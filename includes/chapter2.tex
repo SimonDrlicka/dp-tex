@@ -1,0 +1,23 @@
+\section{Použité vývojové prostriedky}
+V tejto si priblížime technológie, ktoré boli použité pri práci na tejto diplomovej práci.
+
+\subsection{Softvér}
+\subsubsection{Javascript}
+JavaScript predstavuje základný stavebný kameň pri vývoji aplikácií pre Zepp OS, operačný systém používaný v zariadeniach Amazfit, ako sú napríklad hodinky Amazfit T-Rex 3.
+JavaScript je skriptovací alebo programovací jazyk, ktorý vám umožňuje implementovať komplexné funkcie na webových stránkach – vždy, keď webová stránka robí viac, než len nečinne zobrazovať statické informácie na pozeranie – zobrazuje aktuálne aktualizácie obsahu, interaktívne mapy, animovanú 2D/3D grafiku, posúvacie video jukeboxy atď. – môžete si byť istí, že JavaScript je pravdepodobne zapojený. Je treťou vrstvou v "tortovom modeli" štandardných webových technológií spolu s HTML a CSS.
+
+\subsubsection{Node.js}
+Node.js je prostredie na beh JavaScriptu, ktoré nám umožňuje používať tento jazyk mimo prehliadača, predovšetkým na serverovej strane. Nie je to ani tak samostatný jazyk, ako skôr nástroj postavený na V8 engine od Google (tom istom, ktorý poháňa Chrome), čo nám dovoľuje vytvárať rýchle a škálovateľné aplikácie. Jeho sila spočíva v tom, že funguje asynchrónne a riadi sa udalosťami (eventami) – namiesto čakania na dokončenie jednej úlohy dokážeme spracovávať viacero vecí naraz. To nám robí Node.js ideálnym na využitie pri webových serveroch, real-time aplikáciách (napríklad chatoch) či API-čkách, čo je aj prípad Zepp-OS API. Navyše, ekosystém disponuje veľkým množstvom knižníc prostredníctvom \Gls{npm}, čo nám umožňuje rýchlo si poskladať všetko, čo potrebujeme. \cite{Node.js-definition}
+
+\subsubsection{Node Package Manager}
+Node Package Manager \Gls{npm}, je nástroj, ktorý nám uľahčuje život pri práci s JavaScriptom a Node.js. V podstate ide o správcu balíčkov, kde si môžeme sťahovať, inštalovať a spravovať tisíce hotových kódov od iných vývojárov. Keď potrebujeme napríklad pridať funkčnosť na prácu s dátami, serverom alebo čímkoľvek iným, stačí pár príkazov v termináli (napr. npm install express). Okrem toho nám npm pomáha aj s verziami balíčkov a ich dependenciami, aby všetko fungovalo hladko. Je to jednoducho srdce ekosystému Node.js, bez ktorého by sme strácali kopec času písaním vecí, ktoré už niekto pred nami naprogramoval. \cite{npm-definition}
+
+
+\subsubsection{Python}
+Python je interpretovaný, objektovo-orientovaný, vysokoúrovňový programovací jazyk s dynamickou sémantikou. Jeho zabudované vysokoúrovňové dátové štruktúry v kombinácii s dynamickým typovaním a dynamickým viazaním ho robia veľmi atraktívnym pre rýchly vývoj aplikácií, ako aj pre použitie ako skriptovací alebo spojovací jazyk na prepojenie existujúcich komponentov. Jednoduchá a ľahko osvojiteľná syntax Pythonu kladie dôraz na čitateľnosť, čím znižuje náklady na údržbu programu. Python podporuje moduly a balíčky, čo podporuje modularitu programu a opätovné použitie kódu. Interpret Pythonu a rozsiahla štandardná knižnica sú dostupné v zdrojovej alebo binárnej forme zadarmo pre všetky hlavné platformy a môžu byť voľne distribuované. V našej práci sme ho použili na spracovanie výstupov z gyroskopu a akcelerometra a na vytvorenie neurónovej siete na rozpoznávanie gest, ich vizualizovanie prostredníctvom grafov. \cite{python-definition}
+
+\subsubsection{Pandas}
+Pandas je open-source knižnica v Pythone, ktorá nám uľahčuje prácu s dátami. Je navrhnutá najmä na manipuláciu a analýzu štruktúrovaných dát, ako sú tabuľky alebo časové rady. Hlavnými hviezdami tejto knižnice sú dva dátové typy: Series (jednorozmerné pole, niečo ako zoznam s indexmi) a DataFrame (dvojrozmerná tabuľka, podobná Excelu alebo SQL tabuľke). S Pandas vieme dáta čítať z rôznych formátov (\Gls{csv}, Excel, \Gls{json}, \Gls{sql}), čistiť ich, filtrovať, zoskupovať, spájať či robiť štatistické výpočty – všetko s pár riadkami kódu. V našej práci používame knižnicu pandas na spracovávanie výstupných dát vo formáte CSV. \cite{pandas-definition}
+
+\subsubsection{Knižnica Matplotlib}
+Matplotlib je open-source knižnica v Pythone, ktorá nám slúži na vytváranie vizualizácií dát. Je to taký univerzálny nástroj na kreslenie grafov – od jednoduchých čiarových a stĺpcových cez bodové až po zložité 3D vizualizácie. Vznikla v roku 2003 vďaka Johnovi Hunterovi a je obľúbená najmä preto, že ponúka obrovskú flexibilitu a kontrolu nad vzhľadom grafov. Najčastejšie ju používame cez jej modul pyplot, ktorý nám dáva intuitívne príkazy podobné MATLAB-u.
