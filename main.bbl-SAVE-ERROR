@@ -1,0 +1,320 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global/global}
+    \entry{smartwatch-definition}{misc}{}{}
+      \name{author}{2}{}{%
+        {{hash=d37d754df15d457e57248006d2aa9b38}{%
+           family={Lutkevich},
+           familyi={L\bibinitperiod},
+           given={Ben},
+           giveni={B\bibinitperiod}}}%
+        {{hash=54535be59fbb9f4c65691ab33e0090b8}{%
+           family={Provazza},
+           familyi={P\bibinitperiod},
+           given={Alyssa},
+           giveni={A\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {TechTarget}%
+      }
+      \strng{namehash}{2f78b57a3883e5a346a7d03d136bb295}
+      \strng{fullhash}{2f78b57a3883e5a346a7d03d136bb295}
+      \strng{fullhashraw}{2f78b57a3883e5a346a7d03d136bb295}
+      \strng{bibnamehash}{2f78b57a3883e5a346a7d03d136bb295}
+      \strng{authorbibnamehash}{2f78b57a3883e5a346a7d03d136bb295}
+      \strng{authornamehash}{2f78b57a3883e5a346a7d03d136bb295}
+      \strng{authorfullhash}{2f78b57a3883e5a346a7d03d136bb295}
+      \strng{authorfullhashraw}{2f78b57a3883e5a346a7d03d136bb295}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Search IoT}
+      \field{month}{2}
+      \field{title}{What is a smartwatch?}
+      \field{year}{2022}
+      \verb{urlraw}
+      \verb https://www.techtarget.com/iotagenda/definition/smartwatch
+      \endverb
+      \verb{url}
+      \verb https://www.techtarget.com/iotagenda/definition/smartwatch
+      \endverb
+    \endentry
+    \entry{Zepp}{misc}{}{}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Zepp OS Developers Documentation}
+      \field{title}{Zepp OS Developers Documentation}
+      \verb{urlraw}
+      \verb https://docs.zepp.com/docs/intro/
+      \endverb
+      \verb{url}
+      \verb https://docs.zepp.com/docs/intro/
+      \endverb
+    \endentry
+    \entry{zepp-flow}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=44ab0ee1921900da6d1e69386aab02bd}{%
+           family={Chu},
+           familyi={C\bibinitperiod},
+           given={Joyce},
+           giveni={J\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Amazfit}%
+      }
+      \strng{namehash}{44ab0ee1921900da6d1e69386aab02bd}
+      \strng{fullhash}{44ab0ee1921900da6d1e69386aab02bd}
+      \strng{fullhashraw}{44ab0ee1921900da6d1e69386aab02bd}
+      \strng{bibnamehash}{44ab0ee1921900da6d1e69386aab02bd}
+      \strng{authorbibnamehash}{44ab0ee1921900da6d1e69386aab02bd}
+      \strng{authornamehash}{44ab0ee1921900da6d1e69386aab02bd}
+      \strng{authorfullhash}{44ab0ee1921900da6d1e69386aab02bd}
+      \strng{authorfullhashraw}{44ab0ee1921900da6d1e69386aab02bd}
+      \field{extraname}{1}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Amazfit}
+      \field{month}{2}
+      \field{title}{Zepp Health unveils Zepp OS 3.5 with Zepp FlowTM, powered by large lang}
+      \field{year}{2024}
+      \verb{urlraw}
+      \verb https://us.amazfit.com/blogs/news/zepp-health-unveils-zepp-os-3-5-with-zepp-flow%E2%84%A2-powered-by-large-language-model-ai-pioneering-the-next-generation-of-wearable-intelligence-devices-at-mwc-barcelona-2024
+      \endverb
+      \verb{url}
+      \verb https://us.amazfit.com/blogs/news/zepp-health-unveils-zepp-os-3-5-with-zepp-flow%E2%84%A2-powered-by-large-language-model-ai-pioneering-the-next-generation-of-wearable-intelligence-devices-at-mwc-barcelona-2024
+      \endverb
+    \endentry
+    \entry{zepp-chatgpt}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=44ab0ee1921900da6d1e69386aab02bd}{%
+           family={Chu},
+           familyi={C\bibinitperiod},
+           given={Joyce},
+           giveni={J\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Amazfit}%
+      }
+      \strng{namehash}{44ab0ee1921900da6d1e69386aab02bd}
+      \strng{fullhash}{44ab0ee1921900da6d1e69386aab02bd}
+      \strng{fullhashraw}{44ab0ee1921900da6d1e69386aab02bd}
+      \strng{bibnamehash}{44ab0ee1921900da6d1e69386aab02bd}
+      \strng{authorbibnamehash}{44ab0ee1921900da6d1e69386aab02bd}
+      \strng{authornamehash}{44ab0ee1921900da6d1e69386aab02bd}
+      \strng{authorfullhash}{44ab0ee1921900da6d1e69386aab02bd}
+      \strng{authorfullhashraw}{44ab0ee1921900da6d1e69386aab02bd}
+      \field{extraname}{2}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Amazfit}
+      \field{month}{7}
+      \field{title}{Zepp health introduces Zepp OS 4: Redefining wearable intelligence by}
+      \field{year}{2024}
+      \verb{urlraw}
+      \verb https://us.amazfit.com/blogs/news/zepp-health-introduces-zepp-os-4-redefining-wearable-intelligence-by-integrating-openais-gpt-4o-into-its-amazfit-smartwatches
+      \endverb
+      \verb{url}
+      \verb https://us.amazfit.com/blogs/news/zepp-health-introduces-zepp-os-4-redefining-wearable-intelligence-by-integrating-openais-gpt-4o-into-its-amazfit-smartwatches
+      \endverb
+    \endentry
+    \entry{zepp-voice}{misc}{}{}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{journaltitle}{ZEPP Health}
+      \field{month}{7}
+      \field{year}{2024}
+      \verb{urlraw}
+      \verb https://www.zepp.com/press-release/zepp-health-introduces-zepp-os-4-redefining-wearable-intelligence-by-integrating-openais-gpt-4o-into-its-amazfit-smartwatches
+      \endverb
+      \verb{url}
+      \verb https://www.zepp.com/press-release/zepp-health-introduces-zepp-os-4-redefining-wearable-intelligence-by-integrating-openais-gpt-4o-into-its-amazfit-smartwatches
+      \endverb
+    \endentry
+    \entry{zepp-bt}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=70a6838dbb14b5de44c8324c35684af2}{%
+           family={zhou},
+           familyi={z\bibinitperiod},
+           given={Ana},
+           giveni={A\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {amazfit-de}%
+      }
+      \strng{namehash}{70a6838dbb14b5de44c8324c35684af2}
+      \strng{fullhash}{70a6838dbb14b5de44c8324c35684af2}
+      \strng{fullhashraw}{70a6838dbb14b5de44c8324c35684af2}
+      \strng{bibnamehash}{70a6838dbb14b5de44c8324c35684af2}
+      \strng{authorbibnamehash}{70a6838dbb14b5de44c8324c35684af2}
+      \strng{authornamehash}{70a6838dbb14b5de44c8324c35684af2}
+      \strng{authorfullhash}{70a6838dbb14b5de44c8324c35684af2}
+      \strng{authorfullhashraw}{70a6838dbb14b5de44c8324c35684af2}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{amazfit}
+      \field{month}{7}
+      \field{title}{Zepp health stellt zepp OS 4 VOR: Neudefinition Tragbarer Intelligenz}
+      \field{year}{2024}
+      \verb{urlraw}
+      \verb https://de.amazfit.com/blogs/news/zepp-health-stellt-zepp-os-4-vor-neudefinition-tragbarer-intelligenz-durch-integration-von-openais-gpt-4o-in-seine-amazfit-smartwatches
+      \endverb
+      \verb{url}
+      \verb https://de.amazfit.com/blogs/news/zepp-health-stellt-zepp-os-4-vor-neudefinition-tragbarer-intelligenz-durch-integration-von-openais-gpt-4o-in-seine-amazfit-smartwatches
+      \endverb
+    \endentry
+    \entry{sensors-article}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=f954344575636aaccb9db2af88f6a6e0}{%
+           family={Singh},
+           familyi={S\bibinitperiod},
+           given={Ritik},
+           giveni={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{f954344575636aaccb9db2af88f6a6e0}
+      \strng{fullhash}{f954344575636aaccb9db2af88f6a6e0}
+      \strng{fullhashraw}{f954344575636aaccb9db2af88f6a6e0}
+      \strng{bibnamehash}{f954344575636aaccb9db2af88f6a6e0}
+      \strng{authorbibnamehash}{f954344575636aaccb9db2af88f6a6e0}
+      \strng{authornamehash}{f954344575636aaccb9db2af88f6a6e0}
+      \strng{authorfullhash}{f954344575636aaccb9db2af88f6a6e0}
+      \strng{authorfullhashraw}{f954344575636aaccb9db2af88f6a6e0}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Gadgets To Use}
+      \field{month}{10}
+      \field{title}{20 types of sensors on a smartwatch: How do they work?}
+      \field{year}{2023}
+      \verb{urlraw}
+      \verb https://gadgetstouse.com/blog/2023/10/05/sensors-in-smartwatch-how-they-work/
+      \endverb
+      \verb{url}
+      \verb https://gadgetstouse.com/blog/2023/10/05/sensors-in-smartwatch-how-they-work/
+      \endverb
+    \endentry
+    \entry{zapasenie_pravidla}{book}{}{}
+      \name{author}{1}{}{%
+        {{hash=8c7adcea9208ca7919a45cb43ea5e5d4}{%
+           family={Wrestling},
+           familyi={W\bibinitperiod},
+           given={United\bibnamedelima World},
+           giveni={U\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+      }
+      \name{translator}{1}{}{%
+        {{hash=d10747da84091c09e1dca9feacce48c7}{%
+           family={Marček},
+           familyi={M\bibinitperiod},
+           given={Stanislav},
+           giveni={S\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Bratislava}%
+      }
+      \list{publisher}{1}{%
+        {Slovenský zápasnícky zväz}%
+      }
+      \strng{namehash}{8c7adcea9208ca7919a45cb43ea5e5d4}
+      \strng{fullhash}{8c7adcea9208ca7919a45cb43ea5e5d4}
+      \strng{fullhashraw}{8c7adcea9208ca7919a45cb43ea5e5d4}
+      \strng{bibnamehash}{8c7adcea9208ca7919a45cb43ea5e5d4}
+      \strng{authorbibnamehash}{8c7adcea9208ca7919a45cb43ea5e5d4}
+      \strng{authornamehash}{8c7adcea9208ca7919a45cb43ea5e5d4}
+      \strng{authorfullhash}{8c7adcea9208ca7919a45cb43ea5e5d4}
+      \strng{authorfullhashraw}{8c7adcea9208ca7919a45cb43ea5e5d4}
+      \strng{translatorbibnamehash}{d10747da84091c09e1dca9feacce48c7}
+      \strng{translatornamehash}{d10747da84091c09e1dca9feacce48c7}
+      \strng{translatorfullhash}{d10747da84091c09e1dca9feacce48c7}
+      \strng{translatorfullhashraw}{d10747da84091c09e1dca9feacce48c7}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Preložené z: International Wrestling Rules, United World Wrestling, January 2017}
+      \field{title}{Medzinárodné pravidlá zápasenia}
+      \field{urlday}{8}
+      \field{urlmonth}{4}
+      \field{urlyear}{2025}
+      \field{year}{2017}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://zapasenie.sk/documents/pravidla_2017.pdf
+      \endverb
+      \verb{url}
+      \verb https://zapasenie.sk/documents/pravidla_2017.pdf
+      \endverb
+    \endentry
+    \entry{Node.js-definition}{misc}{}{}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{journaltitle}{Node.js - About}
+      \verb{urlraw}
+      \verb https://nodejs.org/en/about
+      \endverb
+      \verb{url}
+      \verb https://nodejs.org/en/about
+      \endverb
+    \endentry
+    \entry{npm-definition}{misc}{}{}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{journaltitle}{npm Docs}
+      \verb{urlraw}
+      \verb https://docs.npmjs.com/about-npm
+      \endverb
+      \verb{url}
+      \verb https://docs.npmjs.com/about-npm
+      \endverb
+    \endentry
+    \entry{python-definition}{misc}{}{}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{journaltitle}{Python.org}
+      \verb{urlraw}
+      \verb https://www.python.org/doc/essays/blurb/
+      \endverb
+      \verb{url}
+      \verb https://www.python.org/doc/essays/blurb/
+      \endverb
+    \endentry
+    \entry{pandas-definition}{misc}{}{}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{journaltitle}{What kind of data does pandas handle? - pandas 2.2.3 documentation}
+      \verb{urlraw}
+      \verb https://pandas.pydata.org/docs/getting_started/intro_tutorials/01_table_oriented.html
+      \endverb
+      \verb{url}
+      \verb https://pandas.pydata.org/docs/getting_started/intro_tutorials/01_table_oriented.html
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

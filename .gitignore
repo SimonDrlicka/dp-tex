@@ -15,3 +15,5 @@
 *.xml
 *.toc
 *.pdf
+
+/scripts

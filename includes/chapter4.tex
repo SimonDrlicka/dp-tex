@@ -1,13 +1,1 @@
-\section{Návrh gest}
-V tejto diplomovej práci sa zameriavame na návrh a implementáciu nových gest, ktoré umožnia ovládanie vybraných funkcií v našej aplikácii - konkrétne sa zameriame na gestá, ktoré sa podobajú signálom rozhodcu zápasenia. Inteligentné hodinky s operačným systémom Zepp OS už natívne podporujú určité gestá bez nutnosti dodatočného programovania. Jedným z takýchto gest je prebudenie hodiniek pri ich uvedení do vodorovnej polohy, čo umožňuje pohodlnú interakciu bez potreby fyzického dotyku alebo stláčania tlačidiel. My sa v práci zameriavame na vytvorenie novej aplikácie pre hodinky so Zepp OS, ktorá odisiela dáta z gyroskopického senzoru a akcelerometra do telefónu, kde sú tieto dáta následne spracované a vyhodnotené.
-
-
-\subsection{Gesto FLICK CLOCKWISE}
-Gesto „Flick Clockwise“ je definované ako rýchly pohyb zápästia v smere hodinových ručičiek, zachytený gyroskopickým senzorom inteligentných hodiniek. Inšpiráciou je signál rozhodcu zápasenia používaný na udelenie bodov jednej zo strán. V rámci našej aplikácie toto gesto slúži na pridanie bodu prvej strane (napríklad zápasníkovi A). Dáta z gyroskopu sú prenášané do telefónu, kde algoritmus vyhodnocuje rýchlosť a smer rotácie na presné rozpoznanie pohybu. Implementácia zohľadňuje elimináciu falošných detekcií, aby sa zabránilo nechcenému pripočítaniu bodov pri bežných pohyboch ruky.
-
-\subsection{Gesto FLICK COUNTERCLOCKWISE}
-Gesto „Flick Counterclockwise“ predstavuje rýchly pohyb zápästia proti smeru hodinových ručičiek, detegovaný pomocou gyroskopického senzoru. Vychádza zo signálu rozhodcu zápasenia, ktorý môže naznačovať udelenie bodov opačnej strane. V aplikácii je toto gesto navrhnuté na pridanie bodu druhej strane (napríklad zápasníkovi B). Spracovanie dát prebieha analogicky ako pri geste „Flick Clockwise“, pričom algoritmus rozlišuje opačný smer rotácie a zabezpečuje spoľahlivé rozpoznanie.
-
-\subsection{Gesto RISE ARM}
-Gesto nazvané „RISE ARM“ je kľúčovým prvkom v procese penalizácie pasívneho správania zápasníka podľa pravidiel United World Wrestling (UWW, 2017). Rozhodca na žinenke ho vykonáva s cieľom upozorniť na neaktívnosť, prerušiť stretnutie (ak je potrebné) a iniciovať procedúru trestu. Gesto začína zastavením boja zdvihnutím oboch rúk dlaňami nahor do výšky ramien, nasleduje ukázanie pravej ruky na pasívneho zápasníka a zdvihnutie ľavej ruky nad hlavu do vertikálnej polohy. Celkové trvanie gesta je približne 2–3 sekundy, pričom jeho jednoznačnosť a viditeľnosť z viacerých uhlov sú kritické pre správnu interpretáciu zo strany zúčastnených aj potenciálnych systémov automatického rozoznávania gest. V závislosti od štýlu zápasenia (voľný alebo grécko-rímsky) môže byť gesto sprevádzané dodatočnými signálmi, ako je udelenie bodov súperovi, čo zvyšuje jeho kontextuálnu variabilitu.
-
+\section{kap4}
