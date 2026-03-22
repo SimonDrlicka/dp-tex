@@ -1,3 +1,5 @@
+
+
 \section{Použité vývojové prostriedky}
 V tejto si priblížime technológie, ktoré boli použité pri práci na tejto diplomovej práci.
 
@@ -7,10 +9,10 @@ JavaScript predstavuje základný stavebný kameň pri vývoji aplikácií pre Z
 JavaScript je skriptovací alebo programovací jazyk, ktorý vám umožňuje implementovať komplexné funkcie na webových stránkach - vždy, keď webová stránka robí viac, než len nečinne zobrazovať statické informácie na pozeranie - zobrazuje aktuálne aktualizácie obsahu, interaktívne mapy, animovanú 2D/3D grafiku, posúvacie video jukeboxy atď. - môžete si byť istí, že JavaScript je pravdepodobne zapojený. Je treťou vrstvou v "tortovom modeli" štandardných webových technológií spolu s HTML a CSS.
 
 \subsubsection{Node.js}
-Node.js je prostredie na beh JavaScriptu, ktoré nám umožňuje používať tento jazyk mimo prehliadača, predovšetkým na serverovej strane. Nie je to ani tak samostatný jazyk, ako skôr nástroj postavený na V8 engine od Google (tom istom, ktorý poháňa Chrome), čo nám dovoľuje vytvárať rýchle a škálovateľné aplikácie. Jeho sila spočíva v tom, že funguje asynchrónne a riadi sa udalosťami (eventami) - namiesto čakania na dokončenie jednej úlohy dokážeme spracovávať viacero vecí naraz. To nám robí Node.js ideálnym na využitie pri webových serveroch, real-time aplikáciách (napríklad chatoch) či API-čkách, čo je aj prípad Zepp-OS API. Navyše, ekosystém disponuje veľkým množstvom knižníc prostredníctvom \Gls{npm}, čo nám umožňuje rýchlo si poskladať všetko, čo potrebujeme. \cite{Node.js-definition}
+Node.js je prostredie na beh JavaScriptu, ktoré nám umožňuje používať tento jazyk mimo prehliadača, predovšetkým na serverovej strane. Nie je to ani tak samostatný jazyk, ako skôr nástroj postavený na V8 engine od Google (tom istom, ktorý poháňa Chrome), čo nám dovoľuje vytvárať rýchle a škálovateľné aplikácie. Jeho sila spočíva v tom, že funguje asynchrónne a riadi sa udalosťami (eventami) - namiesto čakania na dokončenie jednej úlohy dokážeme spracovávať viacero vecí naraz. To nám robí Node.js ideálnym na využitie pri webových serveroch, real-time aplikáciách (napríklad chatoch) či API-čkách, čo je aj prípad Zepp-OS API. Navyše, ekosystém disponuje veľkým množstvom knižníc prostredníctvom \gls{npm}, čo nám umožňuje rýchlo si poskladať všetko, čo potrebujeme. \cite{Node.js-definition}
 
 \subsubsection{Node Package Manager}
-Node Package Manager \Gls{npm}, je nástroj, ktorý nám uľahčuje život pri práci s JavaScriptom a Node.js. V podstate ide o správcu balíčkov, kde si môžeme sťahovať, inštalovať a spravovať tisíce hotových kódov od iných vývojárov. Keď potrebujeme napríklad pridať funkčnosť na prácu s dátami, serverom alebo čímkoľvek iným, stačí pár príkazov v termináli (napr. npm install express). Okrem toho nám npm pomáha aj s verziami balíčkov a ich dependenciami, aby všetko fungovalo hladko. Je to jednoducho srdce ekosystému Node.js, bez ktorého by sme strácali kopec času písaním vecí, ktoré už niekto pred nami naprogramoval. \cite{npm-definition}
+Node Package Manager \gls{npm}, je nástroj, ktorý nám uľahčuje život pri práci s JavaScriptom a Node.js. V podstate ide o správcu balíčkov, kde si môžeme sťahovať, inštalovať a spravovať tisíce hotových kódov od iných vývojárov. Keď potrebujeme napríklad pridať funkčnosť na prácu s dátami, serverom alebo čímkoľvek iným, stačí pár príkazov v termináli (napr. npm install express). Okrem toho nám npm pomáha aj s verziami balíčkov a ich dependenciami, aby všetko fungovalo hladko. Je to jednoducho srdce ekosystému Node.js, bez ktorého by sme strácali kopec času písaním vecí, ktoré už niekto pred nami naprogramoval. \cite{npm-definition}
 
 \subsubsection{Zepp OS Mini Program a vývojový rámec}
 Aplikácie pre Zepp OS sa vyvíjajú vo forme tzv. Mini Programov -
@@ -27,16 +29,16 @@ sa skladá z troch logických celkov \cite{zepp_architecture}:
 \end{itemize}
 
 Komunikácia medzi Device App a Side Service prebieha prostredníctvom
-Bluetooth Low Energy (BLE). Keďže natívne BLE API je pomerne
-nízkoúrovňové, Zepp OS poskytuje pomocnú knižnicu MessageBuilder,
+Bluetooth Low Energy (\gls{ble}). Keďže natívne \gls{ble} API je pomerne
+nízkoúrovňové, Zepp OS poskytuje pomocnú knižnicu MessageBuilder, 
 ktorá abstrahuje odosielanie a príjem správ medzi oboma stranami
 do jednoduchého rozhrania. \cite{zepp_bluetooth}
 
 V našej práci je Device App zodpovedná za snímanie senzorových dát
-z gyroskopu a akcelerometra. Tieto dáta sú následne posielané do cez \Gls{BLE} do Side Service, kde sú 
+z gyroskopu a akcelerometra. Tieto dáta sú následne posielané do cez \gls{ble} do Side Service, kde sú 
 spracovávané a analyzované pomocou neurónovej siete na rozpoznávanie gest. Na základe rozpoznaného gesta sa aktualizuje skóre zápasu, ktoré je potom odosielané späť do Device App a následne zobrazené na hodinkách.
 Rozpoznané gesto a aktuálny stav skóre sú následne odosielané
-cez BLE do Android aplikácie, ktorá slúži ako hlavné zobrazovacie
+cez \gls{ble}do Android aplikácie, ktorá slúži ako hlavné zobrazovacie
 rozhranie pre obsluhu zápasu.
 
 \subsubsection{Zepp OS Sensor API}
@@ -51,7 +53,7 @@ rýchlosť rotácie tiež v troch osiach. Oba senzory fungujú
 na princípe registrácie callback funkcie, ktorá je zavolaná
 pri každej novej vzorke dát \cite{zepp_sensor_acc} \cite{zepp_sensor_gyro}:
 
-\begin{lstlisting}[language=JavaScript, caption=Príklad inicializácie akcelerometra v Zepp OS]
+\begin{lstlisting}[caption=Príklad inicializácie akcelerometra v Zepp OS]
 import { Accelerometer, FREQ_MODE_NORMAL } from '@zos/sensor'
 
 const accelerometer = new Accelerometer()
@@ -63,7 +65,7 @@ accelerometer.start()
 \end{lstlisting}
 
 \subsubsection{Zeus CLI}
-Zeus \Gls{CLI} je oficiálny nástroj terminálu pre vývoj
+Zeus \gls{cli} je oficiálny nástroj terminálu pre vývoj
 Zepp OS aplikácií, distribuovaný ako npm balík
 \texttt{@zeppos/zeus-cli}. Vyžaduje Node.js vo verzii 14.0.0
 alebo vyššej. \cite{zepp_cli}
@@ -83,12 +85,49 @@ sady príkazov:
     ladenie bežiacej aplikácie na zariadení
 \end{itemize}
 
+\subsubsection{Kotlin}
+Kotlin je open-source, staticky typovaný programovací jazyk, ktorý
+podporuje objektovo-orientované aj funkcionálne programovanie.
+Vyvíja ho spoločnosť JetBrains od roku 2011, pričom prvé stabilné
+vydanie vyšlo v roku 2016. Od roku 2019 je Kotlin preferovaným
+jazykom Googlu pre vývoj Android aplikácií. \cite{kotlin_android}
+
+Kotlin je plne interoperabilný s jazykom Java, čo znamená, že
+v jednom projekte môžu koexistovať oba jazyky a navzájom sa volať.
+Oproti Jave prináša Kotlin výrazne stručnejšiu syntax, zabudovanú
+ochranu pred null pointer výnimkami a podporu pre korutiny
+(\textit{coroutines}), ktoré zjednodušujú prácu s asynchrónnym
+kódom. \cite{kotlin_overview}
+
+\subsubsection{Android Studio}
+Android Studio je oficiálne integrované vývojové prostredie (\gls{ide})
+pre vývoj Android aplikácií. Je postavené na platforme IntelliJ
+IDEA od spoločnosti JetBrains a bolo predstavené na konferencii
+Google I/O v roku 2013 ako náhrada za dovtedajší Eclipse ADT.
+\cite{android_studio_intro}
+
+Medzi kľúčové funkcie Android Studia patria:
+\begin{itemize}
+    \item inteligentný editor kódu s dopĺňaním pre Kotlin a Javu
+    \item vstavaný emulátor Android zariadení na testovanie
+    bez fyzického hardvéru
+    \item Layout Editor na vizuálny návrh UI rozhraní
+    \item Gradle-based build systém na správu závislostí
+    a zostavenie aplikácie
+    \item nástroje na profilovanie výkonu a ladenie aplikácií
+    (Logcat, Profiler)
+\end{itemize}
+
+Android Studio je dostupné bezplatne pod licenciou Apache 2.0
+a je kompatibilné so systémami Windows, macOS aj Linux.
+\cite{android_studio_intro}
+
 
 \subsubsection{Python}
 Python je interpretovaný, objektovo-orientovaný, vysokoúrovňový programovací jazyk s dynamickou sémantikou. Jeho zabudované vysokoúrovňové dátové štruktúry v kombinácii s dynamickým typovaním a dynamickým viazaním ho robia veľmi atraktívnym pre rýchly vývoj aplikácií, ako aj pre použitie ako skriptovací alebo spojovací jazyk na prepojenie existujúcich komponentov. Jednoduchá a ľahko osvojiteľná syntax Pythonu kladie dôraz na čitateľnosť, čím znižuje náklady na údržbu programu. Python podporuje moduly a balíčky, čo podporuje modularitu programu a opätovné použitie kódu. Interpret Pythonu a rozsiahla štandardná knižnica sú dostupné v zdrojovej alebo binárnej forme zadarmo pre všetky hlavné platformy a môžu byť voľne distribuované. V našej práci sme ho použili na spracovanie výstupov z gyroskopu a akcelerometra a na vytvorenie neurónovej siete na rozpoznávanie gest, ich vizualizovanie prostredníctvom grafov. \cite{python-definition}
 
 \subsubsection{Pandas}
-Pandas je open-source knižnica v Pythone, ktorá nám uľahčuje prácu s dátami. Je navrhnutá najmä na manipuláciu a analýzu štruktúrovaných dát, ako sú tabuľky alebo časové rady. Hlavnými hviezdami tejto knižnice sú dva dátové typy: Series (jednorozmerné pole, niečo ako zoznam s indexmi) a DataFrame (dvojrozmerná tabuľka, podobná Excelu alebo SQL tabuľke). S Pandas vieme dáta čítať z rôznych formátov (\Gls{csv}, Excel, \Gls{json}, \Gls{sql}), čistiť ich, filtrovať, zoskupovať, spájať či robiť štatistické výpočty - všetko s pár riadkami kódu. V našej práci používame knižnicu pandas na spracovávanie výstupných dát vo formáte CSV. \cite{pandas-definition}
+Pandas je open-source knižnica v Pythone, ktorá nám uľahčuje prácu s dátami. Je navrhnutá najmä na manipuláciu a analýzu štruktúrovaných dát, ako sú tabuľky alebo časové rady. Hlavnými hviezdami tejto knižnice sú dva dátové typy: Series (jednorozmerné pole, niečo ako zoznam s indexmi) a DataFrame (dvojrozmerná tabuľka, podobná Excelu alebo SQL tabuľke). S Pandas vieme dáta čítať z rôznych formátov (\gls{csv}, Excel, \gls{json}, \gls{sql}), čistiť ich, filtrovať, zoskupovať, spájať či robiť štatistické výpočty - všetko s pár riadkami kódu. V našej práci používame knižnicu pandas na spracovávanie výstupných dát vo formáte CSV. \cite{pandas-definition}
 
 \subsubsection{Knižnica Matplotlib}
 Matplotlib je open-source knižnica v Pythone, ktorá nám slúži na vytvárvanie vizualizácií dát. Je to taký univerzálny nástroj na kreslenie grafov - od jednoduchých čiarových a stĺpcových cez bodové až po zložité 3D vizualizácie. Vznikla v roku 2003 vďaka Johnovi Hunterovi a je obľúbená najmä preto, že ponúka obrovskú flexibilitu a kontrolu nad vzhľadom grafov. Najčastejšie ju používame cez jej modul pyplot, ktorý nám dáva intuitívne príkazy podobné MATLAB-u.

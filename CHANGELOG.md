@@ -1,4 +1,43 @@
 # Changelog
+ - 2.0.1 (2025.02.07)
+   1. add a few abbreviations to example thesis
+
+ - 2.0.0 (2025.02.05)
+   1. major changes in formatting — synchronize with the official Word template
+      while keeping the familiar look & feel of LaTeX
+   2. add support for manual glossaries (`\FEImanualListOfGlossaries`)
+   3. new command for declaration of AI tools usage (`\FEIaiDeclaration`)
+   4. add script for generating `thesis.tex`
+
+ - 1.8.1 (2024.05.02)
+   1. bring back hyperlinks for glossary references
+
+ - 1.8.0 (2024.01.07)
+   1. title spacing now contains glue (LaTeX can make small changes in spacing)
+   2. remove unnecessary noindent from example
+   3. fix baselineskip in section titles (nicer spacing of multi-line titles)
+   4. better spacing of multi-line thesis titles in the abstract
+   5. improve formatting of listings
+      - colors now comply with WCAG AA
+      - margins are included for visual clarity
+   6. various improvements in the example
+      - add non-breakable spaces where they are needed
+      - change table position specifiers to [htbp]
+      - fix position of citations
+   7. fix table counters
+
+ - 1.7.0 (2023.05.18)
+   1. fix order of packages `inputenc` and `microtype`
+   2. replace package `url` with `xurl`
+   3. add package `booktabs`
+   4. add list of accented slovak characters for `lstlisting`
+   5. add style `code-listing` for code listings
+   6. fix referencing unknown language
+
+ - 1.6.3 (2023.04.17)
+   1. more thorough make clean
+   2. fix slovak labels (Výpis, Algoritmus)
+
  - 1.6.2 (2021.10.15)
    1. fix some typos
    2. fix bibliography invalid items (ISBN) and text formatting

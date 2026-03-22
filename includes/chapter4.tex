@@ -1,1 +1,90 @@
-\section{kap4}
+\section{Výber hardvéru - hodiniek}
+
+Pre realizáciu tejto práce bolo nevyhnutné zvoliť vhodné hardvérové
+zariadenie, ktoré by spĺňalo požiadavky na snímanie pohybových dát
+v reálnom čase a zároveň umožňovalo vývoj vlastných aplikácií.
+V tejto kapitole popisujeme kritériá výberu inteligentných hodiniek
+a uvádzame technické parametre zariadenia, ktoré sme pri našej práci použili.
+
+\subsection{Požiadavky na zariadenie}
+
+Keďže základom aplikácie je vyhodnocovaní pohybových gest rozhodcu
+priamo zo zápästia, nie každé smart nositeľné zariadenie je pre tento účel
+vhodné. Definovali sme nasledujúce funkčné požiadavky, ktoré
+muselo zariadenie spĺňať:
+
+\begin{itemize}
+    \item \textbf{Prístup k akcelerometru a gyroskopu cez API} —
+    zariadenie musí umožňovať programátorský prístup k surovým
+    dátam zo senzorov pohybu, nie len ich spracované výstupy
+    (napr. počet krokov). Bez tejto možnosti nie je možné
+    vyhodnocovať vlastné gestá.
+
+    \item \textbf{Podpora vlastných aplikácií} — hodinky musia
+    disponovať otvoreným vývojovým prostredím umožňujúcim inštaláciu
+    aplikácií tretích strán. Uzavreté platformy bez SDK či developer \Gls{api} 
+    (v našom prípade máme prístup iba k obmedzenej API, ktorá je ale dostatočná pre náš účel)
+    vývojárom neumožňujú nasadiť vlastný kód.
+
+    \item \textbf{Komunikácia s mobilným zariadením} — aplikácia
+    vyžaduje prenos dát z hodiniek do Androidu v reálnom čase.
+    Hodinky preto musia podporovať obojsmernú Bluetooth komunikáciu
+    prístupnú z kódu aplikácie.
+
+    \item \textbf{Dostatočná frekvencia snímania senzorov} —
+    na zachytenie krátkych a rýchlych pohybov charakteristických
+    pre rozhodcovské gestá je potrebná dostatočne vysoká vzorkovacia
+    frekvencia. Príliš nízka frekvencia by viedla k strate
+    dôležitých pohybových informácií.
+
+    \item \textbf{Výdrž batérie} — zariadenie musí byť schopné
+    pracovať počas celého trvania zápasu bez nutnosti nabíjania,
+    čo kladie požiadavku na energetickú efektivitu operačného
+    systému aj aplikácie samotnej.
+\end{itemize}
+
+\subsection{Amazfit T-Rex 2}
+
+Pred výberom finálneho zariadenia sme v úvodnej fáze práce
+pracovali s hodinkami Amazfit T-Rex 2. Tieto hodinky bežia
+na staršej verzii operačného systému Zepp OS 2.0, ktorá
+neposkytuje programátorský prístup k surovým dátam senzorov
+pohybu. Konkrétne, Zepp OS API verzie 2.0 neumožňuje
+extrahovať hodnoty gyroskopu ani akcelerometra priamo
+v aplikácii, čo je pre vyhodnocovanie pohybových gest
+nevyhnutná podmienka.
+
+Napriek tomu nám práca s Amazfit T-Rex 2 nebola zbytočná.
+Zoznámili sme sa so štruktúrou Zepp OS Mini Program,
+pochopili sme princíp komunikácie medzi hodinkami
+a mobilným zariadením cez\Gls{ble} a overili sme základné
+vývojové nástroje (Zeus CLI, Zepp App Developer Mode).
+Tieto znalosti nám pri prechode na Amazfit T-Rex 3
+výrazne uľahčili prácu.
+
+Z dôvodu hardvérových obmedzení operačného systému
+Zepp OS 2.0 sme sa teda rozhodli prejsť na novší model,
+ktorý tieto obmedzenia nemá.
+
+\subsection{Amazfit T-Rex 3}
+
+Po splnení všetkých funkčných požiadaviek sme pre praktickú
+implementáciu zvolili hodinky Amazfit T-Rex 3. Z pohľadu
+hardvéru a softvéru ponúkajú parametre, ktoré sú pre našu
+aplikáciu dostatočné a zároveň umožňujú stabilný vývoj
+v prostredí Zepp OS 4.
+
+\begin{itemize}
+    \item \textbf{Procesor:} ZPS3044
+    \item \textbf{Operačná pamäť:} 64 MB \Gls{ram}
+    \item \textbf{Úložisko:} 32 GB
+    \item \textbf{Displej:} 1,5" \Gls{amoled}, 480x480 px, 2000 nits
+    \item \textbf{Senzory:} 6-osový \Gls{imu} (3-osový akcelerometer
+    + 3-osový gyroskop), barometer, kompas, optický senzor
+    srdcovej frekvencie
+    \item \textbf{Konektivita:} Bluetooth 5.3 \Gls{ble}
+    \item \textbf{Operačný systém:} Zepp \Gls{os} 4
+    \item \textbf{Výdrž batérie:} až 27 dní pri bežnom používaní
+    \item \textbf{Odolnosť:} vojenský štandard \Gls{mil},
+    vodotesnosť 10 \Gls{atm}
+\end{itemize} \cite{trex3_specs}

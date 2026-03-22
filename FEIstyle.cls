@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{FEIstyle}[2020/05/13 v. 1.6.1 Thesis template - FEI STUBA]
+\ProvidesClass{FEIstyle}[2025/02/07 v. 2.0.1 Thesis template - FEI STUBA]
 
 % parse arguments
 \DeclareOption{dizp}{\def\typPraceSkr{dizp}
@@ -44,36 +44,42 @@
     \def\FEIenglish{1} 
 }
 
-\def\FEIgen{0}
-\DeclareOption{m}{
-    \def\FEIgen{1} 
-}
-\DeclareOption{z}{
-    \def\FEIgen{2} 
-}
-
 \ProcessOptions
 \ExecuteOptions{dp}
 \LoadClass[\myset]{\parentclass}
 
 \usepackage[overload]{textcase}
-\usepackage[acronym,nopostdot,nogroupskip,nonumberlist]{glossaries}
-\usepackage{amsthm}
 
+% hyperref has to be loaded *before* glossaries
+% see https://mirror.kumi.systems/ctan/macros/latex/contrib/glossaries/glossaries-user.html#sec:hyperref
+\usepackage[bookmarksopen,colorlinks,plainpages=false,urlcolor=blue,hypertexnames=false,unicode]{hyperref}
+
+\usepackage[acronym,nopostdot,nogroupskip,nonumberlist]{glossaries}
+
+\usepackage[final, babel, nopatch=item]{microtype}
+\usepackage[utf8]{inputenc}
 % we should use ISO 690 & 690-2 http://www.fei.stuba.sk/sk/kniznica-fei/vzory-bibliografickych-odkazov-a-citovanie.html?page_id=1756 
 % package for biblatex https://github.com/michal-h21/biblatex-iso690
-\usepackage[backend=biber,style=iso-numeric,autolang=other,bibencoding=utf8,seconds=true]{biblatex}
+\usepackage[backend=biber,
+            sorting=none,
+            style=iso-numeric,
+            shortnumeration=true,
+            citestyle=numeric-comp,
+            maxnames=5,
+            minnames=1,
+            giveninits=true]{biblatex}
+\DefineBibliographyStrings{slovak}{
+  urlfrom = {Dostupné z}
+}
 
 \ifnum\FEIenglish=0
-    \usepackage[slovak]{babel}
+    \usepackage[english,main=slovak]{babel}
 \else
-    \usepackage[english]{babel}
+    \usepackage[main=english, slovak]{babel}
 \fi
-
-\usepackage[utf8]{inputenc}
+\languageattribute{slovak}{split}
 
 \usepackage[style=slovak]{csquotes}
-\usepackage{microtype}
 \usepackage[T1]{fontenc}
 
 \usepackage[immediate]{silence}
@@ -81,15 +87,19 @@
 % silence warnings of sectsty/sectsty.sty:
 %     'Command \underbar has changed.'
 %     'Command \underline has changed.'
+
 \usepackage{sectsty}
 \DeactivateWarningFilters[temp]
 
 \usepackage{chngcntr}
 \usepackage{tocloft}
 \usepackage{rotating}
-\usepackage{anysize}
+\usepackage[a4paper, tmargin=3cm,bmargin=3cm,lmargin=2.75cm,rmargin=2.75cm]{geometry}
 \usepackage{xifthen}
 \usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{upgreek}
+\usepackage{isomath}
 \usepackage{ifmtarg}
 \usepackage{xstring}
 \usepackage[compact]{titlesec}
@@ -98,18 +108,91 @@
 \usepackage{lmodern}
 \usepackage{changepage}
 \usepackage{scrextend}
-\usepackage{xstring}
-\usepackage{url}
+\usepackage{xurl}
 \usepackage{enumitem}
 \usepackage{caption}
 \usepackage{subcaption}
-\usepackage[bookmarksopen,colorlinks,plainpages=false,urlcolor=blue,hypertexnames=false,unicode]{hyperref}
 \usepackage{algorithm}
 \usepackage{algorithmic}
-\usepackage{color}
-% \usepackage{showframe} % debugging overflows
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{pdfpages}
+\usepackage[all]{nowidow}
+%\usepackage{showframe} % debugging overflows
 
 % \cftsetpnumwidth{1.8em} % set the dots width in loX (f,t,l,a...) https://tex.stackexchange.com/q/369283/106389
+
+% https://stackoverflow.com/a/74266238
+\lstset{
+  extendedchars=true,
+  literate=
+    {á}{{\'a}}1
+    {ä}{{\"a}}1
+    {č}{{\v{c}}}1
+    {ď}{{\v{d}}}1
+    {é}{{\'e}}1
+    {í}{{\'i}}1
+    {ĺ}{{\'l}}1
+    {ľ}{{\v{l}}}1
+    {ň}{{\v{n}}}1
+    {ó}{{\'o}}1
+    {ô}{{\^o}}1
+    {ŕ}{{\'{r}}}1
+    {š}{{\v{s}}}1
+    {ť}{{\v{t}}}1
+    {ú}{{\'u}}1
+    {ý}{{\'y}}1
+    {ž}{{\v{z}}}1
+    {Á}{{\'A}}1
+    {Ä}{{\""A}}1
+    {Č}{{\v{C}}}1
+    {Ď}{{\v{C}}}1
+    {É}{{\'E}}1
+    {Í}{{\'I}}1
+    {Ĺ}{{\'L}}1
+    {Ľ}{{\v{L}}}1
+    {Ň}{{\v{N}}}1
+    {Ó}{{\'O}}1
+    {Ô}{{\^O}}1
+    {Ŕ}{{\'{R}}}1
+    {Š}{{\v{S}}}1
+    {Ť}{{\v{T}}}1
+    {Ú}{{\'U}}1
+    {Ý}{{\'Y}}1
+    {Ž}{{\v{Z}}}1
+}
+
+% https://www.overleaf.com/learn/latex/Code_listing
+\definecolor{codegreen}{rgb}{0,0.506,0}
+\definecolor{codegray}{rgb}{0.2,0.2,0.2}
+\definecolor{codeviolet}{rgb}{0.58,0,0.82}
+\definecolor{codemagenta}{rgb}{0.839,0,0.494}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.95}
+\lstdefinestyle{code-listing}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{codemagenta},
+    numberstyle=\ttfamily\footnotesize\color{codegray},
+    stringstyle=\color{codeviolet},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=none,
+    numbersep=8pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2,
+    frame=single,
+    framesep=3pt,
+    framerule=0pt,
+    xleftmargin=4pt,
+    xrightmargin=4pt,
+    framexleftmargin=1pt,
+    framexrightmargin=1pt
+}
 
 \newboolean{isThesis}
 
@@ -117,129 +200,6 @@
     {0}{\setboolean{isThesis}{false}}
     {1}{\setboolean{isThesis}{true}}
 }
-
-\lstdefinelanguage{JavaScript}{
-  morekeywords=[1]{break, continue, delete, else, for, function, if, in,
-    new, return, this, typeof, var, void, while, with},
-  % Literals, primitive types, and reference types.
-  morekeywords=[2]{false, null, true, boolean, number, undefined,
-    Array, Boolean, Date, Math, Number, String, Object},
-  % Built-ins.
-  morekeywords=[3]{eval, parseInt, parseFloat, escape, unescape},
-  % Decorators
-  morekeywords=[4]{@Entity, @Unique, @PrimaryGeneratedColumn, @Column, @IsEmail, @ManyToMany, @OneToMany, @BeforeInsert,
-                @IsNumber, @IsString, @IsEmail},
-  sensitive,
-  morecomment=[s]{/*}{*/},
-  morecomment=[l]//,
-  morecomment=[s]{/**}{*/}, % JavaDoc style comments
-  morestring=[b]',
-  morestring=[b]"
-}[keywords, comments, strings]
-
-\lstalias[]{ES6}[ECMAScript2015]{JavaScript}
-
-
-\lstdefinelanguage[ECMAScript2015]{JavaScript}[]{JavaScript}{
-  morekeywords=[1]{await, async, case, catch, class, const, default, do,
-    enum, export, extends, finally, from, implements, import, instanceof, interface,
-    let, static, super, switch, throw, try, type},
-  morestring=[b]` % Interpolation strings.
-}
-\lstdefinelanguage{HTML}{
-  % HTML tags
-  sensitive=true,
-  morekeywords=[1]{a,abbr,acronym,address,applet,area,article,aside,audio,b,base,basefont,bdi,bdo,big,blockquote,body,br,button,canvas,caption,center,cite,code,col,colgroup,datalist,dd,del,details,dfn,dialog,dir,div,dl,dt,em,embed,fieldset,figcaption,figure,font,footer,form,frame,frameset,h1,h2,h3,h4,h5,h6,head,header,hr,html,i,iframe,img,input,ins,kbd,label,legend,li,link,main,map,mark,menu,meta,meter,nav,noframes,noscript,object,ol,optgroup,option,output,p,param,picture,pre,progress,q,rp,rt,ruby,s,samp,script,section,select,small,source,span,strike,strong,style,sub,summary,sup,svg,table,tbody,td,template,textarea,tfoot,th,thead,time,title,tr,track,tt,u,ul,var,video,wbr},
-  % HTML attributes
-  morekeywords=[2]{accept,accept-charset,accesskey,action,align,alt,async,autocomplete,autofocus,autoplay,bgcolor,border,buffered,challenge,charset,checked,cite,class,code,codebase,color,cols,colspan,content,contenteditable,contextmenu,controls,coords,data,datetime,default,defer,dir,dirname,disabled,download,draggable,dropzone,enctype,for,form,formaction,headers,height,hidden,high,href,hreflang,http-equiv,icon,id,ismap,itemprop,keytype,kind,label,lang,language,loop,low,manifest,max,maxlength,media,method,GET,POST,min,multiple,email,file,date,month,datetime,datetime-local,number,password,range,search,tel,text,time,url,week,minlength,name,novalidate,onbeforeunload,onblur,oncanplay,oncanplaythrough,onchange,onclick,oncontextmenu,oncopy,oncuechange,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragleave,ondragover,ondragstart,ondrop,ondurationchange,onemptied,onended,onerror,onfocus,onhashchange,oninput,oninvalid,onkeydown,onkeypress,onkeyup,onload,onloadeddata,onloadedmetadata,onloadstart,onmessage,onmousedown,onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onoffline,ononline,onpagehide,onpageshow,onpaste,onpause,onplay,onplaying,onprogress,onratechange,onreset,onresize,onscroll,onsearch,onseeked,onseeking,onselect,onstalled,onstorage,onsubmit,onsuspend,ontimeupdate,ontoggle,onunload,onvolumechange,onwaiting,open,optimum,pattern,ping,placeholder,poster,preload,readonly,rel,required,reversed,rows,rowspan,sandbox,scope,scoped,scrolling,seamless,selected,shape,size,sizes,span,spellcheck,src,srcdoc,srclang,srcset,start,step,style,summary,tabindex,target,title,translate,type,button,checkbox,file,hidden,image,password,radio,range,reset,submit}
-  }
-
-  \lstdefinestyle{HTML}{
-    language=HTML,
-    basicstyle=\small\ttfamily,
-    keywordstyle=\color{blue},
-    commentstyle=\color{gray},
-    stringstyle=\color{purple},
-    showstringspaces=false,
-    tabsize=2,
-    breaklines=true,
-    breakatwhitespace=true,
-    morekeywords={html, head, title, body, h1},
-    morecomment=[s]{<!--}{-->},
-    morestring=[b]",
-    morestring=[b]',
-    literate=
-        {á}{{\'a}}1
-        {é}{{\'e}}1
-        {í}{{\'i}}1
-        {ó}{{\'o}}1
-        {ú}{{\'u}}1
-        {ý}{{\'y}}1
-        {Á}{{\'A}}1
-        {É}{{\'E}}1
-        {Í}{{\'I}}1
-        {Ó}{{\'O}}1
-        {Ú}{{\'U}}1
-        {Ý}{{\'Y}}1
-}
-
-% \lstdefinelanguage{HTML}{
-%   % HTML tags
-%   sensitive=true,
-%   morekeywords=[1]{a,abbr,acronym,address,applet,area,article,aside,audio,b,base,basefont,bdi,bdo,big,blockquote,body,br,button,canvas,caption,center,cite,code,col,colgroup,datalist,dd,del,details,dfn,dialog,dir,div,dl,dt,em,embed,fieldset,figcaption,figure,font,footer,form,frame,frameset,h1,h2,h3,h4,h5,h6,head,header,hr,html,i,iframe,img,input,ins,kbd,label,legend,li,link,main,map,mark,menu,meta,meter,nav,noframes,noscript,object,ol,optgroup,option,output,p,param,picture,pre,progress,q,rp,rt,ruby,s,samp,script,section,select,small,source,span,strike,strong,style,sub,summary,sup,svg,table,tbody,td,template,textarea,tfoot,th,thead,time,title,tr,track,tt,u,ul,var,video,wbr},
-%   % HTML attributes
-%   morekeywords=[2]{accept,accept-charset,accesskey,action,align,alt,async,autocomplete,autofocus,autoplay,bgcolor,border,buffered,challenge,charset,checked,cite,class,code,codebase,color,cols,colspan,content,contenteditable,contextmenu,controls,coords,data,datetime,default,defer,dir,dirname,disabled,download,draggable,dropzone,enctype,for,form,formaction,headers,height,hidden,high,href,hreflang,http-equiv,icon,id,ismap,itemprop,keytype,kind,label,lang,language,loop,low,manifest,max,maxlength,media,method,GET,POST,min,multiple,email,file,date,month,datetime,datetime-local,number,password,range,search,tel,text,time,url,week,minlength,name,novalidate,onbeforeunload,onblur,oncanplay,oncanplaythrough,onchange,onclick,oncontextmenu,oncopy,oncuechange,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragleave,ondragover,ondragstart,ondrop,ondurationchange,onemptied,onended,onerror,onfocus,onhashchange,oninput,oninvalid,onkeydown,onkeypress,onkeyup,onload,onloadeddata,onloadedmetadata,onloadstart,onmessage,onmousedown,onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onoffline,ononline,onpagehide,onpageshow,onpaste,onpause,onplay,onplaying,onprogress,onratechange,onreset,onresize,onscroll,onsearch,onseeked,onseeking,onselect,onstalled,onstorage,onsubmit,onsuspend,ontimeupdate,ontoggle,onunload,onvolumechange,onwaiting,open,optimum,pattern,ping,placeholder,poster,preload,readonly,rel,required,reversed,rows,rowspan,sandbox,scope,scoped,scrolling,seamless,selected,shape,size,sizes,span,spellcheck,src,srcdoc,srclang,srcset,start,step,style,summary,tabindex,target,title,translate,type,button,checkbox,file,hidden,image,password,radio,range,reset,submit,text,time
-
-% Requires package: color.
-\definecolor{mediumgray}{rgb}{0.3, 0.4, 0.4}
-\definecolor{mediumblue}{rgb}{0.0, 0.0, 0.8}
-\definecolor{forestgreen}{rgb}{0.13, 0.55, 0.13}
-\definecolor{darkviolet}{rgb}{0.58, 0.0, 0.83}
-\definecolor{royalblue}{rgb}{0.25, 0.41, 0.88}
-\definecolor{crimson}{rgb}{0.86, 0.8, 0.24}
-
-\lstdefinestyle{JSES6Base}{
-  backgroundcolor=\color{white},
-  basicstyle=\ttfamily,
-  breakatwhitespace=false,
-  breaklines=false,
-  captionpos=b,
-  columns=fullflexible,
-  commentstyle=\color{mediumgray}\upshape,
-  emph={},
-  emphstyle=\color{crimson},
-  extendedchars=true,  % requires inputenc
-  fontadjust=true,
-  frame=single,
-  identifierstyle=\color{black},
-  keepspaces=true,
-  keywordstyle=\color{mediumblue},
-  keywordstyle={[2]\color{darkviolet}},
-  keywordstyle={[3]\color{royalblue}},
-  keywordstyle={[4]\color{magenta}},
-  numbers=left,
-  numbersep=5pt,
-  numberstyle=\tiny\color{black},
-  rulecolor=\color{black},
-  showlines=true,
-  showspaces=false,
-  showstringspaces=false,
-  showtabs=false,
-  stringstyle=\color{forestgreen},
-  tabsize=2,
-  title=\lstname,
-  upquote=true  % requires textcomp
-}
-
-\lstdefinestyle{JavaScript}{
-  language=JavaScript,
-  style=JSES6Base
-}
-\lstdefinestyle{ES6}{
-  language=ES6,
-  style=JSES6Base
-}
-
 
 % deine global variables 
 \def\@nedefinovane{! UNDEFINED: \textbackslash}
@@ -319,10 +279,6 @@
 \def\FEIstudyProgrammeEn#1{\def\@studijnyProgramEn{#1}}
 \newcommand{\printStudijnyProgramEn}{\@studijnyProgramEn}
 
-%\def\@cisloStudijnehoOdboru{2511}
-%\def\FEIstudyFieldNumber#1{\def\@cisloStudijnehoOdboru{#1}}
-%\newcommand{\printCisloStudijnehoOdboru}{\@cisloStudijnehoOdboru}
-
 \def\@nazovStudijnehoOdboru{Informatika}
 \def\FEIstudyField#1{\def\@nazovStudijnehoOdboru{#1}}
 \newcommand{\printNazovStudijnehoOdboru}{\@nazovStudijnehoOdboru}
@@ -347,24 +303,20 @@
 \def\FEIconsultant#1{\def\@konzultant{#1} \def\@tempKonzultant{1}}
 \newcommand{\printKonzultant}{\@konzultant}
 
-\def\@mesto{Bratislava}
-\def\FEIplace#1{\def\@mesto{#1}}
-\newcommand{\printMesto}{\@mesto}
-
 %definovanie globalnych nastaveni
 \pagenumbering{arabic}  
 \pagestyle{plain}
-\parindent=0.8cm
+\parindent=0.63cm
 \parskip=1pt
-\linespread{1.3}
+\linespread{1.25}
 \hypersetup{colorlinks, citecolor=black, filecolor=black, linkcolor=black, urlcolor=black}
-\sectionfont{\bf\fontsize{22pt}{1.3}\selectfont}
-\subsectionfont{\bf\fontsize{16pt}{1.3}\selectfont}
-\subsubsectionfont{\bf\fontsize{14pt}{1.3}\selectfont}
+\sectionfont{\fontsize{20pt}{18pt}\selectfont}
+\subsectionfont{\fontsize{16pt}{15pt}\selectfont}
+\subsubsectionfont{\fontsize{14pt}{14pt}\selectfont}
 
-\titlespacing*\section{0pt}{24pt}{12pt}
-\titlespacing*\subsection{6pt}{12pt}{6pt}
-\titlespacing*\subsubsection{12pt}{10pt}{0pt}
+\titlespacing*\section{0pt}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}
+\titlespacing*\subsection{0pt}{3ex plus 1ex minus .2ex}{1.25ex plus .2ex}
+\titlespacing*\subsubsection{0pt}{2.5ex plus 1ex minus .2ex}{1.25ex plus .2ex}
 
 \lstset{
   basicstyle=\scriptsize\ttfamily,
@@ -375,26 +327,14 @@
   captionpos=b % caption below text
 }
 
-%\IfEqCase*{\FEIenglish}{
-%    {0}{
-%        \addto\captionsslovak{\renewcommand{\figurename}{Obr\a'azok}}
-%        \addto\captionsslovak{\renewcommand{\tablename}{Tabu\v{l}ka}}
-%        \addto\captionsslovak{\renewcommand{\contentsname}{Obsah}}
-%        \addto\captionsslovak{\renewcommand\listfigurename{Zoznam obr\a'azkov}}
-%        \addto\captionsslovak{\renewcommand\listtablename{Zoznam tabuliek}}
-%        \addto\captionsslovak{\renewcommand{\chaptername}{Kapitola}}
-       \addto\captionsslovak{\renewcommand{\lstlistingname}{V\a'ypis}}
-       \renewcommand{\ALG@name}{Algoritmus}%}
-%    {1}{
-%        \addto\captionsenglish{\renewcommand{\figurename}{Figure}}
-%        \addto\captionsenglish{\renewcommand{\tablename}{Table}}
-%        \addto\captionsenglish{\renewcommand{\contentsname}{Contents}}
-%        \addto\captionsenglish{\renewcommand\listfigurename{List of Figures}}
-%        \addto\captionsenglish{\renewcommand\listtablename{List of Table}}
-%        \addto\captionsenglish{\renewcommand{\chaptername}{Chapter}}
-%        \addto\captionsenglish{\renewcommand{\lstlistingname}{Listing}}
-%        \renewcommand{\ALG@name}{Algorithm}}
-%    }[]
+\IfEqCase*{\FEIenglish}{
+   {0}{
+       \addto\captionsslovak{\renewcommand{\lstlistingname}{V\a'ypis k\a'odu}}
+       \renewcommand{\ALG@name}{Algoritmus}}
+   {1}{
+       \addto\captionsenglish{\renewcommand{\lstlistingname}{Listing}}
+       \renewcommand{\ALG@name}{Algorithm}}
+   }[]
 
 % http://tex.stackexchange.com/questions/588/how-can-i-change-the-margins-for-only-part-of-the-text
 \def\changemargin#1#2{\list{}{\rightmargin#2\leftmargin#1}\item[]}
@@ -423,51 +363,53 @@
 
 \newcommand\FEIcover{
     \pagestyle{empty}
-    \begin{changemargin}{0.19cm}{0.19cm}
+    \newgeometry{tmargin=2cm,bmargin=1.8cm,lmargin=2.75cm,rmargin=2.75cm}
         \IfEqCase*{\FEIenglish}{
             {0}{
                 \def\@skolaTemp{\printSkola}
                 \def\@skolaFakulta{\printFakulta}
-                \def\@skolaEvCislo{{\fontsize{12pt}{1.3}\selectfont Eviden\v{c}n\a'e \v{c}\a'islo: \printEvidencneCislo}}
+                \def\@skolaEvCislo{{Eviden\v{c}n\a'e \v{c}\a'islo: \printEvidencneCislo}}
                 \def\@skolaNazovPrace{\printNazov}
                 \def\@skolaTypPrace{\typPrace}
                 }
             {1}{
                 \def\@skolaTemp{\printSkolaEn}
                 \def\@skolaFakulta{\printFakultaEn}
-                \def\@skolaEvCislo{{\fontsize{12pt}{1.3}\selectfont Registration number: \printEvidencneCislo}}
+                \def\@skolaEvCislo{{Registration number: \printEvidencneCislo}}
                 \def\@skolaNazovPrace{\printNazovEn}
                 \def\@skolaTypPrace{\typPraceEn}
                 }
             }[]
+        \begin{sffamily}
         \begin{center}
-            {\fontsize{14pt}{1.3}\selectfont \bf \MakeTextUppercase{\@skolaTemp}\newline \MakeTextUppercase{\@skolaFakulta}}    
+            {\fontsize{14.5pt}{0}\selectfont\bfseries \MakeTextUppercase{\@skolaTemp}\\[11.3pt] \@skolaFakulta}
         \end{center}
-        \vspace{10mm}
+        \vspace{11.5mm}
         \ifthenelse{\boolean{isThesis}}
         {
-            \@skolaEvCislo
+            \fontsize{12.5pt}{0}\selectfont\noindent\@skolaEvCislo
         }{}
-        \vspace{60mm}
+        \vspace{51.5mm}
         \begin{center}
-            {\fontsize{16pt}{1.3}\selectfont \bf{\MakeTextUppercase{\@skolaNazovPrace}}} \\[1em] 
-            {\bf\fontsize{16pt}{1.3}\selectfont \MakeTextUppercase{\@skolaTypPrace}}
+            {\fontsize{20.5pt}{18.2pt}\selectfont\bfseries\nointerlineskip\@skolaNazovPrace\par}\vspace{29pt}
+            {\fontsize{14.5pt}{0}\selectfont\bfseries \@skolaTypPrace}
         \end{center}
         \vspace{\fill}
         \begin{flushleft}
-            {\fontsize{14pt}{1.3}\selectfont \bf
+            {\fontsize{14.5pt}{0}\selectfont\bfseries
                 \@rok
                 \hfill
                 \printAutor}
         \end{flushleft} 
-    \end{changemargin}
+    \end{sffamily}
+    \restoregeometry
     \newpage    
 }
 
 \newcommand\FEItitlePage{
     \setcounter{page}{1}
     \pagestyle{empty}
-    \begin{changemargin}{0.19cm}{0.19cm} 
+    \newgeometry{tmargin=3.024cm,bmargin=2.775cm,lmargin=2.75cm,rmargin=2.75cm}
         \IfEqCase*{\FEIenglish}{
             {0}{
                 \def\@skolaTemp{\printSkola}
@@ -475,14 +417,13 @@
                 \def\@skolaStudPr{\printStudijnyProgram}
                 \def\@skolaStudPrCisl{\printNazovStudijnehoOdboru}
                 \def\@skolaSkolPrac{\printSkoliacePracovisko}
-                \def\@skolaEvCislo{{\fontsize{12pt}{1.3}\selectfont Eviden\v{c}n\a'e \v{c}\a'islo: \printEvidencneCislo}}
+                \def\@skolaEvCislo{{Eviden\v{c}n\a'e \v{c}\a'islo: \printEvidencneCislo}}
                 \def\@skolaNazovPrace{\printNazov}
                 \def\@skolaTypPrace{\typPrace}
                 \def\@tempStudProgr{\v{S}tudijn\a'y program:}
-                %\def\@tempCisloStud{\v{C}\a'islo \v{s}tudijn\a'eho odboru:}
-                \def\@tempNazovStud{N\a'azov \v{s}tudijn\a'eho odboru:}
+                \def\@tempNazovStud{Študijný odbor:}
                 \def\@tempSkolPracov{\v{S}koliace pracovisko:}
-                \def\@tempVedPrace{Ved\a'uci z\a'avere\v{c}nej pr\a'ace:}
+                \def\@tempVedPrace{Školiteľ:}
                 \def\@tempKonzultanta{Konzultant:}
                 \ifthenelse{\boolean{isThesis}}
                 {}{
@@ -500,11 +441,10 @@
                 \def\@skolaStudPr{\printStudijnyProgramEn}
                 \def\@skolaStudPrCisl{\printNazovStudijnehoOdboruEn}
                 \def\@skolaSkolPrac{\printSkoliacePracoviskoEn}
-                \def\@skolaEvCislo{\fontsize{12pt}{1.3}\selectfont Registration number: \printEvidencneCislo}       
+                \def\@skolaEvCislo{Registration number: \printEvidencneCislo}
                 \def\@skolaNazovPrace{\printNazovEn}
                 \def\@skolaTypPrace{\typPraceEn}
                 \def\@tempStudProgr{Study Programme:}
-                %\def\@tempCisloStud{Field Number:}
                 \def\@tempNazovStud{Study Field:}
                 \def\@tempSkolPracov{Training Workplace:}
                 \def\@tempVedPrace{Supervisor:}  
@@ -520,28 +460,29 @@
                 }
             }
             }[]
+        \begin{sffamily}
         \begin{center}
-            {\fontsize{14pt}{1.3}\selectfont \bf \MakeTextUppercase{\@skolaTemp}\newline \MakeTextUppercase{\@skolaFakulta}}    
+            {\fontsize{14pt}{1.3}\selectfont \bfseries \MakeTextUppercase{\@skolaTemp}\\[9.4pt] \@skolaFakulta}
         \end{center}
-        \vspace{10mm}
+        \vspace{9mm}
         {
             \ifthenelse{\boolean{isThesis}}
             {
                 \fontsize{12pt}{1.3}\selectfont \@skolaEvCislo
             }{}
         }    
-        \vspace{60mm}
+        \vspace{40.9mm}
         \begin{center}
-            {\fontsize{16pt}{1.3}\selectfont \bf{\MakeTextUppercase{\@skolaNazovPrace}}} \\[1em]
-            {\bf\fontsize{16pt}{1.3}\selectfont  \MakeTextUppercase{\@skolaTypPrace}}
+            {\fontsize{20pt}{18.1pt}\selectfont\bfseries\@skolaNazovPrace\par}\vspace{22pt}
+            {\fontsize{14pt}{0}\selectfont\bfseries\@skolaTypPrace}
         \end{center}
         \vspace{\fill}
+        {\fontsize{12pt}{14pt}\selectfont
         \begin{tabbing}
             \hspace*{5cm}\= \kill
             \@tempStudProgr \> \@skolaStudPr \\
             \ifthenelse{\boolean{isThesis}}
-            {%\@tempCisloStud \> \printCisloStudijnehoOdboru \\
-             \@tempNazovStud \> \@skolaStudPrCisl \\
+            {\@tempNazovStud \> \@skolaStudPrCisl \\
              \@tempSkolPracov \> \@skolaSkolPrac \\
              \@tempVedPrace \> \printVeduciZaverecnejPrace \\
              \IfEqCase*{\@tempKonzultant}{
@@ -553,95 +494,64 @@
                 \@tempTa \> \@skolaTa \\
             }
         \end{tabbing}
-        \vspace{\fill}
+        }
+        \vspace{3.43cm}
         \begin{flushleft}
-            {\fontsize{14pt}{1.3}\selectfont \bf
-                \printMesto \
+            {\fontsize{12pt}{0}\selectfont \bfseries
                 \@rok
                 \hfill
                 \printAutor}
         \end{flushleft}
-    \end{changemargin}
+        \end{sffamily}
+    \restoregeometry
     \newpage
 }
 
 \newcommand\FEIthanks[1]{
     \pagestyle{empty}
-    \vspace*{120mm}
+    \vspace*{\stretch{1}}
     \IfEqCase*{\FEIenglish}{
-        {0}{\section*{\fontsize{22pt}{1.3}\selectfont Po\v{d}akovanie}}
-        {1}{\section*{\fontsize{22pt}{1.3}\selectfont Acknowledgments}}
+        {0}{\section*{\fontsize{16pt}{1.3}\selectfont Po\v{d}akovanie}}
+        {1}{\section*{\fontsize{16pt}{1.3}\selectfont Acknowledgments}}
         }[]
+    \vspace{1pt}
         
     \ifthenelse{\isempty{#1}}
     {Chcem sa po\v{d}akova\v{t} ved\'{u}cemu z\'{a}vere\v{c}nej pr\'{a}ce, ktor\'{y}m bol \printVeduciZaverecnejPrace, za odborn\'{e} vedenie, rady a pripomienky, ktor\'{e} mi pomohli pri vypracovan\'{i} tejto  \typPraceTempII.}
-    {\input{#1}}    
+    {\input{#1}}
+    \vspace{7.1pt}
     \newpage
-}
-
-\newcommand\FEIassignment[1]{   
-    \pagestyle{empty}
-    \setlength{\voffset}{-2.5cm}
-    \begin{center}
-        \makebox[\textwidth]{\includegraphics[width=\paperwidth]{#1}}
-    \end{center}
-    \setlength{\hoffset}{0cm} 
-    \setlength{\voffset}{0cm}
 }
 
 \newcommand\FEIabstract[1]{
     \pagestyle{empty}   
-    \section*{\fontsize{22pt}{1.3}\selectfont S\'{U}HRN}
-    \noindent\MakeTextUppercase{\printSkola}
-    \newline
-    \MakeTextUppercase{\printFakulta}
-    \vspace{1em}
-    \begin{tabbing} 
-        \hspace*{7cm}\= \kill
-        \v{S}tudijn\a'y program:\> \printStudijnyProgram \\
-        Autor:\> \printAutor \\
-        \typPrace:\>
-        \begin{minipage}[t]{21.5em}
-            \printNazov
-        \end{minipage} \\
-        Ved\a'uci z\a'avere\v{c}nej pr\a'ace:\> \printVeduciZaverecnejPrace \\\IfEqCase*{\@tempKonzultant}{
-            {0}{}
-            {1}{Konzultant:\>\printKonzultant \\}
-                }[]Miesto a rok predlo\v{z}enia pr\a'ace:\>\printMesto \ \@rok
-    \end{tabbing}
-    \vspace{1em}
-    \input{#1}
+    \vspace*{-26.6pt}
+    \section*{\fontsize{20pt}{1.3}\selectfont Abstrakt}
+    \vspace{0.45cm}
 
-    \vspace{2em}
-    \noindent K\v{l}\a'u\v{c}ov\a'e slov\a'a: \printKeywords
+    \noindent\input{#1}
+
+    \vspace{0.8cm}
+    \noindent \textbf{K\v{l}\a'u\v{c}ov\a'e slov\a'a}
+
+    \vspace{0.3cm}
+    \noindent \printKeywords
     \clearpage
 }
     
 \newcommand\FEIabstractEn[1]{
     \pagestyle{empty}   
-    \section*{\fontsize{22pt}{1.3}\selectfont ABSTRACT}
-    \noindent\MakeTextUppercase{\printSkolaEn}
-    \newline
-    \MakeTextUppercase{\printFakultaEn}
-    \vspace{1em}
-    \begin{tabbing} 
-        \hspace*{7cm}\= \kill
-        Study Programme:\> \printStudijnyProgramEn \\
-        Author:\> \printAutor \\
-        \typPraceEn:\>
-        \begin{minipage}[t]{21.5em}
-            \printNazovEn
-        \end{minipage} \\
-        Supervisor:\> \printVeduciZaverecnejPrace \\\IfEqCase*{\@tempKonzultant}{
-            {0}{}
-            {1}{Consultant:\>\printKonzultant \\}
-                }[]Place and year of submission:\>\printMesto \ \@rok
-    \end{tabbing}
-    \vspace{1em}
-    \input{#1}
+    \vspace*{-26.6pt}
+    \section*{\fontsize{20pt}{1.3}\selectfont Abstract}
+    \vspace{0.45cm}
 
-    \vspace{2em}
-    \noindent Keywords: \printKeywordsEn
+    \noindent\input{#1}
+
+    \vspace{0.8cm}
+    \noindent \textbf{Keywords}
+
+    \vspace{0.3cm}
+    \noindent \printKeywordsEn
     \clearpage
 }
         
@@ -654,7 +564,7 @@
         
 \newcommand\listoffiguresandtables{
     \IfEqCase*{\FEIenglish}{
-        {0}{\renewcommand{\cftfigpresnum}{Obr\'{a}zok\ }
+        {0}{\renewcommand{\cftfigpresnum}{Obrázok\ }
             \renewcommand{\cfttabpresnum}{Tabu\v{l}ka\ }}
         {1}{\renewcommand{\cftfigpresnum}{Figure\ }
             \renewcommand{\cfttabpresnum}{Table\ }}
@@ -664,8 +574,8 @@
     \setlength{\cftfignumwidth}{\dimexpr\mylenf+3em}
     \setlength{\cfttabnumwidth}{\dimexpr\mylenf+3em}
     \IfEqCase*{\FEIenglish}{
-        {0}{\section*{Zoznam obr\'{a}zkov a tabuliek}}
-        {1}{\section*{List of Figures and Tables}}
+        {0}{\section*{\fontsize{20pt}{1.3}\selectfont Zoznam obr\'{a}zkov a tabuliek}}
+        {1}{\section*{\fontsize{20pt}{1.3}\selectfont List of Figures and Tables}}
         }[]    
     \phantomsection
     \@starttoc{lof}
@@ -690,9 +600,9 @@
 \newcommand\FEIlistOfAlgorithms{
     \IfEqCase*{\FEIenglish}{
         {0}{\def\@zoznamAlg{Zoznam algoritmov}}
-        {1}{\def\@zoznamAlg{List of Algorithm}}
+        {1}{\def\@zoznamAlg{List of Algorithms}}
         }[]
-    \renewcommand{\listalgorithmname}{\bf\fontsize{22pt}{1.3}\selectfont \@zoznamAlg}
+    \renewcommand{\listalgorithmname}{\fontsize{20pt}{1.3}\selectfont \@zoznamAlg}
     \pagestyle{plain}
     \listofalgorithms
     \newpage
@@ -701,10 +611,10 @@
 
 \newcommand\FEIlistOfListings{    
     \IfEqCase*{\FEIenglish}{
-        {0}{\def\@zoznamList{Zoznam v\a'ypisov}}
+        {0}{\def\@zoznamList{Zoznam v\a'ypisov k\a'odov}}
         {1}{\def\@zoznamList{List of listings}}
         }[]
-    \renewcommand{\lstlistlistingname}{\bf\fontsize{22pt}{1.3}\selectfont \@zoznamList}
+    \renewcommand{\lstlistlistingname}{\fontsize{20pt}{1.3}\selectfont \@zoznamList}
     \pagestyle{plain}
     \lstlistoflistings
     \newpage
@@ -720,26 +630,46 @@
 
 \renewcommand{\glsnamefont}[1]{\textbf{#1}}
 
-\newcommand\FEIglossaries[1]{
+% https://tex.stackexchange.com/questions/266591/printing-glossaries-with-long-styles-adds-to-the-tables-counter
+\newglossarystyle{FEIlong}{
     \setglossarystyle{long}
+    \renewenvironment{theglossary}{
+      \begin{longtable*}{lp{\glsdescwidth}}
+    }
+    {\end{longtable*}}%
+}
+
+\newcommand\FEIglossaries[1]{
+    \setglossarystyle{FEIlong}
     \makeglossaries
     \loadglsentries{#1}
     \setlength\LTleft{8pt}
 }
-        
-\newcommand\FEIlistOfGlossaries{  
-    \pagestyle{plain}
+
+\newcommand\FEIlistOfGlossaries{
     \IfEqCase*{\FEIenglish}{
-        {0}{\def\@zoznamZn{Zoznam skratiek}}
-        {1}{\def\@zoznamZn{List of Abbreviations}}
+        {0}{\def\@zoznamZn{Zoznam značiek a skratiek}}
+        {1}{\def\@zoznamZn{List of Symbols and Abbreviations}}
     }[]
     %\addtocontents{lof}{\protect\thispagestyle{plain}}
     %\addtocontents{lot}{\protect\thispagestyle{plain}}
-    \printglossary[type=\acronymtype,title={\@zoznamZn}]
+    \printglossary[type=\acronymtype,title={\fontsize{20pt}{1.3}\selectfont \@zoznamZn}]
     \newpage
-    \pagestyle{plain}
 }
-             
+
+\newcommand\FEImanualListOfGlossaries[1]{
+    \IfEqCase*{\FEIenglish}{
+        {0}{\def\@zoznamZn{Zoznam značiek a skratiek}}
+        {1}{\def\@zoznamZn{List of Symbols and Abbreviations}}
+    }[]
+    \section*{\@zoznamZn}
+    {
+        \linespread{1.7}\selectfont
+        \input{#1}\par
+    }
+    \newpage
+}
+
 \newcommand\FEIintroduction[1]{ 
     \pagestyle{plain}
     \IfEqCase*{\FEIenglish}{
@@ -777,8 +707,8 @@
     \newpage
     \cleardoublepage
     \phantomsection 
-    \addcontentsline{toc}{section}{Resum\'{e}}
-    \section*{Resum\'{e}}
+    \addcontentsline{toc}{section}{Rezum\'{e}}
+    \section*{Rezum\'{e}}
     \noindent \noindent \input{#1}
 }
 
@@ -787,25 +717,40 @@
     \cleardoublepage
     \phantomsection 
     \IfEqCase*{\FEIenglish}{
-        {0}{\def\@zoznamBib{Zoznam pou\v{z}itej literat\'{u}ry}}
+        {0}{\def\@zoznamBib{Literatúra}}
         {1}{\def\@zoznamBib{Bibliography}}
         }[]
     \addcontentsline{toc}{section}{\@zoznamBib}
     \renewcommand\refname{\@zoznamBib} 
 
-    \renewcommand\multinamedelim{\addcomma\space}
-    \renewcommand\finalnamedelim{\addspace\bibstring{and}\space}
     % below you can set padding in bibliography
     \setlength{\bibhang}{0pt}
     \printbibliography
 }
 
+\newcommand\FEIaiDeclaration[1]{
+    \IfEqCase*{\FEIenglish}{
+        {0}{\def\@aiDeclaration{Použitie nástrojov umelej inteligencie}}
+        {1}{\def\@aiDeclaration{Usage of artificial intelligence tools}}
+        }[]
+    \phantomsection
+    \addcontentsline{toc}{subsection}{\@aiDeclaration}
+    \subsection*{\@aiDeclaration}
+    \input{#1}\par
+}
+
 \newcounter{listOfAppendix}
 
 \IfEqCase*{\FEIenglish}{
-    {0}{\def\@zoznamPri{Pr\'{i}lohy}}
-    {1}{\def\@zoznamPri{Appendix}}
-    }[]
+    {0}{
+        \def\@appendices{Dodatky}
+        \def\@appendix{Dodatok}
+    }
+    {1}{
+        \def\@appendices{Appendices}
+        \def\@appendix{Appendix}
+    }
+}[]
 
 \newcommand\FEIlistOfAppendix{
     \newpage
@@ -822,11 +767,9 @@
     \counterwithin{algorithm}{section}
     \setcounter{lstlisting}{0}
     \counterwithin{lstlisting}{section}
-    % \setcounter{page}{1}  
-    \pagenumbering{Roman}
     \cleardoublepage
     \phantomsection 
-    \addcontentsline{toc}{section}{\@zoznamPri}
+    \addcontentsline{toc}{section}{\@appendices}
     \listofpriloh
 }
 
@@ -840,7 +783,7 @@
     \noindent\input{#2}
 }
         
-\newlistof{priloh}{pri}{\@zoznamPri}
+\newlistof{priloh}{pri}{\@appendices}
 \newcommand{\pridajPrilohu}[1]{
     \refstepcounter{priloh}
     \addcontentsline{pri}{priloh}{\protect\numberline{\Alph{section}} #1}\par
@@ -862,12 +805,12 @@
 \newcommand\frontmatter{%
     \clearpage
     %\@mainmatterfalse
-    \pagenumbering{roman}}
+}
 
 \newcommand\mainmatter{%
     \cleardoublepage
     % \@mainmattertrue
-    \pagenumbering{arabic}}
+}
 
 \newcommand\backmatter{%
     \if@openright
@@ -875,6 +818,12 @@
     \else
     \clearpage
     \fi
+    \renewcommand \thesection{\Alph{section}}
+    \titleformat{\section}
+    {\normalfont\Large\bfseries}{\@appendix{} \thesection:}{1ex}{}
+    \setcounter{section}{0}
+    \setcounter{subsection}{0}
+    \setcounter{subsubsection}{0}
     % \@mainmatterfalse
 }
 %\makeatother

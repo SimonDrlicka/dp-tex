@@ -1,6 +1,8 @@
 /.build
 *.sublime-workspace
 *.pri
+
+# LaTeX auxiliary / build files
 *.aux
 *.bbl
 *.bcf
@@ -15,5 +17,35 @@
 *.xml
 *.toc
 *.pdf
+
+# glossary / acronyms
+*.acn
+*.acr
+*.alg
+*.glg
+*.glo
+*.gls
+*.ist
+
+# listings / synctex
+*.lol
+*.synctex.gz
+
+# index
+*.idx
+*.ilg
+*.ind
+
+# nomenclature
+*.nlo
+*.nls
+
+# other common LaTeX artifacts
+*.nav
+*.snm
+*.vrb
+*.dvi
+*.xdy
+*-blx.bib
 
 /scripts
