@@ -118,6 +118,20 @@ sú flickovacie gestá ignorované. Tým je zabezpečené,
 že bežné pohyby ruky rozhodcu počas zápasu nevedú
 k~neúmyselnému prideľovaniu bodov.
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{img/subgesture-hand-down-example.png}
+    \caption{Príklad priebehu akcelerometrických dát
+    počas gesta \uv{Hand Down}.}
+    \label{fig:subgesture-hand-down}
+\end{figure}
+
+Na obrázku~\ref{fig:subgesture-hand-down} je
+zobrazený priebeh akcelerometrických dát počas
+vykonania gesta \uv{Hand Down}. Z~grafu je zrejmé,
+že hodnoty jednotlivých osí sa po spustení ruky
+ustália v~rámci definovaných hraničných pásiem.
+
 Na základe analýzy nameraných akcelerometrických dát
 boli stanovené hraničné hodnoty pre jednotlivé osi,
 ktoré definujú cieľovú polohu gesta \uv{Hand Down}.
@@ -127,9 +141,12 @@ príslušných osiach akcelerometra. Konkrétne rozsahy
 sú nasledovné:
 
 \begin{itemize}
-    \item \colorbox{xaxis!20}{$-11{,}0 \leq a_x \leq -9{,}0 \;\text{m/s}^2$}
-    \item \colorbox{yaxis!20}{$-4{,}0 \leq a_y \leq -2{,}0 \;\text{m/s}^2$}
-    \item \colorbox{zaxis!20}{$0{,}0 \leq a_z \leq 3{,}0 \;\text{m/s}^2$}
+    \item \colorbox{xaxis!20}{$-11{,}0
+    \leq a_x \leq -9{,}0 \;\text{m/s}^2$}
+    \item \colorbox{yaxis!20}{$-4{,}0
+    \leq a_y \leq -2{,}0 \;\text{m/s}^2$}
+    \item \colorbox{zaxis!20}{$0{,}0
+    \leq a_z \leq 3{,}0 \;\text{m/s}^2$}
 \end{itemize}
 
 Ak sa hodnoty všetkých troch osí súčasne nachádzajú
