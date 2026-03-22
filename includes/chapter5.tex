@@ -54,15 +54,16 @@ obrázku~\ref{fig:subgesture-hand-up} a~ich konkrétne
 hodnoty sú nasledovné:
 
 \begin{itemize}
-    \item \colorbox{xaxis!20}{$8{,}5 \leq a_x \leq 10{,}5 \;\text{m/s}^2$}
-    \item \colorbox{yaxis!20}{$-5{,}0 \leq a_y \leq 0{,}0 \;\text{m/s}^2$}
-    \item \colorbox{zaxis!20}{$2{,}5 \leq a_z \leq 5{,}0 \;\text{m/s}^2$}
+    \item \colorbox{xaxis!20}{$\handUpAxMin \leq a_x \leq \handUpAxMax \;\text{m/s}^2$}
+    \item \colorbox{yaxis!20}{$\handUpAyMin \leq a_y \leq \handUpAyMax \;\text{m/s}^2$}
+    \item \colorbox{zaxis!20}{$\handUpAzMin \leq a_z \leq \handUpAzMax \;\text{m/s}^2$}
 \end{itemize}
 
 Ak sa hodnoty všetkých troch osí súčasne nachádzajú
 v~rámci uvedených rozsahov, dôjde k~úspešnému rozpoznaniu
 gesta \uv{Rise Arm} a~aplikácia sa prepne do režimu
 bodovania, v~ktorom sú následne vyhodnocované flickovacie gestá.
+
 
 \subsubsection{Fáza 2 -- FLICK}
 
@@ -72,31 +73,69 @@ gyroskopickým senzorom hodiniek. Smer rotácie určuje,
 ktorému zápasníkovi sa bod pridelí:
 
 \begin{itemize}
-    \item \textbf{Flick Clockwise} -- rýchly pohyb
-    zápästia v~smere hodinových ručičiek pridelí bod
-    červenému zápasníkovi.
     \item \textbf{Flick Counterclockwise} -- rýchly
     pohyb zápästia proti smeru hodinových ručičiek
     pridelí bod modrému zápasníkovi.
+    \item \textbf{Flick Clockwise} -- rýchly pohyb
+    zápästia v~smere hodinových ručičiek pridelí bod
+    červenému zápasníkovi.
 \end{itemize}
 
 Dáta z~gyroskopu sú prenášané do telefónu, kde
-algoritmus vyhodnocuje rýchlosť a~smer rotácie na
-presné rozpoznanie smeru flicku. Rozhodca môže
-v~rámci jednej aktivácie vykonať aj viacero po sebe
-nasledujúcich flickovacích gest, pokiaľ neukončí
-fázu bodovania.
+algoritmus vyhodnocuje uhlovú rýchlosť rotácie na
+osi $g_x$, kde $g_x$ označuje hodnotu uhlovej
+rýchlosti na príslušnej osi gyroskopického senzora
+v~jednotkách stupňov za sekundu (DPS). Na základe
+analýzy nameraných gyroskopických dát boli stanovené
+nasledovné hraničné hodnoty pre rozpoznanie
+jednotlivých smerov flicku:
+
+\begin{itemize}
+    \item \colorbox{xaxis!20}{Modrý zápasník:
+    $g_x < \flckBlueThreshold \;\text{DPS}$} -- rotácia proti
+    smeru hodinových ručičiek prekročí prahovú
+    hodnotu $\flckBlueThreshold\,\text{DPS}$.
+    \item \colorbox{yaxis!20}{Červený zápasník:
+    $g_x > \flickRedThreshold \;\text{DPS}$} -- rotácia v~smere
+    hodinových ručičiek prekročí prahovú hodnotu
+    $\flickRedThreshold\,\text{DPS}$.
+\end{itemize}
+
+Rozhodca môže v~rámci jednej aktivácie vykonať aj
+viacero po sebe nasledujúcich flickovacích gest,
+pokiaľ neukončí fázu bodovania gestom
+\uv{Hand Down}. Tým je umožnené prideliť viacero
+bodov bez nutnosti opakovane zdvíhať a~spúšťať ruku.
 
 \subsubsection{Fáza 3 -- HAND DOWN}
 
 Poslednou fázou je spustenie ruky späť do pôvodnej
 polohy. Akcelerometer deteguje návrat zápästia do
 neutrálnej orientácie, čo signalizuje ukončenie
-procesu bodovania. Po rozpoznaní gesta „Hand Down"
+procesu bodovania. Po rozpoznaní gesta \uv{Hand Down}
 sa aplikácia prepne späť do režimu čakania, v~ktorom
 sú flickovacie gestá ignorované. Tým je zabezpečené,
 že bežné pohyby ruky rozhodcu počas zápasu nevedú
 k~neúmyselnému prideľovaniu bodov.
+
+Na základe analýzy nameraných akcelerometrických dát
+boli stanovené hraničné hodnoty pre jednotlivé osi,
+ktoré definujú cieľovú polohu gesta \uv{Hand Down}.
+Analogicky ako pri geste \uv{Rise Arm}, hodnoty
+$a_x$, $a_y$ a~$a_z$ označujú zrýchlenie na
+príslušných osiach akcelerometra. Konkrétne rozsahy
+sú nasledovné:
+
+\begin{itemize}
+    \item \colorbox{xaxis!20}{$-11{,}0 \leq a_x \leq -9{,}0 \;\text{m/s}^2$}
+    \item \colorbox{yaxis!20}{$-4{,}0 \leq a_y \leq -2{,}0 \;\text{m/s}^2$}
+    \item \colorbox{zaxis!20}{$0{,}0 \leq a_z \leq 3{,}0 \;\text{m/s}^2$}
+\end{itemize}
+
+Ak sa hodnoty všetkých troch osí súčasne nachádzajú
+v~rámci uvedených rozsahov, dôjde k~úspešnému
+rozpoznaniu gesta \uv{Hand Down} a~aplikácia sa
+prepne späť do režimu čakania.
 
 \subsection{Gesto RISE ARM}
 Gesto nazvané „RISE ARM“ je kľúčovým prvkom v~procese penalizácie pasívneho správania zápasníka podľa pravidiel United World Wrestling (UWW, 2017). Rozhodca na žinenke ho vykonáva s~cieľom upozorniť na neaktívnosť, prerušiť stretnutie (ak je potrebné) a~iniciovať procedúru trestu. Gesto začína zastavením boja zdvihnutím oboch rúk dlaňami nahor do výšky ramien, nasleduje ukázanie pravej ruky na pasívneho zápasníka a~zdvihnutie ľavej ruky nad hlavu do vertikálnej polohy. Celkové trvanie gesta je približne 2-3 sekundy, pričom jeho jednoznačnosť a~viditeľnosť z~viacerých uhlov sú kritické pre správnu interpretáciu zo strany zúčastnených aj potenciálnych systémov automatického rozoznávania gest. V~závislosti od štýlu zápasenia (voľný alebo grécko-rímsky) môže byť gesto sprevádzané dodatočnými signálmi, ako je udelenie bodov súperovi, čo zvyšuje jeho kontextuálnu variabilitu.
