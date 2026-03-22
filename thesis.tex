@@ -39,9 +39,11 @@
 
 % Bibliography database file
 \bibliography{includes/bibliography.bib}
+\input{includes/colors}
 
 \begin{document}
 
+\pagenumbering{roman}
 %%%%%%%%%%%%%%%%%%
 %%              %%
 %% FRONT MATTER %%
@@ -88,6 +90,10 @@
 %%             %%
 %%%%%%%%%%%%%%%%%
 \mainmatter
+
+\clearpage
+\pagenumbering{arabic}
+\setcounter{page}{1}
 
 \FEIintroduction{includes/introduction}
 \FEIcore{includes/core}

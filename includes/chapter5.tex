@@ -26,6 +26,44 @@ ochranný mechanizmus -- flickovacie gestá sú
 vyhodnocované len vtedy, keď rozhodca vedome zdvihne
 ruku, čím sa predchádza nechcenému pripočítaniu bodov.
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{img/subgesture-hand-up-example.png}
+    \caption{Príklad priebehu akcelerometrických dát
+    počas gesta „Rise Arm".}
+    \label{fig:subgesture-hand-up}
+\end{figure}
+
+Na obrázku~\ref{fig:subgesture-hand-up} je zobrazený
+priebeh akcelerometrických dát počas vykonania gesta
+\uv{Rise Arm}. Na grafe je viditeľný výrazný prechod
+osi $a_x$ (modrá) z~hodnôt okolo
+$-10\,\text{m/s}^2$ na približne $+9\,\text{m/s}^2$,
+čo zodpovedá zmene orientácie zápästia zo spustenej
+polohy do zdvihnutej. Farebné pásma znázorňujú
+očakávané rozsahy hodnôt pre jednotlivé osi
+v~cieľovej polohe.
+
+Na základe analýzy nameraných akcelerometrických dát
+boli stanovené hraničné hodnoty pre jednotlivé osi,
+ktoré definujú cieľovú polohu gesta \uv{Rise Arm},
+kde $a_x$, $a_y$ a~$a_z$ označujú hodnoty zrýchlenia
+na príslušných osiach akcelerometra. Tieto rozsahy
+sú znázornené farebnými pásmami na
+obrázku~\ref{fig:subgesture-hand-up} a~ich konkrétne
+hodnoty sú nasledovné:
+
+\begin{itemize}
+    \item \colorbox{xaxis!20}{$8{,}5 \leq a_x \leq 10{,}5 \;\text{m/s}^2$}
+    \item \colorbox{yaxis!20}{$-5{,}0 \leq a_y \leq 0{,}0 \;\text{m/s}^2$}
+    \item \colorbox{zaxis!20}{$2{,}5 \leq a_z \leq 5{,}0 \;\text{m/s}^2$}
+\end{itemize}
+
+Ak sa hodnoty všetkých troch osí súčasne nachádzajú
+v~rámci uvedených rozsahov, dôjde k~úspešnému rozpoznaniu
+gesta \uv{Rise Arm} a~aplikácia sa prepne do režimu
+bodovania, v~ktorom sú následne vyhodnocované flickovacie gestá.
+
 \subsubsection{Fáza 2 -- FLICK}
 
 Po aktivácii režimu bodovania rozhodca vykoná rýchly
