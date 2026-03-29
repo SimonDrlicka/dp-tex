@@ -1,1 +1,170 @@
-\section{kap6}
+\section{Analýza existujúcich riešení}
+
+Pred samotným návrhom a~implementáciou vlastného riešenia je
+potrebné preskúmať, aké aplikácie a~technológie sú v~súčasnosti
+dostupné v~oblasti podpory rozhodcov prostredníctvom nositeľných
+zariadení. Cieľom tejto kapitoly je zmapovať existujúce riešenia,
+identifikovať ich silné a~slabé stránky a~na základe toho určiť
+priestor, ktorý naša práca vypĺňa.
+
+Analýzu sme rozdelili do troch oblastí. V~prvej sa zameriavame
+na rozhodcovské aplikácie pre smart hodinky, ktoré sú určené
+pre rôzne športy -- predovšetkým futbal, hokej či hádzanú.
+V~druhej časti skúmame aplikácie špecificky zamerané na
+zápasenie, no bez využitia detekcie gest. V~tretej časti
+uvádzame relevantné akademické práce z~oblasti rozpoznávania
+gest pomocou inerciálnych senzorov na zápästí.
+
+\subsection{Rozhodcovské aplikácie pre smart hodinky}
+
+V~oblasti športového rozhodcovania existuje niekoľko aplikácií,
+ktoré využívajú smart hodinky ako nástroj na uľahčenie práce
+rozhodcu počas zápasu. Tieto aplikácie sa zameriavajú najmä na
+správu času, zaznamenávanie udalostí a~analýzu výkonu rozhodcu.
+Spoločným znakom všetkých nižšie uvedených riešení je, že na
+ovládanie využívajú dotykový displej hodiniek -- rozhodca musí
+aktívne ťukať na obrazovku, aby zaznamenal udalosť.
+
+\subsubsection{REFSIX}
+REFSIX je jedna z~najrozšírenejších aplikácií pre futbalových
+rozhodcov. Je dostupná pre Apple Watch, Samsung Galaxy Watch
+a~zariadenia s~Android Wear. Aplikácia umožňuje rozhodcovi
+sledovať čas zápasu pomocou viacerých časomier, zaznamenávať
+žlté a~červené karty spolu s~číslom hráča a~dôvodom udelenia,
+a~po zápase generovať automatické správy o~priebehu stretnutia.
+V~rozšírenej verzii REFSIX PRO ponúka aj sledovanie prejdenej
+vzdialenosti, heatmapu pozícií rozhodcu na ihrisku a~video
+analýzu. Aplikácia funguje aj bez pripojenia k~internetu --
+dáta sa synchronizujú medzi hodinkami a~telefónom pred zápasom
+a~po ňom. \cite{refsix}
+
+\subsubsection{Referee Watch PRO}
+Referee Watch PRO je aplikácia pre Apple Watch určená pre
+rozhodcov viacerých športov -- futbal, americký futbal, hádzanú,
+rugby aj hokej. Jej hlavnou funkciou je pokročilé riadenie času
+zápasu s~intuitívnym ovládaním priamo z~hodiniek. Po skončení
+zápasu aplikácia poskytuje analytiku výkonu vrátane heatmapy
+pohybu rozhodcu po ihrisku. \cite{referee_watch_pro}
+
+\subsubsection{MatchGear}
+MatchGear je open-source aplikácia pre Android WearOS a~Apple
+Watch, ktorá je určená pre rozhodcov, trénerov aj manažérov.
+Aktuálne plne podporuje pozemný hokej, halový hokej, futbal,
+halový futbal a~korfbal. Aplikácia umožňuje sledovanie času,
+skóre, kariet a~trestných časov. Zaujímavosťou je podpora gesta
+\uv{double-tap} na Apple Watch, ktoré umožňuje spustiť alebo
+zastaviť čas bez nutnosti dotyku displeja. Zdrojový kód je
+dostupný na platforme GitHub. \cite{matchgear}
+
+\subsubsection{Whistle}
+Whistle je rozhodcovská aplikácia s~podporou smart hodiniek,
+telefónov a~televíznych obrazoviek. Rozhodca ovláda zápas
+z~hodiniek a~všetky zmeny -- skóre, karty, prestávky -- sa
+v~reálnom čase synchronizujú s~ostatnými prepojenými
+zariadeniami. Aplikácia podporuje zdieľanie priebehu zápasu
+prostredníctvom unikátneho kódu, vďaka čomu môžu tréneri,
+asistenti rozhodcu či diváci sledovať aktuálny stav stretnutia.
+Po zápase ponúka prehľad udalostí a~heatmapu pohybu rozhodcu.
+\cite{whistle}
+
+\subsubsection{Spintso S1 Pro}
+Na rozdiel od predchádzajúcich softvérových riešení, Spintso
+S1 Pro predstavuje dedikované hardvérové zariadenie -- smart
+hodinky navrhnuté špeciálne pre rozhodcov. Hodinky disponujú
+\Gls{gps}, meraním srdcovej frekvencie, počítadlom krokov
+a~vibračnými upozorneniami pri štarte, prestávke a~konci
+zápasu. Po aktivácii režimu zápasu sa dotykový displej uzamkne
+a~ovládanie prebieha výhradne jedným tlačidlom, čo zabraňuje
+nechceným dotykom spôsobeným napríklad dažďom alebo potom.
+Hodinky je možné prepojiť s~mobilnou aplikáciou Spintso Watch,
+ktorá poskytuje mapu pohybu rozhodcu a~ďalšie štatistiky.
+\cite{spintso}
+
+\subsection{Aplikácie zamerané na zápasenie}
+
+V~oblasti zápasenia existuje niekoľko aplikácií, ktoré sú však
+primárne určené pre trénerov, štatistikov alebo bodových
+rozhodcov sediacich pri stole -- nie pre rozhodcu na žinenke.
+
+\subsubsection{Wrestling Scoreboard}
+Wrestling Scoreboard je aplikácia pre iOS, ktorá vizuálne
+napodobňuje oficiálny \Gls{uww} scoreboard. Umožňuje pridávanie
+a~odoberanie bodov, sledovanie pasivity, napomenutí a~časomieru
+s~nastaviteľnou dĺžkou polčasu. Ovládanie je čisto dotykové --
+rozhodca alebo operátor musí manuálne ťukať na tlačidlá na
+obrazovke. Aplikácia nepodporuje smart hodinky ani
+rozpoznávanie gest. \cite{wrestling_scoreboard}
+
+\subsubsection{MatBoss}
+MatBoss je komplexný nástroj pre trénerov a~štatistikov
+v~zápasení. Umožňuje zaznamenávanie výsledkov zápasov, video
+analýzu a~integráciu s~platformou TrackWrestling. V~roku 2023
+bola vydaná bezplatná verzia \uv{Stats-Only}, ktorá zjednodušuje
+digitálne zaznamenávanie štatistík priamo z~mobilného
+zariadenia. Aplikácia je však určená pre použitie pri stole,
+nie pre rozhodcu na žinenke. \cite{matboss}
+
+\subsubsection{Matside Stats}
+Matside Stats je mobilná aplikácia na sledovanie a~ukladanie
+bodov počas zápasov. Obsahuje inteligentnú validáciu --
+napríklad po takedowne neumožní rovnakému zápasníkovi vykonať
+escape. Podporuje tiež súčasné sledovanie viacerých zápasov
+viacerými osobami. Rovnako ako MatBoss, aj táto aplikácia je
+určená pre operátorov pri stole. \cite{matside_stats}
+
+\subsection{Akademický výskum -- rozpoznávanie gest pomocou IMU}
+
+Okrem komerčných aplikácií existuje rozsiahly akademický výskum
+zameraný na rozpoznávanie gest ruky pomocou inerciálnych
+senzorov umiestnených na zápästí. Tieto práce tvoria teoretický
+základ, na ktorom stavia aj naše riešenie.
+
+Kim a~kol. (2018) navrhli algoritmus rozpoznávania gest ruky
+založený na hlbokom učení, konkrétne na kombinácii konvolučných
+vrstiev a~rekurentných \Gls{gru} vrstiev. Vstupom boli dáta
+z~gyroskopu a~akcelerometra umiestnených na zápästí. Autori
+dosiahli vysokú presnosť rozpoznávania, čo potvrdilo vhodnosť
+týchto senzorov pre detekciu gest. \cite{deepgesture}
+
+Xu a~kol. (2021) predstavili algoritmus rozpoznávania 8~gest
+ruky bežiaci na náramku s~minimálnymi výpočtovými zdrojmi.
+Navrhnutý prístup využíval fúziu dát z~akcelerometra
+a~gyroskopu pomocou komplementárneho filtra a~definoval nový
+typ príznaku nazvaný \uv{axis-crossing code}. Výsledky ukázali,
+že aj na zariadeniach s~obmedzeným výkonom je možné dosiahnuť
+spoľahlivé rozpoznávanie gest v~reálnom čase.
+\cite{hand_gesture_wristband}
+
+V~oblasti nositeľných senzorov a~rozpoznávania ľudských aktivít
+je tiež relevantný výskum z~roku 2026, ktorý navrhuje prístup
+s~konvolučnými neurónovými sieťami špecializovanými pre
+jednotlivé typy senzorov. Výsledky jednotlivých modelov sa
+následne kombinujú technikou neskorej fúzie. Tento prístup
+dosahuje vyššiu presnosť ako klasické metódy, napríklad
+\Gls{svm}. \cite{wearable_sensors_ai}
+
+\subsection{Zhrnutie a priestor pre vlastné riešenie}
+
+Na základe vykonanej analýzy môžeme konštatovať, že existujúce
+rozhodcovské aplikácie pre smart hodinky sú primárne zamerané
+na futbal a~ďalšie loptové športy. Ich ovládanie je založené
+na dotykovom rozhraní -- rozhodca musí opakovane ťukať na
+displej hodiniek, čo v~kontexte zápasenia nie je praktické,
+keďže rozhodca na žinenke potrebuje mať obe ruky voľné
+a~neustále sledovať dianie na žinenke.
+
+Aplikácie zamerané na zápasenie (Wrestling Scoreboard, MatBoss,
+Matside Stats) sú určené pre bodových rozhodcov alebo trénerov
+sediacich pri stole a~nevyužívajú smart hodinky ani
+rozpoznávanie gest.
+
+Akademický výskum potvrdzuje, že rozpoznávanie gest ruky
+pomocou akcelerometra a~gyroskopu na zápästí je technicky
+realizovateľné s~vysokou presnosťou. Avšak žiadna
+z~existujúcich prác sa nezameriava na špecifickú aplikáciu
+pre rozhodcov v~zápasení.
+
+Naša práca preto vypĺňa identifikovanú medzeru -- navrhuje
+a~implementuje riešenie, ktoré využíva senzory smart hodiniek
+na automatickú detekciu rozhodcovských gest v~zápasení, bez
+nutnosti dotykového ovládania.

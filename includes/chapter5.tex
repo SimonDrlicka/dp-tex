@@ -18,7 +18,7 @@ bežných pohyboch ruky.
 Prvou fázou gesta je zdvihnutie ruky rozhodcom do
 hornej polohy. Tento pohyb je detegovaný akcelerometrom
 inteligentných hodiniek, ktorý zaznamenáva zmenu
-orientácie zápästia. Po rozpoznaní gesta „Rise Arm"
+orientácie zápästia. Po rozpoznaní gesta \uv{Rise Arm}
 sa aplikácia prepne z~režimu čakania do režimu
 bodovania, v~ktorom hodinky aktívne očakávajú príjem
 flickovacích gest. Táto aktivačná fáza slúži ako
@@ -30,7 +30,7 @@ ruku, čím sa predchádza nechcenému pripočítaniu bodov.
     \centering
     \includegraphics[width=0.9\textwidth]{img/subgesture-hand-up-example.png}
     \caption{Príklad priebehu akcelerometrických dát
-    počas gesta „Rise Arm".}
+    počas gesta \uv{Rise Arm}.}
     \label{fig:subgesture-hand-up}
 \end{figure}
 
@@ -92,14 +92,60 @@ jednotlivých smerov flicku:
 
 \begin{itemize}
     \item \colorbox{xaxis!20}{Modrý zápasník:
-    $g_x < \flckBlueThreshold \;\text{DPS}$} -- rotácia proti
-    smeru hodinových ručičiek prekročí prahovú
+    $g_x < \flckBlueThreshold \;\text{DPS}$} -- rotácia
+    proti smeru hodinových ručičiek prekročí prahovú
     hodnotu $\flckBlueThreshold\,\text{DPS}$.
     \item \colorbox{yaxis!20}{Červený zápasník:
-    $g_x > \flickRedThreshold \;\text{DPS}$} -- rotácia v~smere
-    hodinových ručičiek prekročí prahovú hodnotu
-    $\flickRedThreshold\,\text{DPS}$.
+    $g_x > \flickRedThreshold \;\text{DPS}$} -- rotácia
+    v~smere hodinových ručičiek prekročí prahovú
+    hodnotu $\flickRedThreshold\,\text{DPS}$.
 \end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{img/subgesture-flick-counterclockwise.png}
+    \caption{Príklad priebehu gyroskopických
+    a~akcelerometrických dát počas gesta
+    \uv{Flick Counterclockwise}.}
+    \label{fig:subgesture-flick-ccw}
+\end{figure}
+
+Na obrázku~\ref{fig:subgesture-flick-ccw} je
+zobrazený priebeh senzorových dát počas vykonania
+gesta \uv{Flick Counterclockwise}. V~hornej časti
+grafu, ktorá zachytáva gyroskopické dáta, je viditeľný
+výrazný záporný špičkový výkyv (spike) na osi $g_x$
+(modrá), ktorý dosahuje hodnotu približne
+$-1600\,\text{DPS}$, čo výrazne prekračuje stanovenú
+prahovú hodnotu $\flckBlueThreshold\,\text{DPS}$.
+Práve tento krátkodobý, ale intenzívny výkyv je
+kľúčovým signálom, na základe ktorého algoritmus
+rozpozná flick proti smeru hodinových ručičiek
+a~pridelí bod modrému zápasníkovi. V~spodnej časti
+grafu sú zobrazené akcelerometrické dáta, na ktorých
+je viditeľný sprievodný otras spôsobený rýchlym
+pohybom zápästia.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{img/subgesture-flick-clockwise.png}
+    \caption{Príklad priebehu gyroskopických
+    a~akcelerometrických dát počas gesta
+    \uv{Flick Clockwise}.}
+    \label{fig:subgesture-flick-cw}
+\end{figure}
+
+Na obrázku~\ref{fig:subgesture-flick-cw} je analogicky
+zobrazený priebeh senzorových dát počas vykonania
+gesta \uv{Flick Clockwise}. V~hornej časti grafu sú
+viditeľné viaceré kladné špičkové výkyvy na osi $g_x$
+(modrá), ktoré dosahujú hodnoty približne
+$+1500\,\text{DPS}$, čo výrazne prekračuje stanovenú
+prahovú hodnotu $\flickRedThreshold\,\text{DPS}$
+vyznačenú červenou prerušovanou čiarou. Každý takýto
+výkyv predstavuje jeden flick v~smere hodinových
+ručičiek, na základe ktorého algoritmus pridelí bod
+červenému zápasníkovi.
 
 Rozhodca môže v~rámci jednej aktivácie vykonať aj
 viacero po sebe nasledujúcich flickovacích gest,
