@@ -118,6 +118,7 @@
 \usepackage{booktabs}
 \usepackage{pdfpages}
 \usepackage[all]{nowidow}
+\usepackage{float}
 %\usepackage{showframe} % debugging overflows
 
 % \cftsetpnumwidth{1.8em} % set the dots width in loX (f,t,l,a...) https://tex.stackexchange.com/q/369283/106389
