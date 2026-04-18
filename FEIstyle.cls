@@ -828,4 +828,13 @@
     % \@mainmatterfalse
 }
 %\makeatother
+\lstdefinelanguage{Kotlin}{
+  keywords={fun, val, var, if, else, when, class,
+    object, data, return, import, package, for,
+    while, do, in, is, as, null, true, false},
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]",
+  sensitive=true
+}
 \endinput

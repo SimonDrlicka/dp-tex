@@ -1,170 +1,602 @@
-\section{Analýza existujúcich riešení}
+\section{Návrh gest}
+\label{chapter:gesta}
 
-Pred samotným návrhom a~implementáciou vlastného riešenia je
-potrebné preskúmať, aké aplikácie a~technológie sú v~súčasnosti
-dostupné v~oblasti podpory rozhodcov prostredníctvom nositeľných
-zariadení. Cieľom tejto kapitoly je zmapovať existujúce riešenia,
-identifikovať ich silné a~slabé stránky a~na základe toho určiť
-priestor, ktorý naša práca vypĺňa.
+V~tejto diplomovej práci sa zameriavame na návrh 
+nových gest, ktoré umožnia ovládanie vybraných 
+funkcií v~našej aplikácii - konkrétne sa zameriame
+na gestá, ktoré sa podobajú signálom rozhodcu
+zápasenia. Inteligentné hodinky s~operačným systémom
+Zepp OS už natívne podporujú určité gestá bez nutnosti
+dodatočného programovania. Jedným z~takýchto gest je
+prebudenie hodiniek pri ich uvedení do vodorovnej 
+polohy, čo umožňuje pohodlnú interakciu bez potreby
+fyzického dotyku alebo stláčania tlačidiel. 
+My sa v~práci zameriame na vytvorenie novej 
+aplikácie pre hodinky so Zepp OS, ktorá odosiela 
+dáta z~gyroskopického senzora a~akcelerometra do 
+smart telefónu, kde sú tieto dáta následne spracované 
+a~vyhodnotené.
 
-Analýzu sme rozdelili do troch oblastí. V~prvej sa zameriavame
-na rozhodcovské aplikácie pre smart hodinky, ktoré sú určené
-pre rôzne športy -- predovšetkým futbal, hokej či hádzanú.
-V~druhej časti skúmame aplikácie špecificky zamerané na
-zápasenie, no bez využitia detekcie gest. V~tretej časti
-uvádzame relevantné akademické práce z~oblasti rozpoznávania
-gest pomocou inerciálnych senzorov na zápästí.
+Pred samotným popisom jednotlivých gest uvádzame
+prehľadovú tabuľku~\ref{tab:prehlad-gest}, ktorá
+zhŕňa všetky navrhnuté gestá, ich účel a~správanie
+aplikácie po ich detekcii.
 
-\subsection{Rozhodcovské aplikácie pre smart hodinky}
+\begin{table}[H]
+    \centering
+    \caption{Prehľad navrhnutých gest}
+    \label{tab:prehlad-gest}
+    \begin{tabularx}{\textwidth}{l l X}
+        \toprule
+        \textbf{Gesto} & \textbf{Varianty}
+            & \textbf{Správanie aplikácie} \\
+        \midrule
+        BODOVANIE & červený, modrý
+            & Kompozitné gesto: Rise Arm aktivuje
+            režim bodovania, Flick prideľuje body
+            podľa smeru rotácie, Hand Down ukončí
+            bodovanie. \\
+        \addlinespace
+        PASIVITA & červený, modrý
+            & Zaznamená pasivitu a~spustí
+            30-sekundový odpočet. Ak nikto
+            neskóruje, súper automaticky dostane
+            1~bod. \\
+        \addlinespace
+        NAPOMENUTIE & červený, modrý
+            & Automaticky prepne do režimu
+            bodovania so zamknutou stranou --
+            body idú výhradne súperovi. \\
+        \addlinespace
+        TOUCHE & --
+            & Odošle informáciu o~lopatkovom
+            víťazstve. Zápas sa okamžite
+            ukončuje. \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
 
-V~oblasti športového rozhodcovania existuje niekoľko aplikácií,
-ktoré využívajú smart hodinky ako nástroj na uľahčenie práce
-rozhodcu počas zápasu. Tieto aplikácie sa zameriavajú najmä na
-správu času, zaznamenávanie udalostí a~analýzu výkonu rozhodcu.
-Spoločným znakom všetkých nižšie uvedených riešení je, že na
-ovládanie využívajú dotykový displej hodiniek -- rozhodca musí
-aktívne ťukať na obrazovku, aby zaznamenal udalosť.
+\subsection{Gesto BODOVANIE}
 
-\subsubsection{REFSIX}
-REFSIX je jedna z~najrozšírenejších aplikácií pre futbalových
-rozhodcov. Je dostupná pre Apple Watch, Samsung Galaxy Watch
-a~zariadenia s~Android Wear. Aplikácia umožňuje rozhodcovi
-sledovať čas zápasu pomocou viacerých časomier, zaznamenávať
-žlté a~červené karty spolu s~číslom hráča a~dôvodom udelenia,
-a~po zápase generovať automatické správy o~priebehu stretnutia.
-V~rozšírenej verzii REFSIX PRO ponúka aj sledovanie prejdenej
-vzdialenosti, heatmapu pozícií rozhodcu na ihrisku a~video
-analýzu. Aplikácia funguje aj bez pripojenia k~internetu --
-dáta sa synchronizujú medzi hodinkami a~telefónom pred zápasom
-a~po ňom. \cite{refsix}
+Gesto \uv{Bodovanie} je kompozitné gesto pozostávajúce
+z~troch po sebe nasledujúcich fáz, ktoré spoločne
+umožňujú rozhodcovi prideľovať body jednotlivým
+zápasníkom. Inšpirovali sme sa reálnym signálom rozhodcu
+v~zápasení, kde zdvihnutie ruky signalizuje začiatok
+bodovania a~následný rýchly pohyb zápästia určuje, ktorej
+strane sa bod udeľuje. 
 
-\subsubsection{Referee Watch PRO}
-Referee Watch PRO je aplikácia pre Apple Watch určená pre
-rozhodcov viacerých športov -- futbal, americký futbal, hádzanú,
-rugby aj hokej. Jej hlavnou funkciou je pokročilé riadenie času
-zápasu s~intuitívnym ovládaním priamo z~hodiniek. Po skončení
-zápasu aplikácia poskytuje analytiku výkonu vrátane heatmapy
-pohybu rozhodcu po ihrisku. \cite{referee_watch_pro}
 
-\subsubsection{MatchGear}
-MatchGear je open-source aplikácia pre Android WearOS a~Apple
-Watch, ktorá je určená pre rozhodcov, trénerov aj manažérov.
-Aktuálne plne podporuje pozemný hokej, halový hokej, futbal,
-halový futbal a~korfbal. Aplikácia umožňuje sledovanie času,
-skóre, kariet a~trestných časov. Zaujímavosťou je podpora gesta
-\uv{double-tap} na Apple Watch, ktoré umožňuje spustiť alebo
-zastaviť čas bez nutnosti dotyku displeja. Zdrojový kód je
-dostupný na platforme GitHub. \cite{matchgear}
+Na obrázku~\ref{fig:gesto-rise-arm} je znázornený
+vývojový diagram gesta \uv{Bodovanie}. Algoritmus
+začína v~režime čakania, kde čaká na detekciu
+gesta \uv{Rise Arm}. Po jeho detekcii sa prepne
+do režimu bodovania, v~ktorom čaká na detekciu
+flicku. Flick v~smere hodinových ručičiek udelí
+bod červenému zápasníkovi, flick proti smeru
+hodinových ručičiek udelí bod modrému zápasníkovi.
+Ak nie je detekovaný žiadny flick, algoritmus
+čaká na gesto \uv{Hand Down}, ktoré ukončí
+bodovanie a~vráti algoritmus späť do režimu
+čakania.
 
-\subsubsection{Whistle}
-Whistle je rozhodcovská aplikácia s~podporou smart hodiniek,
-telefónov a~televíznych obrazoviek. Rozhodca ovláda zápas
-z~hodiniek a~všetky zmeny -- skóre, karty, prestávky -- sa
-v~reálnom čase synchronizujú s~ostatnými prepojenými
-zariadeniami. Aplikácia podporuje zdieľanie priebehu zápasu
-prostredníctvom unikátneho kódu, vďaka čomu môžu tréneri,
-asistenti rozhodcu či diváci sledovať aktuálny stav stretnutia.
-Po zápase ponúka prehľad udalostí a~heatmapu pohybu rozhodcu.
-\cite{whistle}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{img/diagrams/flowchart-gesto-bodovanie.png}
+    \caption{Vývojový diagram gesta BODOVANIE}
+    \label{fig:bodovanie-flowchart}
+\end{figure}
 
-\subsubsection{Spintso S1 Pro}
-Na rozdiel od predchádzajúcich softvérových riešení, Spintso
-S1 Pro predstavuje dedikované hardvérové zariadenie -- smart
-hodinky navrhnuté špeciálne pre rozhodcov. Hodinky disponujú
-\Gls{gps}, meraním srdcovej frekvencie, počítadlom krokov
-a~vibračnými upozorneniami pri štarte, prestávke a~konci
-zápasu. Po aktivácii režimu zápasu sa dotykový displej uzamkne
-a~ovládanie prebieha výhradne jedným tlačidlom, čo zabraňuje
-nechceným dotykom spôsobeným napríklad dažďom alebo potom.
-Hodinky je možné prepojiť s~mobilnou aplikáciou Spintso Watch,
-ktorá poskytuje mapu pohybu rozhodcu a~ďalšie štatistiky.
-\cite{spintso}
+\subsubsection{Fáza 1 -- RISE ARM}
 
-\subsection{Aplikácie zamerané na zápasenie}
+Prvou fázou gesta je zdvihnutie ruky rozhodcom do
+hornej polohy. Tento pohyb je detegovaný akcelerometrom
+inteligentných hodiniek, ktorý zaznamenáva zmenu
+orientácie zápästia. Po rozpoznaní gesta \uv{Rise Arm}
+sa aplikácia prepne z~režimu čakania do režimu
+bodovania, v~ktorom hodinky aktívne očakávajú príjem
+flickovacích gest. Táto aktivačná fáza slúži ako
+ochranný mechanizmus -- flickovacie gestá sú
+vyhodnocované len vtedy, keď rozhodca vedome zdvihne
+ruku, čím sa predchádza nechcenému pripočítaniu bodov.
 
-V~oblasti zápasenia existuje niekoľko aplikácií, ktoré sú však
-primárne určené pre trénerov, štatistikov alebo bodových
-rozhodcov sediacich pri stole -- nie pre rozhodcu na žinenke.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\textwidth]{img/gesture-img/obrazok-gesto-rise-arm.png}
+    \caption{Poloha ruky pri geste \uv{Rise Arm}}
+    \label{fig:gesto-rise-arm}
+\end{figure}
 
-\subsubsection{Wrestling Scoreboard}
-Wrestling Scoreboard je aplikácia pre iOS, ktorá vizuálne
-napodobňuje oficiálny \Gls{uww} scoreboard. Umožňuje pridávanie
-a~odoberanie bodov, sledovanie pasivity, napomenutí a~časomieru
-s~nastaviteľnou dĺžkou polčasu. Ovládanie je čisto dotykové --
-rozhodca alebo operátor musí manuálne ťukať na tlačidlá na
-obrazovke. Aplikácia nepodporuje smart hodinky ani
-rozpoznávanie gest. \cite{wrestling_scoreboard}
+Na obrázku~\ref{fig:gesto-rise-arm} je znázornená
+poloha ruky rozhodcu pri geste \uv{Rise Arm}. Ľavá
+ruka s~hodinkami a~červenou manžetou je zdvihnutá
+nad hlavu a zároveň dlaň smeruje dopredu. Táto poloha
+zodpovedá reálnemu signálu rozhodcu na žinenke, ktorým
+oznamuje začiatok bodovania ostatným členom
+rozhodcovského tímu.
 
-\subsubsection{MatBoss}
-MatBoss je komplexný nástroj pre trénerov a~štatistikov
-v~zápasení. Umožňuje zaznamenávanie výsledkov zápasov, video
-analýzu a~integráciu s~platformou TrackWrestling. V~roku 2023
-bola vydaná bezplatná verzia \uv{Stats-Only}, ktorá zjednodušuje
-digitálne zaznamenávanie štatistík priamo z~mobilného
-zariadenia. Aplikácia je však určená pre použitie pri stole,
-nie pre rozhodcu na žinenke. \cite{matboss}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{img/gesture-flow/flow-gesto-rise-arm.png}
+    \caption{Príklad priebehu akcelerometrických dát
+    počas gesta \uv{Rise Arm}.}
+    \label{fig:subgesture-hand-up}
+\end{figure}
 
-\subsubsection{Matside Stats}
-Matside Stats je mobilná aplikácia na sledovanie a~ukladanie
-bodov počas zápasov. Obsahuje inteligentnú validáciu --
-napríklad po takedowne neumožní rovnakému zápasníkovi vykonať
-escape. Podporuje tiež súčasné sledovanie viacerých zápasov
-viacerými osobami. Rovnako ako MatBoss, aj táto aplikácia je
-určená pre operátorov pri stole. \cite{matside_stats}
+Na obrázku~\ref{fig:subgesture-hand-up} je zobrazený
+priebeh akcelerometrických dát počas vykonania gesta
+\uv{Rise Arm}. Na grafe je viditeľný výrazný prechod
+osi $a_x$ (modrá) z~hodnôt okolo
+$-10\,\text{m/s}^2$ na približne $+9\,\text{m/s}^2$,
+čo zodpovedá zmene orientácie zápästia zo spustenej
+polohy do zdvihnutej. Farebné pásma znázorňujú
+očakávané rozsahy hodnôt pre jednotlivé osi
+v~cieľovej polohe.
 
-\subsection{Akademický výskum -- rozpoznávanie gest pomocou IMU}
+Na základe analýzy nameraných akcelerometrických dát
+sme stanovili hraničné hodnoty pre jednotlivé osi,
+ktoré definujú cieľovú polohu gesta \uv{Rise Arm},
+kde $a_x$, $a_y$ a~$a_z$ označujú hodnoty zrýchlenia
+na príslušných osiach akcelerometra. Tieto rozsahy
+sú znázornené farebnými pásmami na
+obrázku~\ref{fig:subgesture-hand-up} a~ich konkrétne
+hodnoty sú nasledovné:
 
-Okrem komerčných aplikácií existuje rozsiahly akademický výskum
-zameraný na rozpoznávanie gest ruky pomocou inerciálnych
-senzorov umiestnených na zápästí. Tieto práce tvoria teoretický
-základ, na ktorom stavia aj naše riešenie.
+\begin{itemize}
+    \item \colorbox{xaxis!20}{$\handUpAxMin \leq a_x \leq \handUpAxMax \;\text{m/s}^2$}
+    \item \colorbox{yaxis!20}{$\handUpAyMin \leq a_y \leq \handUpAyMax \;\text{m/s}^2$}
+    \item \colorbox{zaxis!20}{$\handUpAzMin \leq a_z \leq \handUpAzMax \;\text{m/s}^2$}
+\end{itemize}
 
-Kim a~kol. (2018) navrhli algoritmus rozpoznávania gest ruky
-založený na hlbokom učení, konkrétne na kombinácii konvolučných
-vrstiev a~rekurentných \Gls{gru} vrstiev. Vstupom boli dáta
-z~gyroskopu a~akcelerometra umiestnených na zápästí. Autori
-dosiahli vysokú presnosť rozpoznávania, čo potvrdilo vhodnosť
-týchto senzorov pre detekciu gest. \cite{deepgesture}
+Ak sa hodnoty všetkých troch osí súčasne nachádzajú
+v~rámci uvedených rozsahov, dôjde k~úspešnému rozpoznaniu
+gesta \uv{Rise Arm} a~aplikácia sa prepne do režimu
+bodovania, v~ktorom sú následne vyhodnocované flickovacie gestá.
 
-Xu a~kol. (2021) predstavili algoritmus rozpoznávania 8~gest
-ruky bežiaci na náramku s~minimálnymi výpočtovými zdrojmi.
-Navrhnutý prístup využíval fúziu dát z~akcelerometra
-a~gyroskopu pomocou komplementárneho filtra a~definoval nový
-typ príznaku nazvaný \uv{axis-crossing code}. Výsledky ukázali,
-že aj na zariadeniach s~obmedzeným výkonom je možné dosiahnuť
-spoľahlivé rozpoznávanie gest v~reálnom čase.
-\cite{hand_gesture_wristband}
 
-V~oblasti nositeľných senzorov a~rozpoznávania ľudských aktivít
-je tiež relevantný výskum z~roku 2026, ktorý navrhuje prístup
-s~konvolučnými neurónovými sieťami špecializovanými pre
-jednotlivé typy senzorov. Výsledky jednotlivých modelov sa
-následne kombinujú technikou neskorej fúzie. Tento prístup
-dosahuje vyššiu presnosť ako klasické metódy, napríklad
-\Gls{svm}. \cite{wearable_sensors_ai}
+\subsubsection{Fáza 2 -- FLICK}
 
-\subsection{Zhrnutie a priestor pre vlastné riešenie}
+Po aktivácii režimu bodovania rozhodca vykoná rýchly
+rotačný pohyb zápästia, ktorý je zachytený
+gyroskopickým senzorom hodiniek. Smer rotácie určuje,
+ktorému zápasníkovi sa bod pridelí:
 
-Na základe vykonanej analýzy môžeme konštatovať, že existujúce
-rozhodcovské aplikácie pre smart hodinky sú primárne zamerané
-na futbal a~ďalšie loptové športy. Ich ovládanie je založené
-na dotykovom rozhraní -- rozhodca musí opakovane ťukať na
-displej hodiniek, čo v~kontexte zápasenia nie je praktické,
-keďže rozhodca na žinenke potrebuje mať obe ruky voľné
-a~neustále sledovať dianie na žinenke.
+\begin{itemize}
+    \item \textbf{Flick Counterclockwise} -- rýchly
+    pohyb zápästia proti smeru hodinových ručičiek
+    pridelí bod modrému zápasníkovi.
+    \item \textbf{Flick Clockwise} -- rýchly pohyb
+    zápästia v~smere hodinových ručičiek pridelí bod
+    červenému zápasníkovi.
+\end{itemize}
 
-Aplikácie zamerané na zápasenie (Wrestling Scoreboard, MatBoss,
-Matside Stats) sú určené pre bodových rozhodcov alebo trénerov
-sediacich pri stole a~nevyužívajú smart hodinky ani
-rozpoznávanie gest.
+Dáta z~gyroskopu sú prenášané do telefónu, kde
+algoritmus vyhodnocuje uhlovú rýchlosť rotácie na
+osi $g_x$, kde $g_x$ označuje hodnotu uhlovej
+rýchlosti na príslušnej osi gyroskopického senzora
+v~jednotkách stupňov za sekundu (DPS). Na základe
+analýzy nameraných gyroskopických dát boli stanovené
+nasledovné hraničné hodnoty pre rozpoznanie
+jednotlivých smerov flicku:
 
-Akademický výskum potvrdzuje, že rozpoznávanie gest ruky
-pomocou akcelerometra a~gyroskopu na zápästí je technicky
-realizovateľné s~vysokou presnosťou. Avšak žiadna
-z~existujúcich prác sa nezameriava na špecifickú aplikáciu
-pre rozhodcov v~zápasení.
+\begin{itemize}
+    \item \colorbox{xaxis!20}{Modrý zápasník:
+    $g_x < \flckBlueThreshold \;\text{DPS}$} -- rotácia
+    proti smeru hodinových ručičiek prekročí prahovú
+    hodnotu $\flckBlueThreshold\,\text{DPS}$.
+    \item \colorbox{yaxis!20}{Červený zápasník:
+    $g_x > \flickRedThreshold \;\text{DPS}$} -- rotácia
+    v~smere hodinových ručičiek prekročí prahovú
+    hodnotu $\flickRedThreshold\,\text{DPS}$.
+\end{itemize}
 
-Naša práca preto vypĺňa identifikovanú medzeru -- navrhuje
-a~implementuje riešenie, ktoré využíva senzory smart hodiniek
-na automatickú detekciu rozhodcovských gest v~zápasení, bez
-nutnosti dotykového ovládania.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.40\textwidth]{img/gesture-img/obrazok-gesto-flick-counterclockwise.png}
+    \caption{Pohyb zápästia pri geste
+    \uv{Flick Counterclockwise} -- bod pre
+    modrého zápasníka}
+    \label{fig:gesto-flick-ccw}
+\end{figure}
+
+Na obrázku~\ref{fig:gesto-flick-ccw} je znázornený
+pohyb zápästia pri geste \uv{Flick Counterclockwise}.
+Rozhodca s~rukou zdvihnutou nad hlavou vykoná rýchlu
+rotáciu zápästia proti smeru hodinových ručičiek,
+čo je na obrázku znázornené modrou šípkou. Tento
+pohyb je zachytený gyroskopom na osi $g_x$ ako
+výrazný záporný špičkový výkyv.
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{img/gesture-flow/flow-gesto-flick-counterclockwise.png}
+    \caption{Príklad priebehu gyroskopických
+    a~akcelerometrických dát počas gesta
+    \uv{Flick Counterclockwise}.}
+    \label{fig:subgesture-flick-ccw}
+\end{figure}
+
+Na obrázku~\ref{fig:subgesture-flick-ccw} je
+zobrazený priebeh senzorových dát počas vykonania
+gesta \uv{Flick Counterclockwise}. V~hornej časti
+grafu, ktorá zachytáva gyroskopické dáta, je viditeľný
+výrazný záporný špičkový výkyv (spike) na osi $g_x$
+(modrá), ktorý dosahuje hodnotu približne
+$-1600\,\text{DPS}$, čo výrazne prekračuje stanovenú
+prahovú hodnotu $\flckBlueThreshold\,\text{DPS}$.
+Práve tento krátkodobý, ale intenzívny výkyv je
+kľúčovým signálom, na základe ktorého algoritmus
+rozpozná flick proti smeru hodinových ručičiek
+a~pridelí bod modrému zápasníkovi. V~spodnej časti
+grafu sú zobrazené akcelerometrické dáta, na ktorých
+je viditeľný sprievodný otras spôsobený rýchlym
+pohybom zápästia.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{img/gesture-flow/flow-gesto-flick-clockwise.png}
+    \caption{Príklad priebehu gyroskopických
+    a~akcelerometrických dát počas gesta
+    \uv{Flick Clockwise}.}
+    \label{fig:subgesture-flick-cw}
+\end{figure}
+
+Na obrázku~\ref{fig:subgesture-flick-cw} je analogicky
+zobrazený priebeh senzorových dát počas vykonania
+gesta \uv{Flick Clockwise}. V~hornej časti grafu sú
+viditeľné viaceré kladné špičkové výkyvy na osi $g_x$
+(modrá), ktoré dosahujú hodnoty približne
+$+1500\,\text{DPS}$, čo výrazne prekračuje stanovenú
+prahovú hodnotu $\flickRedThreshold\,\text{DPS}$
+vyznačenú červenou prerušovanou čiarou. Každý takýto
+výkyv predstavuje jeden flick v~smere hodinových
+ručičiek, na základe ktorého algoritmus pridelí bod
+červenému zápasníkovi.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.40\textwidth]{img/gesture-img/obrazok-gesto-flick-clockwise.png}
+    \caption{Pohyb zápästia pri geste \uv{Flick Clockwise} -- bod pre červeného zápasníka}
+    \label{fig:gesto-flick-cw}
+\end{figure}
+
+Na obrázku~\ref{fig:gesto-flick-cw} je znázornený
+pohyb zápästia pri geste \uv{Flick Clockwise}.
+Rozhodca s~rukou zdvihnutou nad hlavou vykoná rýchlu
+rotáciu zápästia v~smere hodinových ručičiek, čo je
+na obrázku znázornené červenou šípkou. Tento pohyb
+je zachytený gyroskopom na osi $g_x$ ako výrazný
+kladný špičkový výkyv.
+
+Rozhodca môže v~rámci jednej aktivácie vykonať aj
+viacero po sebe nasledujúcich flickovacích gest,
+pokiaľ neukončí fázu bodovania gestom
+\uv{Hand Down}. Tým je umožnené prideliť viacero
+bodov bez nutnosti opakovane zdvíhať a~spúšťať ruku.
+
+\subsubsection{Fáza 3 -- HAND DOWN}
+
+Poslednou fázou je spustenie ruky späť do pôvodnej
+polohy. Akcelerometer deteguje návrat zápästia do
+neutrálnej orientácie, čo signalizuje ukončenie
+procesu bodovania. Po rozpoznaní gesta \uv{Hand Down}
+sa aplikácia prepne späť do režimu čakania, v~ktorom
+sú flickovacie gestá ignorované. Tým je zabezpečené,
+že bežné pohyby ruky rozhodcu počas zápasu nevedú
+k~neúmyselnému prideľovaniu bodov.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{img/gesture-img/obrazok-hand-down.png}
+    \caption{Príklad priebehu akcelerometrických dát počas gesta \uv{Hand Down}.}
+    \label{fig:subgesture-hand-down}
+\end{figure}
+
+Na obrázku~\ref{fig:subgesture-hand-down} je
+zobrazený priebeh akcelerometrických dát počas
+vykonania gesta \uv{Hand Down}. Z~grafu je zrejmé,
+že hodnoty jednotlivých osí sa po spustení ruky
+ustália v~rámci definovaných hraničných pásiem.
+
+Na základe analýzy nameraných akcelerometrických dát
+boli stanovené hraničné hodnoty pre jednotlivé osi,
+ktoré definujú cieľovú polohu gesta \uv{Hand Down}.
+Analogicky ako pri geste \uv{Rise Arm}, hodnoty
+$a_x$, $a_y$ a~$a_z$ označujú zrýchlenie na
+príslušných osiach akcelerometra. Konkrétne rozsahy
+sú nasledovné:
+
+\begin{itemize}
+    \item \colorbox{xaxis!20}{$\handDownAxMin \leq a_x \leq \handDownAxMax \;\text{m/s}^2$}
+    \item \colorbox{yaxis!20}{$\handDownAyMin \leq a_y \leq \handDownAyMax \;\text{m/s}^2$}
+    \item \colorbox{zaxis!20}{$\handDownAzMin \leq a_z \leq \handDownAzMax \;\text{m/s}^2$}
+\end{itemize}
+
+Ak sa hodnoty všetkých troch osí súčasne nachádzajú
+v~rámci uvedených rozsahov, dôjde k~úspešnému
+rozpoznaniu gesta \uv{Hand Down} a~aplikácia sa
+prepne späť do režimu čakania.
+
+\subsection{Gesto PASIVITA}
+
+Gesto \uv{Pasivita} slúži na signalizáciu pasívneho
+správania jedného zo zápasníkov bodovému rozhodcovi.
+Pravidlá zápasenia a~dôsledky pasivity sú podrobne
+popísané v~kapitole~2. Pre toto gesto sme navrhli
+dve alternatívy -- pre červeného a~modrého zápasníka.
+
+Priebeh gesta je znázornený na
+obrázku~\ref{fig:pasivita-flowchart}. Po detekcii
+gesta aplikácia zaznamená pasivitu a~spustí
+30-sekundový odpočet aktivity. Ak počas tejto doby
+hociktorý zo zápasníkov získa body (detegované gestom
+BODOVANIE), odpočet sa zruší a~žiadny trestný bod
+sa neudelí. Ak odpočet vyprší bez akéhokoľvek
+bodovania, aplikácia automaticky pridelí 1~bod
+súperovi pasívneho zápasníka.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{img/diagrams/flowchart-gesto-pasivita.png}
+    \caption{Vývojový diagram gesta PASIVITA}
+    \label{fig:pasivita-flowchart}
+\end{figure}
+
+\subsubsection{PASIVITA -- červený}
+
+Rozhodca vystrčí ľavú ruku (s~hodinkami) vodorovne
+do strany v~90-stupňovom uhle od tela, pričom dlaň
+smeruje nadol k~zemi.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\textwidth]{img/gesture-img/obrazok-gesto-pasivity-cerveny.png}
+    \caption{Poloha ruky pri geste
+    \uv{PASIVITA -- červený}}
+    \label{fig:gesto-pasivita-cerveny}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{img/gesture-flow/flow-gesto-pasivita-cerveny.png}
+    \caption{Príklad priebehu akcelerometrických
+    dát počas gesta \uv{PASIVITA -- červený}.}
+    \label{fig:subgesture-pasivita-cerveny}
+\end{figure}
+
+Na obrázku~\ref{fig:subgesture-pasivita-cerveny}
+je zobrazený priebeh akcelerometrických dát počas
+vykonania gesta \uv{PASIVITA -- červený}. Os $a_z$ (zelená)
+kolíše v~širšom rozsahu, preto sme pre ňu zvolili
+väčšie tolerančné pásmo. Farebné pásma znázorňujú
+očakávané rozsahy hodnôt pre jednotlivé osi
+v~cieľovej polohe.
+
+Charakteristickým znakom tejto polohy je hodnota
+$a_x$ blízko nuly (ruka je vodorovne) a~výrazne
+kladná hodnota $a_z$, čo zodpovedá bočnej
+orientácii zápästia. Hraničné hodnoty:
+
+\begin{itemize}
+    \item \colorbox{xaxis!20}{$\passivityRedAxMin \leq a_x \leq \passivityRedAxMax \;\text{m/s}^2$}
+    \item \colorbox{yaxis!20}{$\passivityRedAyMin \leq a_y \leq \passivityRedAyMax \;\text{m/s}^2$}
+    \item \colorbox{zaxis!20}{$\passivityRedAzMin \leq a_z \leq \passivityRedAzMax \;\text{m/s}^2$}
+\end{itemize}
+
+\subsubsection{PASIVITA -- modrý}
+
+Rozhodca vystrčí ľavú ruku (s~hodinkami) vodorovne
+dopredu pred telo, pričom dlaň smeruje nahor
+k~stropu.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\textwidth]{img/gesture-img/obrazok-gesto-pasivity-modry.png}
+    \caption{Poloha ruky pri geste
+    \uv{PASIVITA -- modrý}}
+    \label{fig:gesto-pasivita-modry}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{img/gesture-flow/flow-gesto-pasivita-modry.png}
+    \caption{Príklad priebehu akcelerometrických dát počas gesta \uv{PASIVITA -- modrý}.}
+    \label{fig:subgesture-pasivita-modry}
+\end{figure}
+
+Na obrázku~\ref{fig:subgesture-pasivita-modry}
+je zobrazený priebeh akcelerometrických dát počas
+vykonania gesta \uv{PASIVITA -- modrý}. Os $a_z$
+(zelená) dosahuje výrazne záporné hodnoty okolo
+$-10\,\text{m/s}^2$, čo je kľúčový rozdiel oproti
+červenému variantu.
+
+Podobne ako pri červenom variante, hodnota $a_x$
+je blízko nuly, ale os $a_z$ je výrazne záporná,
+čo spoľahlivo rozlišuje obe alternatívy.
+Hraničné hodnoty:
+
+\begin{itemize}
+    \item \colorbox{xaxis!20}{$\passivityBlueAxMin \leq a_x \leq \passivityBlueAxMax \;\text{m/s}^2$}
+    \item \colorbox{yaxis!20}{$\passivityBlueAyMin \leq a_y \leq \passivityBlueAyMax \;\text{m/s}^2$}
+    \item \colorbox{zaxis!20}{$\passivityBlueAzMin \leq a_z \leq \passivityBlueAzMax \;\text{m/s}^2$}
+\end{itemize}
+
+
+
+\subsection{Gesto NAPOMENUTIE}
+
+Gesto \uv{Napomenutie} slúži na signalizáciu
+priestupku zápasníka (podrobne popísané
+v~kapitole~2). Po detekcii aplikácia automaticky prepne do režimu
+bodovania, kde sú všetky body pripočítavané výhradne
+súperovi napomenutého zápasníka. Rozhodca následne
+flickovaním určí počet udelených bodov.
+Flickovacie gestá pre napomenutého zápasníka sú
+v~tomto režime ignorované. Po ukončení bodovania
+je potrebné vykonať gesto \uv{Hand Down}, ktoré
+vráti aplikáciu späť do režimu čakania. Pre toto
+gesto sme navrhli dve alternatívy.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{img/diagrams/flowchart-gesto-napomenutie.png}
+    \caption{Vývojový diagram gesta NAPOMENUTIE}
+    \label{fig:napomenutie-flowchart}
+\end{figure}
+
+\subsubsection{NAPOMENUTIE -- červený}
+
+Rozhodca vystrčí ľavú ruku (s~hodinkami) šikmo
+dopredu a~nadol pod uhlom približne 45°, pričom dlaň
+smeruje nadol. Gestom ukazuje na previnilého
+červeného zápasníka. Po detekcii sa aplikácia
+automaticky prepne do režimu bodovania, kde všetky
+body idú modrému zápasníkovi, teda flickovacie gesto
+pre červeného zápasníka je ignorované.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\textwidth]{img/gesture-img/obrazok-gesto-napomenutie-cerveny.png}
+    \caption{Poloha ruky pri geste
+    \uv{NAPOMENUTIE -- červený}}
+    \label{fig:gesto-napomenutie-cerveny}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{img/gesture-flow/flow-gesto-napomenutie-cerveny.png}
+    \caption{Príklad priebehu akcelerometrických
+    dát počas gesta \uv{NAPOMENUTIE -- červený}.}
+    \label{fig:subgesture-napomenutie-cerveny}
+\end{figure}
+
+Na obrázku~\ref{fig:subgesture-napomenutie-cerveny}
+je zobrazený priebeh akcelerometrických dát počas
+vykonania gesta \uv{NAPOMENUTIE -- červený}. Pre os
+$a_y$ (oranžová) sme zvolili väčší rozsah,
+pretože ruka rozhodcu nemusí smerovať presne
+dole -- pri reálnom použití môže dochádzať
+k~jemnému odklonu od ideálnej polohy. Farebné
+pásma znázorňujú očakávané rozsahy hodnôt pre
+jednotlivé osi v~cieľovej polohe.
+
+Charakteristickým znakom tejto polohy sú stredne
+záporné hodnoty na osi $a_x$ (ruka je šikmo nadol)
+a~výrazne kladné hodnoty na osi $a_z$. Hraničné
+hodnoty:
+
+\begin{itemize}
+    \item \colorbox{xaxis!20}{$\warnRedAxMin \leq a_x \leq \warnRedAxMax \;\text{m/s}^2$}
+    \item \colorbox{yaxis!20}{$\warnRedAyMin \leq a_y \leq \warnRedAyMax \;\text{m/s}^2$}
+    \item \colorbox{zaxis!20}{$\warnRedAzMin \leq a_z \leq \warnRedAzMax \;\text{m/s}^2$}
+\end{itemize}
+
+\subsubsection{NAPOMENUTIE -- modrý}
+
+Pri napomenutí modrého zápasníka rozhodca presunie
+ľavú ruku (s~hodinkami) za chrbát do oblasti krížov,
+pričom dlaň smeruje von. Pravou rukou (s~modrou
+manžetou) ukazuje na previnilého modrého zápasníka.
+Po detekcii sa aplikácia automaticky prepne do režimu
+bodovania, kde všetky body idú červenému zápasníkovi.
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.40\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{img/gesture-img/obrazok-gesto-napomenutie-modry1.png}
+        \caption{Pohľad spredu}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.40\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{img/gesture-img/obrazok-gesto-napomenutie-modry2.png}
+        \caption{Pohľad zozadu}
+    \end{subfigure}
+    \caption{Poloha ruky pri geste
+    \uv{NAPOMENUTIE -- modrý}}
+    \label{fig:gesto-napomenutie-modry}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{img/gesture-flow/flow-gesto-napomenutie-modry.png}
+    \caption{Príklad priebehu akcelerometrických dát počas gesta \uv{NAPOMENUTIE -- modrý}.}
+    \label{fig:subgesture-napomenutie-modry}
+\end{figure}
+
+Na obrázku~\ref{fig:subgesture-napomenutie-modry}
+je zobrazený priebeh akcelerometrických dát počas
+vykonania gesta \uv{NAPOMENUTIE -- modrý}. 
+Os $a_y$ (oranžová) dosahuje výrazne záporné hodnoty okolo
+$-9\,\text{m/s}^2$ -- práve táto os je kľúčovým
+rozlišovacím faktorom oproti červenému variantu.
+Os $a_z$ (zelená) sa pohybuje v~okolí nuly.
+Farebné pásma znázorňujú očakávané rozsahy
+hodnôt pre jednotlivé osi v~cieľovej polohe.
+
+Charakteristickým znakom tejto polohy sú stredne
+záporné hodnoty na osi $a_x$ (ruka za chrbtom)
+a~výrazne záporné hodnoty na osi $a_y$, čo
+zodpovedá otočeniu zápästia za telom. Hraničné
+hodnoty:
+
+\begin{itemize}
+    \item \colorbox{xaxis!20}{$\warnBlueAxMin \leq a_x \leq \warnBlueAxMax \;\text{m/s}^2$}
+    \item \colorbox{yaxis!20}{$\warnBlueAyMin \leq a_y \leq \warnBlueAyMax \;\text{m/s}^2$}
+    \item \colorbox{zaxis!20}{$\warnBlueAzMin \leq a_z \leq \warnBlueAzMax \;\text{m/s}^2$}
+\end{itemize}
+
+Porovnanie oboch alternatív ukazuje, že kľúčovým
+rozlišovacím faktorom je os $a_y$ -- pri červenom
+variante sa pohybuje okolo nuly, zatiaľ čo pri
+modrom variante dosahuje výrazne záporné hodnoty
+(okolo $-9$). Tento rozdiel zabezpečuje spoľahlivú
+detekciu bez rizika zámeny oboch gest.
+
+\subsection{Gesto TOUCHE}
+
+Gesto \uv{TOUCHE} slúži na signalizáciu lopatkového
+víťazstva, ktoré okamžite ukončuje zápas (podrobne
+popísané v~kapitole~2). Na rozdiel od ostatných gest,
+po detekcii TOUCHE automaticky nenasleduje bodovanie
+-- aplikácia len odošle informáciu o~lopatkovom
+víťazstve. Keďže je vždy jednoznačné, ktorý zápasník
+je na lopatkách, pre toto gesto stačí jedna
+alternatíva bez rozlíšenia červeného a~modrého
+zápasníka.
+
+Rozhodca preloží ľavú ruku (s~hodinkami) cez hruď
+a~položí dlaň na pravé rameno.
+Na obrázku~\ref{fig:gesto-touche} je znázornená
+poloha ruky pri tomto geste.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\textwidth]{img/gesture-img/obrazok-gesto-touche.png}
+    \caption{Poloha ruky pri geste \uv{TOUCHE}}
+    \label{fig:gesto-touche}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{img/gesture-flow/flow-gesto-touche.png}
+    \caption{Príklad priebehu akcelerometrických
+    dát počas gesta \uv{TOUCHE}.}
+    \label{fig:subgesture-touche}
+\end{figure}
+
+Charakteristickým znakom tejto polohy sú stredne
+kladné hodnoty na osi $a_x$ (ruka je zdvihnutá
+k~ramenu) a~výrazne záporné hodnoty na osi $a_y$,
+čo zodpovedá prekríženiu ruky cez hruď. Táto
+kombinácia hodnôt je unikátna a~neprekrýva sa
+so žiadnym iným gestom. Hraničné hodnoty:
+
+\begin{itemize}
+    \item \colorbox{xaxis!20}{$\toucheAxMin \leq a_x \leq \toucheAxMax \;\text{m/s}^2$}
+    \item \colorbox{yaxis!20}{$\toucheAyMin \leq a_y \leq \toucheAyMax \;\text{m/s}^2$}
+    \item \colorbox{zaxis!20}{$\toucheAzMin \leq a_z \leq \toucheAzMax \;\text{m/s}^2$}
+\end{itemize}

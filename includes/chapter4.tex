@@ -8,36 +8,36 @@ a~uvádzame technické parametre zariadenia, ktoré sme pri našej práci použi
 
 \subsection{Požiadavky na zariadenie}
 
-Keďže základom aplikácie je vyhodnocovaní pohybových gest rozhodcu
+Keďže základom aplikácie je vyhodnocovanie pohybových gest rozhodcu
 priamo zo zápästia, nie každé smart nositeľné zariadenie je pre tento účel
 vhodné. Definovali sme nasledujúce funkčné požiadavky, ktoré
 muselo zariadenie spĺňať:
 
 \begin{itemize}
-    \item \textbf{Prístup k~akcelerometru a~gyroskopu cez API} —
+    \item \textbf{Prístup k~akcelerometru a~gyroskopu cez API} --
     zariadenie musí umožňovať programátorský prístup k~surovým
     dátam zo senzorov pohybu, nie len ich spracované výstupy
     (napr. počet krokov). Bez tejto možnosti nie je možné
     vyhodnocovať vlastné gestá.
 
-    \item \textbf{Podpora vlastných aplikácií} — hodinky musia
+    \item \textbf{Podpora vlastných aplikácií} -- hodinky musia
     disponovať otvoreným vývojovým prostredím umožňujúcim inštaláciu
     aplikácií tretích strán. Uzavreté platformy bez SDK či developer \Gls{api} 
-    (v~našom prípade máme prístup iba k~obmedzenej API, ktorá je ale dostatočná pre náš účel)
-    vývojárom neumožňujú nasadiť vlastný kód.
+    vývojárom neumožňujú nasadiť vlastný kód. V~našom prípade máme prístup 
+    iba k~obmedzenej API, ktorá je ale dostatočná pre náš účel.
 
-    \item \textbf{Komunikácia s~mobilným zariadením} — aplikácia
+    \item \textbf{Komunikácia s~mobilným zariadením} -- aplikácia
     vyžaduje prenos dát z~hodiniek do Androidu v~reálnom čase.
     Hodinky preto musia podporovať obojsmernú Bluetooth komunikáciu
     prístupnú z~kódu aplikácie.
 
-    \item \textbf{Dostatočná frekvencia snímania senzorov} —
+    \item \textbf{Dostatočná frekvencia snímania senzorov} --
     na zachytenie krátkych a~rýchlych pohybov charakteristických
     pre rozhodcovské gestá je potrebná dostatočne vysoká vzorkovacia
     frekvencia. Príliš nízka frekvencia by viedla k~strate
     dôležitých pohybových informácií.
 
-    \item \textbf{Výdrž batérie} — zariadenie musí byť schopné
+    \item \textbf{Výdrž batérie} -- zariadenie musí byť schopné
     pracovať počas celého trvania zápasu bez nutnosti nabíjania,
     čo kladie požiadavku na energetickú efektivitu operačného
     systému aj aplikácie samotnej.
@@ -64,7 +64,7 @@ výrazne uľahčili prácu.
 
 Z~dôvodu hardvérových obmedzení operačného systému
 Zepp OS 2.0 sme sa teda rozhodli prejsť na novší model,
-ktorý tieto obmedzenia nemá.
+ktorý vyššie uvedené obmedzenia nemá.
 
 \subsection{Amazfit T-Rex 3}
 
@@ -85,6 +85,4 @@ v~prostredí Zepp OS 4.
     \item \textbf{Konektivita:} Bluetooth 5.3 \Gls{ble}
     \item \textbf{Operačný systém:} Zepp \Gls{os} 4
     \item \textbf{Výdrž batérie:} až 27 dní pri bežnom používaní
-    \item \textbf{Odolnosť:} vojenský štandard \Gls{mil},
-    vodotesnosť 10 \Gls{atm}
 \end{itemize} \cite{trex3_specs}
