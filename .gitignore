@@ -17,6 +17,7 @@
 *.xml
 *.toc
 *.pdf
+!includes/**
 
 # glossary / acronyms
 *.acn
