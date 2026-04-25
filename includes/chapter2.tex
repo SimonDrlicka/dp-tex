@@ -1,249 +1,91 @@
 \section{Zápasenie ako šport}
 
-\subsection{Definícia a~história zápasenia}
+\subsection{Stručný prehľad zápasenia}
 
-Zápasenie je kontaktný šport, ktorý kombinuje fyzickú
-silu, techniku a~stratégiu s~cieľom získať kontrolu
-nad súperom prostredníctvom povolených chmatov
-a~akcií. Dvaja zápasníci sa snažia dosiahnuť víťazstvo
-buď položením súpera na lopatky, alebo získaním
-väčšieho počtu bodov za technické akcie v priebehu
-zápasu \cite{zapasenie_pravidla}.
+Zápasenie je kontaktný šport, v~ktorom dvaja súperi využívajú povolené chmaty a~akcie s~cieľom
+získať kontrolu nad telom protivníka. Víťazstvo sa dosahuje buď pádom -- obe lopatky súpera
+súčasne na žinenke -- alebo vyšším počtom bodov v~závere zápasu \cite{zapasenie_pravidla}.
 
-\subsection{Hlavné štýly zápasenia}
+Existujú dva hlavné olympijské štýly. Grécko-rímsky štýl zakazuje akékoľvek chmaty pod pásom
+a~útoky na nohy; zápasníci využívajú výhradne techniky v~hornej časti tela. Voľný štýl naopak
+povoľuje útok aj obranu celým telom vrátane nôh. Pravidlá a~bodovanie sa medzi štýlmi mierne
+líšia, najmä v~počte bodov udelených súperovi za rovnaký priestupok \cite{zapasenie_pravidla}.
 
-Zápasenie zahŕňa dva hlavné štýly -- grécko-rímsky
-štýl (GR) a~voľný štýl (VŠ), ktoré sa líšia
-v~povolených technikách a~stratégiách
-\cite{zapasenie_pravidla}.
-
-Grécko-rímsky štýl zakazuje akékoľvek chmaty pod
-pásom a~útoky na nohy súpera. Zápasníci sa sústreďujú
-na techniky v~hornej časti tela -- hody, zdvihy
-a~držania -- s~dôrazom na postoj v~stoji
-\cite{zapasenie_pravidla}.
-
-Voľný štýl umožňuje využívať celé telo vrátane nôh
-na útok aj obranu, čo zahŕňa chmaty pod pásom,
-podkopy a~techniky s~nohami. Vďaka tomu je
-dynamickejší a~všestrannejší. Voľný štýl je základom
-aj pre ženské zápasenie, zahrnuté do olympijského
-programu od roku 2004 \cite{zapasenie_pravidla}.
-
-\subsection{Ciele a~priebeh zápasenia}
-
-Cieľom zápasenia je dosiahnuť víťazstvo nad súperom
-buď pádom (obe lopatky súpera súčasne na žinenke),
-čo okamžite ukončuje zápas, alebo získaním väčšieho
-počtu bodov za technické akcie
-\cite{zapasenie_pravidla}.
-
-Zápas sa skladá z~dvoch polčasov po 3~minúty
-s~30-sekundovou prestávkou medzi nimi. Zápasníci
-začínajú v~stoji a~môžu pokračovať v~parteri 
-(zápas na zemi), ak jeden z~nich získa kontrolu nad 
-súperom. Zápas môže byť ukončený predčasne technickou 
-prevahou -- ak rozdiel v~skóre dosiahne 8~bodov v~grécko-rímskom
-alebo 10~bodov vo voľnom štýle. V~prípade remízy sa víťaz 
-určuje podľa kritérií ako vyšší počet technických bodov 
-alebo posledná bodovaná akcia \cite{zapasenie_pravidla}.
-
-\subsection{Úloha rozhodcu v~zápasení}
-
-Rozhodca zohráva kľúčovú úlohu pri zabezpečení
-férového a~bezpečného priebehu zápasu. Dohliada na
-dodržiavanie pravidiel, kontroluje správanie
-zápasníkov a~komunikuje s~ostatnými členmi
-rozhodcovského tímu -- bodovým rozhodcom a~predsedom
-žinenky \cite{zapasenie_pravidla}.
-
-Rozhodca je zodpovedný za signalizáciu začiatku
-a~konca zápasu, prerušenie v~prípade zranenia alebo
-konzultácie s~rozhodcovským tímom, ako aj za
-sledovanie a~hodnotenie technických akcií. Jeho
-rozhodnutia sú záväzné, v~sporných situáciách však
-môže predseda žinenky rozhodnutie prehodnotiť
-\cite{zapasenie_pravidla}.
-
-\subsection{Hodnotenie zápasu rozhodcom}
-
-Rozhodca hodnotí zápas prideľovaním bodov za
-technické akcie. Za jednoduchý hod udeľuje 2~body,
-za vysoký hod s~amplitúdou 4~body a~za vytlačenie
-súpera zo žinenky 1~bod. Bodové hodnotenie rozhodca
-signalizuje zdvihnutím ruky s~príslušným počtom
-prstov \cite{zapasenie_pravidla}.
-
-
-\subsection{Napomenutia a~zákazy}
-
-Napomenutie je trest, ktorý rozhodca na žinenke udeľuje
-zápasníkovi za porušenie pravidiel. V~bodovacích záznamoch
-sa označuje symbolom \uv{O}. Samotné napomenutie neznamená
-priamu stratu bodov pre previnilého zápasníka -- dôsledkom
-napomenutia je však automatické udelenie bodov jeho súperovi.
-Počet udelených bodov závisí od typu priestupku a~od štýlu
-zápasenia \cite{zapasenie_pravidla}.
-
-Z~pohľadu rozhodcu na žinenke je napomenutie vždy spojené
-s~následným bodovaním. Rozhodca najprv gestom signalizuje
-napomenutie -- ukáže na previnilého zápasníka -- a~následne
-pomocou gesta bodovanie oznámi, koľko bodov sa udeľuje
-súperovi. Tieto dva signály tvoria dôležitú dvojicu,
-ktorá je kľúčová aj pre návrh gest v~našej aplikácii.
-
-Podľa Medzinárodných pravidiel zápasenia
-\cite{zapasenie_pravidla} sa napomenutie udeľuje
-v~nasledujúcich situáciách:
-
-\subsubsection{Únik z~chmatu}
-
-Za únik z~chmatu sa považuje situácia, keď sa brániaci
-zápasník otvorene vyhýba kontaktu so súperom, aby mu
-zabránil vykonať chmat. Tieto situácie môžu nastať
-v~pozícii parter aj postoj, v~pásme aktivity aj pasivity.
-Previnilému zápasníkovi sa udelí napomenutie \uv{O}
-a~jeho súper získa 1~bod vo voľnom štýle, resp. 2~body
-v~grécko-rímskom štýle. Boj pokračuje v~polohe, v~ktorej
-k~priestupku došlo \cite{zapasenie_pravidla}.
-
-Špeciálnym prípadom v~grécko-rímskom štýle je situácia,
-keď ovládaný zápasník na žinenke použije nohy ako obranu
--- ohýba alebo zdvíha jednu či obe nohy, aby zabránil
-vykonaniu chmatu. Aj v~tomto prípade dostane napomenutie
-a~súper získa 2~body \cite{zapasenie_pravidla}.
-
-\subsection{Útek zo žinenky}
-
-Ak zápasník uniká z~priestoru žinenky, či už z~postoja
-alebo z~partera, je okamžite napomínaný za priestupok.
-Dôsledky sa líšia podľa pozície, z~ktorej k~úteku došlo
-\cite{zapasenie_pravidla}:
-
-\begin{itemize}
-    \item \textbf{Útek z~pozície parter} -- súper získa
-    1~bod vo voľnom štýle, resp. 2~body v~grécko-rímskom
-    štýle. Boj pokračuje v~polohe parter.
-    \item \textbf{Útek z~nebezpečnej pozície} -- súper
-    získa 2~body. Boj pokračuje v~polohe parter.
-    \item \textbf{Útek z~pozície postoj} -- súper získa
-    1~bod vo voľnom štýle, resp. 2~body v~grécko-rímskom
-    štýle. Boj pokračuje v~polohe postoj.
-\end{itemize}
-
-Ak zápasník dobrovoľne vynesie súpera zo žinenky, je
-to penalizované napomenutím pre vynášajúceho a~súper
-získa 1~bod vo voľnom štýle, resp. 2~body
-v~grécko-rímskom štýle \cite{zapasenie_pravidla}.
-
-\subsubsection{Zakázané chmaty}
-
-Pravidlá zápasenia definujú chmaty a~akcie, ktoré sú
-zakázané z~dôvodu ochrany zdravia a~bezpečnosti
-zápasníkov. Medzi zakázané chmaty patria napríklad
-držanie súpera za hrdlo, vykrúcanie paže o~viac ako
-90°, škrtenie, prelamovanie mostu tlakom smerom k~hlave
-alebo nebezpečné zdvihy \cite{zapasenie_pravidla}.
-
-Ak útočiaci zápasník vykoná úspešnú akciu napriek
-zakázanému chmatu súpera, rozhodca najprv ohodnotí
-akciu bodmi a~následne udelí previnilcovi napomenutie
-\uv{O} spolu s~1~bodom vo voľnom štýle, resp. 2~bodmi
-v~grécko-rímskom štýle pre súpera. Ak útočiaci zápasník
-akciu nedokončil práve kvôli zakázanému chmatu, súper
-previnilého získa 2~body \cite{zapasenie_pravidla}.
-
-Pri prvom porušení rozhodca zápasníka najprv upozorní
-slovom \uv{ATTENTION}. Ak zápasník svoju chybu
-zopakuje, rozhodca mu udelí napomenutie \uv{O}
-a~súperovi príslušné body \cite{zapasenie_pravidla}.
-
-\subsubsection{Všeobecné zákazy}
-
-Okrem zakázaných chmatov pravidlá definujú aj všeobecné
-zákazy, za ktoré hrozí napomenutie. Zápasníkom je zakázané
-napríklad ťahať súpera za vlasy či uši, hrýzť, kopať,
-udierať do hlavy, škrtiť, stúpať súperovi na prsty,
-držať súpera za dres alebo sa zachytávať žinenky. Zakázané
-je tiež rozprávať sa počas stretnutia alebo sa dohodnúť
-na výsledku zápasu \cite{zapasenie_pravidla}.
-
-
-\subsection{Pasivita}
-
-Pasivita je situácia, keď sa zápasník úmyselne vyhýba
-boju -- blokuje súpera, zaberá prsty, marí jeho snahu
-alebo sa snaží naťahovať čas. Pravidlá zápasenia
-penalizujú takéto správanie, pričom postup sa líši
-podľa štýlu zápasenia \cite{zapasenie_pravidla}.
-
-Vo voľnom štýle rozhodca najprv verbálne upozorní
-pasívneho zápasníka. Pri opakovanom priestupku mu
-určí 30-sekundovú dobu aktivity, počas ktorej musí
-skórovať. Ak sa mu to nepodarí, súper získa 1~bod
-\cite{zapasenie_pravidla}.
-
-V~grécko-rímskom štýle je postup postupný -- prvé
-upozornenie je slovné, druhé sa zapisuje ako prvé
-\uv{P} bez bodov a~až tretie previnenie je
-penalizované 1~bodom pre súpera
-\cite{zapasenie_pravidla}.
-
-Rozhodca na žinenke signalizuje pasivitu ukázaním ruky
-smerom k~pasívnemu zápasníkovi. Keďže je potrebné
-rozlíšiť, ktorý zápasník je pasívny, v~našej aplikácii
-sme pre toto gesto navrhli dve alternatívy -- pre
-červeného a~modrého zápasníka.
-
-
-\subsection{TOUCHE -- lopatkové víťazstvo}
-
-TOUCHE, označované aj ako \uv{víťazstvo na lopatky},
-je najvyššou formou víťazstva v~zápasení. Nastáva
-vtedy, keď útočiaci zápasník drží súpera na žinenke
-tak, že obe jeho lopatky sú súčasne v~kontakte so
-žinenkou po určitý čas. Dosiahnutie TOUCHE okamžite
-ukončuje zápas bez ohľadu na aktuálne skóre
-\cite{zapasenie_pravidla}.
-
-Podľa článku 44 Medzinárodných pravidiel zápasenia
-\cite{zapasenie_pravidla} musí byť lopatkové
-víťazstvo zreteľné -- obidve ramená súpera musia
-byť súčasne pritlačené na žinenku v~pásme aktivity
-alebo v~oranžovej zóne. Lopatky v~ochrannom pásme
-sú neplatné.
-
-Na rozdiel od bodovania alebo napomenutia, TOUCHE
-vyžaduje potvrdenie od predsedu žinenky. Rozhodca
-na žinenke najprv signalizuje TOUCHE, počká na
-potvrdenie a~až potom udrie dlaňou po žinenke
-a~odpíska koniec zápasu \cite{zapasenie_pravidla}.
-
+Na zápase pôsobí rozhodcovský tím -- rozhodca na žinenke, bodový rozhodca a~predseda žinenky.
+Rozhodnutia rozhodcu na žinenke sú záväzné, v~sporných situáciách ich však môže predseda žinenky
+prehodnotiť \cite{zapasenie_pravidla}.
 
 \subsection{Význam gest rozhodcov v~zápasení}
 
-Gestá rozhodcov zohrávajú kľúčovú úlohu
-v~zabezpečení transparentnosti a~plynulosti
-zápasenia. Slúžia ako primárny spôsob komunikácie
-medzi rozhodcom na žinenke a~ostatnými účastníkmi
--- bodovým rozhodcom, predsedom žinenky, trénermi
-a~divákmi \cite{zapasenie_pravidla}. Gestá musia
-byť jednoznačné a~viditeľné z~rôznych uhlov, čo je
-obzvlášť dôležité pri medzinárodných súťažiach
-s~jazykovými bariérami.
+Gestá rozhodcov sú primárnym komunikačným kanálom medzi rozhodcom na žinenke a~ostatnými
+účastníkmi zápasu -- bodovým rozhodcom, predsedom žinenky, trénermi a~divákmi
+\cite{zapasenie_pravidla}. Musia byť jednoznačné a~viditeľné z~rôznych uhlov, čo je obzvlášť
+dôležité pri medzinárodných súťažiach s~jazykovými bariérami. Na ľavom zápästí má rozhodca
+červenú manžetu, na pravom modrú -- farba ruky, ktorou ukazuje na zápasníka, teda jednoznačne
+určuje, komu signál patrí.
 
-Rozhodca udeľuje body zdvihnutím ruky s~príslušným
-počtom prstov a~súčasne druhou rukou ukazuje na
-zápasníka podľa farby dresu -- červeného alebo
-modrého. Na ľavom zápästí má červenú manžetu, na
-pravom modrú \cite{zapasenie_pravidla}.
+Práve táto ustálená a~vizuálne jednoznačná sústava gest vytvára vhodný základ pre automatizované
+systémy rozpoznávania, ktoré môžu prispieť k~presnejšiemu a~objektívnejšiemu rozhodovaniu.
+V~našej práci na to nadväzujeme -- navrhujeme gestá, ktoré umožnia rozhodcovi naďalej používať
+štandardné signály a~zároveň pohybmi ruky s~hodinkami automaticky zaznamenať udalosti v~zápase.
+Konkrétne gestá sú definované v~kapitole~\ref{chapter:gesta}.
 
-Význam gest presahuje samotnú komunikáciu -- sú
-základom pre automatizované systémy rozpoznávania,
-ktoré môžu zlepšiť presnosť a~objektivitu
-rozhodovania. V~našej práci sa zameriavame na
-navrhnutie gest, ktoré umožnia rozhodcovi naďalej
-používať štandardné signály a~zároveň pomocou
-pohybov ruky s~hodinkami zaznamenať udalosti
-v~zápase. Konkrétne gestá sú definované
-v~kapitole~\ref{chapter:gesta}.
+Pre návrh gest je potrebné pochopiť štyri typy signálov, ktoré rozhodca na žinenke používa
+najčastejšie -- bodovanie technických akcií, napomenutia, pasivitu a~TOUCHE. V~nasledujúcich
+podsekciách preto stručne popisujeme pravidlá zápasenia v~rozsahu potrebnom pre každý z~týchto
+signálov.
+
+\subsection{Bodovanie technických akcií}
+
+Rozhodca prideľuje body za technické akcie: 2~body za jednoduchý hod, 4~body za vysoký hod
+s~amplitúdou a~1~bod za vytlačenie súpera zo žinenky. Bodovanie signalizuje zdvihnutou rukou
+s~príslušným počtom prstov, zatiaľ čo druhou rukou ukazuje na zápasníka podľa farby dresu --
+červeného alebo modrého \cite{zapasenie_pravidla}.
+
+\subsection{Napomenutia}
+
+Napomenutie je trest, ktorý rozhodca udeľuje za porušenie pravidiel a~v~zázname sa označuje
+symbolom \uv{O}. Samotné napomenutie neznamená priamu stratu bodov pre previnilého zápasníka --
+jeho dôsledkom je automatické pridelenie bodov súperovi. Počet udelených bodov závisí od typu
+priestupku a~od štýlu zápasenia \cite{zapasenie_pravidla}.
+
+Z~pohľadu rozhodcu je napomenutie vždy spojené s~následným bodovaním: najprv gestom ukáže
+na previnilého zápasníka a~následne ďalším gestom oznámi, koľko bodov sa udeľuje súperovi.
+Táto dvojica signálov je kľúčová aj pre návrh zodpovedajúceho gesta v~našej aplikácii.
+
+Napomenutie sa udeľuje najmä \cite{zapasenie_pravidla}:
+
+\begin{itemize}
+    \item \textbf{za únik z~chmatu} -- brániaci zápasník sa otvorene vyhýba kontaktu so súperom;
+    súper získa 1~bod vo voľnom štýle, resp. 2~body v~grécko-rímskom štýle,
+    \item \textbf{za útek zo žinenky} -- úmyselné opustenie priestoru žinenky alebo dobrovoľné
+    vynesenie súpera mimo; bodový dôsledok závisí od pozície a~štýlu,
+    \item \textbf{za zakázané chmaty} -- napríklad držanie za hrdlo, vykrúcanie paže o~viac ako
+    90°, škrtenie alebo nebezpečné zdvihy; pri prvom porušení rozhodca verbálne upozorní slovom
+    \uv{ATTENTION}, pri opakovaní udeľuje napomenutie,
+    \item \textbf{za všeobecné zákazy} -- ťahanie za vlasy či uši, hryzenie, kopanie, udieranie
+    do hlavy, držanie súpera za dres či dohodu na výsledku zápasu.
+\end{itemize}
+
+\subsection{Pasivita}
+
+Pasivita je situácia, keď sa zápasník úmyselne vyhýba boju -- blokuje súpera, zaberá mu prsty
+alebo naťahuje čas. Postup penalizácie sa líši podľa štýlu \cite{zapasenie_pravidla}. Vo voľnom
+štýle rozhodca najprv verbálne upozorní pasívneho zápasníka; pri opakovaní mu určí 30-sekundovú
+dobu aktivity, počas ktorej musí skórovať -- inak získa súper 1~bod. V~grécko-rímskom štýle
+je postup postupný: slovné upozornenie, záznam \uv{P} bez bodov, a~až tretie previnenie prináša
+súperovi 1~bod.
+
+Rozhodca signalizuje pasivitu ukázaním ruky smerom k~pasívnemu zápasníkovi. Keďže je potrebné
+rozlíšiť, ktorý zápasník je pasívny, v~našej aplikácii sme pre toto gesto navrhli dve alternatívy
+-- pre červeného a~modrého zápasníka.
+
+\subsection{TOUCHE -- lopatkové víťazstvo}
+
+TOUCHE, označované aj ako \uv{víťazstvo na lopatky}, je najvyššou formou víťazstva v~zápasení.
+Nastáva, keď útočiaci zápasník súčasne pritlačí obe lopatky súpera na žinenku v~pásme aktivity.
+Dosiahnutie TOUCHE okamžite ukončuje zápas bez ohľadu na skóre \cite{zapasenie_pravidla}.
+
+Na rozdiel od bodovania či napomenutia vyžaduje TOUCHE potvrdenie od predsedu žinenky. Rozhodca
+na žinenke najprv TOUCHE signalizuje, počká na potvrdenie a~až potom udrie dlaňou po žinenke
+a~odpíska koniec zápasu \cite{zapasenie_pravidla}.

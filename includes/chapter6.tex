@@ -17,10 +17,41 @@ dáta z~gyroskopického senzora a~akcelerometra do
 smart telefónu, kde sú tieto dáta následne spracované 
 a~vyhodnotené.
 
-Pred samotným popisom jednotlivých gest uvádzame
-prehľadovú tabuľku~\ref{tab:prehlad-gest}, ktorá
-zhŕňa všetky navrhnuté gestá, ich účel a~správanie
-aplikácie po ich detekcii.
+Pred popisom jednotlivých navrhnutých gest zavádzame niekoľko základných pojmov, s~ktorými
+budeme v~tejto kapitole pracovať. Tieto pojmy označujú elementárne pohyby ruky, z~ktorých
+sa následne skladajú zložitejšie, tzv.~kompozitné gestá:
+
+\begin{itemize}
+    \item \textbf{Rise Arm} -- zdvihnutie ruky rozhodcu do hornej polohy nad hlavu, dlaň
+    smeruje dopredu. Slúži ako aktivačný signál pre začiatok bodovania. Podrobný popis
+    a~hraničné hodnoty senzorov sú uvedené v~sekcii~\ref{subsec:rise-arm}.
+
+    \item \textbf{Flick} -- rýchly rotačný pohyb zápästia okolo osi predlaktia. Smer
+    rotácie (v~smere alebo proti smeru hodinových ručičiek) určuje, ktorému zápasníkovi
+    sa pridelí bod. Podrobný popis a~hraničné hodnoty sú uvedené
+    v~sekcii~\ref{subsec:flick}.
+
+    \item \textbf{Hand Down} -- spustenie ruky späť do pôvodnej, neutrálnej polohy pozdĺž
+    tela. Slúži ako ukončovací signál procesu bodovania. Podrobný popis a~hraničné hodnoty
+    sú uvedené v~sekcii~\ref{subsec:hand-down}.
+
+    \item \textbf{Kompozitné gesto} -- gesto zložené z~viacerých po sebe nasledujúcich
+    elementárnych pohybov, ktoré sú vyhodnocované ako jeden logický celok. V~našej práci
+    sme navrhli nasledujúce kompozitné gestá:
+    \begin{itemize}
+        \item \textbf{Bodovanie} -- kompozícia pohybov Rise Arm, Flick a~Hand Down.
+        Slúži na pridelenie bodov zápasníkovi podľa smeru flicku.
+        \item \textbf{Napomenutie -- červený} -- kompozícia šikmého ukazovacieho pohybu %TODO: Update nove gesto
+        a~následného bodovania, pri ktorom sú všetky body automaticky pripisované
+        modrému zápasníkovi.
+        \item \textbf{Napomenutie -- modrý} -- kompozícia pohybu ruky za chrbát %TODO: Update nove gesto
+        a~následného bodovania, pri ktorom sú všetky body automaticky pripisované
+        červenému zápasníkovi.
+    \end{itemize}
+\end{itemize}
+
+Pre lepšiu prehľadnosť uvádzame aj tabuľku~\ref{tab:prehlad-gest}, ktorá zhŕňa všetky
+navrhnuté gestá, ich účel a~správanie aplikácie po ich detekcii.
 
 \begin{table}[H]
     \centering
@@ -57,6 +88,7 @@ aplikácie po ich detekcii.
 \end{table}
 
 \subsection{Gesto BODOVANIE}
+\label{subsec:bodovanie}
 
 Gesto \uv{Bodovanie} je kompozitné gesto pozostávajúce
 z~troch po sebe nasledujúcich fáz, ktoré spoločne
@@ -88,6 +120,7 @@ bodovanie a~vráti algoritmus späť do režimu
 \end{figure}
 
 \subsubsection{Fáza 1 -- RISE ARM}
+\label{subsec:rise-arm}
 
 Prvou fázou gesta je zdvihnutie ruky rozhodcom do
 hornej polohy. Tento pohyb je detegovaný akcelerometrom
@@ -155,6 +188,7 @@ bodovania, v~ktorom sú následne vyhodnocované flickovacie gestá.
 
 
 \subsubsection{Fáza 2 -- FLICK}
+\label{subsec:flick}
 
 Po aktivácii režimu bodovania rozhodca vykoná rýchly
 rotačný pohyb zápästia, ktorý je zachytený
@@ -276,6 +310,7 @@ pokiaľ neukončí fázu bodovania gestom
 bodov bez nutnosti opakovane zdvíhať a~spúšťať ruku.
 
 \subsubsection{Fáza 3 -- HAND DOWN}
+\label{subsec:hand-down}
 
 Poslednou fázou je spustenie ruky späť do pôvodnej
 polohy. Akcelerometer deteguje návrat zápästia do
