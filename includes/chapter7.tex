@@ -20,17 +20,17 @@ ruky alebo vrátenie ruky späť smerom dolu. Pri vytváraní
 aplikácie sme použili \Gls{npm} knižnicu @zos/sensor, ktorá 
 umožňuje spracovanie dát zo senzorov v~prostredí Zepp OS. 
 
-\subsection{Amazfit T-Rex 2}
-Na začiatku sme pracovali so staršou verziou hodiniek Amazfit 
-T-Rex 2, ktorých operačný systém podporoval Zepp OS \gls{api} verzie 
-2.0. V~tejto verzii nie je možné extrahovať dáta z~požadovaných
-senzorov, ako napríklad gyroskop alebo akcelerometer. Pri práci
-s~týmito hodinkami sme mali možnosť sa zoznámiť s~Zepp OS 
-\gls{api}, čo nám pri práci s~novším modelom Amazfit T-Rex 3 uľahčilo
-prácu. Zoznámili sme sa s~možnosťami, ako posielať správy z~hodiniek 
-do mobilného zariadenia. Najväčšia pridaná hodnota bola v získaní 
-vedomostí o~architektúre Zepp OS Mini Programu a komunikácii cez 
-(\gls{ble}) so smart telefónom.
+% \subsection{Amazfit T-Rex 2}
+% Na začiatku sme pracovali so staršou verziou hodiniek Amazfit 
+% T-Rex 2, ktorých operačný systém podporoval Zepp OS \gls{api} verzie 
+% 2.0. V~tejto verzii nie je možné extrahovať dáta z~požadovaných
+% senzorov, ako napríklad gyroskop alebo akcelerometer. Pri práci
+% s~týmito hodinkami sme mali možnosť sa zoznámiť s~Zepp OS 
+% \gls{api}, čo nám pri práci s~novším modelom Amazfit T-Rex 3 uľahčilo
+% prácu. Zoznámili sme sa s~možnosťami, ako posielať správy z~hodiniek 
+% do mobilného zariadenia. Najväčšia pridaná hodnota bola v získaní 
+% vedomostí o~architektúre Zepp OS Mini Programu a komunikácii cez 
+% (\gls{ble}) so smart telefónom.
 
 
 \subsection{Amazfit T-Rex 3}
@@ -230,12 +230,14 @@ definované enumeráciou \texttt{GestureMode}:
 \begin{itemize}
     \item \textbf{WAITING} -- východiskový režim,
     v~ktorom aplikácia čaká na detekciu gesta.
-    Flickovacie gestá sú v~tomto režime ignorované.
+    Flickovacie gestá (viď podsekciu~\ref{subsubsec:flick})
+    sú v~tomto režime ignorované.
     \item \textbf{GESTURE} -- režim bodovania, do
     ktorého sa aplikácia prepne po detekcii gesta
-    \uv{Rise Arm}. V~tomto režime sa vyhodnocujú
-    flickovacie gestá a~body sa prideľujú podľa
-    smeru rotácie zápästia.
+    \uv{Rise Arm} (viď podsekciu~\ref{subsubsec:rise-arm})
+    alebo \uv{Hand Back} (viď podsekciu~\ref{subsubsec:hand-back}).
+    V~tomto režime sa vyhodnocujú flickovacie gestá
+    a~body sa prideľujú podľa aktivačného gesta.
     \item \textbf{WARNING\_RED} -- režim napomenutia
     červeného zápasníka. Aplikácia sa do neho prepne
     po detekcii gesta \uv{NAPOMENUTIE -- červený}.

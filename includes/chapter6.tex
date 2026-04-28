@@ -17,10 +17,34 @@ dáta z~gyroskopického senzora a~akcelerometra do
 smart telefónu, kde sú tieto dáta následne spracované 
 a~vyhodnotené.
 
-Pred samotným popisom jednotlivých gest uvádzame
-prehľadovú tabuľku~\ref{tab:prehlad-gest}, ktorá
-zhŕňa všetky navrhnuté gestá, ich účel a~správanie
-aplikácie po ich detekcii.
+\subsection{Definícia pojmov}
+\label{subsection:definicia-pojmov}
+
+Pred podrobným popisom jednotlivých gest definujeme základné pojmy, ktoré budeme v~ďalšom texte
+používať. Tieto pojmy označujú elementárne pohyby alebo polohy ruky, z~ktorých sa skladajú
+zložitejšie kompozitné gestá.
+
+\begin{description}
+    \item[Rise Arm] Pohyb, pri ktorom rozhodca zdvihne ľavú ruku (s~hodinkami) z~neutrálnej polohy
+    pri tele do polohy nad hlavou, pričom dlaň smeruje dopredu. Slúži ako aktivačné gesto pre
+    bodovanie červeného zápasníka. Detailne popísaný v~podsekcii~\ref{subsubsec:rise-arm}.
+
+    \item[Hand Back] Pohyb, pri ktorom rozhodca presunie ľavú ruku (s~hodinkami) za chrbát do
+    oblasti krížov, pričom dlaň smeruje nahor a~displej hodiniek je natočený k~zemi. Slúži ako
+    aktivačné gesto pre bodovanie modrého zápasníka. Detailne popísaný
+    v~podsekcii~\ref{subsubsec:hand-back}.
+
+    \item[Flick] Rýchly rotačný pohyb zápästia proti smeru hodinových ručičiek, zachytený
+    gyroskopom. V~aktívnom režime bodovania prideľuje bod zápasníkovi podľa toho, ktoré
+    aktivačné gesto bolo predtým vykonané. Detailne popísaný
+    v~podsekcii~\ref{subsubsec:flick}.
+
+    \item[Hand Down] Návrat ruky späť do neutrálnej polohy pri tele. Ukončuje akýkoľvek režim
+    bodovania a~vracia aplikáciu do režimu čakania. Detailne popísaný
+    v~podsekcii~\ref{subsubsec:hand-down}.
+\end{description}
+
+Tabuľka~\ref{tab:prehlad-gest} prehľadne zhŕňa všetky navrhnuté gestá.
 
 \begin{table}[H]
     \centering
@@ -32,10 +56,12 @@ aplikácie po ich detekcii.
             & \textbf{Správanie aplikácie} \\
         \midrule
         BODOVANIE & červený, modrý
-            & Kompozitné gesto: Rise Arm aktivuje
-            režim bodovania, Flick prideľuje body
-            podľa smeru rotácie, Hand Down ukončí
-            bodovanie. \\
+            & Kompozitné gesto: aktivačné gesto
+            (Rise Arm pre červeného, Hand Back
+            pre modrého) prepne aplikáciu do
+            režimu bodovania, Flick prideľuje
+            body príslušnému zápasníkovi, Hand
+            Down ukončí bodovanie. \\
         \addlinespace
         PASIVITA & červený, modrý
             & Zaznamená pasivitu a~spustí
@@ -46,7 +72,8 @@ aplikácie po ich detekcii.
         NAPOMENUTIE & červený, modrý
             & Automaticky prepne do režimu
             bodovania so zamknutou stranou --
-            body idú výhradne súperovi. \\
+            body idú výhradne súperovi. Bodovanie
+            sa opäť ukončí gestom Hand Down. \\
         \addlinespace
         TOUCHE & --
             & Odošle informáciu o~lopatkovom
@@ -58,27 +85,18 @@ aplikácie po ich detekcii.
 
 \subsection{Gesto BODOVANIE}
 
-Gesto \uv{Bodovanie} je kompozitné gesto pozostávajúce
-z~troch po sebe nasledujúcich fáz, ktoré spoločne
-umožňujú rozhodcovi prideľovať body jednotlivým
-zápasníkom. Inšpirovali sme sa reálnym signálom rozhodcu
-v~zápasení, kde zdvihnutie ruky signalizuje začiatok
-bodovania a~následný rýchly pohyb zápästia určuje, ktorej
-strane sa bod udeľuje. 
+Gesto \uv{Bodovanie} je kompozitné gesto pozostávajúce z~troch po sebe nasledujúcich fáz, ktoré spoločne
+umožňujú rozhodcovi prideľovať body jednotlivým zápasníkom. Inšpirovali sme sa reálnym signálom rozhodcu
+v~zápasení, kde aktivačné gesto pred flickom určuje, ktorému zápasníkovi sa bod udelí. Gesto má dve
+alternatívy -- pre červeného a~modrého zápasníka, ktoré sa odlišujú aktivačným gestom v~prvej fáze.
 
-
-Na obrázku~\ref{fig:gesto-rise-arm} je znázornený
-vývojový diagram gesta \uv{Bodovanie}. Algoritmus
-začína v~režime čakania, kde čaká na detekciu
-gesta \uv{Rise Arm}. Po jeho detekcii sa prepne
-do režimu bodovania, v~ktorom čaká na detekciu
-flicku. Flick v~smere hodinových ručičiek udelí
-bod červenému zápasníkovi, flick proti smeru
-hodinových ručičiek udelí bod modrému zápasníkovi.
-Ak nie je detekovaný žiadny flick, algoritmus
-čaká na gesto \uv{Hand Down}, ktoré ukončí
-bodovanie a~vráti algoritmus späť do režimu
-čakania.
+Na obrázku~\ref{fig:bodovanie-flowchart} je znázornený vývojový diagram gesta \uv{Bodovanie}, ktorý
+zachytáva spoločnú logiku pre obe alternatívy. Algoritmus začína v~režime čakania, kde čaká na detekciu
+jedného z~dvoch aktivačných gest. Po detekcii gesta \uv{Rise Arm} sa prepne do režimu bodovania pre
+červeného zápasníka, po detekcii gesta \uv{Hand Back} do režimu bodovania pre modrého zápasníka.
+V~oboch prípadoch následne čaká na detekciu flicku proti smeru hodinových ručičiek, ktorý udelí bod
+podľa aktívneho režimu. Po prípadnom flicku alebo bez neho algoritmus čaká na gesto \uv{Hand Down},
+ktoré ukončí bodovanie a~vráti algoritmus späť do režimu čakania.
 
 \begin{figure}[H]
     \centering
@@ -87,18 +105,18 @@ bodovanie a~vráti algoritmus späť do režimu
     \label{fig:bodovanie-flowchart}
 \end{figure}
 
-\subsubsection{Fáza 1 -- RISE ARM}
+\subsubsection{Fáza 1 -- AKTIVÁCIA}
 
-Prvou fázou gesta je zdvihnutie ruky rozhodcom do
-hornej polohy. Tento pohyb je detegovaný akcelerometrom
-inteligentných hodiniek, ktorý zaznamenáva zmenu
-orientácie zápästia. Po rozpoznaní gesta \uv{Rise Arm}
-sa aplikácia prepne z~režimu čakania do režimu
-bodovania, v~ktorom hodinky aktívne očakávajú príjem
-flickovacích gest. Táto aktivačná fáza slúži ako
-ochranný mechanizmus -- flickovacie gestá sú
-vyhodnocované len vtedy, keď rozhodca vedome zdvihne
-ruku, čím sa predchádza nechcenému pripočítaniu bodov.
+Prvou fázou gesta je aktivácia režimu bodovania pomocou jedného z~dvoch aktivačných gest. Aktivačné
+gesto súčasne určuje, ktorému zápasníkovi sa bude bod udeľovať. Aktivačná fáza zároveň slúži ako
+ochranný mechanizmus -- flickovacie gestá sú vyhodnocované len vtedy, keď rozhodca vedome vykoná
+aktivačné gesto, čím sa predchádza nechcenému pripočítaniu bodov.
+
+\paragraph{Aktivácia pre červeného -- RISE ARM}
+\label{subsubsec:rise-arm}
+Rozhodca zdvihne ľavú ruku (s~hodinkami) nad hlavu, pričom dlaň smeruje dopredu. Tento pohyb je
+detegovaný akcelerometrom inteligentných hodiniek, ktorý zaznamenáva zmenu orientácie zápästia.
+Po rozpoznaní gesta \uv{Rise Arm} sa aplikácia prepne do režimu bodovania pre červeného zápasníka.
 
 \begin{figure}[H]
     \centering
@@ -107,40 +125,25 @@ ruku, čím sa predchádza nechcenému pripočítaniu bodov.
     \label{fig:gesto-rise-arm}
 \end{figure}
 
-Na obrázku~\ref{fig:gesto-rise-arm} je znázornená
-poloha ruky rozhodcu pri geste \uv{Rise Arm}. Ľavá
-ruka s~hodinkami a~červenou manžetou je zdvihnutá
-nad hlavu a zároveň dlaň smeruje dopredu. Táto poloha
-zodpovedá reálnemu signálu rozhodcu na žinenke, ktorým
-oznamuje začiatok bodovania ostatným členom
-rozhodcovského tímu.
+Na obrázku~\ref{fig:gesto-rise-arm} je znázornená poloha ruky rozhodcu pri geste \uv{Rise Arm}. Ľavá
+ruka s~hodinkami a~červenou manžetou je zdvihnutá nad hlavu a~zároveň dlaň smeruje dopredu. Táto
+poloha zodpovedá reálnemu signálu rozhodcu na žinenke, ktorým oznamuje začiatok bodovania pre
+červeného zápasníka ostatným členom rozhodcovského tímu.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.9\textwidth]{img/gesture-flow/flow-gesto-rise-arm.png}
-    \caption{Príklad priebehu akcelerometrických dát
-    počas gesta \uv{Rise Arm}.}
+    \caption{Príklad priebehu akcelerometrických dát počas gesta \uv{Rise Arm}.}
     \label{fig:subgesture-hand-up}
 \end{figure}
 
-Na obrázku~\ref{fig:subgesture-hand-up} je zobrazený
-priebeh akcelerometrických dát počas vykonania gesta
-\uv{Rise Arm}. Na grafe je viditeľný výrazný prechod
-osi $a_x$ (modrá) z~hodnôt okolo
-$-10\,\text{m/s}^2$ na približne $+9\,\text{m/s}^2$,
-čo zodpovedá zmene orientácie zápästia zo spustenej
-polohy do zdvihnutej. Farebné pásma znázorňujú
-očakávané rozsahy hodnôt pre jednotlivé osi
-v~cieľovej polohe.
+Na obrázku~\ref{fig:subgesture-hand-up} je zobrazený priebeh akcelerometrických dát počas vykonania
+gesta \uv{Rise Arm}. Na grafe je viditeľný výrazný prechod osi $a_x$ (modrá) z~hodnôt okolo
+$-10\,\text{m/s}^2$ na približne $+9\,\text{m/s}^2$, čo zodpovedá zmene orientácie zápästia zo
+spustenej polohy do zdvihnutej.
 
-Na základe analýzy nameraných akcelerometrických dát
-sme stanovili hraničné hodnoty pre jednotlivé osi,
-ktoré definujú cieľovú polohu gesta \uv{Rise Arm},
-kde $a_x$, $a_y$ a~$a_z$ označujú hodnoty zrýchlenia
-na príslušných osiach akcelerometra. Tieto rozsahy
-sú znázornené farebnými pásmami na
-obrázku~\ref{fig:subgesture-hand-up} a~ich konkrétne
-hodnoty sú nasledovné:
+Hraničné hodnoty pre rozpoznanie gesta \uv{Rise Arm}, kde $a_x$, $a_y$ a~$a_z$ označujú hodnoty
+zrýchlenia na príslušných osiach akcelerometra:
 
 \begin{itemize}
     \item \colorbox{xaxis!20}{$\handUpAxMin \leq a_x \leq \handUpAxMax \;\text{m/s}^2$}
@@ -148,164 +151,123 @@ hodnoty sú nasledovné:
     \item \colorbox{zaxis!20}{$\handUpAzMin \leq a_z \leq \handUpAzMax \;\text{m/s}^2$}
 \end{itemize}
 
-Ak sa hodnoty všetkých troch osí súčasne nachádzajú
-v~rámci uvedených rozsahov, dôjde k~úspešnému rozpoznaniu
-gesta \uv{Rise Arm} a~aplikácia sa prepne do režimu
-bodovania, v~ktorom sú následne vyhodnocované flickovacie gestá.
+\paragraph{Aktivácia pre modrého -- HAND BACK}
+\label{subsubsec:hand-back}
 
+Rozhodca presunie ľavú ruku (s~hodinkami) za chrbát do oblasti krížov, pričom zápästie je rotované
+tak, že otvorená dlaň smeruje nahor a~displej hodiniek je natočený smerom k~zemi. Po rozpoznaní
+gesta \uv{Hand Back} sa aplikácia prepne do režimu bodovania pre modrého zápasníka.
 
-\subsubsection{Fáza 2 -- FLICK}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\textwidth]{img/gesture-img/obrazok-gesto-hand-back.png}
+    \caption{Poloha ruky pri geste \uv{Hand Back}}
+    \label{fig:gesto-hand-back}
+\end{figure}
 
-Po aktivácii režimu bodovania rozhodca vykoná rýchly
-rotačný pohyb zápästia, ktorý je zachytený
-gyroskopickým senzorom hodiniek. Smer rotácie určuje,
-ktorému zápasníkovi sa bod pridelí:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{img/gesture-flow/flow-gesto-hand-back.png}
+    \caption{Príklad priebehu akcelerometrických dát počas gesta \uv{Hand Back}.}
+    \label{fig:subgesture-hand-back}
+\end{figure}
+
+Na obrázku~\ref{fig:subgesture-hand-back} je zobrazený priebeh akcelerometrických dát počas vykonania
+gesta \uv{Hand Back}. Charakteristickým znakom tejto polohy je výrazne záporná hodnota osi $a_z$,
+ktorá zodpovedá orientácii hodiniek displejom k~zemi.
+
+Hraničné hodnoty pre rozpoznanie gesta \uv{Hand Back}:
 
 \begin{itemize}
-    \item \textbf{Flick Counterclockwise} -- rýchly
-    pohyb zápästia proti smeru hodinových ručičiek
-    pridelí bod modrému zápasníkovi.
-    \item \textbf{Flick Clockwise} -- rýchly pohyb
-    zápästia v~smere hodinových ručičiek pridelí bod
-    červenému zápasníkovi.
+    \item \colorbox{xaxis!20}{$\handBackAxMin \leq a_x \leq \handBackAxMax \;\text{m/s}^2$}
+    \item \colorbox{yaxis!20}{$\handBackAyMin \leq a_y \leq \handBackAyMax \;\text{m/s}^2$}
+    \item \colorbox{zaxis!20}{$\handBackAzMin \leq a_z \leq \handBackAzMax \;\text{m/s}^2$}
 \end{itemize}
 
-Dáta z~gyroskopu sú prenášané do telefónu, kde
-algoritmus vyhodnocuje uhlovú rýchlosť rotácie na
-osi $g_x$, kde $g_x$ označuje hodnotu uhlovej
-rýchlosti na príslušnej osi gyroskopického senzora
-v~jednotkách stupňov za sekundu (DPS). Na základe
-analýzy nameraných gyroskopických dát boli stanovené
-nasledovné hraničné hodnoty pre rozpoznanie
-jednotlivých smerov flicku:
+Ak sa hodnoty všetkých troch osí súčasne nachádzajú v~rámci uvedených rozsahov pre dané aktivačné
+gesto, aplikácia sa prepne do príslušného režimu bodovania, v~ktorom sú následne vyhodnocované
+flickovacie gestá.
+
+\subsubsection{Fáza 2 -- FLICK}
+\label{subsubsec:flick}
+
+Po aktivácii režimu bodovania rozhodca vykoná rýchly rotačný pohyb zápästia proti smeru hodinových
+ručičiek, ktorý je zachytený gyroskopickým senzorom hodiniek. Bod sa pridelí podľa aktívneho režimu
+nastaveného v~prvej fáze:
 
 \begin{itemize}
-    \item \colorbox{xaxis!20}{Modrý zápasník:
-    $g_x < \flckBlueThreshold \;\text{DPS}$} -- rotácia
-    proti smeru hodinových ručičiek prekročí prahovú
-    hodnotu $\flckBlueThreshold\,\text{DPS}$.
-    \item \colorbox{yaxis!20}{Červený zápasník:
-    $g_x > \flickRedThreshold \;\text{DPS}$} -- rotácia
-    v~smere hodinových ručičiek prekročí prahovú
-    hodnotu $\flickRedThreshold\,\text{DPS}$.
+    \item Ak bol režim aktivovaný gestom \uv{Rise Arm}, flick pridelí bod \textbf{červenému} zápasníkovi.
+    \item Ak bol režim aktivovaný gestom \uv{Hand Back}, flick pridelí bod \textbf{modrému} zápasníkovi.
+\end{itemize}
+
+Dáta z~gyroskopu sú prenášané do telefónu, kde algoritmus vyhodnocuje uhlovú rýchlosť rotácie na osi
+$g_x$, kde $g_x$ označuje hodnotu uhlovej rýchlosti na príslušnej osi gyroskopického senzora
+v~jednotkách stupňov za sekundu (DPS). Na základe analýzy nameraných gyroskopických dát bola
+stanovená nasledovná hraničná hodnota pre rozpoznanie flicku:
+
+\begin{itemize}
+    \item \colorbox{xaxis!20}{$g_x < \flckBlueThreshold \;\text{DPS}$} -- rotácia proti smeru
+    hodinových ručičiek prekročí prahovú hodnotu $\flckBlueThreshold\,\text{DPS}$.
 \end{itemize}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.40\textwidth]{img/gesture-img/obrazok-gesto-flick-counterclockwise.png}
-    \caption{Pohyb zápästia pri geste
-    \uv{Flick Counterclockwise} -- bod pre
-    modrého zápasníka}
+    \caption{Pohyb zápästia pri geste \uv{Flick}}
     \label{fig:gesto-flick-ccw}
 \end{figure}
 
-Na obrázku~\ref{fig:gesto-flick-ccw} je znázornený
-pohyb zápästia pri geste \uv{Flick Counterclockwise}.
-Rozhodca s~rukou zdvihnutou nad hlavou vykoná rýchlu
-rotáciu zápästia proti smeru hodinových ručičiek,
-čo je na obrázku znázornené modrou šípkou. Tento
-pohyb je zachytený gyroskopom na osi $g_x$ ako
-výrazný záporný špičkový výkyv.
-
+Na obrázku~\ref{fig:gesto-flick-ccw} je znázornený pohyb zápästia pri geste \uv{Flick}.
+Rozhodca vykoná rýchlu rotáciu zápästia proti smeru hodinových ručičiek, čo je na obrázku znázornené
+modrou šípkou. Tento pohyb je zachytený gyroskopom na osi $g_x$ ako výrazný záporný špičkový výkyv.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.9\textwidth]{img/gesture-flow/flow-gesto-flick-counterclockwise.png}
-    \caption{Príklad priebehu gyroskopických
-    a~akcelerometrických dát počas gesta
-    \uv{Flick Counterclockwise}.}
+    \caption{Príklad priebehu gyroskopických a~akcelerometrických dát počas gesta
+    \uv{Flick}.}
     \label{fig:subgesture-flick-ccw}
 \end{figure}
 
-Na obrázku~\ref{fig:subgesture-flick-ccw} je
-zobrazený priebeh senzorových dát počas vykonania
-gesta \uv{Flick Counterclockwise}. V~hornej časti
-grafu, ktorá zachytáva gyroskopické dáta, je viditeľný
-výrazný záporný špičkový výkyv (spike) na osi $g_x$
-(modrá), ktorý dosahuje hodnotu približne
-$-1600\,\text{DPS}$, čo výrazne prekračuje stanovenú
-prahovú hodnotu $\flckBlueThreshold\,\text{DPS}$.
-Práve tento krátkodobý, ale intenzívny výkyv je
-kľúčovým signálom, na základe ktorého algoritmus
-rozpozná flick proti smeru hodinových ručičiek
-a~pridelí bod modrému zápasníkovi. V~spodnej časti
-grafu sú zobrazené akcelerometrické dáta, na ktorých
-je viditeľný sprievodný otras spôsobený rýchlym
-pohybom zápästia.
+Na obrázku~\ref{fig:subgesture-flick-ccw} je zobrazený priebeh senzorových dát počas vykonania gesta
+\uv{Flick}. V~hornej časti grafu, ktorá zachytáva gyroskopické dáta, je viditeľný
+výrazný záporný špičkový výkyv (spike) na osi $g_x$ (modrá), ktorý dosahuje hodnotu približne
+$-1600\,\text{DPS}$, čo výrazne prekračuje stanovenú prahovú hodnotu $\flckBlueThreshold\,\text{DPS}$.
+Práve tento krátkodobý, ale intenzívny výkyv je kľúčovým signálom, na základe ktorého algoritmus
+rozpozná flick a~pridelí bod podľa aktívneho režimu. V~spodnej časti grafu sú zobrazené
+akcelerometrické dáta, na ktorých je viditeľný sprievodný otras spôsobený rýchlym pohybom zápästia.
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.9\textwidth]{img/gesture-flow/flow-gesto-flick-clockwise.png}
-    \caption{Príklad priebehu gyroskopických
-    a~akcelerometrických dát počas gesta
-    \uv{Flick Clockwise}.}
-    \label{fig:subgesture-flick-cw}
-\end{figure}
-
-Na obrázku~\ref{fig:subgesture-flick-cw} je analogicky
-zobrazený priebeh senzorových dát počas vykonania
-gesta \uv{Flick Clockwise}. V~hornej časti grafu sú
-viditeľné viaceré kladné špičkové výkyvy na osi $g_x$
-(modrá), ktoré dosahujú hodnoty približne
-$+1500\,\text{DPS}$, čo výrazne prekračuje stanovenú
-prahovú hodnotu $\flickRedThreshold\,\text{DPS}$
-vyznačenú červenou prerušovanou čiarou. Každý takýto
-výkyv predstavuje jeden flick v~smere hodinových
-ručičiek, na základe ktorého algoritmus pridelí bod
-červenému zápasníkovi.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.40\textwidth]{img/gesture-img/obrazok-gesto-flick-clockwise.png}
-    \caption{Pohyb zápästia pri geste \uv{Flick Clockwise} -- bod pre červeného zápasníka}
-    \label{fig:gesto-flick-cw}
-\end{figure}
-
-Na obrázku~\ref{fig:gesto-flick-cw} je znázornený
-pohyb zápästia pri geste \uv{Flick Clockwise}.
-Rozhodca s~rukou zdvihnutou nad hlavou vykoná rýchlu
-rotáciu zápästia v~smere hodinových ručičiek, čo je
-na obrázku znázornené červenou šípkou. Tento pohyb
-je zachytený gyroskopom na osi $g_x$ ako výrazný
-kladný špičkový výkyv.
-
-Rozhodca môže v~rámci jednej aktivácie vykonať aj
-viacero po sebe nasledujúcich flickovacích gest,
-pokiaľ neukončí fázu bodovania gestom
-\uv{Hand Down}. Tým je umožnené prideliť viacero
-bodov bez nutnosti opakovane zdvíhať a~spúšťať ruku.
+Rozhodca môže v~rámci jednej aktivácie vykonať aj viacero po sebe nasledujúcich flickovacích gest,
+pokiaľ neukončí fázu bodovania gestom \uv{Hand Down}. Tým je umožnené prideliť viacero bodov bez
+nutnosti opakovane vykonávať aktivačné gesto.
 
 \subsubsection{Fáza 3 -- HAND DOWN}
+\label{subsubsec:hand-down}
 
-Poslednou fázou je spustenie ruky späť do pôvodnej
-polohy. Akcelerometer deteguje návrat zápästia do
-neutrálnej orientácie, čo signalizuje ukončenie
-procesu bodovania. Po rozpoznaní gesta \uv{Hand Down}
-sa aplikácia prepne späť do režimu čakania, v~ktorom
-sú flickovacie gestá ignorované. Tým je zabezpečené,
-že bežné pohyby ruky rozhodcu počas zápasu nevedú
-k~neúmyselnému prideľovaniu bodov.
+Poslednou fázou je spustenie ruky späť do neutrálnej polohy pri tele. Akcelerometer deteguje návrat
+zápästia do neutrálnej orientácie, čo signalizuje ukončenie procesu bodovania. Po rozpoznaní gesta
+\uv{Hand Down} sa aplikácia prepne späť do režimu čakania, v~ktorom sú flickovacie gestá ignorované.
+Tým je zabezpečené, že bežné pohyby ruky rozhodcu počas zápasu nevedú k~neúmyselnému prideľovaniu bodov.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.9\textwidth]{img/gesture-img/obrazok-hand-down.png}
+    \includegraphics[width=0.4\textwidth]{img/gesture-img/obrazok-gesto-hand-down.png}
+    \caption{Poloha ruky pri geste \uv{Hand Down}}
+    \label{fig:gesto-hand-down}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{img/gesture-flow/flow-gesto-hand-down.png}
     \caption{Príklad priebehu akcelerometrických dát počas gesta \uv{Hand Down}.}
     \label{fig:subgesture-hand-down}
 \end{figure}
 
-Na obrázku~\ref{fig:subgesture-hand-down} je
-zobrazený priebeh akcelerometrických dát počas
-vykonania gesta \uv{Hand Down}. Z~grafu je zrejmé,
-že hodnoty jednotlivých osí sa po spustení ruky
+Na obrázku~\ref{fig:subgesture-hand-down} je zobrazený priebeh akcelerometrických dát počas
+vykonania gesta \uv{Hand Down}. Z~grafu je zrejmé, že hodnoty jednotlivých osí sa po spustení ruky
 ustália v~rámci definovaných hraničných pásiem.
 
-Na základe analýzy nameraných akcelerometrických dát
-boli stanovené hraničné hodnoty pre jednotlivé osi,
-ktoré definujú cieľovú polohu gesta \uv{Hand Down}.
-Analogicky ako pri geste \uv{Rise Arm}, hodnoty
-$a_x$, $a_y$ a~$a_z$ označujú zrýchlenie na
-príslušných osiach akcelerometra. Konkrétne rozsahy
-sú nasledovné:
+Hraničné hodnoty pre rozpoznanie gesta \uv{Hand Down}:
 
 \begin{itemize}
     \item \colorbox{xaxis!20}{$\handDownAxMin \leq a_x \leq \handDownAxMax \;\text{m/s}^2$}
@@ -313,10 +275,38 @@ sú nasledovné:
     \item \colorbox{zaxis!20}{$\handDownAzMin \leq a_z \leq \handDownAzMax \;\text{m/s}^2$}
 \end{itemize}
 
-Ak sa hodnoty všetkých troch osí súčasne nachádzajú
-v~rámci uvedených rozsahov, dôjde k~úspešnému
-rozpoznaniu gesta \uv{Hand Down} a~aplikácia sa
-prepne späť do režimu čakania.
+Ak sa hodnoty všetkých troch osí súčasne nachádzajú v~rámci uvedených rozsahov, dôjde k~úspešnému
+rozpoznaniu gesta \uv{Hand Down} a~aplikácia sa prepne späť do režimu čakania.
+
+\subsubsection{Priebeh celého gesta BODOVANIE}
+
+Pre lepšiu predstavu o~tom, ako jednotlivé fázy gesta \uv{Bodovanie} nadväzujú na seba v~reálnom
+čase, uvádzame na obrázku~\ref{fig:bodovanie-priebeh} priebeh senzorových dát počas vykonania
+celého kompozitného gesta vrátane všetkých troch fáz.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{img/gesture-flow/flow-gesto-bodovanie.png}
+    \caption{Priebeh gyroskopických a~akcelerometrických dát počas celého gesta BODOVANIE
+    pre červeného zápasníka. Vyznačené sú tri kľúčové momenty -- \uv{Rise Arm} (aktivácia),
+    \uv{Red score} (flick) a~\uv{Hand Down} (ukončenie).}
+    \label{fig:bodovanie-priebeh}
+\end{figure}
+
+Na obrázku~\ref{fig:bodovanie-priebeh} sú zvislými prerušovanými čiarami vyznačené tri kľúčové
+momenty zodpovedajúce trom fázam gesta. V~prvej fáze (\uv{Hand up}) sa hodnoty akcelerometra
+ustália v~rozsahoch zodpovedajúcich zdvihnutej polohe ruky, čím sa aplikácia prepne do režimu
+bodovania pre červeného zápasníka. V~druhej fáze (\uv{Red score}) je v~hornej časti grafu
+viditeľný výrazný záporný špičkový výkyv na osi $g_x$ (modrá), ktorý prekračuje prahovú hodnotu
+$\flckBlueThreshold\,\text{DPS}$ a~spôsobí pridelenie bodu. V~tretej fáze (\uv{Hand down}) sa
+hodnoty akcelerometra ustália v~rozsahoch zodpovedajúcich neutrálnej polohe ruky, čo signalizuje
+ukončenie procesu bodovania.
+
+Z~grafu je tiež zrejmé, že v~strednej fáze rozhodca vykonal 3 po sebe nasledujúce
+flicky a aplikácia pridala 3 body červenému zápasníkovi.
+
+Obdobne by vyzeral priebeh gesta \uv{Bodovanie} pre modrého zápasníka, s~tým rozdielom, že aktivácia by prebehla gestom \uv{Hand Back} 
+a~flicky by pridávali body modrému zápasníkovi.
 
 \subsection{Gesto PASIVITA}
 
