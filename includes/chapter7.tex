@@ -332,42 +332,120 @@ Pre zlepšenie používateľského zážitku a~zabezpečenie
 spätnej väzby pre rozhodcu sme implementovali
 haptickú odozvu prostredníctvom vibrácií hodiniek.
 Každý typ udalosti má priradenú odlišnú vibračnú
-odozvu, ktorá sa líši počtom impulzov a~ich trvaním.
-Rozhodca tak aj bez pohľadu na displej vie, aká
-udalosť bola zaznamenaná.
+schému, ktorá sa líši počtom impulzov, ich trvaním
+a~použitým vibračným módom. Rozhodca tak aj bez
+pohľadu na displej vie, aká udalosť bola zaznamenaná.
 
-Prehľad vibračných schém je uvedený
-v~tabuľke~\ref{tab:hapticka-odozva}. Udalosti sú
-zoradené podľa priority -- najvýraznejšia vibrácia
-je priradená automatickému udeleniu trestného bodu
-po vypršaní 30-sekundového odpočtu pasivity, keďže
-ide o~udalosť, ktorú rozhodca priamo neinicioval
-a~musí byť o~nej jednoznačne informovaný.
+Vibrácie sú riadené z~Android aplikácie -- po vyhodnotení
+prijatých dát sa do \Gls{http} odpovede zabalí príkaz
+na vibrovanie a~Device App tento príkaz vykoná
+prostredníctvom \gls{api} \texttt{Vibrator} z~knižnice
+\texttt{@zos/sensor}~\cite{zepp_sensor_vibrator}. Maximálna
+spojitá dĺžka vibrovania je na použitom modeli hodiniek
+hardvérovo limitovaná na približne 500\,ms, preto sme
+tomu prispôsobili dĺžku najdlhšieho impulzu používaného
+v~aplikácii.
+
+\paragraph{Použité vibračné módy}
+Z~ponuky vibračných módov dokumentovaných
+v~\cite{zepp_sensor_vibrator} sme po empirických testoch
+na hodinkách Amazfit T-Rex 3 vybrali dva, ktoré tvoria
+základné stavebné bloky všetkých vibračných schém
+v~aplikácii. Pre prehľadnosť sme im v~ďalšom texte
+priradili krátke pomenovania (\uv{krátky}, \uv{dlhý},
+\uv{krátky ostrý}), ktoré používame v~tabuľke
+udalostí. Definícia jednotlivých módov je uvedená
+v~tabuľke~\ref{tab:vibracne-mody}.
+
+\begin{table}[H]
+    \centering
+    \caption{Definícia vibračných módov používaných v~aplikácii}
+    \label{tab:vibracne-mody}
+
+    \begin{tabularx}{\textwidth}{l l c X}
+        \toprule
+        \textbf{Pomenovanie} & \textbf{Konštanta API} & \textbf{Trvanie} & \textbf{Popis} \\
+        \midrule
+        krátky & \texttt{VIBRATOR\_SCENE\_TIMER} & 250\,ms & Spojitý vibračný mód, ktorý vibruje až do manuálneho zastavenia volaním \texttt{stop()}. Krátky impulz získame zastavením po 250\,ms. \\
+        \addlinespace
+        dlhý & \texttt{VIBRATOR\_SCENE\_TIMER} & 500\,ms & Rovnaký mód ako vyššie, dlhší impulz získame zastavením po 500\,ms. Ide o~maximálnu prakticky dosiahnuteľnú spojitú dĺžku na danom modeli hodiniek. \\
+        \addlinespace
+        krátky ostrý & \texttt{VIBRATOR\_SCENE\_SHORT\_STRONG} & $\approx$\,20\,ms & Jednorazový impulz s~vyššou intenzitou a~pevne danou dĺžkou. Používa sa na signalizáciu vstupu do režimu bodovania v~debug móde. \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+
+\paragraph{Špeciálna sekvencia po ukončení bodovania}
+Najinformatívnejšiu spätnú väzbu poskytuje sekvencia,
+ktorá sa spustí po geste \uv{Hand Down} ukončujúcom
+sekvenciu bodovania. Pozostáva z~jedného \uv{dlhého}
+impulzu, po ktorom nasleduje 300\,ms pauza a~následne
+$N$ \uv{krátkych} impulzov, kde $N$ zodpovedá počtu
+bodov udelených v~rámci práve ukončenej sekvencie
+bodovania. Rozhodca tak na zápästí jednoznačne vníma,
+koľko bodov bolo zápasníkovi pridelených bez nutnosti
+pohľadu na displej.
+
+\paragraph{Rozdiely medzi debug a~produkčným módom}
+Sada vibračných odoziev sa líši podľa zvoleného režimu
+spustenia servera. V~debug móde má každé detegované
+gesto vlastnú spätnú väzbu vrátane vstupu do režimu
+bodovania (gestá \uv{Rise Arm} a~\uv{Hand Back}). V~produkčnom
+móde sú tieto vstupy potlačené, aby rozhodca nebol
+rušený vibráciami pri prípravných gestách. Zároveň
+v~produkčnom móde nie je aktívny 30-sekundový odpočet
+pasivity ani automatické udelenie trestného bodu --
+hodinky síce zavibrujú pri detekcii pózy pasivity, ale
+o~prípadnom trestnom bode rozhoduje rozhodca manuálne.
+
+Prehľad vibračných schém pre obidva módy je uvedený
+v~tabuľke~\ref{tab:hapticka-odozva}. Pomenovania v~stĺpcoch
+sa odkazujú na vibračné módy definované
+v~tabuľke~\ref{tab:vibracne-mody}.
 
 \begin{table}[H]
     \centering
     \caption{Prehľad haptickej odozvy pri jednotlivých udalostiach}
     \label{tab:hapticka-odozva}
 
-    \begin{tabularx}{\textwidth}{X c c}
+    \begin{tabularx}{\textwidth}{X l l}
 
         \toprule
-        \textbf{Udalosť} & \textbf{Impulzy} & \textbf{Trvanie} \\
+        \textbf{Udalosť} & \textbf{Debug mód} & \textbf{Produkčný mód} \\
 
         \midrule
-        Trestný bod za pasivitu (automatický) & 1 & dlhé \\
+        Ukončenie sekvencie bodovania ($N$ bodov) & 1\,$\times$ dlhý + $N$\,$\times$ krátky & rovnako \\
         \addlinespace
 
-        TOUCHE & 5 & krátke \\
+        Trestný bod za pasivitu (automatický) & 1\,$\times$ dlhý & --- \\
         \addlinespace
 
-        Spustenie odpočtu pasivity & 2 & krátke \\
+        TOUCHE & 5\,$\times$ krátky & rovnako \\
         \addlinespace
 
-        Prechod do režimu napomenutia & 2 & krátke \\
+        Detekcia pózy pasivity & 2\,$\times$ krátky\textsuperscript{*} & 2\,$\times$ krátky \\
         \addlinespace
 
-        Prechod do režimu bodovania / čakania & 1 & krátke \\
+        Prechod do režimu napomenutia & 2\,$\times$ krátky & rovnako \\
+        \addlinespace
+
+        Vstup do režimu bodovania & 1\,$\times$ krátky ostrý & --- \\
+        \addlinespace
+
+        Návrat do režimu čakania (Hand Down z~napomenutia) & 1\,$\times$ krátky & rovnako \\
         \bottomrule
     \end{tabularx}
+
+    \vspace{0.5em}
+    \footnotesize
+    \raggedright
+    \textsuperscript{*}~V~debug móde signalizuje súčasne
+    aj spustenie 30-sekundového odpočtu pasivity, ktorý
+    pri vypršaní automaticky pridelí trestný bod súperovi.
+    V~produkčnom móde signalizuje iba detekciu pózy bez
+    automatického penalizovania.
 \end{table}
+
+Pomlčka v~stĺpci produkčného módu označuje, že daná
+udalosť v~tomto móde nenastáva, prípadne nevyvoláva
+haptickú odozvu.
