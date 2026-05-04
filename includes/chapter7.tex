@@ -8,17 +8,17 @@ by umožňovala intuitívne ovládanie bez nutnosti
 dotyku displeja. Najskôr sme začali s~analýzou údajov
 z~akcelerometra, aby sme zachytili základné pohyby ruky.
 Neskôr sme prešli na kombináciu s~gyroskopom, aby sme vedeli
-zachytiť aj rýchle pohyby, ktoré sú pre flickovacie gestá 
+zachytiť aj rýchle pohyby, ktoré sú pre flickovacie gestá
 charakteristické.
 % Implementácia aplikácie pre Zepp OS sa zamerala na využitie senzorov zabudovaných v~hodinkách Amazfit, konkrétne akcelerometra a~gyroskopu, na ovládanie pomocou gest zápästia. Naším cieľom bolo vytvoriť funkčnú aplikáciu, ktorá by umožňovala intuitívne ovládanie bez nutnosti dotyku displeja. Najskôr sme začali s~analýzou údajov z~gyroskopu, aby sme zachytili základné pohyby ruky, no neskôr sme prešli na kombináciu s~akcelerometrom kvôli vyššej presnosti pri rýchlych gestách.
 
-Proces začal vývojom skúšobnej aplikácie v~JavaScripte 
+Proces začal vývojom skúšobnej aplikácie v~JavaScripte
 (použili sme Zepp OS \gls{api} verzie 4.2), ktorá zobrazovala
 hodnoty senzorov v~reálnom čase. Pomocou tejto aplikácie
 sme určili hraničné hodnoty pohybov, ako napríklad zdvihnutie
-ruky alebo vrátenie ruky späť smerom dolu. Pri vytváraní 
-aplikácie sme použili \Gls{npm} knižnicu @zos/sensor, ktorá 
-umožňuje spracovanie dát zo senzorov v~prostredí Zepp OS. 
+ruky alebo vrátenie ruky späť smerom dolu. Pri vytváraní
+aplikácie sme použili \Gls{npm} knižnicu @zos/sensor, ktorá
+umožňuje spracovanie dát zo senzorov v~prostredí Zepp OS.
 
 % \subsection{Amazfit T-Rex 2}
 % Na začiatku sme pracovali so staršou verziou hodiniek Amazfit 
@@ -32,18 +32,18 @@ umožňuje spracovanie dát zo senzorov v~prostredí Zepp OS.
 % vedomostí o~architektúre Zepp OS Mini Programu a komunikácii cez 
 % (\gls{ble}) so smart telefónom.
 
-
 \subsection{Amazfit T-Rex 3}
-Novšia verzia hodiniek, ktoré disponujú najnovšou verziou operačného 
-systému Zepp OS, už umožňuje prácu s~Zepp OS API verzie min. 3.0. 
-V~tejto verzii je možné programátorsky získať dáta z~gyroskopu 
+Novšia verzia hodiniek, ktoré disponujú najnovšou verziou operačného
+systému Zepp OS, už umožňuje prácu s~Zepp OS API verzie min. 3.0.
+V~tejto verzii je možné programátorsky získať dáta z~gyroskopu
 a~akcelerometra. Dáta následne vieme spracovať a zo vzoriek
 definovať hraničné hodnoty pre potrebné gestá, ktoré
-umožnia rozhodcovi zaznamenávať dôležité udalosti v~zápase bez nutnosti 
-dotyku displeja. Jednotlivé gestá a ich hraničné hodnoty sú definované v kapotole
+umožnia rozhodcovi zaznamenávať dôležité udalosti v~zápase bez nutnosti
+dotyku displeja. Jednotlivé gestá a ich hraničné hodnoty sú definované v~kapitole
 \ref{chapter:gesta}.
 
 \subsection{Aplikácia na zber dát}
+\label{sec:zber-app}
 Na úvod sme vytvorili skúšobnú aplikáciu pre Zepp OS,
 ktorej hlavným cieľom bolo overiť možnosť extrakcie
 dát zo senzorov hodiniek Amazfit T-Rex 3. Aplikácia
@@ -74,7 +74,7 @@ prenášajú z~hodiniek cez App Side priamo do Android
 aplikácie bez potreby cloudového úložiska.
 
 V~rámci Android aplikácie sme implementovali
-debug rozhranie. To v~reálnom čase zobrazuje
+debug rozhranie, ktoré je podrobne popísané v~kapitole \ref{app:debug-android}. To v~reálnom čase zobrazuje
 grafy hodnôt akcelerometra a~gyroskopu. Po ukončení
 meracej relácie sa všetky nazbierané dáta automaticky
 exportujú do \Gls{csv} súboru. Tento súbor následne
@@ -95,35 +95,36 @@ grafom -- na ľavom snímku je zvolené gesto
 \uv{Hand up}, na pravom \uv{Hand down}.
 Na jednotlivých grafoch sú definované hranice
 pre každú z~osí. Pre účel jednoduchšieho debuggovania
-sme pridali select-box element, ktorý umožňuje prepínať 
+sme pridali select-box element, ktorý umožňuje prepínať
 na rôzne hranice definovaných gest. V~spodnej časti
-obrazovky sa nachádzajú tlačidlá na spustenie 
+obrazovky sa nachádzajú tlačidlá na spustenie
 a~zastavenie lokálneho \Gls{http} servera. Ukončenie \gls{http}
 servera zároveň spustí export všetkých nazbieraných dát do
-CSV súboru pre vizualizáciu a spracovanie v python scripte.
+\Gls{csv} súboru pre vizualizáciu a spracovanie v python scripte.
 
 \begin{figure}[H]
+  \centering
+  \begin{subfigure}[b]{0.45\textwidth}
     \centering
-    \begin{subfigure}[b]{0.45\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{img/Skusobna-aplikacia1.jpg}
-        \caption{Gesto \uv{Hand up}}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.45\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{img/Skusobna aplikacia2.jpg}
-        \caption{Gesto \uv{Hand down}}
-    \end{subfigure}
-    \caption{Debug rozhranie Android aplikácie.}
-    \label{fig:debug-android}
+    \includegraphics[width=\textwidth]{img/Skusobna-aplikacia1.jpg}
+    \caption{Gesto \uv{Hand up}}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{img/Skusobna aplikacia2.jpg}
+    \caption{Gesto \uv{Hand down}}
+  \end{subfigure}
+  \caption{Debug rozhranie Android aplikácie.}
+  \label{fig:debug-android}
 \end{figure}
 
 \subsection{Python skript na spracovanie a~vizualizáciu dát}
+\label{sec:python-skript}
 Na definovanie hraničných hodnôt pre jednotlivé gestá
 sme vytvorili pomocný nástroj v~jazyku Python, ktorý
 slúži ako lokálny webový editor gest. Nástroj je
-implementovaný ako \Gls{http} server s užívateľským rozhraním, 
+implementovaný ako \Gls{http} server s užívateľským rozhraním,
 ktoré umožňuje načítanie dát z~CSV súboru, ich vizualizáciu v~grafoch.
 
 Nástroj načíta \Gls{csv} súbory s~nameranými dátami
@@ -140,7 +141,7 @@ definovať presné hranice pre jednotlivé gestá, ktoré sme
 následne implementovali do Android aplikácie a~testovali
 ich rozpoznávanie v~reálnom čase.
 
-Po uložení hraničných hodnôt nástroj automaticky 
+Po uložení hraničných hodnôt nástroj automaticky
 vygeneruje Kotlin kód v~tvare \texttt{GestureDefinition},
 pripravený na priame vloženie do konfigurácie
 Android aplikácie. Príklad vygenerovaného kódu je
@@ -167,13 +168,12 @@ GestureDefinition(
 ),
 \end{lstlisting}
 
-Na obrázku~\ref{fig:gesture-editor} je zobrazené
-webové rozhranie nástroja na editáciu gest. V~ľavej
+Na obrázku~\ref{fig:gesture-editor} je zobrazené webové rozhranie nástroja na editáciu gest. V~ľavej
 časti sa nachádza panel s~výberom \Gls{csv} súboru
-a~gesta prostredníctvom rozbaľovacích menu, uloženie 
-a~orezanie \Gls{csv} súboru, a~vstupné polia pre 
-manuálnu úpravu hraničných hodnôt jednotlivých osí 
-akcelerometra. V~pravej časti sú zobrazené 2 interaktívne 
+a~gesta prostredníctvom rozbaľovacích menu, uloženie
+a~orezanie \Gls{csv} súboru, a~vstupné polia pre
+manuálnu úpravu hraničných hodnôt jednotlivých osí
+akcelerometra. V~pravej časti sú zobrazené 2 interaktívne
 grafy, konkrétne horný pre gyroskop a~spodný pre akcelerometer.
 V~grafe akcelerometra sú farebnými pásmami
 a~prerušovanými čiarami vyznačené aktuálne hraničné
@@ -182,11 +182,11 @@ aj priamo v~grafe potiahnutím farebných bodov na
 koncoch prerušovaných čiar.
 
 \begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth]{img/python-script-ukazka.png}
-    \caption{Webové rozhranie nástroja na editáciu
+  \centering
+  \includegraphics[width=\textwidth]{img/python-script-ukazka.png}
+  \caption{Webové rozhranie nástroja na editáciu
     gest}
-    \label{fig:gesture-editor}
+  \label{fig:gesture-editor}
 \end{figure}
 
 \subsection{Aplikácia pre rozpoznávanie gest}
@@ -208,18 +208,18 @@ obrázku~\ref{fig:architektura}. Systém sa skladá
 z~troch prepojených častí: Device App bežiaca na
 hodinkách sníma dáta z~akcelerometra a~gyroskopu
 a~odosiela ich cez \Gls{ble} do App Side služby
-v Zepp aplikácii bežiacej v~telefóne. Tá preposiela 
+v Zepp aplikácii bežiacej v~telefóne. Tá preposiela
 dáta prostredníctvom \Gls{http} požiadavky na lokálny server
 bežiaci v~Android aplikácii na porte 8080.
-Android aplikácia vyhodnotí prijaté dáta, rozpozná 
-gesto, aktualizuje skóre a~výsledok odošle cez response 
+Android aplikácia vyhodnotí prijaté dáta, rozpozná
+gesto, aktualizuje skóre a~výsledok odošle cez response
 do hodiniek, kde sa zobrazí na displeji.
 
 \begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth]{img/diagrams/flowchart-aplikacia.png}
-    \caption{Architektúra systému}
-    \label{fig:architektura}
+  \centering
+  \includegraphics[width=\textwidth]{img/diagrams/flowchart-aplikacia.png}
+  \caption{Architektúra systému}
+  \label{fig:architektura}
 \end{figure}
 
 \subsubsection{Režimy aplikácie}
@@ -228,25 +228,25 @@ Aplikácia pracuje v~štyroch režimoch, ktoré sú
 definované enumeráciou \texttt{GestureMode}:
 
 \begin{itemize}
-    \item \textbf{WAITING} -- východiskový režim,
-    v~ktorom aplikácia čaká na detekciu gesta.
-    Flickovacie gestá (viď podsekciu~\ref{subsubsec:flick})
-    sú v~tomto režime ignorované.
-    \item \textbf{GESTURE} -- režim bodovania, do
-    ktorého sa aplikácia prepne po detekcii gesta
-    \uv{Rise Arm} (viď podsekciu~\ref{subsubsec:rise-arm})
-    alebo \uv{Hand Back} (viď podsekciu~\ref{subsubsec:hand-back}).
-    V~tomto režime sa vyhodnocujú flickovacie gestá
-    a~body sa prideľujú podľa aktivačného gesta.
-    \item \textbf{WARNING\_RED} -- režim napomenutia
-    červeného zápasníka. Aplikácia sa do neho prepne
-    po detekcii gesta \uv{NAPOMENUTIE -- červený}.
-    Bodovanie je zamknuté -- všetky flicky sa
-    pripočítavajú výhradne modrému zápasníkovi.
-    \item \textbf{WARNING\_BLUE} -- režim napomenutia
-    modrého zápasníka. Analogicky k~predchádzajúcemu,
-    všetky flicky sa pripočítavajú výhradne červenému
-    zápasníkovi.
+  \item \textbf{WAITING} -- východiskový režim,
+        v~ktorom aplikácia čaká na detekciu gesta.
+        Flickovacie gestá (viď podsekciu~\ref{subsubsec:flick})
+        sú v~tomto režime ignorované.
+  \item \textbf{GESTURE} -- režim bodovania, do
+        ktorého sa aplikácia prepne po detekcii gesta
+        \uv{Rise Arm} (viď podsekciu~\ref{subsubsec:rise-arm})
+        alebo \uv{Hand Back} (viď podsekciu~\ref{subsubsec:hand-back}).
+        V~tomto režime sa vyhodnocujú flickovacie gestá
+        a~body sa prideľujú podľa aktivačného gesta.
+  \item \textbf{WARNING\_RED} -- režim napomenutia
+        červeného zápasníka. Aplikácia sa do neho prepne
+        po detekcii gesta \uv{NAPOMENUTIE -- červený}.
+        Bodovanie je zamknuté -- všetky flicky sa
+        pripočítavajú výhradne modrému zápasníkovi.
+  \item \textbf{WARNING\_BLUE} -- režim napomenutia
+        modrého zápasníka. Analogicky k~predchádzajúcemu,
+        všetky flicky sa pripočítavajú výhradne červenému
+        zápasníkovi.
 \end{itemize}
 
 Režimy \texttt{WARNING\_RED} a~\texttt{WARNING\_BLUE}
@@ -260,7 +260,7 @@ režimu \texttt{WAITING} sa vo všetkých prípadoch
 vykoná gestom \uv{Hand Down}.
 
 \subsubsection{Debug mód}
-
+\label{app:debug-android}
 Debug mód Android aplikácie slúži na monitorovanie
 a~ladenie rozpoznávania gest v~reálnom čase. Oproti
 pôvodnej aplikácii na zber dát bolo rozhranie
@@ -285,10 +285,10 @@ a~následný návrat do pôvodnej polohy gestom
 \uv{Hand Down}.
 
 \begin{figure}[H]
-    \centering
-    \includegraphics[width=0.4\textwidth]{img/gesto-aplikacia-debug.png}
-    \caption{Debug mód -- stav po sekvencii bodovania (Blue: 2, Red: 2)}
-    \label{fig:debug-scoring}
+  \centering
+  \includegraphics[width=0.4\textwidth]{img/gesto-aplikacia-debug.png}
+  \caption{Debug mód -- stav po sekvencii bodovania (Blue: 2, Red: 2)}
+  \label{fig:debug-scoring}
 \end{figure}
 
 \subsubsection{Produkčný mód}
@@ -320,54 +320,119 @@ trestného bodu po uplynutí 30-sekundového odpočtu
 a~na záver signalizácia TOUCHE -- lopatkového víťazstva.
 
 \begin{figure}[H]
-    \centering
-    \includegraphics[width=0.4\textwidth]{img/gesto-aplikacia-prod.png}
-    \caption{Produkčný mód Android aplikácie -- záznam udalostí počas simulovaného zápasu}
-    \label{fig:prod-mode}
+  \centering
+  \includegraphics[width=0.4\textwidth]{img/gesto-aplikacia-prod.png}
+  \caption{Produkčný mód Android aplikácie -- záznam udalostí počas simulovaného zápasu}
+  \label{fig:prod-mode}
 \end{figure}
 
-\subsubsection{Haptická odozva}
+V~produkčnom móde sme neimplementovali automatické
+spustenie 30-sekundového odpočtu pasivity, hoci je
+v~aplikácii podporovaný a~demonštrovaný v~debug móde.
+Dôvodom je skutočnosť, že priebeh zápasu môže byť
+kedykoľvek prerušený (napríklad pri opustení žinenky,
+zranení alebo technickej prestávke), čo by si vyžiadalo
+zložitú logiku pozastavenia a~obnovenia odpočtu.
+Okrem toho v~zápasníckych pravidlách \Gls{uww}
+udelenie trestného bodu za pasivitu musí byť odsúhlasené
+aj bočným rozhodcom a~vedúcim žinenky,
+čo predstavuje samostatný
+proces validácie, ktorý nie je možné spoľahlivo zachytiť
+prostredníctvom hodiniek hlavného rozhodcu. Implementácia
+tejto funkcionality v~plnom rozsahu nie je súčasťou
+zadania diplomovej práce.
+
+\subsubsection{Zber dát}
+\label{sec:zber-dát}
+Dáta na definovanie hraničných hodnôt sme zbierali
+pomocou aplikácie na zber dát popísanej
+v~sekcii~\ref{sec:zber-app}. Meranie prebiehalo
+v~stoji -- pre každé gesto sme ruku uviedli do
+požadovanej polohy a~následne s~ňou pohybovali
+v~rámci tejto polohy. Cieľom bolo zachytiť
+prirodzenú variabilitu, keďže rozhodca nikdy
+nedá ruku do presne rovnakej pozície. Hraničné
+hodnoty preto musia obsahovať dostatočnú
+toleranciu, ktorá zohľadňuje nielen odchýlky
+v~polohe ruky, ale aj skutočnosť, že sa rozhodca
+počas zápasu môže nachádzať v~pohybe.
+
+Pre každé gesto sme vykonali približne 15 až 20
+meraní. Priebeh jedného merania bol nasledovný:
+v~Android aplikácii sme spustili lokálny \Gls{http}
+server, čím sa začal záznam dát zo senzorov.
+Následne sme vykonali požadované gesto
+a~po ukončení merania sme server zastavili.
+Aplikácia automaticky exportovala zaznamenané
+dáta z~akcelerometra a~gyroskopu do \Gls{csv}
+súboru. Exportované súbory sme následne
+spracovali v~Python nástroji popísanom
+v~sekcii~\ref{sec:python-skript}, kde sme
+vizuálne posúdili priebehy senzorových dát
+a~na ich základe určili hraničné hodnoty
+pre jednotlivé gestá.
+
+\subsubsection{Vibračná odozva}
 
 Pre zlepšenie používateľského zážitku a~zabezpečenie
 spätnej väzby pre rozhodcu sme implementovali
-haptickú odozvu prostredníctvom vibrácií hodiniek.
+vibračnú odozvu prostredníctvom vibrácií hodiniek.
 Každý typ udalosti má priradenú odlišnú vibračnú
-odozvu, ktorá sa líši počtom impulzov a~ich trvaním.
+schému, ktorá sa líši počtom impulzov a~ich trvaním.
 Rozhodca tak aj bez pohľadu na displej vie, aká
 udalosť bola zaznamenaná.
 
-Prehľad vibračných schém je uvedený
-v~tabuľke~\ref{tab:hapticka-odozva}. Udalosti sú
-zoradené podľa priority -- najvýraznejšia vibrácia
-je priradená automatickému udeleniu trestného bodu
-po vypršaní 30-sekundového odpočtu pasivity, keďže
-ide o~udalosť, ktorú rozhodca priamo neinicioval
-a~musí byť o~nej jednoznačne informovaný.
+V~rámci aplikácie sme definovali tri typy vibračných
+impulzov, ktoré slúžia ako základné stavebné jednotky
+pre zložené vibračné schémy:
+
+\begin{itemize}
+  \item \textbf{Krátky impulz} (\textit{short})
+        \label{vib:short} -- vibračný impulz s~trvaním
+        250\,ms. Používa sa ako základná stavebná
+        jednotka pre sekvencie viacerých impulzov.
+
+  \item \textbf{Dlhý impulz} (\textit{long})
+        \label{vib:long} -- vibračný impulz s~trvaním
+        500\,ms. Pri testovaní sa ukázalo, že 500\,ms
+        je maximálna dosiahnuteľná dĺžka spojitej
+        vibrácie -- firmvér hodiniek motor po tomto
+        intervale automaticky zastaví.
+
+  \item \textbf{Silný krátky impulz}
+        (\textit{short\_strong}) \label{vib:short-strong}
+        -- jednorazový impulz s~trvaním 20\,ms a~vyššou
+        intenzitou. Používa sa pri aktivačných gestách
+        \uv{Rise Arm} a~\uv{Hand Back}.
+\end{itemize}
+
+Mapovanie konkrétnych udalostí v~zápase na jednotlivé
+typy vibračných impulzov je uvedené
+v~tabuľke~\ref{tab:vibracna-odozva}.
 
 \begin{table}[H]
-    \centering
-    \caption{Prehľad haptickej odozvy pri jednotlivých udalostiach}
-    \label{tab:hapticka-odozva}
+  \centering
+  \caption{Prehľad vibračnej odozvy pri jednotlivých udalostiach}
+  \label{tab:vibracna-odozva}
 
-    \begin{tabularx}{\textwidth}{X c c}
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}X c c c}
+    \toprule
+    \textbf{Udalosť}                                  & \textbf{Impulz}                                    & \textbf{Následné impulzy}                     & \textbf{Mód} \\
+    \midrule
+    Ukončenie bodovania (Hand Down po bodovaní)       & 1\,$\times$\,dlhý~(\ref{vib:long})                 & $N$\,$\times$\,krátky~(\ref{vib:short})$^{*}$ & debug + prod \\
+    \midrule
+    TOUCHE                                            & 5\,$\times$\,krátky~(\ref{vib:short})              & ---                                           & debug + prod \\
+    \midrule
+    Prechod do režimu napomenutia                     & 2\,$\times$\,krátky~(\ref{vib:short})              & ---                                           & debug + prod \\
+    \midrule
+    Aktivácia režimu bodovania (Rise Arm / Hand Back) & 1\,$\times$\,silný krátky~(\ref{vib:short-strong}) & ---                                           & len debug    \\
+    \midrule
+    Spustenie odpočtu pasivity                        & 2\,$\times$\,krátky~(\ref{vib:short})              & ---                                           & len debug    \\
+    \midrule
+    Trestný bod za pasivitu (automatický)             & 1\,$\times$\,dlhý~(\ref{vib:long})                 & ---                                           & len debug    \\
+    \bottomrule
+  \end{tabularx}
 
-        \toprule
-        \textbf{Udalosť} & \textbf{Impulzy} & \textbf{Trvanie} \\
-
-        \midrule
-        Trestný bod za pasivitu (automatický) & 1 & dlhé \\
-        \addlinespace
-
-        TOUCHE & 5 & krátke \\
-        \addlinespace
-
-        Spustenie odpočtu pasivity & 2 & krátke \\
-        \addlinespace
-
-        Prechod do režimu napomenutia & 2 & krátke \\
-        \addlinespace
-
-        Prechod do režimu bodovania / čakania & 1 & krátke \\
-        \bottomrule
-    \end{tabularx}
+  \vspace{0.5em}
+  {\footnotesize $^{*}$ $N$ -- počet bodov pridelených v~práve ukončenej bodovacej sekvencii.}
 \end{table}
