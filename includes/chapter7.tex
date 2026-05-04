@@ -44,6 +44,8 @@ dotyku displeja. Jednotlivé gestá a ich hraničné hodnoty sú definované v~k
 
 \subsection{Aplikácia na zber dát}
 \label{sec:zber-app}
+
+\subsubsection{Architektúra a debug rozhranie}
 Na úvod sme vytvorili skúšobnú aplikáciu pre Zepp OS,
 ktorej hlavným cieľom bolo overiť možnosť extrakcie
 dát zo senzorov hodiniek Amazfit T-Rex 3. Aplikácia
@@ -74,7 +76,7 @@ prenášajú z~hodiniek cez App Side priamo do Android
 aplikácie bez potreby cloudového úložiska.
 
 V~rámci Android aplikácie sme implementovali
-debug rozhranie, ktoré je podrobne popísané v~kapitole \ref{app:debug-android}. To v~reálnom čase zobrazuje
+debug rozhranie, ktoré v~reálnom čase zobrazuje
 grafy hodnôt akcelerometra a~gyroskopu. Po ukončení
 meracej relácie sa všetky nazbierané dáta automaticky
 exportujú do \Gls{csv} súboru. Tento súbor následne
@@ -118,6 +120,35 @@ servera zároveň spustí export všetkých nazbieraných dát do
   \caption{Debug rozhranie Android aplikácie.}
   \label{fig:debug-android}
 \end{figure}
+
+\subsubsection{Zber dát}
+\label{sec:zber-dát}
+Dáta na definovanie hraničných hodnôt sme zbierali
+pomocou aplikácie popísanej vyššie. Meranie prebiehalo
+v~stoji -- pre každé gesto sme ruku uviedli do
+požadovanej polohy a~následne s~ňou pohybovali
+v~rámci tejto polohy. Cieľom bolo zachytiť
+prirodzenú variabilitu, keďže rozhodca nikdy
+nedá ruku do presne rovnakej pozície. Hraničné
+hodnoty preto musia obsahovať dostatočnú
+toleranciu, ktorá zohľadňuje nielen odchýlky
+v~polohe ruky, ale aj skutočnosť, že sa rozhodca
+počas zápasu môže nachádzať v~pohybe.
+
+Pre každé gesto sme vykonali približne 15 až 20
+meraní. Priebeh jedného merania bol nasledovný:
+v~Android aplikácii sme spustili lokálny \Gls{http}
+server, čím sa začal záznam dát zo senzorov.
+Následne sme vykonali požadované gesto
+a~po ukončení merania sme server zastavili.
+Aplikácia automaticky exportovala zaznamenané
+dáta z~akcelerometra a~gyroskopu do \Gls{csv}
+súboru. Exportované súbory sme následne
+spracovali v~Python nástroji popísanom
+v~sekcii~\ref{sec:python-skript}, kde sme
+vizuálne posúdili priebehy senzorových dát
+a~na ich základe určili hraničné hodnoty
+pre jednotlivé gestá.
 
 \subsection{Python skript na spracovanie a~vizualizáciu dát}
 \label{sec:python-skript}
@@ -249,8 +280,8 @@ definované enumeráciou \texttt{GestureMode}:
   \item \textbf{WARNING\_RED} -- režim napomenutia
         červeného zápasníka. Aplikácia sa do neho prepne
         po detekcii gesta \uv{NAPOMENUTIE -- červený}.
-        Bodovanie je zamknuté -- všetky flicky sa
-        pripočítavajú výhradne modrému zápasníkovi.
+        Bodovanie je obmedzené na modrého zápasníka a teda
+        všetky flicky pripočítavajú body modrému zápasníkovi.
   \item \textbf{WARNING\_BLUE} -- režim napomenutia
         modrého zápasníka. Analogicky k~predchádzajúcemu,
         všetky flicky sa pripočítavajú výhradne červenému
@@ -267,7 +298,7 @@ Návrat do režimu \texttt{WAITING} sa vo všetkých
 prípadoch vykoná gestom \uv{Hand Down}.
 
 \subsubsection{Debug mód}
-\label{app:debug-android}
+\label{app:debug-final}
 Debug mód Android aplikácie slúži na monitorovanie
 a~ladenie rozpoznávania gest v~reálnom čase. Oproti
 pôvodnej aplikácii na zber dát bolo rozhranie
@@ -350,36 +381,6 @@ proces validácie, ktorý nie je možné spoľahlivo zachytiť
 prostredníctvom hodiniek hlavného rozhodcu. Implementácia
 tejto funkcionality v~plnom rozsahu nie je súčasťou
 zadania diplomovej práce.
-
-\subsubsection{Zber dát}
-\label{sec:zber-dát}
-Dáta na definovanie hraničných hodnôt sme zbierali
-pomocou aplikácie na zber dát popísanej
-v~sekcii~\ref{sec:zber-app}. Meranie prebiehalo
-v~stoji -- pre každé gesto sme ruku uviedli do
-požadovanej polohy a~následne s~ňou pohybovali
-v~rámci tejto polohy. Cieľom bolo zachytiť
-prirodzenú variabilitu, keďže rozhodca nikdy
-nedá ruku do presne rovnakej pozície. Hraničné
-hodnoty preto musia obsahovať dostatočnú
-toleranciu, ktorá zohľadňuje nielen odchýlky
-v~polohe ruky, ale aj skutočnosť, že sa rozhodca
-počas zápasu môže nachádzať v~pohybe.
-
-Pre každé gesto sme vykonali približne 15 až 20
-meraní. Priebeh jedného merania bol nasledovný:
-v~Android aplikácii sme spustili lokálny \Gls{http}
-server, čím sa začal záznam dát zo senzorov.
-Následne sme vykonali požadované gesto
-a~po ukončení merania sme server zastavili.
-Aplikácia automaticky exportovala zaznamenané
-dáta z~akcelerometra a~gyroskopu do \Gls{csv}
-súboru. Exportované súbory sme následne
-spracovali v~Python nástroji popísanom
-v~sekcii~\ref{sec:python-skript}, kde sme
-vizuálne posúdili priebehy senzorových dát
-a~na ich základe určili hraničné hodnoty
-pre jednotlivé gestá.
 
 \subsubsection{Vibračná odozva}
 
