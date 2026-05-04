@@ -224,7 +224,7 @@ do hodiniek, kde sa zobrazí na displeji.
 
 \subsubsection{Režimy aplikácie}
 
-Aplikácia pracuje v~štyroch režimoch, ktoré sú
+Aplikácia pracuje v~piatich režimoch, ktoré sú
 definované enumeráciou \texttt{GestureMode}:
 
 \begin{itemize}
@@ -232,12 +232,20 @@ definované enumeráciou \texttt{GestureMode}:
         v~ktorom aplikácia čaká na detekciu gesta.
         Flickovacie gestá (viď podsekciu~\ref{subsubsec:flick})
         sú v~tomto režime ignorované.
-  \item \textbf{GESTURE} -- režim bodovania, do
-        ktorého sa aplikácia prepne po detekcii gesta
-        \uv{Rise Arm} (viď podsekciu~\ref{subsubsec:rise-arm})
-        alebo \uv{Hand Back} (viď podsekciu~\ref{subsubsec:hand-back}).
-        V~tomto režime sa vyhodnocujú flickovacie gestá
-        a~body sa prideľujú podľa aktivačného gesta.
+  \item \textbf{GESTURE\_RED} -- režim bodovania
+        červeného zápasníka. Aplikácia sa do neho
+        prepne po detekcii gesta \uv{Rise Arm}
+        (viď podsekciu~\ref{subsubsec:rise-arm}).
+        Všetky flickovacie gestá zaznamenané počas
+        tohto režimu pripočítavajú body červenému
+        zápasníkovi.
+  \item \textbf{GESTURE\_BLUE} -- režim bodovania
+        modrého zápasníka. Aplikácia sa do neho
+        prepne po detekcii gesta \uv{Hand Back}
+        (viď podsekciu~\ref{subsubsec:hand-back}).
+        Všetky flickovacie gestá zaznamenané počas
+        tohto režimu pripočítavajú body modrému
+        zápasníkovi.
   \item \textbf{WARNING\_RED} -- režim napomenutia
         červeného zápasníka. Aplikácia sa do neho prepne
         po detekcii gesta \uv{NAPOMENUTIE -- červený}.
@@ -249,15 +257,14 @@ definované enumeráciou \texttt{GestureMode}:
         zápasníkovi.
 \end{itemize}
 
-Režimy \texttt{WARNING\_RED} a~\texttt{WARNING\_BLUE}
-zdieľajú s~režimom \texttt{GESTURE} spoločnú
-vlastnosť -- vo všetkých troch sa vyhodnocujú
-flickovacie gestá. Rozdiel je v~tom, že v~režime
-\texttt{GESTURE} smer flicku určuje príjemcu bodov,
-zatiaľ čo v~režimoch napomenutia je príjemca bodov
-výhradne súper napomenutého zápasníka. Návrat do
-režimu \texttt{WAITING} sa vo všetkých prípadoch
-vykoná gestom \uv{Hand Down}.
+Režimy \texttt{GESTURE\_RED}, \texttt{GESTURE\_BLUE},
+\texttt{WARNING\_RED} a~\texttt{WARNING\_BLUE} zdieľajú
+spoločnú vlastnosť -- vo všetkých štyroch sa vyhodnocujú
+flickovacie gestá. O~tom, ktorému zápasníkovi sa
+zaznamenaný flick pripočíta, rozhoduje výhradne aktuálny
+režim aplikácie, nie smer ani charakter samotného flicku.
+Návrat do režimu \texttt{WAITING} sa vo všetkých
+prípadoch vykoná gestom \uv{Hand Down}.
 
 \subsubsection{Debug mód}
 \label{app:debug-android}
@@ -267,20 +274,22 @@ pôvodnej aplikácii na zber dát bolo rozhranie
 rozšírené o~zobrazenie aktuálne rozpoznaného gesta,
 režimu aplikácie a~priebežného skóre.
 
+% TODO: Mame teraz 2 rozne gesta na prepinanie medzi rezimami. Treba updatnut obrazok za 2 varianty pre cerveneho a modreho
 Na obrázku~\ref{fig:debug-scoring} je zobrazený
-stav aplikácie po ukončení sekvencie bodovania.
+stav aplikácie po ukončení sekvencií bodovania.
 V~hornej časti obrazovky vidíme aktuálny režim
 (\texttt{waiting}) a~informáciu o~poslednom
 rozpoznanom geste. Pod tým je zobrazené priebežné
 skóre -- v~tomto prípade Blue: 2, Red: 2. Na grafe
 gyroskopu sú viditeľné výrazné špičkové výkyvy na
 osi $g_x$, ktoré zodpovedajú jednotlivým flickovacím
-gestám -- záporné výkyvy pridelili po jednom bode
-modrému zápasníkovi a~kladné výkyvy po jednom bode
-červenému zápasníkovi. V~grafe akcelerometra je
-viditeľný prechod hodnôt zodpovedajúci sekvencii
-gest \uv{Rise Arm} (vstup do režimu bodovania),
-po ktorom nasledovali flickovacie gestá,
+gestám. Každý výkyv prekračujúci nastavený prah
+pridelil jeden bod podľa aktívneho režimu bodovania
+v~čase jeho detekcie. V~grafe akcelerometra sú
+viditeľné prechody hodnôt zodpovedajúce aktivačným
+gestám \uv{Rise Arm} (vstup do režimu \texttt{GESTURE\_RED})
+a~\uv{Hand Back} (vstup do režimu \texttt{GESTURE\_BLUE}),
+po ktorých vždy nasledovali flickovacie gestá
 a~následný návrat do pôvodnej polohy gestom
 \uv{Hand Down}.
 
