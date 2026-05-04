@@ -254,6 +254,7 @@ do hodiniek, kde sa zobrazí na displeji.
 \end{figure}
 
 \subsubsection{Režimy aplikácie}
+\label{subsubsec:rezimy-aplikacie}
 
 Aplikácia pracuje v~piatich režimoch, ktoré sú
 definované enumeráciou \texttt{GestureMode}:
@@ -399,8 +400,7 @@ pre zložené vibračné schémy:
 \begin{itemize}
   \item \textbf{Krátky impulz} (\textit{short})
         \label{vib:short} -- vibračný impulz s~trvaním
-        250\,ms. Používa sa ako základná stavebná
-        jednotka pre sekvencie viacerých impulzov.
+        250\,ms.
 
   \item \textbf{Dlhý impulz} (\textit{long})
         \label{vib:long} -- vibračný impulz s~trvaním
@@ -412,34 +412,71 @@ pre zložené vibračné schémy:
   \item \textbf{Silný krátky impulz}
         (\textit{short\_strong}) \label{vib:short-strong}
         -- jednorazový impulz s~trvaním 20\,ms a~vyššou
-        intenzitou. Používa sa pri aktivačných gestách
-        \uv{Rise Arm} a~\uv{Hand Back}.
+        intenzitou.
 \end{itemize}
 
-Mapovanie konkrétnych udalostí v~zápase na jednotlivé
-typy vibračných impulzov je uvedené
-v~tabuľke~\ref{tab:vibracna-odozva}.
+V~aplikácii rozlišujeme šesť typov udalostí, pri ktorých sa
+spustí vibračná odozva:
+
+\begin{itemize}
+  \item \textbf{Ukončenie bodovania} -- nastáva po vykonaní
+        gesta \uv{Hand Down} v~ktoromkoľvek z~bodovacích režimov
+        (\texttt{GESTURE\_RED}, \texttt{GESTURE\_BLUE},
+        \texttt{WARNING\_RED}, \texttt{WARNING\_BLUE} --
+        viď podsekciu~\ref{subsubsec:rezimy}). Počet
+        následných krátkych impulzov zodpovedá počtu bodov
+        pridelených v~práve ukončenej sekvencii.
+
+  \item \textbf{TOUCHE} -- nastáva po detekcii gesta \uv{TOUCHE}.
+        Päť po sebe nasledujúcich krátkych impulzov tvorí
+        výraznú schému, ktorú nemožno zameniť so žiadnou inou
+        udalosťou.
+
+  \item \textbf{Prechod do režimu napomenutia} -- nastáva po
+        detekcii gesta \uv{NAPOMENUTIE -- červený} alebo
+        \uv{NAPOMENUTIE -- modrý}.
+
+  \item \textbf{Aktivácia režimu bodovania} -- nastáva po
+        detekcii aktivačného gesta \uv{Rise Arm} alebo
+        \uv{Hand Back}.
+
+  \item \textbf{Spustenie odpočtu pasivity} -- nastáva po
+        detekcii gesta \uv{PASIVITA -- červený} alebo
+        \uv{PASIVITA -- modrý}.
+
+  \item \textbf{Trestný bod za pasivitu} -- nastáva automaticky
+        po uplynutí 30-sekundového odpočtu pasivity bez
+        zaznamenaného bodovania.
+\end{itemize}
+
+Mapovanie konkrétnych udalostí na typy vibračných impulzov
+je uvedené v~tabuľke~\ref{tab:vibracna-odozva}.
 
 \begin{table}[H]
   \centering
   \caption{Prehľad vibračnej odozvy pri jednotlivých udalostiach}
   \label{tab:vibracna-odozva}
-
-  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}X c c c}
+  \renewcommand{\arraystretch}{1.4}
+  \begin{tabularx}{\textwidth}{
+      >{\raggedright\arraybackslash}p{0.30\textwidth}
+      >{\raggedright\arraybackslash}X
+      >{\raggedright\arraybackslash}X
+      >{\centering\arraybackslash}p{0.13\textwidth}
+    }
     \toprule
-    \textbf{Udalosť}                                  & \textbf{Impulz}                                    & \textbf{Následné impulzy}                     & \textbf{Mód} \\
+    \textbf{Udalosť}              & \textbf{Impulz}                                    & \textbf{Následné impulzy}                     & \textbf{Mód}     \\
     \midrule
-    Ukončenie bodovania (Hand Down po bodovaní)       & 1\,$\times$\,dlhý~(\ref{vib:long})                 & $N$\,$\times$\,krátky~(\ref{vib:short})$^{*}$ & debug + prod \\
+    Ukončenie bodovania           & 1\,$\times$\,dlhý~(\ref{vib:long})                 & $N$\,$\times$\,krátky~(\ref{vib:short})$^{*}$ & oba              \\
     \midrule
-    TOUCHE                                            & 5\,$\times$\,krátky~(\ref{vib:short})              & ---                                           & debug + prod \\
+    TOUCHE                        & 5\,$\times$\,krátky~(\ref{vib:short})              & ---                                           & oba              \\
     \midrule
-    Prechod do režimu napomenutia                     & 2\,$\times$\,krátky~(\ref{vib:short})              & ---                                           & debug + prod \\
+    Prechod do režimu napomenutia & 2\,$\times$\,krátky~(\ref{vib:short})              & ---                                           & oba              \\
     \midrule
-    Aktivácia režimu bodovania (Rise Arm / Hand Back) & 1\,$\times$\,silný krátky~(\ref{vib:short-strong}) & ---                                           & len debug    \\
+    Aktivácia režimu bodovania    & 1\,$\times$\,silný krátky~(\ref{vib:short-strong}) & ---                                           & oba              \\
     \midrule
-    Spustenie odpočtu pasivity                        & 2\,$\times$\,krátky~(\ref{vib:short})              & ---                                           & len debug    \\
+    Spustenie odpočtu pasivity    & 2\,$\times$\,krátky~(\ref{vib:short})              & ---                                           & oba              \\
     \midrule
-    Trestný bod za pasivitu (automatický)             & 1\,$\times$\,dlhý~(\ref{vib:long})                 & ---                                           & len debug    \\
+    Trestný bod za pasivitu       & 1\,$\times$\,dlhý~(\ref{vib:long})                 & ---                                           & len \emph{debug} \\
     \bottomrule
   \end{tabularx}
 
