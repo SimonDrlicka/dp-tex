@@ -1,4 +1,6 @@
 \section{Implementácia}
+\label{chapter:implementacia}
+
 Implementácia aplikácie pre Zepp OS sa zamerala na
 použitie senzorov zabudovaných v~hodinkách Amazfit.
 Konkrétne sme pracovali s~akcelerometrom
@@ -310,7 +312,7 @@ režimu aplikácie a~priebežného skóre.
 Na obrázku~\ref{fig:debug-scoring} je zobrazený
 stav aplikácie po ukončení sekvencií bodovania.
 V~hornej časti obrazovky vidíme aktuálny režim
-(\texttt{waiting}) a~informáciu o~poslednom
+(\texttt{WAITING}) a~informáciu o~poslednom
 rozpoznanom geste. Pod tým je zobrazené priebežné
 skóre -- v~tomto prípade Blue: 2, Red: 2. Na grafe
 gyroskopu sú viditeľné výrazné špičkové výkyvy na
@@ -318,13 +320,11 @@ osi $g_x$, ktoré zodpovedajú jednotlivým flickovacím
 gestám. Každý výkyv prekračujúci nastavený prah
 pridelil jeden bod podľa aktívneho režimu bodovania
 v~čase jeho detekcie. V~grafe akcelerometra sú
-viditeľné prechody hodnôt zodpovedajúce aktivačným
-gestám \uv{Rise Arm} (vstup do režimu \texttt{GESTURE\_RED})
-a~\uv{Hand Back} (vstup do režimu \texttt{GESTURE\_BLUE}),
-po ktorých vždy nasledovali flickovacie gestá
+viditeľné prechody hodnôt zodpovedajúce aktivačnému
+gestu \uv{Rise Arm} (vstup do režimu \texttt{GESTURE\_RED})
+po ktorom nasledovali flickovacie gestá
 a~následný návrat do pôvodnej polohy gestom
-\uv{Hand Down}.
-
+\uv{Hand Down}
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.4\textwidth]{img/gesto-aplikacia-debug.png}
@@ -368,21 +368,28 @@ a~na záver signalizácia TOUCHE -- lopatkového víťazstva.
   \label{fig:prod-mode}
 \end{figure}
 
+\subsubsection{Hlavné rozdiely medzi produkčným a~debug módom}
 V~produkčnom móde sme neimplementovali automatické
 spustenie 30-sekundového odpočtu pasivity, hoci je
 v~aplikácii podporovaný a~demonštrovaný v~debug móde.
 Dôvodom je skutočnosť, že priebeh zápasu môže byť
 kedykoľvek prerušený (napríklad pri opustení žinenky,
 zranení alebo technickej prestávke), čo by si vyžiadalo
-zložitú logiku pozastavenia a~obnovenia odpočtu.
+implementáciu ďalších gest a funkcionalít, ktoré
+presahujú rámec diplomovej práce.
 Okrem toho v~zápasníckych pravidlách \Gls{uww}
 udelenie trestného bodu za pasivitu musí byť odsúhlasené
 aj bočným rozhodcom a~vedúcim žinenky,
 čo predstavuje samostatný
 proces validácie, ktorý nie je možné spoľahlivo zachytiť
-prostredníctvom hodiniek hlavného rozhodcu. Implementácia
-tejto funkcionality v~plnom rozsahu nie je súčasťou
-zadania diplomovej práce.
+prostredníctvom hodiniek hlavného rozhodcu.V~produkčnom móde
+sme takisto vypli vibráciu pri detekcii
+aktivačných gest bodovania (\uv{Rise Arm} a~\uv{Hand Back})
+z~dôvodu príliš častej vibračnej odozvy, ktorá by mohla
+byť pre rozhodcu rušivá a~mätúca. Tieto gestá sa
+počas zápasu vykonávajú pri každom bodovaní, čo by
+viedlo k~zbytočne nadmernému počtu
+vibračných impulzov v~krátkom časovom úseku.
 
 \subsubsection{Vibračná odozva}
 
@@ -441,7 +448,7 @@ spustí vibračná odozva:
         detekcii aktivačného gesta \uv{Rise Arm} alebo
         \uv{Hand Back}.
 
-  \item \textbf{Spustenie odpočtu pasivity} -- nastáva po
+  \item \textbf{Pasivita} -- nastáva po
         detekcii gesta \uv{PASIVITA -- červený} alebo
         \uv{PASIVITA -- modrý}.
 
@@ -465,19 +472,19 @@ je uvedené v~tabuľke~\ref{tab:vibracna-odozva}.
       >{\centering\arraybackslash}p{0.13\textwidth}
     }
     \toprule
-    \textbf{Udalosť}              & \textbf{Impulz}                                    & \textbf{Následné impulzy}                     & \textbf{Mód}     \\
+    \textbf{Udalosť}              & \textbf{Impulz}                    & \textbf{Následné impulzy}    & \textbf{Mód}     \\
     \midrule
-    Ukončenie bodovania           & 1\,$\times$\,dlhý~(\ref{vib:long})                 & $N$\,$\times$\,krátky~(\ref{vib:short})$^{*}$ & oba              \\
+    Ukončenie bodovania           & 1\,$\times$\,dlhý                  & $N$\,$\times$\,krátky $^{*}$ & oba              \\
     \midrule
-    TOUCHE                        & 5\,$\times$\,krátky~(\ref{vib:short})              & ---                                           & oba              \\
+    TOUCHE                        & 5\,$\times$\,krátky                & --                           & oba              \\
     \midrule
-    Prechod do režimu napomenutia & 2\,$\times$\,krátky~(\ref{vib:short})              & ---                                           & oba              \\
+    Prechod do režimu napomenutia & 2\,$\times$\,krátky                & --                           & oba              \\
     \midrule
-    Aktivácia režimu bodovania    & 1\,$\times$\,silný krátky~(\ref{vib:short-strong}) & ---                                           & len \emph{debug} \\
+    Aktivácia režimu bodovania    & 1\,$\times$\,silný krátky          & --                           & len \emph{debug} \\
     \midrule
-    Spustenie odpočtu pasivity    & 2\,$\times$\,krátky~(\ref{vib:short})              & ---                                           & oba              \\
+    Pasivita                      & 2\,$\times$\,krátky                & --                           & oba              \\
     \midrule
-    Trestný bod za pasivitu       & 1\,$\times$\,dlhý~(\ref{vib:long})                 & ---                                           & len \emph{debug} \\
+    Trestný bod za pasivitu       & 1\,$\times$\,dlhý~(\ref{vib:long}) & --                           & len \emph{debug} \\
     \bottomrule
   \end{tabularx}
 

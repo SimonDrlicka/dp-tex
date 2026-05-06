@@ -307,30 +307,30 @@ a~flicky by pridávali body modrému zápasníkovi.
 
 Gesto \uv{Pasivita} slúži na signalizáciu pasívneho
 správania jedného zo zápasníkov bodovému rozhodcovi.
-Pravidlá zápasenia a~dôsledky pasivity sú podrobne
-popísané v~kapitole~2. Pre toto gesto sme navrhli
-dve alternatívy -- pre červeného a~modrého zápasníka.
+Pre toto gesto sme navrhli dve alternatívy -- pre
+červeného a~modrého zápasníka.
 
-Priebeh gesta je znázornený na
-obrázku~\ref{fig:pasivita-flowchart}. Po detekcii
-gesta aplikácia zaznamená pasivitu a~spustí
-30-sekundový odpočet aktivity. Ak počas tejto doby
-hociktorý zo zápasníkov získa body (detegované gestom
-BODOVANIE), odpočet sa zruší a~žiadny trestný bod
-sa neudelí. Ak odpočet vyprší bez akéhokoľvek
-bodovania, aplikácia automaticky pridelí 1~bod
-súperovi pasívneho zápasníka.
-
-Odpočet pasivity sme sa nakoniec rozhodli implementovať
-iba v debug móde aplikácie a nie v produkčnom móde (módy sú
-definované v podsekciách~\ref{app:debug-final} a~\ref{app:prod-final}).
+Pôvodný návrh počítal s~automatickým 30-sekundovým
+odpočtom po detekcii gesta -- ak by žiaden zo zápasníkov
+počas tejto doby neskóroval, aplikácia by automaticky
+pridelila 1~bod súperovi pasívneho zápasníka. Tento
+priebeh je znázornený vo vývojovom diagrame na
+obrázku~\ref{fig:pasivita-flowchart}.
 
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.6\textwidth]{img/diagrams/flowchart-gesto-pasivita.png}
-  \caption{Vývojový diagram gesta PASIVITA}
+  \caption{Pôvodne navrhovaný vývojový diagram gesta PASIVITA s~automatickým odpočtom}
   \label{fig:pasivita-flowchart}
 \end{figure}
+
+Po zvážení reálnych podmienok zápasu sme tento
+mechanizmus implementovali iba v~debug móde aplikácie.
+V~produkčnom móde gesto \uv{Pasivita} pasivitu len
+zaznamená ako udalosť. Detailné dôvody tohto rozhodnutia
+sú uvedené v~kapitole~\ref{chapter:implementacia}
+v~rámci popisu produkčného módu
+(podsekcia~\ref{app:prod-final}).
 
 \subsubsection{PASIVITA -- červený}
 
