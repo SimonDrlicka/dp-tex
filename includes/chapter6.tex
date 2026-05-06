@@ -138,9 +138,7 @@ poloha zodpovedá reálnemu signálu rozhodcu na žinenke, ktorým oznamuje zač
 \end{figure}
 
 Na obrázku~\ref{fig:subgesture-hand-up} je zobrazený priebeh akcelerometrických dát počas vykonania
-gesta \uv{Rise Arm}. Na grafe je viditeľný výrazný prechod osi $a_x$ (modrá) z~hodnôt okolo
-$-10\,\text{m/s}^2$ na približne $+9\,\text{m/s}^2$, čo zodpovedá zmene orientácie zápästia zo
-spustenej polohy do zdvihnutej.
+gesta \uv{Rise Arm} a zobrazenie bodu, kedy dochádza k detekcií tohto gesta.
 
 Hraničné hodnoty pre rozpoznanie gesta \uv{Rise Arm}, kde $a_x$, $a_y$ a~$a_z$ označujú hodnoty
 zrýchlenia na príslušných osiach akcelerometra:
@@ -173,8 +171,7 @@ gesta \uv{Hand Back} sa aplikácia prepne do režimu bodovania pre modrého záp
 \end{figure}
 
 Na obrázku~\ref{fig:subgesture-hand-back} je zobrazený priebeh akcelerometrických dát počas vykonania
-gesta \uv{Hand Back}. Charakteristickým znakom tejto polohy je výrazne záporná hodnota osi $a_z$,
-ktorá zodpovedá orientácii hodiniek displejom k~zemi.
+gesta \uv{Hand Back} a zobrazenie bodu, kedy dochádza k detekcií tohto gesta.
 
 Hraničné hodnoty pre rozpoznanie gesta \uv{Hand Back}:
 
@@ -287,14 +284,12 @@ celého kompozitného gesta vrátane všetkých troch fáz.
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.95\textwidth]{img/gesture-flow/flow-gesto-bodovanie.png}
-  \caption{Priebeh gyroskopických a~akcelerometrických dát počas celého gesta BODOVANIE
-    pre červeného zápasníka. Vyznačené sú tri kľúčové momenty -- \uv{Rise Arm} (aktivácia),
-    \uv{Red score} (flick) a~\uv{Hand Down} (ukončenie).}
+  \caption{Priebeh gyroskopických a~akcelerometrických dát počas celého gesta BODOVANIE pre červeného zápasníka.}
   \label{fig:bodovanie-priebeh}
 \end{figure}
 
 Na obrázku~\ref{fig:bodovanie-priebeh} sú zvislými prerušovanými čiarami vyznačené tri kľúčové
-momenty zodpovedajúce trom fázam gesta. V~prvej fáze (\uv{Hand up}) sa hodnoty akcelerometra
+momenty zodpovedajúce trom fázam gesta. V~prvej fáze (\uv{Rise Arm}) sa hodnoty akcelerometra
 ustália v~rozsahoch zodpovedajúcich zdvihnutej polohe ruky, čím sa aplikácia prepne do režimu
 bodovania pre červeného zápasníka. V~druhej fáze (\uv{Red score}) je v~hornej časti grafu
 viditeľný výrazný záporný špičkový výkyv na osi $g_x$ (modrá), ktorý prekračuje prahovú hodnotu
@@ -326,6 +321,10 @@ sa neudelí. Ak odpočet vyprší bez akéhokoľvek
 bodovania, aplikácia automaticky pridelí 1~bod
 súperovi pasívneho zápasníka.
 
+Odpočet pasivity sme sa nakoniec rozhodli implementovať
+iba v debug móde aplikácie a nie v produkčnom móde (módy sú
+definované v podsekciách~\ref{app:debug-final} a~\ref{app:prod-final}).
+
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.6\textwidth]{img/diagrams/flowchart-gesto-pasivita.png}
@@ -337,8 +336,7 @@ súperovi pasívneho zápasníka.
 
 Rozhodca vystrčí ľavú ruku (s~hodinkami) vodorovne
 do strany v~90-stupňovom uhle od tela, pričom dlaň
-smeruje nadol k~zemi, čo spustí odpočet pasivity pre červeného zápasníka,
-počas ktorého musí získať body, inak súper dostane 1~bod.
+smeruje nadol k~zemi.
 
 \begin{figure}[H]
   \centering
@@ -357,16 +355,13 @@ počas ktorého musí získať body, inak súper dostane 1~bod.
 
 Na obrázku~\ref{fig:subgesture-pasivita-cerveny}
 je zobrazený priebeh akcelerometrických dát počas
-vykonania aktivačného gesta \uv{PASIVITA -- červený}. Os $a_z$ (zelená)
-kolíše v~širšom rozsahu, preto sme pre ňu zvolili
-väčšie tolerančné pásmo. Farebné pásma znázorňujú
+vykonania aktivačného gesta \uv{PASIVITA -- červený}.
+Farebné pásma znázorňujú
 očakávané rozsahy hodnôt pre jednotlivé osi
 v~cieľovej polohe.
 
-Charakteristickým znakom tejto polohy je hodnota
-$a_x$ blízko nuly (ruka je vodorovne) a~výrazne
-kladná hodnota $a_z$, čo zodpovedá bočnej
-orientácii zápästia. Hraničné hodnoty:
+\noindent
+\textbf{Hraničné hodnoty:}
 
 \begin{itemize}
   \item \colorbox{xaxis!20}{$\passivityRedAxMin \leq a_x \leq \passivityRedAxMax \;\text{m/s}^2$}
@@ -397,15 +392,12 @@ k~stropu.
 
 Na obrázku~\ref{fig:subgesture-pasivita-modry}
 je zobrazený priebeh akcelerometrických dát počas
-vykonania gesta \uv{PASIVITA -- modrý}. Os $a_z$
-(zelená) dosahuje výrazne záporné hodnoty okolo
-$-10\,\text{m/s}^2$, čo je kľúčový rozdiel oproti
-červenému variantu.
+vykonania gesta \uv{PASIVITA -- modrý}. Farebné pásma znázorňujú
+očakávané rozsahy hodnôt pre jednotlivé osi
+v~cieľovej polohe.
 
-Podobne ako pri červenom variante, hodnota $a_x$
-je blízko nuly, ale os $a_z$ je výrazne záporná,
-čo spoľahlivo rozlišuje obe alternatívy.
-Hraničné hodnoty:
+\noindent
+\textbf{Hraničné hodnoty:}
 
 \begin{itemize}
   \item \colorbox{xaxis!20}{$\passivityBlueAxMin \leq a_x \leq \passivityBlueAxMax \;\text{m/s}^2$}
@@ -417,7 +409,7 @@ Hraničné hodnoty:
 
 Gesto \uv{Napomenutie} slúži na signalizáciu
 priestupku zápasníka (podrobne popísané
-v~kapitole~2). Po detekcii aplikácia automaticky prepne do režimu
+v~kapitole~\ref{chapter:zapasenie}). Po detekcii aplikácia automaticky prepne do režimu
 bodovania, kde sú všetky body pripočítavané výhradne
 súperovi napomenutého zápasníka. Rozhodca následne
 flickovaním určí počet udelených bodov.
@@ -462,17 +454,15 @@ pre červeného zápasníka je ignorované.
 Na obrázku~\ref{fig:subgesture-napomenutie-cerveny} je zobrazený priebeh
 gyroskopických a~akcelerometrických dát počas vykonania aktivačného gesta
 \uv{NAPOMENUTIE -- červený} a~následnej sekvencie bodovania. V~prvej fáze
-(\uv{Gesto rozpoznané} v~čase 2{,}96\,s) sa hodnoty akcelerometra ustália
-v~rozsahoch zodpovedajúcich šikmej polohe ruky nadol, čím sa aplikácia
+(\uv{Gesto rozpoznané} v~čase 2{,}96\,s) sa aplikácia
 prepne do režimu napomenutia červeného zápasníka. V~druhej fáze rozhodca
-vykonal tri po sebe nasledujúce flickovacie gestá (\uv{Blue point}
-v~časoch 4{,}43\,s, 5{,}07\,s a~5{,}72\,s), ktoré sú v~hornej časti grafu
+vykonal tri po sebe nasledujúce flickovacie gestá, ktoré sú v~hornej časti grafu
 viditeľné ako výrazné záporné špičkové výkyvy na osi $g_x$ (modrá)
 prekračujúce prahovú hodnotu $\flckBlueThreshold\,\text{DPS}$. Každý
 z~týchto výkyvov pridelil jeden bod modrému zápasníkovi, keďže bodovanie
 je v~režime napomenutia zamknuté výhradne pre súpera napomenutého
 zápasníka. V~tretej fáze (\uv{Hand down} v~čase 8{,}00\,s) sa hodnoty
-akcelerometra ustália v~rozsahoch zodpovedajúcich neutrálnej polohe ruky,
+akcelerometra ustália v~rozsahoch zodpovedajúcich polohe gesta \uv{Hand down},
 čo signalizuje ukončenie procesu napomenutia červeného zápasníka.
 
 Pre os $a_y$ (oranžová) sme zvolili väčší rozsah, pretože ruka rozhodcu
@@ -482,9 +472,8 @@ znázorňujú očakávané rozsahy hodnôt pre jednotlivé osi v~cieľovej poloh
 aktivačného gesta \uv{NAPOMENUTIE -- červený} a~v~neutrálnej polohe gesta
 \uv{Hand Down}.
 
-Charakteristickým znakom polohy pri aktivačnom geste sú záporné
-hodnoty na osi $a_x$ (ruka je šikmo nadol) a~výrazne kladné hodnoty na
-osi $a_z$. Hraničné hodnoty:
+\noindent
+\textbf{Hraničné hodnoty:}
 
 \begin{itemize}
   \item \colorbox{xaxis!20}{$\warnRedAxMin \leq a_x \leq \warnRedAxMax \;\text{m/s}^2$}
@@ -532,17 +521,14 @@ gyroskopických a~akcelerometrických dát počas vykonania aktivačného gesta
 \uv{NAPOMENUTIE -- modrý} a~následnej sekvencie bodovania. V~prvej fáze
 (\uv{Gesto rozpoznané} v~čase 2{,}99\,s). Aplikácia sa tým prepne do režimu
 napomenutia modrého zápasníka. V~druhej fáze rozhodca vykonal dve po sebe nasledujúce flickovacie
-gestá v~časoch 6{,}25\,s a~7{,}01\,s, ktoré sú v~hornej
-časti grafu viditeľné ako výrazné záporné špičkové výkyvy na osi $g_x$
-(modrá) prekračujúce prahovú hodnotu $\flckBlueThreshold\,\text{DPS}$.
+gestá v~časoch 6{,}25\,s a~7{,}01\,s.
 Každý z~týchto výkyvov pridelil jeden bod červenému zápasníkovi. Počas tohto gesta sú
 body analogicky prideľované iba červenému zápasníkovi. V~tretej fáze (\uv{Hand down} v~čase 9{,}34\,s) sa hodnoty
-akcelerometra ustália v~rozsahoch zodpovedajúcich neutrálnej polohe ruky,
+akcelerometra ustália v~rozsahoch zodpovedajúcich polohe gesta \uv{Hand Down},
 čo signalizuje ukončenie procesu napomenutia modrého zápasníka.
 
-Charakteristickým znakom polohy pri aktivačnom geste sú záporné
-hodnoty na osi $a_x$ (ruka za chrbtom) a~výrazne záporné hodnoty na osi
-$a_y$, čo zodpovedá otočeniu zápästia za telom. Hraničné hodnoty:
+\noindent
+\textbf{Hraničné hodnoty:}
 
 \begin{itemize}
   \item \colorbox{xaxis!20}{$\warnBlueAxMin \leq a_x \leq \warnBlueAxMax \;\text{m/s}^2$}
@@ -595,7 +581,10 @@ kladné hodnoty na osi $a_x$ (ruka je zdvihnutá
 k~ramenu) a~výrazne záporné hodnoty na osi $a_y$,
 čo zodpovedá prekríženiu ruky cez hruď. Táto
 kombinácia hodnôt je unikátna a~neprekrýva sa
-so žiadnym iným gestom. Hraničné hodnoty:
+so žiadnym iným gestom.
+
+\noindent
+\textbf{Hraničné hodnoty:}
 
 \begin{itemize}
   \item \colorbox{xaxis!20}{$\toucheAxMin \leq a_x \leq \toucheAxMax \;\text{m/s}^2$}

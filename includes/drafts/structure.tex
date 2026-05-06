@@ -1,0 +1,308 @@
+\section{Testovanie}
+\label{chapter:testovanie}
+
+V~tejto kapitole popisujeme proces testovania
+implementovanej aplikácie a~uvádzame výsledky
+overenia spoľahlivosti rozpoznávania jednotlivých
+gest. Cieľom testovania bolo overiť, či hraničné
+hodnoty stanovené v~kapitole~\ref{chapter:gesta}
+zabezpečujú spoľahlivú detekciu gest pri ich
+opakovanom vykonávaní v~rôznych podmienkach.
+
+\subsection{Metodika testovania}
+
+Testovanie sme rozdelili do troch fáz, ktoré sa
+postupne približujú k~reálnym podmienkam použitia
+aplikácie. V~prvej fáze sme overovali úspešnosť
+rozpoznania jednotlivých gest pri ich izolovanom
+vykonávaní. V~druhej fáze sme testovali kompletné
+kompozitné sekvencie zodpovedajúce reálnym scenárom
+použitia. V~tretej fáze sme overovali odolnosť
+aplikácie voči falošne pozitívnym detekciám
+pri bežnej aktivite ruky.
+
+Testovanie prebiehalo v~debug móde Android aplikácie
+(viď podsekciu~\ref{app:debug-final}), ktorý umožňuje
+vizuálnu kontrolu rozpoznaných gest v~reálnom čase.
+Pre každý test bola zaznamenávaná informácia o~tom,
+či aplikácia gesto správne rozpoznala, prípadne aký
+bol dôvod chybnej detekcie. Testy vykonával jeden
+používateľ (autor práce) v~stoji, v~kontrolovanom
+prostredí.
+
+Pre vyhodnotenie sme použili nasledujúce metriky:
+\begin{itemize}
+  \item \textbf{Úspešnosť rozpoznania} -- podiel správne
+        rozpoznaných gest z~celkového počtu vykonaných
+        pokusov, vyjadrený v~percentách.
+  \item \textbf{Falošne pozitívne detekcie} -- počet
+        rozpoznaných gest v~situáciách, keď žiadne gesto
+        nebolo úmyselne vykonané.
+  \item \textbf{Úspešnosť kompozitných sekvencií} -- podiel
+        sekvencií, pri ktorých výsledný stav aplikácie
+        (skóre, režim) zodpovedal očakávaniu.
+\end{itemize}
+
+\subsection{Testovanie jednotlivých gest}
+\label{subsec:test-jednotlive}
+
+V~prvej fáze testovania sme každé gesto vykonali
+20-krát v~ideálnych podmienkach (v~stoji, bez
+sprievodných pohybov tela, v~neutrálnej polohe ruky
+medzi pokusmi). Cieľom bolo overiť spoľahlivosť
+detekcie samotného gesta bez vplyvu kontextu.
+
+Pre testovanie gesta \uv{Hand Down} platí špecifický
+postup -- toto gesto sa testuje vždy ako návrat
+z~iného režimu, keďže v~režime \texttt{WAITING}
+už ruka v~neutrálnej polohe je. Hand Down sme preto
+testovali v~kombinácii s~aktivačným gestom Rise Arm.
+
+Výsledky úspešnosti rozpoznania jednotlivých gest
+sú zhrnuté v~tabuľke~\ref{tab:test-jednotlive}.
+
+\begin{table}[H]
+  \centering
+  \caption{Úspešnosť rozpoznania jednotlivých gest}
+  \label{tab:test-jednotlive}
+  \renewcommand{\arraystretch}{1.3}
+  \begin{tabularx}{\textwidth}{
+      >{\raggedright\arraybackslash}X
+      >{\centering\arraybackslash}p{0.15\textwidth}
+      >{\centering\arraybackslash}p{0.18\textwidth}
+      >{\centering\arraybackslash}p{0.18\textwidth}
+    }
+    \toprule
+    \textbf{Gesto}         & \textbf{Pokusy} & \textbf{Rozpoznané} & \textbf{Úspešnosť} \\
+    \midrule
+    Rise Arm               & 20              & XX                  & XX,X\,\%           \\
+    \midrule
+    Hand Back              & 20              & XX                  & XX,X\,\%           \\
+    \midrule
+    Hand Down              & 20              & XX                  & XX,X\,\%           \\
+    \midrule
+    Flick                  & 20              & XX                  & XX,X\,\%           \\
+    \midrule
+    PASIVITA -- červený    & 20              & XX                  & XX,X\,\%           \\
+    \midrule
+    PASIVITA -- modrý      & 20              & XX                  & XX,X\,\%           \\
+    \midrule
+    NAPOMENUTIE -- červený & 20              & XX                  & XX,X\,\%           \\
+    \midrule
+    NAPOMENUTIE -- modrý   & 20              & XX                  & XX,X\,\%           \\
+    \midrule
+    TOUCHE                 & 20              & XX                  & XX,X\,\%           \\
+    \midrule
+    \textbf{Celkovo}       & \textbf{180}    & \textbf{XXX}        & \textbf{XX,X\,\%}  \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+% TODO: Doplň krátky komentár (3-5 viet) k výsledkom.
+% Príklady čo môžeš spomenúť:
+% - Ktoré gesto malo najvyššiu/najnižšiu úspešnosť a prečo
+% - Aké boli typické príčiny chybných detekcií
+% - Či výsledky zodpovedali očakávaniam stanoveným pri návrhu
+
+Z~výsledkov vyplýva, že... % TODO
+
+\subsection{Testovanie kompozitných sekvencií}
+\label{subsec:test-sekvencie}
+
+V~druhej fáze sme testovali kompletné scenáre
+zodpovedajúce reálnemu použitiu aplikácie počas
+zápasu. Každú sekvenciu sme vykonali 5-krát
+a~overovali sme, či výsledný stav aplikácie
+(skóre, aktívny režim, log udalostí) zodpovedá
+očakávaniu. Sekvenciu sme považovali za úspešnú
+iba ak prebehli všetky jej kroky správne -- ak
+zlyhalo čo i len jedno gesto v~rámci sekvencie,
+celá sekvencia sa hodnotila ako neúspešná.
+
+Definované scenáre a~ich výsledky sú uvedené
+v~tabuľke~\ref{tab:test-sekvencie}.
+
+\begin{table}[H]
+  \centering
+  \caption{Úspešnosť rozpoznania kompozitných sekvencií}
+  \label{tab:test-sekvencie}
+  \renewcommand{\arraystretch}{1.3}
+  \begin{tabularx}{\textwidth}{
+      >{\raggedright\arraybackslash}X
+      >{\centering\arraybackslash}p{0.13\textwidth}
+      >{\centering\arraybackslash}p{0.15\textwidth}
+    }
+    \toprule
+    \textbf{Sekvencia}                              & \textbf{Pokusy} & \textbf{Úspešnosť} \\
+    \midrule
+    Bodovanie červeného -- 1 bod                    & 5               & X/5                \\
+    \midrule
+    Bodovanie červeného -- 3 body                   & 5               & X/5                \\
+    \midrule
+    Bodovanie modrého -- 2 body                     & 5               & X/5                \\
+    \midrule
+    Napomenutie červeného + 2 body modrému          & 5               & X/5                \\
+    \midrule
+    Napomenutie modrého + 1 bod červenému           & 5               & X/5                \\
+    \midrule
+    Pasivita s timeoutom (automatický bod súperovi) & 5               & X/5                \\
+    \midrule
+    Pasivita zrušená bodovaním pred timeoutom       & 5               & X/5                \\
+    \midrule
+    TOUCHE                                          & 5               & X/5                \\
+    \midrule
+    \textbf{Celkovo}                                & \textbf{40}     & \textbf{XX/40}     \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+% TODO: Komentár k výsledkom kompozitných sekvencií.
+% - Ktoré sekvencie boli najspoľahlivejšie?
+% - Pri ktorých sa najčastejšie vyskytovali chyby?
+% - Ako sa správal odpočet pasivity v scenároch F a G?
+
+Pri testovaní sekvencií... % TODO
+
+\subsection{Test falošne pozitívnych detekcií}
+\label{subsec:test-false-positive}
+
+V~tretej fáze sme testovali odolnosť aplikácie voči
+nechceným detekciám. Počas 10-minútového obdobia
+sme vykonávali bežné aktivity ruky bez úmyslu
+vyvolať akékoľvek gesto. Tento test bol kľúčový pre
+overenie použiteľnosti aplikácie počas reálneho
+zápasu, kedy rozhodca robí množstvo iných pohybov
+ruky (gestikulácia, manipulácia s~predmetmi, chôdza)
+a~aplikácia by ich nemala interpretovať ako gestá.
+
+Test prebiehal s~aplikáciou v~režime \texttt{WAITING}
+a~zahŕňal nasledujúce aktivity:
+\begin{itemize}
+  \item chôdza po miestnosti (približne 2~minúty),
+  \item sedenie a~písanie na klávesnici (približne 2~minúty),
+  \item gestikulácia rukami pri rozprávaní (približne 2~minúty),
+  \item manipulácia s~predmetmi -- pitie z~pohára,
+        držanie telefónu (približne 2~minúty),
+  \item bežné pohyby pri obliekaní a~uchopovaní predmetov
+        (približne 2~minúty).
+\end{itemize}
+
+Počas testu aplikácia zaznamenala \textbf{X falošne
+  pozitívnych detekcií}. % TODO: doplň počet a charakter
+Charakter zaznamenaných detekcií je uvedený
+v~tabuľke~\ref{tab:test-false-positive}.
+
+\begin{table}[H]
+  \centering
+  \caption{Falošne pozitívne detekcie počas bežnej aktivity}
+  \label{tab:test-false-positive}
+  \renewcommand{\arraystretch}{1.3}
+  \begin{tabularx}{\textwidth}{
+      >{\raggedright\arraybackslash}p{0.30\textwidth}
+      >{\centering\arraybackslash}p{0.15\textwidth}
+      >{\raggedright\arraybackslash}X
+    }
+    \toprule
+    \textbf{Rozpoznané gesto} & \textbf{Počet} & \textbf{Aktivita pri detekcii}    \\
+    \midrule
+    % TODO: Doplň riadky podľa skutočných výsledkov.
+    % Príklad: Flick & 2 & Rýchle otočenie zápästia pri pití z pohára
+    % Ak žiadne falošné detekcie nenastali, uveď to v texte
+    % a tabuľku môžeš úplne vynechať.
+    --                        & 0              & Žiadne falošne pozitívne detekcie \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+% TODO: Komentár k testu false positive.
+% - Boli falošné detekcie len pri jednom type gesta?
+% - Aký je dopad na praktické použitie?
+% - Potvrdzuje to vhodnosť dvojfázového designu BODOVANIA?
+
+Výsledky tretieho testu... % TODO
+
+\subsection{Diskusia výsledkov}
+
+% TODO: Toto je miesto pre tvoju interpretáciu výsledkov.
+% Šablóna nižšie je orientačná - prepíš ju podľa toho,
+% čo ti reálne vyjde.
+
+Na základe výsledkov všetkých troch fáz testovania
+môžeme konštatovať, že implementovaná aplikácia
+spoľahlivo rozpoznáva navrhnuté gestá s~priemernou
+úspešnosťou XX\,\%. % TODO: doplň priemer
+
+Najvyššiu spoľahlivosť dosahujú gestá s~výraznou
+a~unikátnou senzorovou signatúrou. % TODO: konkretizuj
+% Príklad: Flick a TOUCHE -- prvé vďaka výraznému
+% záporému špičkovému výkyvu na osi g_x, druhé
+% vďaka kombinácii hodnôt na osiach a_x a a_y,
+% ktorá sa neprekrýva so žiadnym iným gestom.
+
+Naopak, mierne nižšiu spoľahlivosť sme zaznamenali
+pri gestách... % TODO: konkretizuj a vysvetli prečo
+
+Dvojfázový design gesta \uv{Bodovanie} (aktivačné
+gesto + flick) sa potvrdil ako efektívny ochranný
+mechanizmus -- v~teste falošne pozitívnych detekcií
+neboli flicky nesprávne pripočítané v~žiadnom
+prípade, kedy aplikácia nebola v~aktívnom bodovacom
+režime. % TODO: prispôsob ak vyšlo inak
+
+\subsection{Limitácie a~návrhy na zlepšenie}
+
+Pri interpretácii výsledkov je potrebné zohľadniť
+limitácie testovania a~implementácie:
+
+\begin{itemize}
+  \item \textbf{Kalibrácia na jednu osobu} -- hraničné
+        hodnoty boli stanovené na základe meraní
+        jedného používateľa. Pre rozhodcov s~odlišnou
+        anatómiou ruky alebo individuálnym štýlom
+        signalizácie môže byť potrebná individuálna
+        kalibrácia.
+
+  \item \textbf{Testovanie v~kontrolovaných podmienkach} --
+        testy prebiehali v~stoji bez sprievodných
+        pohybov celého tela. V~reálnom zápase sa
+        rozhodca pohybuje po žinenke, čo môže ovplyvniť
+        presnosť rozpoznávania.
+
+  \item \textbf{Obmedzená vzorka testovania} -- vzhľadom
+        na rozsah diplomovej práce nebolo možné vykonať
+        testovanie počas reálneho zápasu s~viacerými
+        rozhodcami. Validácia v~reálnych podmienkach
+        zostáva otvorenou témou pre nadväzujúci výskum.
+
+  \item \textbf{Absencia automatizovaného odpočtu pasivity
+          v~produkčnom móde} -- ako bolo popísané
+        v~kapitole~\ref{chapter:implementacia}, % TODO: over label
+        produkčný mód nevyhodnocuje 30-sekundový
+        odpočet automaticky z~dôvodu zložitosti
+        validácie pasivity v~reálnom zápase.
+\end{itemize}
+
+Na základe identifikovaných limitácií navrhujeme
+nasledujúce smery ďalšieho rozvoja:
+
+\begin{itemize}
+  \item Implementácia kalibračného režimu, v~ktorom
+        si každý rozhodca môže prispôsobiť hraničné
+        hodnoty individuálnej anatómii a~štýlu
+        signalizácie.
+
+  \item Nahradenie statických hraničných hodnôt
+        modelom strojového učenia (napríklad neurónovou
+        sieťou trénovanou na nameraných dátach), čo by
+        mohlo zvýšiť robustnosť rozpoznávania pri rôznych
+        používateľoch a~v~rôznych podmienkach.
+
+  \item Rozsiahlejšie testovanie počas reálnych zápasov
+        s~viacerými rozhodcami a~následná analýza
+        zhody medzi rozhodnutiami aplikácie a~oficiálnym
+        bodovým hodnotením.
+
+  \item Integrácia s~oficiálnym bodovým systémom
+        \Gls{uww}, čím by aplikácia mohla slúžiť
+        ako podporný nástroj pre celý rozhodcovský tím.
+\end{itemize}

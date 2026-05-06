@@ -1,0 +1,104 @@
+\subsection{Metodika a~ciele testovania}
+\label{subsec:metodika}
+
+Cieľom testovania bolo overiť, či implementovaná
+aplikácia spoľahlivo rozpoznáva navrhnuté gestá
+za podmienok, ktoré sa približujú reálnemu použitiu
+počas zápasu. Konkrétne sme si stanovili tri
+testovacie ciele:
+
+\begin{enumerate}
+  \item Overiť, či hraničné hodnoty stanovené v~kapitole
+        \ref{chapter:gesta} zabezpečujú spoľahlivé
+        rozpoznanie každého gesta pri jeho izolovanom
+        vykonaní.
+  \item Overiť, či kompletné kompozitné sekvencie
+        (napríklad bodovanie s~viacerými flickami,
+        napomenutie s~následným bodovaním súpera) prebiehajú
+        bez chýb a~vedú k~očakávanému stavu aplikácie.
+  \item Overiť odolnosť aplikácie voči falošne pozitívnym
+        detekciám pri bežnej aktivite ruky, ktorá počas
+        zápasu sprevádza prácu rozhodcu.
+\end{enumerate}
+
+\subsubsection{Postup testovania}
+
+Testovanie sme rozdelili do troch fáz, ktoré
+postupne zvyšujú zložitosť a~približujú sa reálnym
+podmienkam použitia. Každá fáza zodpovedá jednému
+z~vyššie uvedených cieľov:
+
+\begin{itemize}
+  \item \textbf{Fáza 1 -- jednotlivé gestá} -- každé gesto
+        bolo testované izolovane v~stoji, v~kontrolovanom
+        prostredí. Pre každé gesto sme vykonali 20 pokusov.
+  \item \textbf{Fáza 2 -- kompozitné sekvencie} -- testovanie
+        kompletných scenárov, ktoré simulujú reálne použitie
+        aplikácie počas zápasu. Pre každý scenár sme
+        vykonali 5 pokusov.
+  \item \textbf{Fáza 3 -- falošne pozitívne detekcie} --
+        10-minútový test pri bežnej aktivite ruky bez
+        úmyslu vyvolať akékoľvek gesto.
+\end{itemize}
+
+\subsubsection{Podmienky testovania}
+
+Všetky testy vykonával jeden používateľ -- autor
+diplomovej práce. Hodinky boli umiestnené na ľavom
+zápästí v~štandardnej polohe, identicky ako pri
+zbere dát v~sekcii~\ref{sec:zber-dát}. Testovanie
+prebiehalo v~kontrolovanom prostredí (uzavretá
+miestnosť, bez sprievodných osôb), aby výsledky
+neovplyvňovali externé faktory.
+
+Aplikácia bola spustená v~debug móde
+(viď podsekciu~\ref{app:debug-final}), ktorý
+zobrazuje grafy senzorových dát, aktuálny režim
+a~rozpoznané gestá v~reálnom čase. Tento mód
+umožňuje okamžitú vizuálnu kontrolu, či bolo gesto
+správne rozpoznané, prípadne identifikáciu príčiny
+zlyhania detekcie.
+
+Medzi jednotlivými pokusmi bola ruka vrátená do
+neutrálnej polohy pri tele a~aplikácia bola
+v~režime \texttt{WAITING}. Pred každým pokusom
+sme overili, že aplikácia je v~očakávanom
+počiatočnom stave.
+
+\subsubsection{Hodnotené metriky}
+
+Pre vyhodnotenie testovania sme použili nasledujúce
+metriky:
+
+\begin{itemize}
+  \item \textbf{Úspešnosť rozpoznania} -- podiel správne
+        rozpoznaných gest z~celkového počtu vykonaných
+        pokusov, vyjadrený v~percentách. Pokus sa
+        považuje za úspešný iba ak aplikácia rozpoznala
+        práve to gesto, ktoré sme vykonali, a~nedošlo
+        k~chybnej detekcii iného gesta.
+
+  \item \textbf{Úspešnosť kompozitných sekvencií} --
+        podiel sekvencií, pri ktorých výsledný stav
+        aplikácie (skóre, aktívny režim, zaznamenané
+        udalosti) zodpovedal očakávaniu. Sekvencia
+        sa hodnotí ako úspešná iba ak prebehli všetky
+        jej kroky správne -- ak zlyhalo čo i len jedno
+        gesto, celá sekvencia sa považuje za neúspešnú.
+
+  \item \textbf{Falošne pozitívne detekcie} -- počet
+        rozpoznaných gest v~situáciách, keď žiadne
+        gesto nebolo úmyselne vykonané. Pre každú
+        falošnú detekciu sme zaznamenali aj typ
+        nesprávne rozpoznaného gesta a~činnosť, pri
+        ktorej k~detekcii došlo.
+\end{itemize}
+
+\subsubsection{Spôsob zaznamenávania výsledkov}
+
+Pre každý vykonaný pokus sme zaznamenali, či bolo
+gesto správne rozpoznané, a~v~prípade chyby aj
+stručný popis príčiny (napríklad nesprávne rozpoznanie
+ako iné gesto, žiadna detekcia, predčasná detekcia).
+Tieto pozorovania sme následne využili pri diskusii
+výsledkov a~identifikácii limitácií systému.
