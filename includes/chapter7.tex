@@ -104,7 +104,7 @@ na rôzne hranice definovaných gest. V~spodnej časti
 obrazovky sa nachádzajú tlačidlá na spustenie
 a~zastavenie lokálneho \Gls{http} servera. Ukončenie \gls{http}
 servera zároveň spustí export všetkých nazbieraných dát do
-\Gls{csv} súboru pre vizualizáciu a spracovanie v python scripte.
+\Gls{csv} súboru pre vizualizáciu a spracovanie v~Python skripte
 
 \begin{figure}[H]
   \centering
@@ -167,7 +167,7 @@ súbor, na základe grafu vizuálne posúdi priebeh
 senzorových dát a~upraví hraničné hodnoty osí
 akcelerometra ($a_x$, $a_y$, $a_z$) alebo prahovú
 hodnotu gyroskopu ($g_x$). Nástroj zároveň umožňuje
-orezanie \Gls{csv} súborov tak, že použávateľ vyberie
+orezanie \Gls{csv} súborov tak, že používateľ vyberie
 relevantný časový úsek a~následne vie uložiť tento segment
 do samostatného súboru. Tento nástroj nám pomohol
 definovať presné hranice pre jednotlivé gestá, ktoré sme
@@ -241,7 +241,7 @@ obrázku~\ref{fig:architektura}. Systém sa skladá
 z~troch prepojených častí: Device App bežiaca na
 hodinkách sníma dáta z~akcelerometra a~gyroskopu
 a~odosiela ich cez \Gls{ble} do App Side služby
-v Zepp aplikácii bežiacej v~telefóne. Tá preposiela
+v~Zepp aplikácii bežiacej v~telefóne. Tá preposiela
 dáta prostredníctvom \Gls{http} požiadavky na lokálny server
 bežiaci v~Android aplikácii na porte 8080.
 Android aplikácia vyhodnotí prijaté dáta, rozpozná
@@ -283,7 +283,7 @@ definované enumeráciou \texttt{GestureMode}:
   \item \textbf{WARNING\_RED} -- režim napomenutia
         červeného zápasníka. Aplikácia sa do neho prepne
         po detekcii gesta \uv{NAPOMENUTIE -- červený}.
-        Bodovanie je obmedzené na modrého zápasníka a teda
+        Bodovanie je obmedzené na modrého zápasníka a~teda
         všetky flicky pripočítavajú body modrému zápasníkovi.
   \item \textbf{WARNING\_BLUE} -- režim napomenutia
         modrého zápasníka. Analogicky k~predchádzajúcemu,
@@ -324,7 +324,8 @@ viditeľné prechody hodnôt zodpovedajúce aktivačnému
 gestu \uv{Rise Arm} (vstup do režimu \texttt{GESTURE\_RED})
 po ktorom nasledovali flickovacie gestá
 a~následný návrat do pôvodnej polohy gestom
-\uv{Hand Down}
+\uv{Hand Down}.
+
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.4\textwidth]{img/gesto-aplikacia-debug.png}
@@ -338,7 +339,7 @@ a~následný návrat do pôvodnej polohy gestom
 Produkčný mód Android aplikácie je určený pre
 reálne použitie počas zápasu. Na rozdiel od debug
 módu nezobrazuje grafy senzorov ani diagnostické
-informácie a teda rozhranie je zjednodušené na
+informácie a~teda rozhranie je zjednodušené na
 zobrazenie aktuálneho skóre a~chronologického
 zoznamu dôležitých udalostí.
 
@@ -349,18 +350,17 @@ zaznamenaná s~presnou časovou značkou. Zaznamenávajú
 sa iba udalosti relevantné pre priebeh zápasu --
 udelenie bodov, napomenutia, pasivita, trestné body
 a~TOUCHE. Pomocné gestá ako \uv{Rise Arm}
-a~\uv{Hand Down} sa do logu nezapisujú, keďže
+a~\uv{Hand Down} sa do~logu nezapisujú, keďže
 slúžia len na aktiváciu a~ukončenie režimu bodovania.
 
 Na obrázku~\ref{fig:prod-mode} je zobrazený príklad
 produkčného rozhrania po sérii udalostí simulujúcich
-reálny priebeh zápasu. V~logu je viditeľná sekvencia
-bodovania, napomenutí pre obe strany s~následným
-pridelením bodov súperovi, signalizácia pasivity
-červeného zápasníka s~automatickým pridelením
-trestného bodu po uplynutí 30-sekundového odpočtu
-a~na záver signalizácia TOUCHE -- lopatkového víťazstva.
+reálny priebeh zápasu. V~logu je viditeľná sekvencia bodovania, napomenutí
+pre obe strany s~následným pridelením bodov súperovi,
+signalizácia pasivity červeného zápasníka a~na záver
+signalizácia TOUCHE -- lopatkového víťazstva.
 
+% TODO: Vymeniť fotku, uz nema davat body za pasivitu, ale rovno trestny bod
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.4\textwidth]{img/gesto-aplikacia-prod.png}
@@ -382,8 +382,9 @@ udelenie trestného bodu za pasivitu musí byť odsúhlasené
 aj bočným rozhodcom a~vedúcim žinenky,
 čo predstavuje samostatný
 proces validácie, ktorý nie je možné spoľahlivo zachytiť
-prostredníctvom hodiniek hlavného rozhodcu.V~produkčnom móde
-sme takisto vypli vibráciu pri detekcii
+prostredníctvom hodiniek hlavného rozhodcu.
+
+V~tomto móde sme takisto vypli vibráciu pri detekcii
 aktivačných gest bodovania (\uv{Rise Arm} a~\uv{Hand Back})
 z~dôvodu príliš častej vibračnej odozvy, ktorá by mohla
 byť pre rozhodcu rušivá a~mätúca. Tieto gestá sa
@@ -446,7 +447,7 @@ spustí vibračná odozva:
 
   \item \textbf{Aktivácia režimu bodovania} -- nastáva po
         detekcii aktivačného gesta \uv{Rise Arm} alebo
-        \uv{Hand Back}.
+        \uv{Hand Back} (iba v~debug móde).
 
   \item \textbf{Pasivita} -- nastáva po
         detekcii gesta \uv{PASIVITA -- červený} alebo
@@ -454,7 +455,8 @@ spustí vibračná odozva:
 
   \item \textbf{Trestný bod za pasivitu} -- nastáva automaticky
         po uplynutí 30-sekundového odpočtu pasivity bez
-        zaznamenaného bodovania.
+        zaznamenaného bodovania (iba v~debug móde, viď
+        podsekciu~\ref{app:debug-final}).
 \end{itemize}
 
 Mapovanie konkrétnych udalostí na typy vibračných impulzov
@@ -472,19 +474,19 @@ je uvedené v~tabuľke~\ref{tab:vibracna-odozva}.
       >{\centering\arraybackslash}p{0.13\textwidth}
     }
     \toprule
-    \textbf{Udalosť}              & \textbf{Impulz}                    & \textbf{Následné impulzy}    & \textbf{Mód}     \\
+    \textbf{Udalosť}              & \textbf{Impulz}           & \textbf{Následné impulzy}    & \textbf{Mód}     \\
     \midrule
-    Ukončenie bodovania           & 1\,$\times$\,dlhý                  & $N$\,$\times$\,krátky $^{*}$ & oba              \\
+    Ukončenie bodovania           & 1\,$\times$\,dlhý         & $N$\,$\times$\,krátky $^{*}$ & oba              \\
     \midrule
-    TOUCHE                        & 5\,$\times$\,krátky                & --                           & oba              \\
+    TOUCHE                        & 5\,$\times$\,krátky       & --                           & oba              \\
     \midrule
-    Prechod do režimu napomenutia & 2\,$\times$\,krátky                & --                           & oba              \\
+    Prechod do režimu napomenutia & 2\,$\times$\,krátky       & --                           & oba              \\
     \midrule
-    Aktivácia režimu bodovania    & 1\,$\times$\,silný krátky          & --                           & len \emph{debug} \\
+    Aktivácia režimu bodovania    & 1\,$\times$\,silný krátky & --                           & len \emph{debug} \\
     \midrule
-    Pasivita                      & 2\,$\times$\,krátky                & --                           & oba              \\
+    Pasivita                      & 2\,$\times$\,krátky       & --                           & oba              \\
     \midrule
-    Trestný bod za pasivitu       & 1\,$\times$\,dlhý~(\ref{vib:long}) & --                           & len \emph{debug} \\
+    Trestný bod za pasivitu       & 1\,$\times$\,dlhý         & --                           & len \emph{debug} \\
     \bottomrule
   \end{tabularx}
 

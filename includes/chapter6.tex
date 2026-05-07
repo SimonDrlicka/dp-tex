@@ -3,7 +3,7 @@
 
 V~tejto diplomovej práci sa zameriavame na návrh
 nových gest, ktoré umožnia ovládanie vybraných
-funkcií v~našej aplikácii - konkrétne sa zameriame
+funkcií v~našej aplikácii -- konkrétne sa zameriame
 na gestá, ktoré sa podobajú signálom rozhodcu
 zápasenia. Inteligentné hodinky s~operačným systémom
 Zepp OS už natívne podporujú určité gestá bez nutnosti
@@ -29,9 +29,10 @@ zložitejšie kompozitné gestá.
         pri tele do polohy nad hlavou, pričom dlaň smeruje dopredu. Slúži ako aktivačné gesto pre
         bodovanie červeného zápasníka. Detailne popísaný v~podsekcii~\ref{subsubsec:rise-arm}.
 
-  \item[Hand Back] Pohyb, pri ktorom rozhodca presunie ľavú ruku (s~hodinkami) za chrbát do
-        oblasti krížov, pričom dlaň smeruje nahor a~displej hodiniek je natočený k~zemi. Slúži ako
-        aktivačné gesto pre bodovanie modrého zápasníka. Detailne popísaný
+  \item[Hand Back] Pohyb, pri ktorom rozhodca presunie ľavú ruku (s~hodinkami) za chrbát
+        do oblasti krížov, pričom hodinky sú natočené displejom k~chrbtu a~dlaň
+        smeruje opačným smerom -- preč od tela. Slúži ako aktivačné gesto pre
+        bodovanie modrého zápasníka. Detailne popísaný
         v~podsekcii~\ref{subsubsec:hand-back}.
 
   \item[Flick] Rýchly rotačný pohyb zápästia proti smeru hodinových ručičiek, zachytený
@@ -53,7 +54,7 @@ Tabuľka~\ref{tab:prehlad-gest} prehľadne zhŕňa všetky navrhnuté gestá.
   \begin{tabularx}{\textwidth}{l l X}
     \toprule
     \textbf{Gesto} & \textbf{Varianty}
-                   & \textbf{Správanie aplikácie}      \\
+                   & \textbf{Správanie aplikácie}              \\
     \midrule
     BODOVANIE      & červený, modrý
                    & Kompozitné gesto: aktivačné gesto
@@ -61,24 +62,21 @@ Tabuľka~\ref{tab:prehlad-gest} prehľadne zhŕňa všetky navrhnuté gestá.
     pre modrého) prepne aplikáciu do
     režimu bodovania, Flick prideľuje
     body príslušnému zápasníkovi, Hand
-    Down ukončí bodovanie.                             \\
+    Down ukončí bodovanie.                                     \\
     \addlinespace
     PASIVITA       & červený, modrý
-                   & Zaznamená pasivitu a~spustí
-    30-sekundový odpočet. Ak nikto
-    neskóruje, súper automaticky dostane
-    1~bod.                                             \\
+                   & Zaznamená pasivitu jedného zo zápasníkov. \\
     \addlinespace
     NAPOMENUTIE    & červený, modrý
                    & Automaticky prepne do režimu
     bodovania so zamknutou stranou --
     body idú výhradne súperovi. Bodovanie
-    sa opäť ukončí gestom Hand Down.                   \\
+    sa opäť ukončí gestom Hand Down.                           \\
     \addlinespace
     TOUCHE         & --
                    & Odošle informáciu o~lopatkovom
     víťazstve. Zápas sa okamžite
-    ukončuje.                                          \\
+    ukončuje.                                                  \\
     \bottomrule
   \end{tabularx}
 \end{table}
@@ -138,7 +136,7 @@ poloha zodpovedá reálnemu signálu rozhodcu na žinenke, ktorým oznamuje zač
 \end{figure}
 
 Na obrázku~\ref{fig:subgesture-hand-up} je zobrazený priebeh akcelerometrických dát počas vykonania
-gesta \uv{Rise Arm} a zobrazenie bodu, kedy dochádza k detekcií tohto gesta.
+gesta \uv{Rise Arm} a označený bod, kedy dochádza k~detekcii tohto gesta.
 
 Hraničné hodnoty pre rozpoznanie gesta \uv{Rise Arm}, kde $a_x$, $a_y$ a~$a_z$ označujú hodnoty
 zrýchlenia na príslušných osiach akcelerometra:
@@ -152,8 +150,9 @@ zrýchlenia na príslušných osiach akcelerometra:
 \paragraph{Aktivácia pre modrého -- HAND BACK}
 \label{subsubsec:hand-back}
 
-Rozhodca presunie ľavú ruku (s~hodinkami) za chrbát do oblasti krížov, pričom zápästie je rotované
-tak, že otvorená dlaň smeruje nahor a~displej hodiniek je natočený smerom k~zemi. Po rozpoznaní
+Rozhodca presunie ľavú ruku (s~hodinkami) za chrbát do oblasti krížov,
+pričom zápästie je rotované tak, že displej hodiniek je natočený smerom
+k~chrbtu a~dlaň smeruje preč od tela. Po rozpoznaní
 gesta \uv{Hand Back} sa aplikácia prepne do režimu bodovania pre modrého zápasníka.
 
 \begin{figure}[H]
@@ -170,10 +169,12 @@ gesta \uv{Hand Back} sa aplikácia prepne do režimu bodovania pre modrého záp
   \label{fig:subgesture-hand-back}
 \end{figure}
 
-Na obrázku~\ref{fig:subgesture-hand-back} je zobrazený priebeh akcelerometrických dát počas vykonania
-gesta \uv{Hand Back} a zobrazenie bodu, kedy dochádza k detekcií tohto gesta.
+Na obrázku~\ref{fig:subgesture-hand-back} je zobrazený priebeh akcelerometrických
+dát počas vykonania gesta \uv{Hand Back} a~označený bod, kedy dochádza
+k~detekcii tohto gesta.
 
-Hraničné hodnoty pre rozpoznanie gesta \uv{Hand Back}:
+\noindent
+\textbf{Hraničné hodnoty:}
 
 \begin{itemize}
   \item \colorbox{xaxis!20}{$\handBackAxMin \leq a_x \leq \handBackAxMax \;\text{m/s}^2$}
@@ -483,12 +484,12 @@ aktivačného gesta \uv{NAPOMENUTIE -- červený} a~v~neutrálnej polohe gesta
 
 \subsubsection{NAPOMENUTIE -- modrý}
 
-Pri napomenutí modrého zápasníka rozhodca presunie
-ľavú ruku (s~hodinkami) za chrbát do oblasti krížov,
-pričom dlaň smeruje von. Pravou rukou (s~modrou
-manžetou) ukazuje na previnilého modrého zápasníka.
-Po detekcii sa aplikácia automaticky prepne do režimu
-bodovania, kde všetky body idú červenému zápasníkovi.
+Pri napomenutí modrého zápasníka rozhodca presunie ľavú ruku (s~hodinkami)
+za chrbát do oblasti krížov, pričom zápästie je rotované tak, že displej
+hodiniek smeruje k~zemi a~otvorená dlaň smeruje nahor (v~približne 45°
+uhle). Pravou rukou (s~modrou manžetou) ukazuje na previnilého modrého
+zápasníka. Po detekcii sa aplikácia automaticky prepne do režimu bodovania,
+kde všetky body idú červenému zápasníkovi.
 
 \begin{figure}[H]
   \centering
@@ -518,12 +519,14 @@ bodovania, kde všetky body idú červenému zápasníkovi.
 
 Na obrázku~\ref{fig:subgesture-napomenutie-modry} je zobrazený priebeh
 gyroskopických a~akcelerometrických dát počas vykonania aktivačného gesta
-\uv{NAPOMENUTIE -- modrý} a~následnej sekvencie bodovania. V~prvej fáze
-(\uv{Gesto rozpoznané} v~čase 2{,}99\,s). Aplikácia sa tým prepne do režimu
-napomenutia modrého zápasníka. V~druhej fáze rozhodca vykonal dve po sebe nasledujúce flickovacie
+\uv{NAPOMENUTIE -- modrý} a~následnej sekvencie bodovania. V~prvej fáze (\uv{Gesto rozpoznané} v~čase 2{,}99\,s) sa aplikácia
+prepne do režimu napomenutia modrého zápasníka.
+V~druhej fáze rozhodca vykonal dve po sebe nasledujúce flickovacie
 gestá v~časoch 6{,}25\,s a~7{,}01\,s.
-Každý z~týchto výkyvov pridelil jeden bod červenému zápasníkovi. Počas tohto gesta sú
-body analogicky prideľované iba červenému zápasníkovi. V~tretej fáze (\uv{Hand down} v~čase 9{,}34\,s) sa hodnoty
+Každý z~týchto výkyvov pridelil jeden bod červenému zápasníkovi.
+Počas tohto gesta sú body analogicky prideľované iba červenému zápasníkovi.
+
+V~tretej fáze (\uv{Hand down} v~čase 9{,}34\,s) sa hodnoty
 akcelerometra ustália v~rozsahoch zodpovedajúcich polohe gesta \uv{Hand Down},
 čo signalizuje ukončenie procesu napomenutia modrého zápasníka.
 
@@ -536,22 +539,20 @@ akcelerometra ustália v~rozsahoch zodpovedajúcich polohe gesta \uv{Hand Down},
   \item \colorbox{zaxis!20}{$\warnBlueAzMin \leq a_z \leq \warnBlueAzMax \;\text{m/s}^2$}
 \end{itemize}
 
-Porovnanie oboch alternatív ukazuje, že kľúčovými
-rozlišovacími faktormi sú osi $a_y$ a~$a_z$.
-Pri červenom variante sa $a_y$ pohybuje okolo nuly
-a~$a_z$ dosahuje výrazne kladné hodnoty, zatiaľ čo
-pri modrom variante $a_y$ dosahuje výrazne záporné
-hodnoty (okolo $-9$) a~$a_z$ sa pohybuje v~okolí
-nuly.
+Hoci je poloha ruky pri tomto geste podobná aktivačnému gestu \uv{Hand Back}
+(obe gestá majú ruku za chrbtom v~oblasti krížov), kľúčový rozdiel je
+v~rotácii zápästia. Pri \uv{Hand Back} smeruje displej hodiniek k~chrbtu,
+pri \uv{NAPOMENUTIE -- modrý} smeruje displej k~zemi. Tento rozdiel sa
+prejavuje v~rôznych osiach akcelerometra -- pri \uv{Hand Back} dosahuje
+výrazne záporné hodnoty os $a_z$, pri \uv{NAPOMENUTIE -- modrý} os $a_y$,
+čím je zabezpečená spoľahlivá detekcia bez rizika zámeny.
 
 \subsection{Gesto TOUCHE}
 
 Gesto \uv{TOUCHE} slúži na signalizáciu lopatkového
 víťazstva, ktoré okamžite ukončuje zápas (podrobne
-popísané v~kapitole~2). Na rozdiel od ostatných gest,
-po detekcii TOUCHE automaticky nenasleduje bodovanie
--- aplikácia len odošle informáciu o~lopatkovom
-víťazstve. Keďže je vždy jednoznačné, ktorý zápasník
+popísané v~kapitole~\ref{chapter:zapasenie}).
+Keďže je vždy jednoznačné, ktorý zápasník
 je na lopatkách, pre toto gesto stačí jedna
 alternatíva bez rozlíšenia červeného a~modrého
 zápasníka.
@@ -576,12 +577,9 @@ poloha ruky pri tomto geste.
   \label{fig:subgesture-touche}
 \end{figure}
 
-Charakteristickým znakom tejto polohy sú stredne
-kladné hodnoty na osi $a_x$ (ruka je zdvihnutá
-k~ramenu) a~výrazne záporné hodnoty na osi $a_y$,
-čo zodpovedá prekríženiu ruky cez hruď. Táto
-kombinácia hodnôt je unikátna a~neprekrýva sa
-so žiadnym iným gestom.
+Na obrázku~\ref{fig:subgesture-touche} je zobrazený priebeh akcelerometrických
+dát počas vykonania gesta \uv{TOUCHE}. Hodnoty osí sa po preložení ruky
+cez hruď ustália v~rámci definovaných hraničných pásiem.
 
 \noindent
 \textbf{Hraničné hodnoty:}
