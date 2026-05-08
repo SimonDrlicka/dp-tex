@@ -29,7 +29,7 @@ bol dôvod chybnej detekcie. Testy vykonával jeden
 používateľ (autor práce) v~stoji, v~kontrolovanom
 prostredí.
 
-\subsection{Testovanie jednotlivých gest}
+\subsection{Fáza 1 -- Testovanie jednotlivých gest}
 \label{subsec:test-jednotlive}
 
 V~prvej fáze testovania sme každé gesto vykonali
@@ -54,50 +54,54 @@ sú zhrnuté v~tabuľke~\ref{tab:test-jednotlive}.
   \renewcommand{\arraystretch}{1.3}
   \begin{tabularx}{\textwidth}{
       >{\raggedright\arraybackslash}X
-      >{\centering\arraybackslash}p{0.15\textwidth}
-      >{\centering\arraybackslash}p{0.18\textwidth}
+      >{\centering\arraybackslash}p{0.12\textwidth}
+      >{\centering\arraybackslash}p{0.14\textwidth}
+      >{\centering\arraybackslash}p{0.13\textwidth}
       >{\centering\arraybackslash}p{0.18\textwidth}
     }
     \toprule
-    \textbf{Gesto}         & \textbf{Pokusy} & \textbf{Rozpoznané} & \textbf{Úspešnosť} \\
+    \textbf{Gesto}        & \textbf{Pokusy} & \textbf{Rozpoznané} & \textbf{Úspešnosť} & \textbf{Medián času det.} \\
     \midrule
-    Rise Arm               & 20              & 18                  & 90,0\%             \\
+    Rise Arm              & 20              & 19                  & 95,0\%             & 0,53\,s                   \\
     \midrule
-    Hand Back              & 20              & 16                  & 80,0\%             \\
+    Hand Back             & 20              & 20                  & 100\%              & 0,40\,s                   \\
     \midrule
-    Hand Down              & 20              & 20                  & 100\%              \\
-    % \midrule
-    % Flick                  & 18              & XX                  & XX,X\,\%           \\
+    Hand Down             & 20              & 20                  & 100\%              & 0,61\,s                   \\
     \midrule
-    PASIVITA -- červený    & 20              & 17                  & 85,0\%             \\
+    PASIVITA — červený    & 20              & 20                  & 100\%              & 0,88\,s                   \\
     \midrule
-    PASIVITA -- modrý      & 20              & 18                  & 90,0\%             \\
+    PASIVITA — modrý      & 20              & 20                  & 100\%              & 0,71\,s                   \\
     \midrule
-    NAPOMENUTIE -- červený & 20              & 18                  & 90,0\%             \\
+    NAPOMENUTIE — červený & 20              & 20                  & 100\%              & 0,55\,s                   \\
     \midrule
-    NAPOMENUTIE -- modrý   & 20              & 19                  & 95,0\%             \\
+    NAPOMENUTIE — modrý   & 20              & 20                  & 100\%              & 0,57\,s                   \\
     \midrule
-    TOUCHE                 & 20              & 17                  & 85,0\%             \\
+    TOUCHE                & 20              & 20                  & 100\%              & 0,82\,s                   \\
     \midrule
-    \textbf{Celkovo}       & \textbf{160}    & \textbf{149}        & \textbf{89,4\%}    \\
+    \textbf{Celkovo}      & \textbf{160}    & \textbf{159}        & \textbf{99,4\%}    & \textbf{0,60\,s}          \\
     \bottomrule
   \end{tabularx}
 \end{table}
 
 Z~výsledkov vyplýva, že priemerná úspešnosť rozpoznania
-naprieč všetkými gestami dosahuje 89,4\%, čo považujeme
-za uspokojivý výsledok pri testovaní v~kontrolovaných
-podmienkach. Najvyššiu spoľahlivosť (100\%) dosiahlo
-gesto \uv{Hand Down}, ktoré má jasne definovanú neutrálnu
-polohu ruky pri tele a~jeho hraničné hodnoty sa neprekrývajú
-so žiadnym iným gestom. Vysokú úspešnosť dosahujú aj gestá
-\uv{NAPOMENUTIE -- modrý} (95,0\%) a~\uv{Rise Arm} a~\uv{NAPOMENUTIE
-  -- červený} (oba 90,0\%).
+naprieč všetkými gestami dosahuje 99,4\,\%, čo považujeme
+za výborný výsledok pri testovaní v~kontrolovaných
+podmienkach. Sedem z~ôsmich gest dosiahlo 100\,\% úspešnosť --
+\uv{Hand Back}, \uv{Hand Down}, \uv{PASIVITA -- červený},
+\uv{PASIVITA -- modrý}, \uv{NAPOMENUTIE -- červený},
+\uv{NAPOMENUTIE -- modrý} a~\uv{TOUCHE}.
 
-Najnižšiu úspešnosť sme zaznamenali pri geste
-\uv{Hand Back} (80,0\%), čo zodpovedá očakávaniu vyplývajúcemu
-z~návrhu — toto gesto má polohu ruky za chrbtom, ktorá je
-mechanicky podobná polohe pri geste \uv{NAPOMENUTIE -- modrý}.
+Mierne nižšiu úspešnosť (95,0\,\%) sme zaznamenali pri geste
+\uv{Rise Arm}, kde sa jeden z~20 pokusov nepodarilo úspešne
+rozpoznať. Vzhľadom na celkovo vysokú úspešnosť ide
+o~ojedinelú výnimku, ktorá nemá výrazný dopad na celkovú
+spoľahlivosť systému.
+
+Mediány času detekcie sa pohybujú v~rozsahu od 0,40\,s
+(\uv{Hand Back}) po 0,88\,s (\uv{PASIVITA -- červený}),
+s~celkovým mediánom 0,60\,s. Tieto hodnoty potvrdzujú,
+že aplikácia dokáže gestá rozpoznať dostatočne rýchlo
+pre použitie v~reálnom čase.
 
 \subsubsection{Analýza chybných detekcií}
 
@@ -115,3 +119,23 @@ predstavujú chybné detekcie.
   \caption{Konfúzna matica testovania gest v ideálnych podmienkach}
   \label{fig:confusion-matrix}
 \end{figure}
+
+\subsection{Fáza 3 -- Test falošne pozitívnych detekcií}
+\label{subsec:test-false-positive}
+
+V~tretej fáze sme testovali odolnosť aplikácie voči
+nechceným detekciám pri bežnej aktivite ruky. Tento
+test bol dôležitý pre overenie použiteľnosti aplikácie
+počas reálneho zápasu, kedy rozhodca vykonáva množstvo
+iných pohybov ruky -- gestikuluje pri komunikácii
+s~rozhodcovským tímom, manipuluje s~predmetmi a~pohybuje
+sa po žinenke. Aplikácia tieto pohyby nesmie nesprávne
+interpretovať ako zápasnícke gestá, inak by dochádzalo
+k~neúmyselnému prideľovaniu bodov.
+
+Vykonali sme dva testovacie scenáre s~aplikáciou
+v~režime \texttt{WAITING}, pri ktorých sme bez úmyslu
+vyvolať akékoľvek gesto vykonávali bežné aktivity --
+chôdzu po miestnosti, gestikuláciu pri rozprávaní,
+manipuláciu s~predmetmi (telefón, pohár) a~bežné
+pohyby pri sedení.
