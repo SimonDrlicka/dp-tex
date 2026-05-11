@@ -72,6 +72,9 @@
   urlfrom = {Dostupné z}
 }
 
+\usepackage[table]{xcolor}
+\usepackage[normalem]{ulem}
+
 \ifnum\FEIenglish=0
     \usepackage[english,main=slovak]{babel}
 \else

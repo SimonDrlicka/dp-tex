@@ -1,0 +1,135 @@
+Cieľom tejto diplomovej práce bolo navrhnúť a~implementovať
+systém na rozpoznávanie gest rozhodcu zápasenia pomocou
+inteligentných hodiniek Amazfit T-Rex 3 s~operačným systémom
+Zepp OS a~sprievodnej mobilnej aplikácie pre Android. Práca
+prepája viaceré oblasti -- šport, pohybové senzory
+v~inteligentných hodinkách a~vývoj softvéru pre dve odlišné
+platformy -- a~ústi do funkčného riešenia, ktoré dokáže
+v~reálnom čase zaznamenávať udalosti v~zápase na základe
+pohybu zápästia rozhodcu.
+
+V~teoretickej časti sme sa najprv venovali základným pojmom
+z~oblasti inteligentných hodiniek, operačného systému Zepp~OS
+a~zabudovaných senzorov. Osobitnú pozornosť sme venovali
+akcelerometru a~gyroskopu, ktoré tvoria základ rozpoznávania
+gest. Následne sme analyzovali zápasenie ako šport -- jeho
+hlavné štýly, priebeh zápasu, úlohy členov rozhodcovského
+tímu a~situácie, v~ktorých rozhodca udeľuje body, napomenutia
+alebo signalizuje pasivitu. Na základe pravidiel organizácie
+\Gls{uww} sme identifikovali kľúčové signály, ktoré sú pre
+priebeh zápasu nevyhnutné, a~ktoré sa zároveň dajú zachytiť
+pomocou senzorov v~hodinkách.
+
+V~ďalšej časti sme predstavili vývojové prostriedky použité
+pri tvorbe systému -- JavaScript a~Zeus \Gls{cli} pre vývoj
+aplikácie pre Zepp~OS, Kotlin a~Android Studio pre mobilnú
+aplikáciu a~Python s~knižnicami Pandas a~Matplotlib na
+spracovanie a~vizualizáciu nameraných dát. Po definovaní
+požiadaviek na hardvér -- predovšetkým prístupu k~surovým
+dátam zo senzorov a~podpory vlastných aplikácií -- sme zvolili
+hodinky Amazfit T-Rex~3, ktoré tieto požiadavky spĺňajú
+a~zároveň poskytujú dostatočný výkon pre snímanie pohybu
+v~reálnom čase.
+
+Analýza existujúcich riešení potvrdila, že hoci v~športovom
+prostredí existuje viacero rozhodcovských aplikácií pre smart
+hodinky -- napríklad pre futbal alebo hokej -- špecifická
+aplikácia pre rozhodcov v~zápasení s~detekciou gest zatiaľ
+chýba. Aplikácie zamerané na zápasenie sú obmedzené na ručný
+zápis bodov prostredníctvom dotykového displeja, čo nevyužíva
+plný potenciál inteligentných hodiniek. Existujúce akademické
+práce v~oblasti rozpoznávania gest pomocou inerciálnych
+senzorov nám zároveň poskytli odrazový mostík pre vlastný
+návrh.
+
+Jadrom práce bol návrh a~implementácia samotných gest. Pre
+ovládanie aplikácie sme zaviedli niekoľko elementárnych
+pohybov ruky -- zdvihnutie ruky nad hlavu, presun ruky za
+chrbát, rotáciu zápästia a~návrat ruky do neutrálnej polohy
+-- z~ktorých sa skladajú kompozitné gestá zodpovedajúce
+signálom rozhodcu: BODOVANIE, NAPOMENUTIE, PASIVITA
+a~TOUCHE, s~rozlíšením medzi červeným a~modrým zápasníkom.
+Návrh gest sme zámerne držali blízko bežnej gestikulácie
+rozhodcu na žinenke, aby si rozhodca nemusel osvojovať umelé
+pohyby a~aby gestá zostali viditeľné pre ostatných členov
+rozhodcovského tímu.
+
+Samotná implementácia pozostáva z~dvoch častí -- aplikácie
+pre Zepp~OS na hodinkách, ktorá zbiera dáta z~akcelerometra
+a~gyroskopu a~odosiela ich cez \Gls{ble} do Android
+aplikácie, a~mobilnej Android aplikácie, kde prebieha
+vlastné rozpoznávanie gest na základe nakalibrovaných
+prahových hodnôt (\uv{threshold-based} algoritmus). Súčasťou
+implementácie je aj vibračná spätná väzba na hodinkách,
+ktorá rozhodcovi v~reálnom čase potvrdzuje rozpoznané gestá
+bez potreby pozerať na displej. Pre potreby ladenia
+a~kalibrácie sme aplikáciu rozšírili o~vývojový režim,
+v~ktorom je možné sledovať priebeh detekcie spolu so
+surovými dátami zo senzorov.
+
+Testovanie aplikácie sme rozdelili do troch fáz, ktoré sa
+postupne približovali k~reálnym podmienkam použitia. V~prvej
+fáze sme overili rozpoznávanie izolovaných gest v~ideálnych
+podmienkach -- naprieč 160~pokusmi (osem gest po
+20~opakovaní) aplikácia dosiahla celkovú úspešnosť 99,4\,\%,
+pričom sedem z~ôsmich gest bolo rozpoznaných so 100\,\%
+úspešnosťou. V~druhej fáze sme overili spoľahlivosť aplikácie
+v~kontexte kompletného zápasníckeho scenára -- 10-násobné
+opakovanie 13-krokovej sekvencie viedlo k~presnosti 96,2\,\%
+s~nulovou mierou falošných detekcií. V~tretej fáze sme
+testovali aplikáciu s~dvomi externými testermi bez
+predchádzajúcej skúsenosti so zápasníckou gestikuláciou,
+ktorí dosiahli presnosti 83,1\,\% a~90,8\,\%. Celkovo sme
+naprieč všetkými fázami vyhodnotili 420~pokusov o~detekciu
+gesta.
+
+Z~výsledkov vyplýva, že aplikácia preukázala vysokú
+spoľahlivosť pre kalibračného používateľa a~rozumnú
+prenositeľnosť na ďalších používateľov bez explicitnej
+kalibrácie. Pri testovaní sme identifikovali dve hlavné
+obmedzenia systému. Prvým je závislosť prahového algoritmu
+na individuálnom štýle vykonávania gest, ktorá vedie
+k~poklesu presnosti pri externých používateľoch. Toto
+zistenie sa zhoduje s~výsledkami minuloročnej
+práce~\cite{dp-balla}, čo potvrdzuje, že ide o~systémový
+jav prahového prístupu nezávislý od konkrétnej hardvérovej
+platformy. Druhým obmedzením je hardvérový limit samotných
+hodiniek pri rýchlych po sebe nasledujúcich pohyboch
+zápästia -- pri viacnásobnom udelení bodov v~rýchlom slede
+senzor gyroskopu v~niektorých prípadoch zaznamená iba časť
+vykonaných pohybov. Toto obmedzenie nie je možné odstrániť
+na úrovni našej aplikácie a~v~praxi sa dá zmierniť
+ponechaním dostatočného časového odstupu medzi jednotlivými
+pohybmi.
+
+Do budúcnosti existuje viacero smerov, ktorými je možné
+projekt rozšíriť:
+
+\begin{itemize}
+    \item doplnenie kalibračnej fázy pred prvým
+        použitím aplikácie, v~ktorej by si rozhodca vykonal
+        každé gesto niekoľkokrát a~hraničné hodnoty by sa
+        automaticky prispôsobili,
+    \item prehodnotenie návrhu gesta \uv{TOUCHE}
+        s~ohľadom na anatomické rozdiely medzi
+        používateľmi, aby bolo vykonateľné bez ohľadu na
+        telesné proporcie,
+    \item rozšírenie systému o~druhé hodinky nosené na
+        pravom zápästí, keďže rozhodca pri rozhodovaní
+        používa obidve ruky -- súčasné riešenie sníma
+        pohyb iba z~ľavej ruky, čo obmedzuje priestor
+        pre návrh ďalších gest,
+    \item rozšírenie implementácie o~ďalšie signály
+        rozhodcu, ktoré by využili aj pohyb pravej ruky
+        a~doplnili tak chýbajúce udalosti v~priebehu zápasu.
+\end{itemize}
+
+Najväčším prínosom tejto práce je preukázanie, že aj bežne
+dostupné komerčné inteligentné hodinky -- v~kombinácii so
+sprievodnou mobilnou aplikáciou -- môžu plniť úlohu pomocníka
+rozhodcu v~zápasení bez potreby špecializovaného hardvéru
+či zložitých metód strojového učenia. Navrhnuté riešenie
+zachováva prirodzenú gestikuláciu rozhodcu, prispieva
+k~pohodlnejšiemu zaznamenávaniu udalostí v~zápase a~zároveň
+otvára priestor pre podobné aplikácie v~iných športoch
+s~ustálenou gestikulačnou komunikáciou.
