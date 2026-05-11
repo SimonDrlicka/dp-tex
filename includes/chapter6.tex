@@ -1,21 +1,21 @@
 \section{Návrh gest}
 \label{chapter:gesta}
 
-V~tejto diplomovej práci sa zameriavame na návrh
-nových gest, ktoré umožnia ovládanie vybraných
-funkcií v~našej aplikácii -- konkrétne sa zameriame
-na gestá, ktoré sa podobajú signálom rozhodcu
-zápasenia. Inteligentné hodinky s~operačným systémom
-Zepp OS už natívne podporujú určité gestá bez nutnosti
-dodatočného programovania. Jedným z~takýchto gest je
-prebudenie hodiniek pri ich uvedení do vodorovnej
-polohy, čo umožňuje pohodlnú interakciu bez potreby
-fyzického dotyku alebo stláčania tlačidiel.
-My sa v~práci zameriame na vytvorenie novej
-aplikácie pre hodinky so Zepp OS, ktorá odosiela
-dáta z~gyroskopického senzora a~akcelerometra do
-smart telefónu, kde sú tieto dáta následne spracované
-a~vyhodnotené.
+V~tejto kapitole popisujeme návrh gest, ktoré
+umožnia rozhodcovi zápasenia ovládať aplikáciu
+pohybmi zápästia bez nutnosti dotyku displeja
+hodiniek. Pri návrhu sme sa inšpirovali reálnymi
+signálmi rozhodcu na žinenke, aby gestá boli
+intuitívne a~rozhodca si nemusel osvojovať novú
+gestikuláciu nesúvisiacu s~jeho prácou.
+
+Navrhnuté gestá rozdeľujeme na \textbf{elementárne}
+(Rise Arm, Hand Back, Flick, Hand Down), ktoré
+tvoria stavebné prvky, a~\textbf{kompozitné}
+(BODOVANIE, PASIVITA, NAPOMENUTIE, TOUCHE), ktoré
+sa skladajú z~jedného alebo viacerých elementárnych
+gest a~reprezentujú konkrétne akcie rozhodcu počas
+zápasu.
 
 \subsection{Definícia pojmov}
 \label{subsection:definicia-pojmov}
@@ -73,10 +73,8 @@ Tabuľka~\ref{tab:prehlad-gest} prehľadne zhŕňa všetky navrhnuté gestá.
     body idú výhradne súperovi. Bodovanie
     sa opäť ukončí gestom Hand Down.                           \\
     \addlinespace
-    TOUCHE         & --
-                   & Odošle informáciu o~lopatkovom
-    víťazstve. Zápas sa okamžite
-    ukončuje.                                                  \\
+    TOUCHE & -- & Zaznamená udalosť lopatkového 
+            víťazstva ako informačný záznam.                                                  \\
     \bottomrule
   \end{tabularx}
 \end{table}
@@ -201,7 +199,7 @@ nastaveného v~prvej fáze:
 Dáta z~gyroskopu sú prenášané do telefónu, kde algoritmus vyhodnocuje uhlovú rýchlosť rotácie na osi
 $g_x$, kde $g_x$ označuje hodnotu uhlovej rýchlosti na príslušnej osi gyroskopického senzora
 v~jednotkách stupňov za sekundu (DPS). Na základe analýzy nameraných gyroskopických dát bola
-stanovená nasledovná hraničná hodnota pre rozpoznanie flicku:
+stanovená nasledovná prahová hodnota pre rozpoznanie flicku:
 
 \begin{itemize}
   \item \colorbox{xaxis!20}{$g_x < \flckBlueThreshold \;\text{DPS}$} -- rotácia proti smeru
@@ -229,7 +227,7 @@ modrou šípkou. Tento pohyb je zachytený gyroskopom na osi $g_x$ ako výrazný
 
 Na obrázku~\ref{fig:subgesture-flick-ccw} je zobrazený priebeh senzorových dát počas vykonania gesta
 \uv{Flick}. V~hornej časti grafu, ktorá zachytáva gyroskopické dáta, je viditeľný
-výrazný záporný špičkový výkyv (spike) na osi $g_x$ (modrá), ktorý dosahuje hodnotu približne
+výrazný záporný špičkový výkyv na osi $g_x$ (modrá), ktorý dosahuje hodnotu približne
 $-1600\,\text{DPS}$, čo výrazne prekračuje stanovenú prahovú hodnotu $\flckBlueThreshold\,\text{DPS}$.
 Práve tento krátkodobý, ale intenzívny výkyv je kľúčovým signálom, na základe ktorého algoritmus
 rozpozná flick a~pridelí bod podľa aktívneho režimu. V~spodnej časti grafu sú zobrazené
@@ -242,7 +240,7 @@ nutnosti opakovane vykonávať aktivačné gesto.
 \subsubsection{Fáza 3 -- HAND DOWN}
 \label{subsubsec:hand-down}
 
-Poslednou fázou je spustenie ruky späť do neutrálnej polohy pri tele. Akcelerometer deteguje návrat
+Poslednou fázou je návrat ruky do neutrálnej polohy pri tele. Akcelerometer deteguje návrat
 zápästia do neutrálnej orientácie, čo signalizuje ukončenie procesu bodovania. Po rozpoznaní gesta
 \uv{Hand Down} sa aplikácia prepne späť do režimu čakania, v~ktorom sú flickovacie gestá ignorované.
 Tým je zabezpečené, že bežné pohyby ruky rozhodcu počas zápasu nevedú k~neúmyselnému prideľovaniu bodov.
@@ -262,7 +260,7 @@ Tým je zabezpečené, že bežné pohyby ruky rozhodcu počas zápasu nevedú k
 \end{figure}
 
 Na obrázku~\ref{fig:subgesture-hand-down} je zobrazený priebeh akcelerometrických dát počas
-vykonania gesta \uv{Hand Down}. Z~grafu je zrejmé, že hodnoty jednotlivých osí sa po spustení ruky
+vykonania gesta \uv{Hand Down}. Z~grafu je zrejmé, že hodnoty jednotlivých osí sa po návrate ruky
 ustália v~rámci definovaných hraničných pásiem.
 
 Hraničné hodnoty pre rozpoznanie gesta \uv{Hand Down}:
@@ -294,12 +292,13 @@ momenty zodpovedajúce trom fázam gesta. V~prvej fáze (\uv{Rise Arm}) sa hodno
 ustália v~rozsahoch zodpovedajúcich zdvihnutej polohe ruky, čím sa aplikácia prepne do režimu
 bodovania pre červeného zápasníka. V~druhej fáze (\uv{Red score}) je v~hornej časti grafu
 viditeľný výrazný záporný špičkový výkyv na osi $g_x$ (modrá), ktorý prekračuje prahovú hodnotu
-$\flckBlueThreshold\,\text{DPS}$ a~spôsobí pridelenie bodu. V~tretej fáze (\uv{Hand down}) sa
+$\flckBlueThreshold\,\text{DPS}$ a~spôsobí pridelenie bodu. V~tretej fáze (\uv{Hand Down}) sa
 hodnoty akcelerometra ustália v~rozsahoch zodpovedajúcich neutrálnej polohe ruky, čo signalizuje
 ukončenie procesu bodovania.
 
-Z~grafu je tiež zrejmé, že v~strednej fáze rozhodca vykonal 3 po sebe nasledujúce
-flicky a aplikácia pridala 3 body červenému zápasníkovi.
+Z~grafu je tiež zrejmé, že v~strednej fáze rozhodca
+vykonal tri po sebe nasledujúce flicky a~aplikácia
+pridala tri body červenému zápasníkovi.
 
 Obdobne by vyzeral priebeh gesta \uv{Bodovanie} pre modrého zápasníka, s~tým rozdielom, že aktivácia by prebehla gestom \uv{Hand Back}
 a~flicky by pridávali body modrému zápasníkovi.
@@ -413,12 +412,9 @@ priestupku zápasníka (podrobne popísané
 v~kapitole~\ref{chapter:zapasenie}). Po detekcii aplikácia automaticky prepne do režimu
 bodovania, kde sú všetky body pripočítavané výhradne
 súperovi napomenutého zápasníka. Rozhodca následne
-flickovaním určí počet udelených bodov.
-Flickovacie gestá pre napomenutého zápasníka sú
-v~tomto režime ignorované. Po ukončení bodovania
-je potrebné vykonať gesto \uv{Hand Down}, ktoré
-vráti aplikáciu späť do režimu čakania. Pre toto
-gesto sme navrhli dve alternatívy.
+flickovaním určí počet udelených bodov. Po ukončení
+bodovania je potrebné vykonať gesto \uv{Hand Down},
+ktoré vráti aplikáciu späť do režimu čakania.
 
 \begin{figure}[H]
   \centering
@@ -434,8 +430,7 @@ dopredu a~nadol pod uhlom približne 45°, pričom dlaň
 smeruje nadol. Gestom ukazuje na previnilého
 červeného zápasníka. Po detekcii sa aplikácia
 automaticky prepne do režimu bodovania, kde všetky
-body idú modrému zápasníkovi, teda flickovacie gesto
-pre červeného zápasníka je ignorované.
+body idú modrému zápasníkovi.
 
 \begin{figure}[H]
   \centering
@@ -455,15 +450,15 @@ pre červeného zápasníka je ignorované.
 Na obrázku~\ref{fig:subgesture-napomenutie-cerveny} je zobrazený priebeh
 gyroskopických a~akcelerometrických dát počas vykonania aktivačného gesta
 \uv{NAPOMENUTIE -- červený} a~následnej sekvencie bodovania. V~prvej fáze
-(\uv{Gesto rozpoznané} v~čase 2{,}96\,s) sa aplikácia
+(\uv{Gesto napomenutie}) sa aplikácia
 prepne do režimu napomenutia červeného zápasníka. V~druhej fáze rozhodca
 vykonal tri po sebe nasledujúce flickovacie gestá, ktoré sú v~hornej časti grafu
 viditeľné ako výrazné záporné špičkové výkyvy na osi $g_x$ (modrá)
 prekračujúce prahovú hodnotu $\flckBlueThreshold\,\text{DPS}$. Každý
 z~týchto výkyvov pridelil jeden bod modrému zápasníkovi, keďže bodovanie
 je v~režime napomenutia zamknuté výhradne pre súpera napomenutého
-zápasníka. V~tretej fáze (\uv{Hand down} v~čase 8{,}00\,s) sa hodnoty
-akcelerometra ustália v~rozsahoch zodpovedajúcich polohe gesta \uv{Hand down},
+zápasníka. V~tretej fáze (\uv{Hand Down}) sa hodnoty
+akcelerometra ustália v~rozsahoch zodpovedajúcich polohe gesta \uv{Hand Down},
 čo signalizuje ukončenie procesu napomenutia červeného zápasníka.
 
 Pre os $a_y$ (oranžová) sme zvolili väčší rozsah, pretože ruka rozhodcu
@@ -507,14 +502,12 @@ bodovania, kde všetky body idú červenému zápasníkovi.
 
 Na obrázku~\ref{fig:subgesture-napomenutie-modry} je zobrazený priebeh
 gyroskopických a~akcelerometrických dát počas vykonania aktivačného gesta
-\uv{NAPOMENUTIE -- modrý} a~následnej sekvencie bodovania. V~prvej fáze (\uv{Gesto rozpoznané} v~čase 2{,}99\,s) sa aplikácia
+\uv{NAPOMENUTIE -- modrý} a~následnej sekvencie bodovania. V~prvej fáze (\uv{Gesto napomenutie}) sa aplikácia
 prepne do režimu napomenutia modrého zápasníka.
-V~druhej fáze rozhodca vykonal dve po sebe nasledujúce flickovacie
-gestá v~časoch 6{,}25\,s a~7{,}01\,s.
-Každý z~týchto výkyvov pridelil jeden bod červenému zápasníkovi.
-Počas tohto gesta sú body analogicky prideľované iba červenému zápasníkovi.
+V~druhej fáze rozhodca vykonal dve po sebe nasledujúce flickovacie gestá.
+Každé z~nich pridelilo jeden bod červenému zápasníkovi.
 
-V~tretej fáze (\uv{Hand down} v~čase 9{,}34\,s) sa hodnoty
+V~tretej fáze (\uv{Hand Down}) sa hodnoty
 akcelerometra ustália v~rozsahoch zodpovedajúcich polohe gesta \uv{Hand Down},
 čo signalizuje ukončenie procesu napomenutia modrého zápasníka.
 
@@ -527,23 +520,26 @@ akcelerometra ustália v~rozsahoch zodpovedajúcich polohe gesta \uv{Hand Down},
   \item \colorbox{zaxis!20}{$\warnBlueAzMin \leq a_z \leq \warnBlueAzMax \;\text{m/s}^2$}
 \end{itemize}
 
-Hoci je poloha ruky pri tomto geste podobná aktivačnému gestu \uv{Hand Back}
-(obe gestá majú ruku za chrbtom v~oblasti krížov), kľúčový rozdiel je
-v~rotácii zápästia. Pri \uv{Hand Back} smeruje displej hodiniek k~chrbtu,
-pri \uv{NAPOMENUTIE -- modrý} smeruje displej k~zemi. Tento rozdiel sa
-prejavuje v~rôznych osiach akcelerometra -- pri \uv{Hand Back} dosahuje
-výrazne záporné hodnoty os $a_z$, pri \uv{NAPOMENUTIE -- modrý} os $a_y$,
-čím je zabezpečená spoľahlivá detekcia bez rizika zámeny.
+Hoci je poloha ruky pri tomto geste podobná
+gestu \uv{PASIVITA -- modrý} (obe gestá majú dlaň
+otočenú nahor a~ruku vodorovne pred telom),
+kľúčový rozdiel je v~ohybe v~lakti. Pri \uv{PASIVITA
+-- modrý} je ruka úplne vystretá pred telom,
+pri \uv{NAPOMENUTIE -- modrý} je pokrčená v~lakti
+s~predlaktím nad bruchom.
 
 \subsection{Gesto TOUCHE}
 
 Gesto \uv{TOUCHE} slúži na signalizáciu lopatkového
-víťazstva, ktoré okamžite ukončuje zápas (podrobne
-popísané v~kapitole~\ref{chapter:zapasenie}).
-Keďže je vždy jednoznačné, ktorý zápasník
-je na lopatkách, pre toto gesto stačí jedna
-alternatíva bez rozlíšenia červeného a~modrého
-zápasníka.
+víťazstva, ktoré v~reálnom zápase okamžite ukončuje
+zápas (podrobne popísané v~kapitole~\ref{chapter:zapasenie}).
+V~našej aplikácii sa však TOUCHE zaznamenáva iba
+ako informačný záznam, keďže o~jeho platnosti
+rozhoduje predseda žinenky mimo systému hodiniek
+(viď podsekciu~\ref{subsec:analyza-informaticka}).
+Keďže je vždy jednoznačné, ktorý zápasník je na
+lopatkách, pre toto gesto stačí jedna alternatíva
+bez rozlíšenia červeného a~modrého zápasníka.
 
 Rozhodca preloží ľavú ruku (s~hodinkami) cez hruď
 a~položí dlaň na pravé rameno.

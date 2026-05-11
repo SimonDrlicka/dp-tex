@@ -181,7 +181,7 @@ koncoch prerušovaných čiar.
   \label{fig:gesture-editor}
 \end{figure}
 
-\subsection{Aplikácia pre rozpoznávanie gest}
+\subsection{Aplikácia na rozpoznávanie gest}
 \label{subsec:rozpoznavacia-app}
 
 Finálna aplikácia na rozpoznávanie gest vychádza
@@ -314,6 +314,14 @@ udalosti relevantné pre priebeh zápasu -- udelenie
 bodov, napomenutia a~TOUCHE. Pomocné gestá ako
 \uv{Rise Arm} a~\uv{Hand Back} sa do~logu nezapisujú,
 keďže slúžia len na aktiváciu režimu bodovania.
+
+Pre prípad chybnej detekcie alebo nesprávneho
+zaznamenania udalosti je každý záznam v~logu
+opatrený tlačidlom v~tvare krížika, ktoré umožňuje
+rozhodcovi alebo jeho asistentovi manuálne odstrániť
+zápis. Pri zmazaní udalosti sa zároveň automaticky
+prepočíta priebežné skóre, aby zodpovedalo aktuálnemu
+stavu zápasu.
 
 Na obrázku~\ref{fig:prod-mode} je zobrazený príklad
 produkčného rozhrania po sérii udalostí simulujúcich
