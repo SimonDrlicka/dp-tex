@@ -32,15 +32,15 @@ pre túto platformu \cite{zepp_architecture}.
 
 \subsubsection{Zepp OS Sensor API}
 
-Pre prístup k~senzorom hodiniek poskytuje Zepp OS
+Prístup k~senzorom hodiniek poskytuje v~Zepp OS
 modul \texttt{@zos/sensor}, ktorý sprístupňuje
-akcelerometer a~gyroskop od verzie API\_LEVEL~3.0
+akcelerometer a~gyroskop od verzie API~3.0
 \cite{zepp_sensor_acc, zepp_sensor_gyro}.
 Akcelerometer meria zrýchlenie zariadenia pozdĺž
 troch ortogonálnych osí (X, Y, Z), pričom osi
 X~a~Y sú rovnobežné s~displejom a~os~Z je naň
 kolmá. Gyroskop meria uhlovú rýchlosť rotácie
-takisto v~troch osiach. Oba senzory fungujú
+taktiež v~troch osiach. Oba senzory fungujú
 na princípe registrácie callback funkcie, ktorá
 sa zavolá pri každej novej vzorke dát:
 
@@ -64,7 +64,7 @@ V~našom projekte slúži ako prerekvizita pre
 vývojový nástroj Zeus~\Gls{cli}, distribuovaný
 ako npm balík \texttt{@zeppos/zeus-cli} a~vyžadujúci
 Node.js vo verzii 14.0.0 alebo vyššej. Zeus \Gls{cli}
-pokrýva celý vývojový cyklus aplikácie pre Zepp OS --
+zahŕňa celý vývojový cyklus aplikácie pre Zepp OS --
 od vytvorenia nového projektu (\texttt{zeus create}),
 cez lokálne ladenie v~simulátore (\texttt{zeus dev})
 a~na reálnom zariadení (\texttt{zeus preview}), až
@@ -77,7 +77,7 @@ samotného balíka slúži štandardný správca balíčkov
 \subsubsection{Komunikácia cez Bluetooth Low Energy}
 
 Hodinky a~telefón medzi sebou komunikujú bezdrôtovo
-prostredníctvom \Gls{ble} (Bluetooth Low Energy).
+prostredníctvom \Gls{ble}.
 Keďže natívne \Gls{ble} \Gls{api} v~Zepp OS je
 pomerne nízkoúrovňové, platforma poskytuje pomocnú
 knižnicu \texttt{MessageBuilder}, ktorá abstrahuje
@@ -101,9 +101,8 @@ prácu s~asynchrónnym kódom \cite{kotlin_overview}.
 
 \subsubsection{Android Studio}
 
-Android Studio je oficiálne integrované vývojové
-prostredie (\Gls{ide}) pre vývoj Android aplikácií.
-Je postavené na platforme IntelliJ IDEA od
+Android Studio je oficiálne \Gls{ide} pre vývoj 
+Android aplikácií. Je postavené na platforme IntelliJ IDEA od
 spoločnosti JetBrains a~bolo predstavené na
 konferencii Google~I/O v~roku 2013
 \cite{android_studio_intro}. Vďaka vstavanému
@@ -123,7 +122,7 @@ na čitateľnosť a~jednoduchosť syntaxe
 ekosystému knižníc pre prácu s~dátami sa stal
 štandardom pre analýzu nameraných údajov vo
 vedeckom prostredí. V~našom projekte slúži na
-offline pomocné skripty pre kalibráciu hraničných
+pomocné skripty pre kalibráciu hraničných
 hodnôt jednotlivých gest -- detaily o~konkrétnom
 použití uvádzame v~podsekcii
 \ref{sec:python-skript}.

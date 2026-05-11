@@ -19,7 +19,7 @@ gest pomocou inerciálnych senzorov na zápästí.
 V~oblasti športového rozhodcovania existuje niekoľko aplikácií,
 ktoré využívajú smart hodinky ako nástroj na uľahčenie práce
 rozhodcu počas zápasu. Tieto aplikácie sa zameriavajú najmä na
-správu času, zaznamenávanie udalostí a~analýzu výkonu rozhodcu.
+zaznamenávanie udalostí v~čase a~záznam štatistík.
 Spoločným znakom všetkých nižšie uvedených riešení je, že na
 ovládanie využívajú dotykový displej hodiniek -- rozhodca musí
 aktívne ťukať na obrazovku, aby zaznamenal udalosť.
@@ -35,7 +35,7 @@ V~rozšírenej verzii REFSIX PRO ponúka aj sledovanie prejdenej
 vzdialenosti, heatmapu pozícií rozhodcu na ihrisku a~video
 analýzu. Aplikácia funguje aj bez pripojenia k~internetu --
 dáta sa synchronizujú medzi hodinkami a~telefónom pred zápasom
-a~po ňom. \cite{refsix}
+a~po ňom \cite{refsix}.
 
 \subsubsection{Referee Watch PRO}
 Referee Watch PRO je aplikácia pre Apple Watch určená pre
@@ -43,7 +43,7 @@ rozhodcov viacerých športov -- futbal, americký futbal, hádzanú,
 rugby i hokej. Jej hlavnou funkciou je pokročilé riadenie času
 zápasu s~intuitívnym ovládaním priamo z~hodiniek. Po skončení
 zápasu aplikácia poskytuje analytiku výkonu vrátane heatmapy
-pohybu rozhodcu po ihrisku. \cite{referee_watch_pro}
+pohybu rozhodcu po ihrisku \cite{referee_watch_pro}.
 
 \subsubsection{MatchGear}
 MatchGear je open-source aplikácia pre Android WearOS a~Apple
@@ -53,7 +53,7 @@ halový futbal a~korfbal. Aplikácia umožňuje sledovanie času,
 skóre, kariet a~trestných časov. Zaujímavosťou je podpora gesta
 \uv{double-tap} na Apple Watch, ktoré umožňuje spustiť alebo
 zastaviť čas bez nutnosti dotyku displeja. Zdrojový kód je
-dostupný na platforme GitHub. \cite{matchgear}
+dostupný na platforme GitHub \cite{matchgear}.
 
 \subsubsection{Whistle}
 Whistle je rozhodcovská aplikácia s~podporou smart hodiniek,
@@ -63,8 +63,8 @@ v~reálnom čase synchronizujú s~ostatnými prepojenými
 zariadeniami. Aplikácia podporuje zdieľanie priebehu zápasu
 prostredníctvom unikátneho kódu, vďaka čomu môžu tréneri,
 asistenti rozhodcu či diváci sledovať aktuálny stav stretnutia.
-Po zápase ponúka prehľad udalostí a~heatmapu pohybu rozhodcu.
-\cite{whistle}
+Po zápase ponúka prehľad udalostí a~heatmapu pohybu rozhodcu
+\cite{whistle}.
 
 \subsubsection{Spintso S1 Pro}
 Na rozdiel od predchádzajúcich softvérových riešení, Spintso
@@ -76,8 +76,8 @@ zápasu. Po aktivácii režimu zápasu sa dotykový displej uzamkne
 a~ovládanie prebieha výhradne jedným tlačidlom, čo zabraňuje
 nechceným dotykom spôsobeným napríklad dažďom alebo potom.
 Hodinky je možné prepojiť s~mobilnou aplikáciou Spintso Watch,
-ktorá poskytuje mapu pohybu rozhodcu a~ďalšie štatistiky.
-\cite{spintso}
+ktorá poskytuje mapu pohybu rozhodcu a~ďalšie štatistiky
+\cite{spintso}.
 
 \subsection{Aplikácie zamerané na zápasenie}
 
@@ -92,7 +92,7 @@ a~odoberanie bodov, sledovanie pasivity, napomenutí a~časomieru
 s~nastaviteľnou dĺžkou polčasu. Ovládanie je čisto dotykové, a teda
 rozhodca musí manuálne ťukať na tlačidlá na
 obrazovke. Aplikácia nepodporuje smart hodinky ani
-rozpoznávanie gest. \cite{wrestling_scoreboard}
+rozpoznávanie gest \cite{wrestling_scoreboard}.
 
 \subsection{Akademický výskum -- rozpoznávanie gest pomocou Inertial Measurement Unit}
 
@@ -101,21 +101,21 @@ výskum zameraný na rozpoznávanie gest rúk pomocou senzorov
 pohybu umiestnených na zápästí všade tam, kde je takéto riešenie 
 možné a prakticky využiteľné.
 
-Kim a~kol. (2018) navrhli algoritmus rozpoznávania gest ruky
+Kim a~kol. \cite{deepgesture} navrhli algoritmus rozpoznávania gest ruky
 založený na hlbokom učení, konkrétne na kombinácii konvolučných
 vrstiev a~rekurentných \Gls{gru} vrstiev. Vstupom boli dáta
 z~gyroskopu a~akcelerometra umiestnených na zápästí. Autori
 dosiahli vysokú presnosť rozpoznávania, čo potvrdilo vhodnosť
-\Gls{imu} senzorov pre detekciu gest. \cite{deepgesture}
+\Gls{imu} senzorov pre detekciu gest 
 
-Xu a~kol. (2021) predstavili algoritmus rozpoznávania 8~gest
+Xu a~kol. \cite{hand_gesture_wristband} predstavili algoritmus rozpoznávania 8~gest
 ruky bežiaci na náramku s~minimálnym výpočtovým výkonom.
 Navrhnutý prístup využíval kombinovanie dát z~akcelerometra
 a~gyroskopu pomocou komplementárneho filtra a~definoval nový
 typ príznaku nazvaný \uv{axis-crossing code}. Výsledky ukázali,
 že aj na zariadeniach s~malým výkonom je možné dosiahnuť
-spoľahlivé rozpoznávanie gest v~reálnom čase.
-\cite{hand_gesture_wristband}
+spoľahlivé rozpoznávanie gest v~reálnom čase
+
 
 V~oblasti nositeľných senzorov a~rozpoznávania ľudských aktivít
 je tiež relevantný výskum z~roku 2026, ktorý navrhuje prístup
@@ -123,7 +123,7 @@ s~konvolučnými neurónovými sieťami špecializovanými pre
 jednotlivé typy senzorov. Výsledky jednotlivých modelov sa
 následne kombinujú technikou neskorej fúzie. Tento prístup
 dosahuje vyššiu presnosť ako klasické metódy, napríklad
-\Gls{svm}. \cite{wearable_sensors_ai}
+\Gls{svm} \cite{wearable_sensors_ai}.
 
 \subsection{Zhrnutie a~priestor pre vlastné riešenie}
 
