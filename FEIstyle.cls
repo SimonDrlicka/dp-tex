@@ -527,12 +527,61 @@
     \newpage
 }
 
+% \newcommand\FEIabstract[1]{
+%     \pagestyle{empty}   
+%     \vspace*{-26.6pt}
+%     \section*{\fontsize{20pt}{1.3}\selectfont Abstrakt}
+%     \vspace{0.45cm}
+
+%     \noindent\input{#1}
+
+%     \vspace{0.8cm}
+%     \noindent \textbf{K\v{l}\a'u\v{c}ov\a'e slov\a'a}
+
+%     \vspace{0.3cm}
+%     \noindent \printKeywords
+%     \clearpage
+% }
+    
+% \newcommand\FEIabstractEn[1]{
+%     \pagestyle{empty}   
+%     \vspace*{-26.6pt}
+%     \section*{\fontsize{20pt}{1.3}\selectfont Abstract}
+%     \vspace{0.45cm}
+
+%     \noindent\input{#1}
+
+%     \vspace{0.8cm}
+%     \noindent \textbf{Keywords}
+
+%     \vspace{0.3cm}
+%     \noindent \printKeywordsEn
+%     \clearpage
+% }
+
 \newcommand\FEIabstract[1]{
-    \pagestyle{empty}   
+    \pagestyle{empty}
     \vspace*{-26.6pt}
     \section*{\fontsize{20pt}{1.3}\selectfont Abstrakt}
     \vspace{0.45cm}
 
+    \noindent \MakeTextUppercase{\printSkola}
+
+    \noindent \MakeTextUppercase{\printFakulta}
+
+    \vspace{0.5cm}
+    {\fontsize{12pt}{14pt}\selectfont
+    \begin{tabbing}
+        \hspace*{6cm}\= \kill
+        \v{S}tudijn\a'y program:                  \> \printStudijnyProgram         \\
+        Autor:                                    \> \printAutor                   \\
+        \typPrace:                                \> \printNazov                   \\
+        Ved\a'uci z\a'avere\v{c}nej pr\a'ace:     \> \printVeduciZaverecnejPrace   \\
+        Miesto a rok predlo\v{z}enia pr\a'ace:    \> Bratislava \@rok
+    \end{tabbing}
+    }
+
+    \vspace{0.5cm}
     \noindent\input{#1}
 
     \vspace{0.8cm}
@@ -542,13 +591,30 @@
     \noindent \printKeywords
     \clearpage
 }
-    
+
 \newcommand\FEIabstractEn[1]{
-    \pagestyle{empty}   
+    \pagestyle{empty}
     \vspace*{-26.6pt}
     \section*{\fontsize{20pt}{1.3}\selectfont Abstract}
     \vspace{0.45cm}
 
+    \noindent \MakeTextUppercase{\printSkolaEn}
+
+    \noindent \MakeTextUppercase{\printFakultaEn}
+
+    \vspace{0.5cm}
+    {\fontsize{12pt}{14pt}\selectfont
+    \begin{tabbing}
+        \hspace*{6cm}\= \kill
+        Study Programme:               \> \printStudijnyProgramEn        \\
+        Author:                        \> \printAutor                    \\
+        \typPraceEn:                   \> \printNazovEn                  \\
+        Supervisor:                    \> \printVeduciZaverecnejPrace    \\
+        Place and year of submission:  \> Bratislava \@rok
+    \end{tabbing}
+    }
+
+    \vspace{0.5cm}
     \noindent\input{#1}
 
     \vspace{0.8cm}
@@ -840,4 +906,67 @@
   morestring=[b]",
   sensitive=true
 }
+
+% --- LISTINGS PACKAGE PRE FAREBNÝ KÓD ---
+\usepackage{listings}
+\usepackage{xcolor}
+
+% Definícia farieb pre kód
+\definecolor{codebackground}{HTML}{F8F8F8}
+\definecolor{codecomment}{HTML}{6A9955}
+\definecolor{codekeyword}{HTML}{0000FF}
+\definecolor{codestring}{HTML}{A31515}
+\definecolor{codenumber}{HTML}{098658}
+\definecolor{codefunction}{HTML}{795E26}
+\definecolor{codelinenumber}{HTML}{808080}
+\definecolor{coderule}{HTML}{D4D4D4}
+
+% Štýl pre JavaScript / TypeScript
+\lstdefinelanguage{JavaScript}{
+  keywords={
+    break, case, catch, continue, debugger, default, delete, do, else,
+    finally, for, function, if, in, instanceof, new, return, switch, this,
+    throw, try, typeof, var, void, while, with, let, const, yield, async,
+    await, of, from, import, export, class, extends, super, static,
+    null, true, false, undefined, NaN, Infinity
+  },
+  keywordstyle=\color{codekeyword}\bfseries,
+  ndkeywords={
+    Promise, Array, Object, String, Number, Boolean, Date, Math, JSON,
+    console, document, window, Accelerometer, Gyroscope, FREQ_MODE_NORMAL,
+    FREQ_MODE_HIGH, FREQ_MODE_LOW
+  },
+  ndkeywordstyle=\color{codefunction}\bfseries,
+  sensitive=true,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{codecomment}\itshape,
+  stringstyle=\color{codestring},
+  morestring=[b]',
+  morestring=[b]"
+}
+
+\lstset{
+  language=JavaScript,
+  backgroundcolor=\color{codebackground},
+  basicstyle=\ttfamily\footnotesize,
+  numberstyle=\tiny\color{codelinenumber},
+  numbers=left,
+  numbersep=8pt,
+  stepnumber=1,
+  showstringspaces=false,
+  tabsize=2,
+  breaklines=true,
+  breakatwhitespace=true,
+  frame=single,
+  rulecolor=\color{coderule},
+  framesep=5pt,
+  framerule=0.5pt,
+  xleftmargin=15pt,
+  xrightmargin=5pt,
+  aboveskip=10pt,
+  belowskip=10pt,
+  captionpos=b
+}
 \endinput
+

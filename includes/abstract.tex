@@ -1,11 +1,21 @@
-Príručka pre študentov Fakulty elektrotechniky 
-a~informatiky STU v Bratislave obsahuje rady a~návody, 
-ako z~formálneho hľadiska pristupovať k~vypracovaniu 
-záverečnej práce vysokoškolského štúdia.
-Dokument zároveň môže slúžiť ako šablóna práce
-v~systéme na sadzbu textu \LaTeX.
-Detailne sa zaoberá pravidlami sadzby
-matematických rovníc,
-číslovania plávajúcich objektov a odkazovaním na ne. 
-Podrobne sa venuje aj spôsobu citovania externých 
-literárnych zdrojov.
+Rozhodca v~zápasení komunikuje svoje rozhodnutia pomocou
+gest, ktoré následne ručne zaznamenáva do bodovacej karty,
+čo zdržuje priebeh zápasu a~je náchylné na chyby. Práca
+skúma, či je možné tento proces zjednodušiť pomocou
+bežne dostupných inteligentných hodiniek bez nutnosti
+metód strojového učenia. Navrhnuté riešenie využíva
+hodinky Amazfit T-Rex~3 so~Zepp~OS nosené na ľavom
+zápästí rozhodcu, ktoré snímajú pohyb pomocou akcelerometra
+a~gyroskopu. Dáta sa v~reálnom čase vyhodnocujú v~sprievodnej
+Android aplikácii pomocou prahových hodnôt nakalibrovaných
+pre osem signálov rozhodcu podľa pravidiel \Gls{uww}. Pri
+návrhu sme vychádzali z~prirodzenej gestikulácie rozhodcu,
+aby si nemusel osvojovať umelé pohyby. Spoľahlivosť systému
+sme overili v~troch testovacích fázach, ktoré sa postupne
+približovali k~reálnym podmienkam použitia -- od izolovaných
+gest cez kompletný zápasnícky scenár až po testovanie
+s~externými používateľmi bez predchádzajúcej skúsenosti.
+Hlavným zisteným obmedzením je závislosť prahového algoritmu
+na individuálnom štýle vykonávania gest, ktorú možno do
+budúcna riešiť kalibračnou fázou prispôsobenou každému
+rozhodcovi.

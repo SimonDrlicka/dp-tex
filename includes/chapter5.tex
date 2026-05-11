@@ -2,7 +2,7 @@
 
 Pred samotným návrhom a~implementáciou vlastného riešenia je
 potrebné preskúmať, aké aplikácie a~technológie sú v~súčasnosti
-dostupné v~oblasti podpory rozhodcov prostredníctvom nositeľných
+dostupné v~oblasti podpory rozhodcov prostredníctvom smart
 zariadení. Cieľom tejto kapitoly je zmapovať existujúce riešenia
 a~identifikovať ich silné a~slabé stránky.
 
@@ -97,9 +97,9 @@ rozpoznávanie gest. \cite{wrestling_scoreboard}
 \subsection{Akademický výskum -- rozpoznávanie gest pomocou Inertial Measurement Unit}
 
 Popri komerčných aplikáciách prebieha aj rozsiahly akademický 
-výskum zameraný na rozpoznávanie gest všade tam, kde je to možné.  
-Rozpoznávame gestá ruky pomocou senzorov pohybu pripevnených na zápästí, 
-kdekoľvek je to možné.
+výskum zameraný na rozpoznávanie gest rúk pomocou senzorov 
+pohybu umiestnených na zápästí všade tam, kde je takéto riešenie 
+možné a prakticky využiteľné.
 
 Kim a~kol. (2018) navrhli algoritmus rozpoznávania gest ruky
 založený na hlbokom učení, konkrétne na kombinácii konvolučných
@@ -125,28 +125,21 @@ následne kombinujú technikou neskorej fúzie. Tento prístup
 dosahuje vyššiu presnosť ako klasické metódy, napríklad
 \Gls{svm}. \cite{wearable_sensors_ai}
 
-\subsection{Zhrnutie a priestor pre vlastné riešenie}
+\subsection{Zhrnutie a~priestor pre vlastné riešenie}
 
-Na základe vykonanej analýzy môžeme konštatovať, že existujúce
-rozhodcovské aplikácie pre smart hodinky sú primárne zamerané
-na futbal a~ďalšie loptové športy. Ich ovládanie je založené
-na dotykovom rozhraní -- rozhodca musí opakovane ťukať na
-displej hodiniek, čo v~kontexte zápasenia nie je praktické,
-keďže rozhodca na žinenke potrebuje mať obe ruky voľné
-a~neustále sledovať dianie na žinenke.
-
-Aplikácie zamerané na zápasenie (Wrestling Scoreboard, MatBoss,
-Matside Stats) sú určené pre bodových rozhodcov alebo trénerov
-sediacich pri stole a~nevyužívajú smart hodinky ani
-rozpoznávanie gest.
+Z~vykonanej analýzy vyplýva, že existujúce rozhodcovské
+aplikácie pre smart hodinky sú primárne zamerané na futbal
+a~ďalšie loptové športy a~ich ovládanie sa opiera o~dotykové
+rozhranie -- to je v~kontexte zápasenia nepraktické, keďže
+rozhodca na žinenke potrebuje mať obe ruky voľné. Aplikácie
+zamerané na zápasenie zase nevyužívajú smart hodinky a~slúžia
+bodovým rozhodcom alebo trénerom pri stole.
 
 Akademický výskum potvrdzuje, že rozpoznávanie gest ruky
 pomocou akcelerometra a~gyroskopu na zápästí je technicky
-realizovateľné s~vysokou presnosťou. Avšak žiadna
-z~existujúcich prác sa nezameriava na špecifickú aplikáciu
-pre rozhodcov v~zápasení pre operačný systém Zepp OS.
-
-Naša práca preto vypĺňa identifikovanú medzeru, navrhuje
-a~implementuje riešenie, ktoré využíva senzory smart hodiniek
-na automatickú detekciu rozhodcovských gest v~zápasení, bez
+realizovateľné s~vysokou presnosťou, žiadna z~existujúcich
+prác sa však nezameriava na rozhodcovské gestá v~zápasení.
+Naša práca preto vypĺňa identifikovanú medzeru a~navrhuje
+riešenie, ktoré automaticky deteguje rozhodcovské gestá
+prostredníctvom senzorov inteligentných hodiniek bez
 nutnosti dotykového ovládania.

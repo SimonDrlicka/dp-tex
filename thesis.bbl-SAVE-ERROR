@@ -1,0 +1,959 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global/global}
+    \entry{smartwatch-definition}{misc}{}{}
+      \name{author}{2}{}{%
+        {{hash=d37d754df15d457e57248006d2aa9b38}{%
+           family={Lutkevich},
+           familyi={L\bibinitperiod},
+           given={Ben},
+           giveni={B\bibinitperiod}}}%
+        {{hash=54535be59fbb9f4c65691ab33e0090b8}{%
+           family={Provazza},
+           familyi={P\bibinitperiod},
+           given={Alyssa},
+           giveni={A\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {TechTarget}%
+      }
+      \strng{namehash}{2f78b57a3883e5a346a7d03d136bb295}
+      \strng{fullhash}{2f78b57a3883e5a346a7d03d136bb295}
+      \strng{fullhashraw}{2f78b57a3883e5a346a7d03d136bb295}
+      \strng{bibnamehash}{2f78b57a3883e5a346a7d03d136bb295}
+      \strng{authorbibnamehash}{2f78b57a3883e5a346a7d03d136bb295}
+      \strng{authornamehash}{2f78b57a3883e5a346a7d03d136bb295}
+      \strng{authorfullhash}{2f78b57a3883e5a346a7d03d136bb295}
+      \strng{authorfullhashraw}{2f78b57a3883e5a346a7d03d136bb295}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Search IoT}
+      \field{month}{2}
+      \field{title}{What is a smartwatch?}
+      \field{year}{2022}
+      \verb{urlraw}
+      \verb https://www.techtarget.com/iotagenda/definition/smartwatch
+      \endverb
+      \verb{url}
+      \verb https://www.techtarget.com/iotagenda/definition/smartwatch
+      \endverb
+    \endentry
+    \entry{Zepp}{misc}{}{}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Zepp OS Developers Documentation}
+      \field{title}{Zepp OS Developers Documentation}
+      \verb{urlraw}
+      \verb https://docs.zepp.com/docs/intro/
+      \endverb
+      \verb{url}
+      \verb https://docs.zepp.com/docs/intro/
+      \endverb
+    \endentry
+    \entry{zepp-flow}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=44ab0ee1921900da6d1e69386aab02bd}{%
+           family={Chu},
+           familyi={C\bibinitperiod},
+           given={Joyce},
+           giveni={J\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Amazfit}%
+      }
+      \strng{namehash}{44ab0ee1921900da6d1e69386aab02bd}
+      \strng{fullhash}{44ab0ee1921900da6d1e69386aab02bd}
+      \strng{fullhashraw}{44ab0ee1921900da6d1e69386aab02bd}
+      \strng{bibnamehash}{44ab0ee1921900da6d1e69386aab02bd}
+      \strng{authorbibnamehash}{44ab0ee1921900da6d1e69386aab02bd}
+      \strng{authornamehash}{44ab0ee1921900da6d1e69386aab02bd}
+      \strng{authorfullhash}{44ab0ee1921900da6d1e69386aab02bd}
+      \strng{authorfullhashraw}{44ab0ee1921900da6d1e69386aab02bd}
+      \field{extraname}{1}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Amazfit}
+      \field{month}{2}
+      \field{title}{Zepp Health unveils Zepp OS 3.5 with Zepp FlowTM, powered by large lang}
+      \field{year}{2024}
+      \verb{urlraw}
+      \verb https://us.amazfit.com/blogs/news/zepp-health-unveils-zepp-os-3-5-with-zepp-flow%E2%84%A2-powered-by-large-language-model-ai-pioneering-the-next-generation-of-wearable-intelligence-devices-at-mwc-barcelona-2024
+      \endverb
+      \verb{url}
+      \verb https://us.amazfit.com/blogs/news/zepp-health-unveils-zepp-os-3-5-with-zepp-flow%E2%84%A2-powered-by-large-language-model-ai-pioneering-the-next-generation-of-wearable-intelligence-devices-at-mwc-barcelona-2024
+      \endverb
+    \endentry
+    \entry{zepp-chatgpt}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=44ab0ee1921900da6d1e69386aab02bd}{%
+           family={Chu},
+           familyi={C\bibinitperiod},
+           given={Joyce},
+           giveni={J\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Amazfit}%
+      }
+      \strng{namehash}{44ab0ee1921900da6d1e69386aab02bd}
+      \strng{fullhash}{44ab0ee1921900da6d1e69386aab02bd}
+      \strng{fullhashraw}{44ab0ee1921900da6d1e69386aab02bd}
+      \strng{bibnamehash}{44ab0ee1921900da6d1e69386aab02bd}
+      \strng{authorbibnamehash}{44ab0ee1921900da6d1e69386aab02bd}
+      \strng{authornamehash}{44ab0ee1921900da6d1e69386aab02bd}
+      \strng{authorfullhash}{44ab0ee1921900da6d1e69386aab02bd}
+      \strng{authorfullhashraw}{44ab0ee1921900da6d1e69386aab02bd}
+      \field{extraname}{2}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Amazfit}
+      \field{month}{7}
+      \field{title}{Zepp health introduces Zepp OS 4: Redefining wearable intelligence by}
+      \field{year}{2024}
+      \verb{urlraw}
+      \verb https://us.amazfit.com/blogs/news/zepp-health-introduces-zepp-os-4-redefining-wearable-intelligence-by-integrating-openais-gpt-4o-into-its-amazfit-smartwatches
+      \endverb
+      \verb{url}
+      \verb https://us.amazfit.com/blogs/news/zepp-health-introduces-zepp-os-4-redefining-wearable-intelligence-by-integrating-openais-gpt-4o-into-its-amazfit-smartwatches
+      \endverb
+    \endentry
+    \entry{zepp-voice}{misc}{}{}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{journaltitle}{ZEPP Health}
+      \field{month}{7}
+      \field{year}{2024}
+      \verb{urlraw}
+      \verb https://www.zepp.com/press-release/zepp-health-introduces-zepp-os-4-redefining-wearable-intelligence-by-integrating-openais-gpt-4o-into-its-amazfit-smartwatches
+      \endverb
+      \verb{url}
+      \verb https://www.zepp.com/press-release/zepp-health-introduces-zepp-os-4-redefining-wearable-intelligence-by-integrating-openais-gpt-4o-into-its-amazfit-smartwatches
+      \endverb
+    \endentry
+    \entry{zepp-bt}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=70a6838dbb14b5de44c8324c35684af2}{%
+           family={zhou},
+           familyi={z\bibinitperiod},
+           given={Ana},
+           giveni={A\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {amazfit-de}%
+      }
+      \strng{namehash}{70a6838dbb14b5de44c8324c35684af2}
+      \strng{fullhash}{70a6838dbb14b5de44c8324c35684af2}
+      \strng{fullhashraw}{70a6838dbb14b5de44c8324c35684af2}
+      \strng{bibnamehash}{70a6838dbb14b5de44c8324c35684af2}
+      \strng{authorbibnamehash}{70a6838dbb14b5de44c8324c35684af2}
+      \strng{authornamehash}{70a6838dbb14b5de44c8324c35684af2}
+      \strng{authorfullhash}{70a6838dbb14b5de44c8324c35684af2}
+      \strng{authorfullhashraw}{70a6838dbb14b5de44c8324c35684af2}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{amazfit}
+      \field{month}{7}
+      \field{title}{Zepp health stellt zepp OS 4 VOR: Neudefinition Tragbarer Intelligenz}
+      \field{year}{2024}
+      \verb{urlraw}
+      \verb https://de.amazfit.com/blogs/news/zepp-health-stellt-zepp-os-4-vor-neudefinition-tragbarer-intelligenz-durch-integration-von-openais-gpt-4o-in-seine-amazfit-smartwatches
+      \endverb
+      \verb{url}
+      \verb https://de.amazfit.com/blogs/news/zepp-health-stellt-zepp-os-4-vor-neudefinition-tragbarer-intelligenz-durch-integration-von-openais-gpt-4o-in-seine-amazfit-smartwatches
+      \endverb
+    \endentry
+    \entry{sensors-article}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=f954344575636aaccb9db2af88f6a6e0}{%
+           family={Singh},
+           familyi={S\bibinitperiod},
+           given={Ritik},
+           giveni={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{f954344575636aaccb9db2af88f6a6e0}
+      \strng{fullhash}{f954344575636aaccb9db2af88f6a6e0}
+      \strng{fullhashraw}{f954344575636aaccb9db2af88f6a6e0}
+      \strng{bibnamehash}{f954344575636aaccb9db2af88f6a6e0}
+      \strng{authorbibnamehash}{f954344575636aaccb9db2af88f6a6e0}
+      \strng{authornamehash}{f954344575636aaccb9db2af88f6a6e0}
+      \strng{authorfullhash}{f954344575636aaccb9db2af88f6a6e0}
+      \strng{authorfullhashraw}{f954344575636aaccb9db2af88f6a6e0}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Gadgets To Use}
+      \field{month}{10}
+      \field{title}{20 types of sensors on a smartwatch: How do they work?}
+      \field{year}{2023}
+      \verb{urlraw}
+      \verb https://gadgetstouse.com/blog/2023/10/05/sensors-in-smartwatch-how-they-work/
+      \endverb
+      \verb{url}
+      \verb https://gadgetstouse.com/blog/2023/10/05/sensors-in-smartwatch-how-they-work/
+      \endverb
+    \endentry
+    \entry{zapasenie_pravidla}{book}{}{}
+      \name{author}{1}{}{%
+        {{hash=8c7adcea9208ca7919a45cb43ea5e5d4}{%
+           family={Wrestling},
+           familyi={W\bibinitperiod},
+           given={United\bibnamedelima World},
+           giveni={U\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+      }
+      \name{translator}{1}{}{%
+        {{hash=d10747da84091c09e1dca9feacce48c7}{%
+           family={Marček},
+           familyi={M\bibinitperiod},
+           given={Stanislav},
+           giveni={S\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Bratislava}%
+      }
+      \list{publisher}{1}{%
+        {Slovenský zápasnícky zväz}%
+      }
+      \strng{namehash}{8c7adcea9208ca7919a45cb43ea5e5d4}
+      \strng{fullhash}{8c7adcea9208ca7919a45cb43ea5e5d4}
+      \strng{fullhashraw}{8c7adcea9208ca7919a45cb43ea5e5d4}
+      \strng{bibnamehash}{8c7adcea9208ca7919a45cb43ea5e5d4}
+      \strng{authorbibnamehash}{8c7adcea9208ca7919a45cb43ea5e5d4}
+      \strng{authornamehash}{8c7adcea9208ca7919a45cb43ea5e5d4}
+      \strng{authorfullhash}{8c7adcea9208ca7919a45cb43ea5e5d4}
+      \strng{authorfullhashraw}{8c7adcea9208ca7919a45cb43ea5e5d4}
+      \strng{translatorbibnamehash}{d10747da84091c09e1dca9feacce48c7}
+      \strng{translatornamehash}{d10747da84091c09e1dca9feacce48c7}
+      \strng{translatorfullhash}{d10747da84091c09e1dca9feacce48c7}
+      \strng{translatorfullhashraw}{d10747da84091c09e1dca9feacce48c7}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Preložené z: International Wrestling Rules, United World Wrestling, January 2017}
+      \field{title}{Medzinárodné pravidlá zápasenia}
+      \field{urlday}{8}
+      \field{urlmonth}{4}
+      \field{urlyear}{2025}
+      \field{year}{2017}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://zapasenie.sk/documents/pravidla_2017.pdf
+      \endverb
+      \verb{url}
+      \verb https://zapasenie.sk/documents/pravidla_2017.pdf
+      \endverb
+    \endentry
+    \entry{zepp_architecture}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=3cd31ac010d0e554602d0c1762cbbea8}{%
+           family={{Zepp Health}},
+           familyi={Z\bibinitperiod}}}%
+      }
+      \strng{namehash}{3cd31ac010d0e554602d0c1762cbbea8}
+      \strng{fullhash}{3cd31ac010d0e554602d0c1762cbbea8}
+      \strng{fullhashraw}{3cd31ac010d0e554602d0c1762cbbea8}
+      \strng{bibnamehash}{3cd31ac010d0e554602d0c1762cbbea8}
+      \strng{authorbibnamehash}{3cd31ac010d0e554602d0c1762cbbea8}
+      \strng{authornamehash}{3cd31ac010d0e554602d0c1762cbbea8}
+      \strng{authorfullhash}{3cd31ac010d0e554602d0c1762cbbea8}
+      \strng{authorfullhashraw}{3cd31ac010d0e554602d0c1762cbbea8}
+      \field{extraname}{1}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Zepp OS Developers Documentation}
+      \field{title}{Overall architecture}
+      \field{year}{2024}
+      \verb{urlraw}
+      \verb https://docs.zepp.com/docs/guides/architecture/arc/
+      \endverb
+      \verb{url}
+      \verb https://docs.zepp.com/docs/guides/architecture/arc/
+      \endverb
+    \endentry
+    \entry{zepp_sensor_acc}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=3cd31ac010d0e554602d0c1762cbbea8}{%
+           family={{Zepp Health}},
+           familyi={Z\bibinitperiod}}}%
+      }
+      \strng{namehash}{3cd31ac010d0e554602d0c1762cbbea8}
+      \strng{fullhash}{3cd31ac010d0e554602d0c1762cbbea8}
+      \strng{fullhashraw}{3cd31ac010d0e554602d0c1762cbbea8}
+      \strng{bibnamehash}{3cd31ac010d0e554602d0c1762cbbea8}
+      \strng{authorbibnamehash}{3cd31ac010d0e554602d0c1762cbbea8}
+      \strng{authornamehash}{3cd31ac010d0e554602d0c1762cbbea8}
+      \strng{authorfullhash}{3cd31ac010d0e554602d0c1762cbbea8}
+      \strng{authorfullhashraw}{3cd31ac010d0e554602d0c1762cbbea8}
+      \field{extraname}{2}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Zepp OS Developers Documentation}
+      \field{title}{Accelerometer}
+      \field{year}{2024}
+      \verb{urlraw}
+      \verb https://docs.zepp.com/docs/reference/device-app-api/newAPI/sensor/Accelerometer/
+      \endverb
+      \verb{url}
+      \verb https://docs.zepp.com/docs/reference/device-app-api/newAPI/sensor/Accelerometer/
+      \endverb
+    \endentry
+    \entry{zepp_sensor_gyro}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=3cd31ac010d0e554602d0c1762cbbea8}{%
+           family={{Zepp Health}},
+           familyi={Z\bibinitperiod}}}%
+      }
+      \strng{namehash}{3cd31ac010d0e554602d0c1762cbbea8}
+      \strng{fullhash}{3cd31ac010d0e554602d0c1762cbbea8}
+      \strng{fullhashraw}{3cd31ac010d0e554602d0c1762cbbea8}
+      \strng{bibnamehash}{3cd31ac010d0e554602d0c1762cbbea8}
+      \strng{authorbibnamehash}{3cd31ac010d0e554602d0c1762cbbea8}
+      \strng{authornamehash}{3cd31ac010d0e554602d0c1762cbbea8}
+      \strng{authorfullhash}{3cd31ac010d0e554602d0c1762cbbea8}
+      \strng{authorfullhashraw}{3cd31ac010d0e554602d0c1762cbbea8}
+      \field{extraname}{3}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Zepp OS Developers Documentation}
+      \field{title}{Gyroscope}
+      \field{year}{2024}
+      \verb{urlraw}
+      \verb https://docs.zepp.com/docs/reference/device-app-api/newAPI/sensor/Gyroscope/
+      \endverb
+      \verb{url}
+      \verb https://docs.zepp.com/docs/reference/device-app-api/newAPI/sensor/Gyroscope/
+      \endverb
+    \endentry
+    \entry{Node.js-definition}{misc}{}{}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{journaltitle}{Node.js - About}
+      \verb{urlraw}
+      \verb https://nodejs.org/en/about
+      \endverb
+      \verb{url}
+      \verb https://nodejs.org/en/about
+      \endverb
+    \endentry
+    \entry{zepp_cli}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=3cd31ac010d0e554602d0c1762cbbea8}{%
+           family={{Zepp Health}},
+           familyi={Z\bibinitperiod}}}%
+      }
+      \strng{namehash}{3cd31ac010d0e554602d0c1762cbbea8}
+      \strng{fullhash}{3cd31ac010d0e554602d0c1762cbbea8}
+      \strng{fullhashraw}{3cd31ac010d0e554602d0c1762cbbea8}
+      \strng{bibnamehash}{3cd31ac010d0e554602d0c1762cbbea8}
+      \strng{authorbibnamehash}{3cd31ac010d0e554602d0c1762cbbea8}
+      \strng{authornamehash}{3cd31ac010d0e554602d0c1762cbbea8}
+      \strng{authorfullhash}{3cd31ac010d0e554602d0c1762cbbea8}
+      \strng{authorfullhashraw}{3cd31ac010d0e554602d0c1762cbbea8}
+      \field{extraname}{4}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Zepp OS Developers Documentation}
+      \field{title}{Zeus CLI Command Line Tools}
+      \field{year}{2024}
+      \verb{urlraw}
+      \verb https://docs.zepp.com/docs/guides/tools/cli/
+      \endverb
+      \verb{url}
+      \verb https://docs.zepp.com/docs/guides/tools/cli/
+      \endverb
+    \endentry
+    \entry{npm-definition}{misc}{}{}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{journaltitle}{npm Docs}
+      \verb{urlraw}
+      \verb https://docs.npmjs.com/about-npm
+      \endverb
+      \verb{url}
+      \verb https://docs.npmjs.com/about-npm
+      \endverb
+    \endentry
+    \entry{zepp_bluetooth}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=3cd31ac010d0e554602d0c1762cbbea8}{%
+           family={{Zepp Health}},
+           familyi={Z\bibinitperiod}}}%
+      }
+      \strng{namehash}{3cd31ac010d0e554602d0c1762cbbea8}
+      \strng{fullhash}{3cd31ac010d0e554602d0c1762cbbea8}
+      \strng{fullhashraw}{3cd31ac010d0e554602d0c1762cbbea8}
+      \strng{bibnamehash}{3cd31ac010d0e554602d0c1762cbbea8}
+      \strng{authorbibnamehash}{3cd31ac010d0e554602d0c1762cbbea8}
+      \strng{authornamehash}{3cd31ac010d0e554602d0c1762cbbea8}
+      \strng{authorfullhash}{3cd31ac010d0e554602d0c1762cbbea8}
+      \strng{authorfullhashraw}{3cd31ac010d0e554602d0c1762cbbea8}
+      \field{extraname}{5}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Zepp OS Developers Documentation}
+      \field{title}{Messagebuilder Bluetooth communication}
+      \field{year}{2024}
+      \verb{urlraw}
+      \verb https://docs.zepp.com/docs/guides/best-practice/bluetooth-communication/
+      \endverb
+      \verb{url}
+      \verb https://docs.zepp.com/docs/guides/best-practice/bluetooth-communication/
+      \endverb
+    \endentry
+    \entry{kotlin_android}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=0b14e391de42e1ac91954686d899a0db}{%
+           family={{Kotlin Foundation}},
+           familyi={K\bibinitperiod}}}%
+      }
+      \strng{namehash}{0b14e391de42e1ac91954686d899a0db}
+      \strng{fullhash}{0b14e391de42e1ac91954686d899a0db}
+      \strng{fullhashraw}{0b14e391de42e1ac91954686d899a0db}
+      \strng{bibnamehash}{0b14e391de42e1ac91954686d899a0db}
+      \strng{authorbibnamehash}{0b14e391de42e1ac91954686d899a0db}
+      \strng{authornamehash}{0b14e391de42e1ac91954686d899a0db}
+      \strng{authorfullhash}{0b14e391de42e1ac91954686d899a0db}
+      \strng{authorfullhashraw}{0b14e391de42e1ac91954686d899a0db}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Kotlin Documentation}
+      \field{title}{Kotlin for Android}
+      \field{year}{2026}
+      \verb{urlraw}
+      \verb https://kotlinlang.org/docs/android-overview.html
+      \endverb
+      \verb{url}
+      \verb https://kotlinlang.org/docs/android-overview.html
+      \endverb
+    \endentry
+    \entry{kotlin_overview}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=8b36e9207c24c76e6719268e49201d94}{%
+           family={{Google}},
+           familyi={G\bibinitperiod}}}%
+      }
+      \strng{namehash}{8b36e9207c24c76e6719268e49201d94}
+      \strng{fullhash}{8b36e9207c24c76e6719268e49201d94}
+      \strng{fullhashraw}{8b36e9207c24c76e6719268e49201d94}
+      \strng{bibnamehash}{8b36e9207c24c76e6719268e49201d94}
+      \strng{authorbibnamehash}{8b36e9207c24c76e6719268e49201d94}
+      \strng{authornamehash}{8b36e9207c24c76e6719268e49201d94}
+      \strng{authorfullhash}{8b36e9207c24c76e6719268e49201d94}
+      \strng{authorfullhashraw}{8b36e9207c24c76e6719268e49201d94}
+      \field{extraname}{1}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Android Developers}
+      \field{title}{Kotlin overview}
+      \field{year}{2026}
+      \verb{urlraw}
+      \verb https://developer.android.com/kotlin/overview
+      \endverb
+      \verb{url}
+      \verb https://developer.android.com/kotlin/overview
+      \endverb
+    \endentry
+    \entry{android_studio_intro}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=8b36e9207c24c76e6719268e49201d94}{%
+           family={{Google}},
+           familyi={G\bibinitperiod}}}%
+      }
+      \strng{namehash}{8b36e9207c24c76e6719268e49201d94}
+      \strng{fullhash}{8b36e9207c24c76e6719268e49201d94}
+      \strng{fullhashraw}{8b36e9207c24c76e6719268e49201d94}
+      \strng{bibnamehash}{8b36e9207c24c76e6719268e49201d94}
+      \strng{authorbibnamehash}{8b36e9207c24c76e6719268e49201d94}
+      \strng{authornamehash}{8b36e9207c24c76e6719268e49201d94}
+      \strng{authorfullhash}{8b36e9207c24c76e6719268e49201d94}
+      \strng{authorfullhashraw}{8b36e9207c24c76e6719268e49201d94}
+      \field{extraname}{2}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Android Developers}
+      \field{title}{Meet Android Studio}
+      \field{year}{2026}
+      \verb{urlraw}
+      \verb https://developer.android.com/studio/intro
+      \endverb
+      \verb{url}
+      \verb https://developer.android.com/studio/intro
+      \endverb
+    \endentry
+    \entry{python-definition}{misc}{}{}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{journaltitle}{Python.org}
+      \verb{urlraw}
+      \verb https://www.python.org/doc/essays/blurb/
+      \endverb
+      \verb{url}
+      \verb https://www.python.org/doc/essays/blurb/
+      \endverb
+    \endentry
+    \entry{trex3_specs}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=053bbbccfb1198ad2f1ebb9f270bd3dd}{%
+           family={Makyan},
+           familyi={M\bibinitperiod},
+           given={Igor},
+           giveni={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{053bbbccfb1198ad2f1ebb9f270bd3dd}
+      \strng{fullhash}{053bbbccfb1198ad2f1ebb9f270bd3dd}
+      \strng{fullhashraw}{053bbbccfb1198ad2f1ebb9f270bd3dd}
+      \strng{bibnamehash}{053bbbccfb1198ad2f1ebb9f270bd3dd}
+      \strng{authorbibnamehash}{053bbbccfb1198ad2f1ebb9f270bd3dd}
+      \strng{authornamehash}{053bbbccfb1198ad2f1ebb9f270bd3dd}
+      \strng{authorfullhash}{053bbbccfb1198ad2f1ebb9f270bd3dd}
+      \strng{authorfullhashraw}{053bbbccfb1198ad2f1ebb9f270bd3dd}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{SMARTBOX.AM}
+      \field{title}{Smart watch amazfit T-rex 3}
+      \field{year}{2025}
+      \verb{urlraw}
+      \verb https://www.smartbox.am/en/shop/view/1856/
+      \endverb
+      \verb{url}
+      \verb https://www.smartbox.am/en/shop/view/1856/
+      \endverb
+    \endentry
+    \entry{refsix}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=481c7e1c3d10180bf6231360eda69feb}{%
+           family={{REFSIX Ltd.}},
+           familyi={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{481c7e1c3d10180bf6231360eda69feb}
+      \strng{fullhash}{481c7e1c3d10180bf6231360eda69feb}
+      \strng{fullhashraw}{481c7e1c3d10180bf6231360eda69feb}
+      \strng{bibnamehash}{481c7e1c3d10180bf6231360eda69feb}
+      \strng{authorbibnamehash}{481c7e1c3d10180bf6231360eda69feb}
+      \strng{authornamehash}{481c7e1c3d10180bf6231360eda69feb}
+      \strng{authorfullhash}{481c7e1c3d10180bf6231360eda69feb}
+      \strng{authorfullhashraw}{481c7e1c3d10180bf6231360eda69feb}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{REFSIX -- The App for Football/Soccer Referees}
+      \field{urlday}{25}
+      \field{urlmonth}{3}
+      \field{urlyear}{2026}
+      \field{year}{2025}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://refsix.com/
+      \endverb
+      \verb{url}
+      \verb https://refsix.com/
+      \endverb
+    \endentry
+    \entry{referee_watch_pro}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=f2ac31100f4c9be0aace59a2e464dec5}{%
+           family={{Referee Watch}},
+           familyi={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{f2ac31100f4c9be0aace59a2e464dec5}
+      \strng{fullhash}{f2ac31100f4c9be0aace59a2e464dec5}
+      \strng{fullhashraw}{f2ac31100f4c9be0aace59a2e464dec5}
+      \strng{bibnamehash}{f2ac31100f4c9be0aace59a2e464dec5}
+      \strng{authorbibnamehash}{f2ac31100f4c9be0aace59a2e464dec5}
+      \strng{authornamehash}{f2ac31100f4c9be0aace59a2e464dec5}
+      \strng{authorfullhash}{f2ac31100f4c9be0aace59a2e464dec5}
+      \strng{authorfullhashraw}{f2ac31100f4c9be0aace59a2e464dec5}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Referee Watch PRO}
+      \field{urlday}{25}
+      \field{urlmonth}{3}
+      \field{urlyear}{2026}
+      \field{year}{2025}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.refereewatch.app/
+      \endverb
+      \verb{url}
+      \verb https://www.refereewatch.app/
+      \endverb
+    \endentry
+    \entry{matchgear}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=89757a08307e036e4da6393048ca41cd}{%
+           family={Kekem},
+           familyi={K\bibinitperiod},
+           given={Martijn},
+           giveni={M\bibinitperiod},
+           prefix={van},
+           prefixi={v\bibinitperiod}}}%
+      }
+      \strng{namehash}{89757a08307e036e4da6393048ca41cd}
+      \strng{fullhash}{89757a08307e036e4da6393048ca41cd}
+      \strng{fullhashraw}{89757a08307e036e4da6393048ca41cd}
+      \strng{bibnamehash}{89757a08307e036e4da6393048ca41cd}
+      \strng{authorbibnamehash}{89757a08307e036e4da6393048ca41cd}
+      \strng{authornamehash}{89757a08307e036e4da6393048ca41cd}
+      \strng{authorfullhash}{89757a08307e036e4da6393048ca41cd}
+      \strng{authorfullhashraw}{89757a08307e036e4da6393048ca41cd}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{MatchGear -- Watch-app for umpires, coaches, and managers}
+      \field{urlday}{25}
+      \field{urlmonth}{3}
+      \field{urlyear}{2026}
+      \field{year}{2025}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.matchgear.app/en/
+      \endverb
+      \verb{url}
+      \verb https://www.matchgear.app/en/
+      \endverb
+    \endentry
+    \entry{whistle}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=84266bff2350a31e273a336075fbb0ee}{%
+           family={{Apart ICT}},
+           familyi={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{84266bff2350a31e273a336075fbb0ee}
+      \strng{fullhash}{84266bff2350a31e273a336075fbb0ee}
+      \strng{fullhashraw}{84266bff2350a31e273a336075fbb0ee}
+      \strng{bibnamehash}{84266bff2350a31e273a336075fbb0ee}
+      \strng{authorbibnamehash}{84266bff2350a31e273a336075fbb0ee}
+      \strng{authornamehash}{84266bff2350a31e273a336075fbb0ee}
+      \strng{authorfullhash}{84266bff2350a31e273a336075fbb0ee}
+      \strng{authorfullhashraw}{84266bff2350a31e273a336075fbb0ee}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Whistle -- Referee Companion App}
+      \field{urlday}{25}
+      \field{urlmonth}{3}
+      \field{urlyear}{2026}
+      \field{year}{2025}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.whistle.support/
+      \endverb
+      \verb{url}
+      \verb https://www.whistle.support/
+      \endverb
+    \endentry
+    \entry{spintso}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=9ef015509251f13fcc3384a30506f548}{%
+           family={{Spintso}},
+           familyi={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{9ef015509251f13fcc3384a30506f548}
+      \strng{fullhash}{9ef015509251f13fcc3384a30506f548}
+      \strng{fullhashraw}{9ef015509251f13fcc3384a30506f548}
+      \strng{bibnamehash}{9ef015509251f13fcc3384a30506f548}
+      \strng{authorbibnamehash}{9ef015509251f13fcc3384a30506f548}
+      \strng{authornamehash}{9ef015509251f13fcc3384a30506f548}
+      \strng{authorfullhash}{9ef015509251f13fcc3384a30506f548}
+      \strng{authorfullhashraw}{9ef015509251f13fcc3384a30506f548}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Spintso Referee Smartwatch S1 Pro With GPS}
+      \field{urlday}{25}
+      \field{urlmonth}{3}
+      \field{urlyear}{2026}
+      \field{year}{2025}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://honigs.com/products/ spintso-referee-watch-s1-pro
+      \endverb
+      \verb{url}
+      \verb https://honigs.com/products/%20spintso-referee-watch-s1-pro
+      \endverb
+    \endentry
+    \entry{wrestling_scoreboard}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=fc9f3e0f2f67f77f7e44e0310c0668ab}{%
+           family={Ono},
+           familyi={O\bibinitperiod},
+           given={Naoya},
+           giveni={N\bibinitperiod}}}%
+      }
+      \strng{namehash}{fc9f3e0f2f67f77f7e44e0310c0668ab}
+      \strng{fullhash}{fc9f3e0f2f67f77f7e44e0310c0668ab}
+      \strng{fullhashraw}{fc9f3e0f2f67f77f7e44e0310c0668ab}
+      \strng{bibnamehash}{fc9f3e0f2f67f77f7e44e0310c0668ab}
+      \strng{authorbibnamehash}{fc9f3e0f2f67f77f7e44e0310c0668ab}
+      \strng{authornamehash}{fc9f3e0f2f67f77f7e44e0310c0668ab}
+      \strng{authorfullhash}{fc9f3e0f2f67f77f7e44e0310c0668ab}
+      \strng{authorfullhashraw}{fc9f3e0f2f67f77f7e44e0310c0668ab}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Wrestling Scoreboard}
+      \field{urlday}{25}
+      \field{urlmonth}{3}
+      \field{urlyear}{2026}
+      \field{year}{2025}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://apps.apple.com/us/app/ wrestling-scoreboard/id1595007128
+      \endverb
+      \verb{url}
+      \verb https://apps.apple.com/us/app/%20wrestling-scoreboard/id1595007128
+      \endverb
+    \endentry
+    \entry{deepgesture}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=93d0d136ca04c422b0d08eaf075f6320}{%
+           family={Kim},
+           familyi={K\bibinitperiod},
+           given={Jihun},
+           giveni={J\bibinitperiod}}}%
+        {{hash=85e116cce6e2e5f7c59320775acf8d60}{%
+           family={Cho},
+           familyi={C\bibinitperiod},
+           given={Jungchan},
+           giveni={J\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{b4519f255ae9ba4588ba199ab78de267}
+      \strng{fullhash}{b4519f255ae9ba4588ba199ab78de267}
+      \strng{fullhashraw}{b4519f255ae9ba4588ba199ab78de267}
+      \strng{bibnamehash}{b4519f255ae9ba4588ba199ab78de267}
+      \strng{authorbibnamehash}{b4519f255ae9ba4588ba199ab78de267}
+      \strng{authornamehash}{b4519f255ae9ba4588ba199ab78de267}
+      \strng{authorfullhash}{b4519f255ae9ba4588ba199ab78de267}
+      \strng{authorfullhashraw}{b4519f255ae9ba4588ba199ab78de267}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Displays}
+      \field{title}{deepGesture: Deep learning-based gesture recognition scheme using motion sensors}
+      \field{volume}{55}
+      \field{year}{2018}
+      \field{pages}{38\bibrangedash 45}
+      \range{pages}{8}
+      \verb{doi}
+      \verb 10.1016/j.displa.2018.08.001
+      \endverb
+    \endentry
+    \entry{hand_gesture_wristband}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=f2cbba030c91fdf0cb79558e021ece70}{%
+           family={Xu},
+           familyi={X\bibinitperiod},
+           given={Changzheng},
+           giveni={C\bibinitperiod}}}%
+        {{hash=f3dcd70ae72b88bad73843a0ffd6ab76}{%
+           family={Pathak},
+           familyi={P\bibinitperiod},
+           given={Parth\bibnamedelima H.},
+           giveni={P\bibinitperiod\bibinitdelim H\bibinitperiod}}}%
+        {{hash=1ae3717ddd3f402c25137b35fa21a742}{%
+           family={Mohapatra},
+           familyi={M\bibinitperiod},
+           given={Prasant},
+           giveni={P\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {MDPI}%
+      }
+      \strng{namehash}{7217c57a907634a1fb8f6cd628c289b1}
+      \strng{fullhash}{7217c57a907634a1fb8f6cd628c289b1}
+      \strng{fullhashraw}{7217c57a907634a1fb8f6cd628c289b1}
+      \strng{bibnamehash}{7217c57a907634a1fb8f6cd628c289b1}
+      \strng{authorbibnamehash}{7217c57a907634a1fb8f6cd628c289b1}
+      \strng{authornamehash}{7217c57a907634a1fb8f6cd628c289b1}
+      \strng{authorfullhash}{7217c57a907634a1fb8f6cd628c289b1}
+      \strng{authorfullhashraw}{7217c57a907634a1fb8f6cd628c289b1}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Sensors}
+      \field{number}{18}
+      \field{title}{Hand Gesture Recognition on a Resource-Limited Interactive Wristband}
+      \field{volume}{21}
+      \field{year}{2021}
+      \field{pages}{6163}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.3390/s21186163
+      \endverb
+    \endentry
+    \entry{wearable_sensors_ai}{article}{}{}
+      \name{author}{4}{}{%
+        {{hash=6ae36301e12e01c768a48f6738b79961}{%
+           family={Ababneh},
+           familyi={A\bibinitperiod},
+           given={Mohammad},
+           giveni={M\bibinitperiod}}}%
+        {{hash=d3bdc6d33a39a55ae92909e0d99dee9a}{%
+           family={Tantawi},
+           familyi={T\bibinitperiod},
+           given={Muaath},
+           giveni={M\bibinitperiod}}}%
+        {{hash=ad3171c80ad7fdb4334a2d566121708c}{%
+           family={Nairat},
+           familyi={N\bibinitperiod},
+           given={Motasem},
+           giveni={M\bibinitperiod}}}%
+        {{hash=cc2e6a269c2fd127013e23d9469a796b}{%
+           family={Shkoukani},
+           familyi={S\bibinitperiod},
+           given={Murad},
+           giveni={M\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Frontiers}%
+      }
+      \strng{namehash}{8d243303a177aa20a68c8c1a846afc6d}
+      \strng{fullhash}{8d243303a177aa20a68c8c1a846afc6d}
+      \strng{fullhashraw}{8d243303a177aa20a68c8c1a846afc6d}
+      \strng{bibnamehash}{8d243303a177aa20a68c8c1a846afc6d}
+      \strng{authorbibnamehash}{8d243303a177aa20a68c8c1a846afc6d}
+      \strng{authornamehash}{8d243303a177aa20a68c8c1a846afc6d}
+      \strng{authorfullhash}{8d243303a177aa20a68c8c1a846afc6d}
+      \strng{authorfullhashraw}{8d243303a177aa20a68c8c1a846afc6d}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Frontiers in Artificial Intelligence}
+      \field{title}{Wearable sensors based on artificial intelligence models for human activity recognition}
+      \field{volume}{7}
+      \field{year}{2026}
+      \verb{doi}
+      \verb 10.3389/frai.2024.1424190
+      \endverb
+    \endentry
+    \entry{dp-balla}{thesis}{}{}
+      \name{author}{1}{}{%
+        {{hash=1fcbe4397930a8c63508724c838d7e77}{%
+           family={Balla},
+           familyi={B\bibinitperiod},
+           given={Dávid},
+           giveni={D\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {Slovenská technická univ. v Bratislave FEI ÚIM (FEI)}%
+      }
+      \list{location}{1}{%
+        {Bratislava}%
+      }
+      \strng{namehash}{1fcbe4397930a8c63508724c838d7e77}
+      \strng{fullhash}{1fcbe4397930a8c63508724c838d7e77}
+      \strng{fullhashraw}{1fcbe4397930a8c63508724c838d7e77}
+      \strng{bibnamehash}{1fcbe4397930a8c63508724c838d7e77}
+      \strng{authorbibnamehash}{1fcbe4397930a8c63508724c838d7e77}
+      \strng{authornamehash}{1fcbe4397930a8c63508724c838d7e77}
+      \strng{authorfullhash}{1fcbe4397930a8c63508724c838d7e77}
+      \strng{authorfullhashraw}{1fcbe4397930a8c63508724c838d7e77}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Vedúci práce: Ing. Stanislav Marček, PhD.}
+      \field{title}{Aplikácia podpory rozhodcov pre zápasenie s využitím detekcie gest pomocou smart hodiniek}
+      \field{type}{Diplomová práca}
+      \field{year}{2025}
+    \endentry
+    \entry{nanasiova2016statistika}{book}{}{}
+      \name{author}{2}{}{%
+        {{hash=c5d30e5dc47912b6781929edbc35110f}{%
+           family={Nánásiová},
+           familyi={N\bibinitperiod},
+           given={Oľga},
+           giveni={O\bibinitperiod}}}%
+        {{hash=d07fa2ff01659c6ca03dfc3b246a0215}{%
+           family={Kohnová},
+           familyi={K\bibinitperiod},
+           given={Silvia},
+           giveni={S\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Bratislava}%
+      }
+      \list{publisher}{1}{%
+        {Vydavateľstvo STU}%
+      }
+      \strng{namehash}{5065f9d33f1f1de4d4f3517b88ef05f6}
+      \strng{fullhash}{5065f9d33f1f1de4d4f3517b88ef05f6}
+      \strng{fullhashraw}{5065f9d33f1f1de4d4f3517b88ef05f6}
+      \strng{bibnamehash}{5065f9d33f1f1de4d4f3517b88ef05f6}
+      \strng{authorbibnamehash}{5065f9d33f1f1de4d4f3517b88ef05f6}
+      \strng{authornamehash}{5065f9d33f1f1de4d4f3517b88ef05f6}
+      \strng{authorfullhash}{5065f9d33f1f1de4d4f3517b88ef05f6}
+      \strng{authorfullhashraw}{5065f9d33f1f1de4d4f3517b88ef05f6}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{1}
+      \field{isbn}{978-80-227-4527-7}
+      \field{title}{Štatistika a pravdepodobnost: Základy matematickej štatistiky a teórie pravdepodobnosti}
+      \field{year}{2016}
+      \field{pages}{199}
+      \range{pages}{1}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+
