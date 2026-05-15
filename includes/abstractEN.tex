@@ -1,23 +1,30 @@
-In wrestling, the referee communicates decisions through
-hand gestures, which are then manually recorded on a~paper
-scoring card -- a~process that slows down the match and is
-prone to errors. This thesis explores whether the process
-can be simplified using commercially available smartwatches,
-without the need for machine learning techniques. The
-proposed solution uses an Amazfit T-Rex~3 smartwatch
-running Zepp~OS, worn on the referee's left wrist, which
-captures motion through its accelerometer and gyroscope.
-The data is evaluated in real time by a~companion Android
-application using a~threshold-based algorithm calibrated
-for eight referee signals defined by the \Gls{uww} rules.
-The gestures were designed to follow the referee's natural
-mat gesticulation, so that no artificial movements need to
-be learned. The reliability of the system was evaluated in
-three testing phases, gradually approaching real-world
-usage conditions -- from isolated gestures through
-a~complete wrestling scenario to testing with external
-users without prior experience. The main limitation
-identified is the dependence of the threshold-based
-algorithm on the individual style of gesture execution,
-which could be addressed in the future by introducing
-a~calibration phase tailored to each referee.
+Wrestling according to the rules of United World Wrestling
+requires the presence of three officials at every match
+-- a~mat referee who communicates decisions through hand
+gestures, a~judge who manually records these decisions on
+a~paper scoring card, and a~mat chairman who supervises
+their cooperation. This method of recording slows down
+the match. This thesis explores whether the process can
+be simplified using commercially available smartwatches,
+without the need for machine learning techniques, thereby
+reducing the number of officials required to conduct
+a~match. The proposed solution uses an Amazfit T-Rex~3
+smartwatch running the Zepp~OS operating system, worn on
+the referee's left wrist, which captures motion through
+its accelerometer and gyroscope. The data is evaluated 
+by a~companion Android application using
+a~threshold-based algorithm calibrated for eight referee
+gestures defined by the rules of United World Wrestling.
+The gestures were designed to follow the referee's
+natural mat gesticulation, so that no artificial movements
+need to be learned that could cause confusion. The
+reliability of the system was evaluated across three
+testing phases comprising 420 recognition attempts,
+achieving an accuracy of 99.4\,\% for isolated gestures
+under ideal conditions, 96.2\,\% for the complete
+wrestling scenario, and between 83.1\,\% and 90.8\,\% for
+two external testers. The main limitation is the
+dependence of the threshold-based algorithm on the
+individual style of gesture execution, which could be
+addressed in the future by introducing a~calibration
+phase tailored to each referee.

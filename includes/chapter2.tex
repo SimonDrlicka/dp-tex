@@ -3,83 +3,83 @@
 
 V~tejto kapitole popisujeme zápasenie ako športovú
 disciplínu so zameraním na udalosti, ktoré rozhodca
-počas zápasu signalizuje a~ktoré budú predmetom
+počas stretnutia signalizuje a~ktoré budú predmetom
 implementácie v~našej aplikácii. Postupne sa
-venujeme základným pravidlám zápasu, úlohe rozhodcu,
+venujeme základným pravidlám zápasenia, úlohe rozhodcu,
 spôsobu udeľovania bodov, napomenutiam, pasivite
 a~lopatkovému víťazstvu. V~záverečnej časti
 analyzujeme pravidlá z~pohľadu návrhu softvérového
-riešenia.
+riešenia. Pri spracovaní vychádzame zo slovenského
+prekladu oficiálnych pravidiel \Gls{uww} platných
+od januára~2017~\cite{zapasenie_pravidla}.
 
 \subsection{Definícia a~história zápasenia}
 
-Zápasenie je kontaktný šport, ktorý kombinuje fyzickú
-silu, techniku a~stratégiu s~cieľom získať kontrolu
-nad súperom prostredníctvom povolených chmatov
-a~akcií. Dvaja zápasníci sa snažia dosiahnuť víťazstvo
-buď položením súpera na lopatky, alebo získaním
-väčšieho počtu bodov za technické akcie v priebehu
-zápasu \cite{zapasenie_pravidla}.
+Zápasenie~\cite{zapasenie_pravidla} je kontaktný šport,
+ktorý kombinuje fyzickú silu, techniku a~stratégiu
+s~cieľom získať kontrolu nad súperom prostredníctvom
+povolených chmatov a~akcií. Dvaja zápasníci sa snažia
+dosiahnuť víťazstvo buď položením súpera na lopatky,
+alebo získaním väčšieho počtu bodov za technické akcie
+v priebehu stretnutia.
 
 \subsection{Ciele a~priebeh zápasenia}
 
-Cieľom zápasenia je dosiahnuť víťazstvo nad súperom
-buď pádom (obe lopatky súpera súčasne na žinenke),
-čo okamžite ukončuje zápas, alebo získaním väčšieho
-počtu bodov za technické akcie
-\cite{zapasenie_pravidla}.
+Cieľom zápasenia~\cite{zapasenie_pravidla} je dosiahnuť
+víťazstvo nad súperom buď pádom (obe lopatky súpera
+súčasne na žinenke), čo okamžite ukončuje zápas, alebo
+získaním väčšieho počtu bodov za technické akcie.
 
-Zápas sa skladá z~dvoch polčasov po 3~minúty
-s~30-sekundovou prestávkou medzi nimi. Zápasníci
-začínajú v~stoji a~môžu pokračovať v~parteri
-(zápas na zemi), ak jeden z~nich získa kontrolu nad
-súperom. Zápas môže byť ukončený predčasne technickou
+Stretnutie~\cite{zapasenie_pravidla} sa skladá z~dvoch
+polčasov po 3~minúty s~30-sekundovou prestávkou medzi
+nimi. Zápasníci začínajú v~stoji a~môžu pokračovať
+v~parteri (zápas na zemi), ak jeden z~nich získa kontrolu
+nad súperom. Stretnutie môže byť ukončené predčasne technickou
 prevahou -- ak rozdiel v~skóre dosiahne 8~bodov v~grécko-rímskom
 alebo 10~bodov vo voľnom štýle. V~prípade remízy sa víťaz
 určuje podľa kritérií ako vyšší počet technických bodov
-alebo posledná bodovaná akcia \cite{zapasenie_pravidla}.
+alebo posledná bodovaná akcia.
 
 \subsection{Úloha rozhodcu v~zápasení}
 
-Rozhodca zohráva kľúčovú úlohu pri zabezpečení
-férového a~bezpečného priebehu zápasu. Dohliada na
-dodržiavanie pravidiel, kontroluje správanie
-zápasníkov a~komunikuje s~ostatnými členmi
-rozhodcovského tímu -- bodovým rozhodcom a~predsedom
-žinenky \cite{zapasenie_pravidla}.
+Rozhodca~\cite{zapasenie_pravidla} zohráva kľúčovú úlohu
+pri zabezpečení férového a~bezpečného priebehu stretnutia.
+Dohliada na dodržiavanie pravidiel, kontroluje správanie
+zápasníkov a~komunikuje s~ostatnými členmi rozhodcovského
+tímu -- bodovým rozhodcom a~predsedom žinenky.
 
-Rozhodca je zodpovedný za signalizáciu začiatku
-a~konca zápasu, prerušenie v~prípade zranenia alebo
-konzultácie s~rozhodcovským tímom, ako aj za
-sledovanie a~hodnotenie technických akcií. Jeho
-rozhodnutia sú záväzné, v~sporných situáciách však
-môže predseda žinenky rozhodnutie prehodnotiť
-\cite{zapasenie_pravidla}.
+Rozhodca je zodpovedný~\cite{zapasenie_pravidla} za
+signalizáciu začiatku a~konca stretnutia, prerušenie
+v~prípade zranenia alebo konzultácie s~rozhodcovským
+tímom, ako aj za sledovanie a~hodnotenie technických
+akcií. Jeho rozhodnutia sú záväzné, v~sporných situáciách
+však môže predseda žinenky rozhodnutie prehodnotiť.
 
-\subsection{Hodnotenie zápasu rozhodcom}
+\subsection{Hodnotenie stretnutia rozhodcom}
 
-Rozhodca hodnotí zápas prideľovaním bodov za
-technické akcie. Za jednoduchý hod udeľuje 2~body,
-za vysoký hod s~amplitúdou 4~body a~za vytlačenie
-súpera zo žinenky 1~bod. Bodové hodnotenie rozhodca
-signalizuje zdvihnutím ruky s~príslušným počtom
-prstov \cite{zapasenie_pravidla}.
+Rozhodca~\cite{zapasenie_pravidla} hodnotí stretnutie
+prideľovaním bodov za technické akcie. Za jednoduchý
+hod udeľuje 2~body, za vysoký hod s~amplitúdou 4~body
+a~za vytlačenie súpera zo žinenky 1~bod. Bodové hodnotenie
+rozhodca signalizuje zdvihnutím ruky s~príslušným
+počtom prstov.
 
 \subsection{Napomenutia a~zákazy}
 
-Napomenutie je trest, ktorý rozhodca na žinenke udeľuje
-zápasníkovi za porušenie pravidiel. V~bodovacích záznamoch
-sa označuje symbolom \uv{O}. Samotné napomenutie neznamená
-priamu stratu bodov pre previnilého zápasníka -- dôsledkom
-napomenutia je však automatické udelenie bodov jeho súperovi.
-Počet udelených bodov závisí od typu priestupku a~od štýlu
-zápasenia \cite[čl.~54]{zapasenie_pravidla}.
+Napomenutie~\cite[čl.~54]{zapasenie_pravidla} je trest,
+ktorý rozhodca na žinenke udeľuje zápasníkovi za
+porušenie pravidiel. V~bodovacích záznamoch sa označuje
+symbolom \uv{O}. Samotné napomenutie neznamená priamu
+stratu bodov pre previnilého zápasníka -- dôsledkom
+napomenutia je však automatické udelenie bodov jeho
+súperovi. Počet udelených bodov závisí od typu priestupku
+a~od štýlu zápasenia.
 
 Z~pohľadu rozhodcu na žinenke je napomenutie vždy spojené
 s~následným bodovaním. Rozhodca najprv gestom signalizuje
 napomenutie -- ukáže na previnilého zápasníka -- a~následne
 pomocou gesta bodovanie oznámi, koľko bodov sa udeľuje
-súperovi. Tieto dva signály tvoria dôležitú dvojicu,
+súperovi. Tieto dve gestá tvoria dôležitú dvojicu,
 ktorá je kľúčová aj pre návrh gest v~našej aplikácii.
 
 Napomenutie sa podľa Medzinárodných pravidiel
@@ -100,7 +100,7 @@ typy priestupkov:
         k~hlave \cite[čl.~52]{zapasenie_pravidla}.
   \item \textbf{Všeobecné zákazy} -- napríklad ťahanie
         za vlasy, hryznutie, kopanie, udieranie do
-        hlavy, či dohoda na výsledku zápasu
+        hlavy, či dohoda na výsledku stretnutia
         \cite[čl.~49]{zapasenie_pravidla}.
 \end{itemize}
 
@@ -110,17 +110,16 @@ zápasenia~\cite{zapasenie_pravidla}.
 
 \subsection{Pasivita}
 
-Pasivita je situácia, keď sa zápasník úmyselne vyhýba
-boju -- blokuje súpera, zaberá prsty alebo sa snaží
-naťahovať čas. Postup penalizácie sa líši podľa štýlu
-zápasenia. Vo voľnom štýle rozhodca po druhom
-upozornení určí pasívnemu zápasníkovi 30-sekundovú
-dobu aktivity. Ak počas nej neskóruje, jeho súper
-získa 1~bod. V~grécko-rímskom štýle je postup
-postupný -- prvé upozornenie je slovné, druhé sa
-zapisuje ako prvé \uv{P} bez bodov a~tretie
-previnenie je penalizované 1~bodom pre súpera
-\cite[čl.~48]{zapasenie_pravidla}.
+Pasivita~\cite[čl.~48]{zapasenie_pravidla} je situácia,
+keď sa zápasník úmyselne vyhýba boju -- blokuje súpera,
+zaberá prsty alebo sa snaží naťahovať čas. Postup
+penalizácie sa líši podľa štýlu zápasenia. Vo voľnom
+štýle rozhodca po druhom upozornení určí pasívnemu
+zápasníkovi 30-sekundovú dobu aktivity. Ak počas nej
+neskóruje, jeho súper získa 1~bod. V~grécko-rímskom
+štýle je postup postupný -- prvé upozornenie je slovné,
+druhé sa zapisuje ako prvé \uv{P} bez bodov a~tretie
+previnenie je penalizované 1~bodom pre súpera.
 
 Rozhodca na žinenke signalizuje pasivitu ukázaním
 ruky smerom k~pasívnemu zápasníkovi. Keďže je
@@ -130,13 +129,12 @@ alternatívy -- pre červeného a~modrého zápasníka.
 
 \subsection{TOUCHE -- lopatkové víťazstvo}
 
-TOUCHE, označované aj ako \uv{víťazstvo na lopatky},
-je najvyššou formou víťazstva v~zápasení. Nastáva
-vtedy, keď útočiaci zápasník drží súpera na žinenke
-tak, že obe jeho lopatky sú súčasne v~kontakte so
-žinenkou po určitý čas. Dosiahnutie TOUCHE okamžite
-ukončuje zápas bez ohľadu na aktuálne skóre
-\cite{zapasenie_pravidla}.
+TOUCHE~\cite{zapasenie_pravidla}, označované aj ako
+\uv{víťazstvo na lopatky}, je najvyššou formou víťazstva
+v~zápasení. Nastáva vtedy, keď útočiaci zápasník drží
+súpera na žinenke tak, že obe jeho lopatky sú súčasne
+v~kontakte so žinenkou po určitý čas. Dosiahnutie TOUCHE
+okamžite ukončuje stretnutie bez ohľadu na aktuálne skóre.
 
 Podľa článku 44 Medzinárodných pravidiel zápasenia
 \cite{zapasenie_pravidla} musí byť lopatkové
@@ -145,11 +143,11 @@ byť súčasne pritlačené na žinenku v~pásme aktivity
 alebo v~oranžovej zóne. Lopatky v~ochrannom pásme
 sú neplatné.
 
-Na rozdiel od bodovania alebo napomenutia, TOUCHE
-vyžaduje potvrdenie od predsedu žinenky. Rozhodca
-na žinenke najprv signalizuje TOUCHE, počká na
-potvrdenie a~až potom udrie dlaňou po žinenke
-a~odpíska koniec zápasu \cite{zapasenie_pravidla}.
+Na rozdiel od bodovania alebo napomenutia, TOUCHE~\cite{zapasenie_pravidla}
+vyžaduje potvrdenie od predsedu žinenky. Rozhodca na
+žinenke najprv signalizuje TOUCHE, počká na potvrdenie
+a~až potom udrie dlaňou po žinenke a~odpíska koniec
+stretnutia.
 
 \subsection{Analýza pravidiel z~pohľadu informatiky}
 \label{subsec:analyza-informaticka}
@@ -161,11 +159,11 @@ tri kľúčové pozorovania, ktoré priamo ovplyvnili
 návrh nášho riešenia.
 
 \subsubsection{Konečná množina sémanticky odlíšených udalostí}
-Rozhodca počas zápasu opakovane vykonáva obmedzenú
+Rozhodca počas stretnutia opakovane vykonáva obmedzenú
 sadu akcií -- bodovanie (1, 2 alebo 4 body pre
 červeného alebo modrého zápasníka), napomenutie,
 pasivita a~TOUCHE. Každá z~týchto udalostí má jasne
-definovanú sémantiku v~kontexte stavu zápasu, čo
+definovanú sémantiku v~kontexte stavu stretnutia, čo
 umožňuje modelovať úlohu ako klasifikačný problém
 nad konečnou množinou tried.
 

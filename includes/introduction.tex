@@ -10,13 +10,15 @@ rozhodcov.
 V~zápasení zohrávajú gestá rozhodcu kľúčovú úlohu pri
 komunikácii rozhodnutí. Rozhodca na žinenke nimi signalizuje
 udelené body, napomenutia, pasivitu či ukončenie zápasu
-lopatkovým víťazstvom. Tieto signály sú nevyhnutné pre
-transparentnosť priebehu zápasu, no zároveň prinášajú
-priestor pre nepresnosti pri ich ručnom zaznamenávaní do
-papierovej bodovacej karty. Práve kombinácia ustálených
-pohybov ruky a~potreby presného zápisu robí zo zápasenia
-vhodnú doménu pre automatizovanú detekciu gest pomocou
-inteligentných hodiniek.
+lopatkovým víťazstvom. Pravidlá \Gls{uww} pritom vyžadujú
+prítomnosť troch rozhodcov, čo predstavuje pre kluby
+organizačnú a~finančnú záťaž a~v~praxi sa pri menších
+turnajoch ich počet znižuje z~troch na dvoch. Práve
+kombinácia ustálených pohybov ruky a~potreby presného zápisu
+robí zo zápasenia vhodnú doménu pre automatizovanú detekciu
+gest pomocou inteligentných hodiniek, ktorá by mohla
+zjednodušiť prácu rozhodcom a~prispieť k~zníženiu nákladov
+spojených s~organizáciou zápasov.
 
 Cieľom tejto diplomovej práce je navrhnúť a~implementovať
 systém na rozpoznávanie gest rozhodcu zápasenia pomocou
@@ -27,7 +29,7 @@ a~gyroskopu a~odosielajú ich do Android aplikácie, kde
 prebieha samotné rozpoznávanie. Rozpoznané gestá -- bodovanie,
 napomenutie, pasivita a~TOUCHE -- sú následne zapisované do
 priebehu zápasu, čím sa nahrádza ručný zápis. Navrhnuté gestá
-vychádzajú z~oficiálnych pravidiel \Gls{uww} a~zo signálov,
+vychádzajú z~oficiálnych pravidiel \Gls{uww} a~z gest,
 ktoré rozhodcovia bežne používajú na žinenke.
 
 V~prvej kapitole sa venujeme základným pojmom potrebným na
@@ -57,7 +59,7 @@ všetky kritériá pre snímanie pohybových dát aj pre vývoj
 vlastných aplikácií.
 
 V~piatej kapitole analyzujeme existujúce riešenia z~oblasti
-rozhodcovských aplikácií pre smart hodinky, aplikácií
+rozhodcovských aplikácií pre inteligentné hodinky, aplikácií
 zameraných na zápasenie a~akademických prác venovaných
 rozpoznávaniu gest pomocou inerciálnych senzorov na zápästí.
 Cieľom je zmapovať silné a~slabé stránky doterajších prístupov

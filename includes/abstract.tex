@@ -1,21 +1,29 @@
-Rozhodca v~zápasení komunikuje svoje rozhodnutia pomocou
-gest, ktoré následne ručne zaznamenáva do bodovacej karty,
-čo zdržuje priebeh zápasu a~je náchylné na chyby. Práca
-skúma, či je možné tento proces zjednodušiť pomocou
-bežne dostupných inteligentných hodiniek bez nutnosti
-metód strojového učenia. Navrhnuté riešenie využíva
-hodinky Amazfit T-Rex~3 so~Zepp~OS nosené na ľavom
-zápästí rozhodcu, ktoré snímajú pohyb pomocou akcelerometra
-a~gyroskopu. Dáta sa v~reálnom čase vyhodnocujú v~sprievodnej
-Android aplikácii pomocou prahových hodnôt nakalibrovaných
-pre osem signálov rozhodcu podľa pravidiel \Gls{uww}. Pri
-návrhu sme vychádzali z~prirodzenej gestikulácie rozhodcu,
-aby si nemusel osvojovať umelé pohyby. Spoľahlivosť systému
-sme overili v~troch testovacích fázach, ktoré sa postupne
-približovali k~reálnym podmienkam použitia -- od izolovaných
-gest cez kompletný zápasnícky scenár až po testovanie
-s~externými používateľmi bez predchádzajúcej skúsenosti.
-Hlavným zisteným obmedzením je závislosť prahového algoritmu
-na individuálnom štýle vykonávania gest, ktorú možno do
+Zápasenie podľa pravidiel Medzinárodnej zápasníckej
+federácie vyžaduje pri každom zápase prítomnosť troch
+rozhodcov -- rozhodcu na žinenke, ktorý komunikuje
+rozhodnutia pomocou gest, bodového rozhodcu, ktorý tieto
+rozhodnutia ručne zaznamenáva do bodovacej karty,
+a~predsedu žinenky, ktorý dohliada na ich súhru. Tento
+spôsob zápisu zdržuje priebeh zápasu. Práca skúma, či je možné tento proces zjednodušiť
+pomocou bežne dostupných inteligentných hodiniek bez
+nutnosti metód strojového učenia, a~tým znížiť počet osôb
+potrebných na vedenie zápasu. Navrhnuté riešenie využíva
+hodinky Amazfit T-Rex~3 s~operačným systémom Zepp~OS
+nosené na ľavom zápästí rozhodcu, ktoré snímajú pohyb
+pomocou akcelerometra a~gyroskopu. Dáta sa
+vyhodnocujú v~sprievodnej Android aplikácii pomocou
+prahových hodnôt nakalibrovaných pre osem gest
+rozhodcu podľa pravidiel Medzinárodnej zápasníckej
+federácie. Pri návrhu sme vychádzali z~prirodzenej
+gestikulácie rozhodcu, aby si nemusel osvojovať umelé
+pohyby, ktoré by mohli spôsobovať zmätok. 
+Spoľahlivosť systému sme overili v~troch
+testovacích fázach naprieč 420 pokusmi -- úspešnosť
+rozpoznávania dosiahla 99,4\,\% pri izolovaných gestách
+v ideálnych podmienkach,
+96,2\,\% pri kompletnom zápasníckom scenári a~83,1\,\%
+až 90,8\,\% pri dvoch externých testeroch. Hlavným
+obmedzením je závislosť prahového algoritmu na
+individuálnom štýle vykonávania gest, ktorú možno do
 budúcna riešiť kalibračnou fázou prispôsobenou každému
 rozhodcovi.

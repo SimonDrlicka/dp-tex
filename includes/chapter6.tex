@@ -5,9 +5,24 @@ V~tejto kapitole popisujeme návrh gest, ktoré
 umožnia rozhodcovi zápasenia ovládať aplikáciu
 pohybmi zápästia bez nutnosti dotyku displeja
 hodiniek. Pri návrhu sme sa inšpirovali reálnymi
-signálmi rozhodcu na žinenke, aby gestá boli
-intuitívne a~rozhodca si nemusel osvojovať novú
-gestikuláciu nesúvisiacu s~jeho prácou.
+gestami rozhodcu na žinenke, aby boli intuitívne
+a~rozhodca si nemusel osvojovať novú, nesprávnu
+gestikuláciu.
+
+Pri výbere a~definovaní gest sme vychádzali z~oficiálnych
+pravidiel Medzinárodnej zápasníckej federácie z~roku~2017
+v~slovenskom preklade~\cite{zapasenie_pravidla}, ktoré
+presne popisujú, akým spôsobom rozhodca komunikuje svoje
+rozhodnutia. Ako doplnkové zdroje sme využili grafický
+prehľad gest pre rozhodcov v~zápasení~\cite{wrestling-referee-signals},
+ktorý vizuálne zachytáva polohy rúk a~smery pohybu pri
+jednotlivých gestách, a~oficiálny inštruktážny videozáznam
+Medzinárodnej zápasníckej federácie~\cite{uww-referee-mechanics-video},
+ktorý demonštruje správne vykonávanie gest v~praxi.
+Kombinácia textového popisu pravidiel, vizuálneho prehľadu
+a~videozáznamu nám pomohla pochopiť nielen formálne
+požiadavky na gestá, ale aj ich praktickú podobu pri
+reálnom zápase.
 
 Navrhnuté gestá rozdeľujeme na \textbf{elementárne}
 (Rise Arm, Hand Back, Flick, Hand Down), ktoré
@@ -16,6 +31,26 @@ tvoria stavebné prvky, a~\textbf{kompozitné}
 sa skladajú z~jedného alebo viacerých elementárnych
 gest a~reprezentujú konkrétne akcie rozhodcu počas
 zápasu.
+
+\subsection{Princíp rozpoznávania}
+\label{subsec:princip-rozpoznavania}
+
+Aplikácia kontinuálne porovnáva aktuálne hodnoty
+senzorov s~intervalmi definovanými pre
+jednotlivé gestá. Algoritmus pracuje s~kĺzavým časovým
+oknom posledných 2~sekúnd a~v~rámci neho hľadá súvislý
+úsek dlhý 0{,}2\,ms, počas ktorého sa 100\,\% hodnôt
+všetkých troch osí akcelerometra súčasne nachádza
+v~definovaných intervaloch daného gesta. Ak takýto
+úsek nájde, gesto sa označí ako rozpoznané. Tento
+mechanizmus zabraňuje falošným detekciám pri
+krátkodobých náhodných pohyboch zápästia a~zároveň
+toleruje drobné výkyvy v~rámci 2-sekundového okna --
+gesto sa rozpozná aj v~prípade, že hodnoty z~intervalov
+nakrátko vystúpia a~následne sa vrátia späť. Tento
+časový mechanizmus vysvetľuje aj posun medzi
+vstupom hodnôt do hraničných intervalov a~okamihom
+detekcie na grafoch v~nasledujúcich podsekciách.
 
 \subsection{Definícia pojmov}
 \label{subsection:definicia-pojmov}
@@ -26,7 +61,7 @@ zložitejšie kompozitné gestá.
 
 \begin{description}
   \item[Rise Arm] Pohyb, pri ktorom rozhodca zdvihne ľavú ruku (s~hodinkami) z~neutrálnej polohy
-        pri tele do polohy nad hlavou, pričom dlaň smeruje dopredu. Slúži ako aktivačné gesto pre
+        pri tele do polohy nad hlavou. Slúži ako aktivačné gesto pre
         bodovanie červeného zápasníka. Detailne popísaný v~podsekcii~\ref{subsubsec:rise-arm}.
 
   \item[Hand Back] Pohyb, pri ktorom rozhodca presunie ľavú ruku (s~hodinkami) za chrbát
@@ -82,8 +117,8 @@ Tabuľka~\ref{tab:prehlad-gest} prehľadne zhŕňa všetky navrhnuté gestá.
 \subsection{Gesto BODOVANIE}
 
 Gesto \uv{Bodovanie} je kompozitné gesto pozostávajúce z~troch po sebe nasledujúcich fáz, ktoré spoločne
-umožňujú rozhodcovi prideľovať body jednotlivým zápasníkom. Inšpirovali sme sa reálnym signálom rozhodcu
-v~zápasení, kde aktivačné gesto pred flickom určuje, ktorému zápasníkovi sa bod udelí. Gesto má dve
+umožňujú rozhodcovi prideľovať body jednotlivým zápasníkom. Inšpirovali sme sa reálnym gestom rozhodcu
+v~zápasení, kde aktivačné gesto pred gestom \uv{Flick} určuje, ktorému zápasníkovi sa bod udelí. Gesto má dve
 alternatívy -- pre červeného a~modrého zápasníka, ktoré sa odlišujú aktivačným gestom v~prvej fáze.
 
 Na obrázku~\ref{fig:bodovanie-flowchart} je znázornený vývojový diagram gesta \uv{Bodovanie}, ktorý
@@ -105,7 +140,7 @@ ktoré ukončí bodovanie a~vráti algoritmus späť do režimu čakania.
 
 Prvou fázou gesta je aktivácia režimu bodovania pomocou jedného z~dvoch aktivačných gest. Aktivačné
 gesto súčasne určuje, ktorému zápasníkovi sa bude bod udeľovať. Aktivačná fáza zároveň slúži ako
-ochranný mechanizmus -- flickovacie gestá sú vyhodnocované len vtedy, keď rozhodca vedome vykoná
+ochranný mechanizmus -- gestá \uv{Flick} sú vyhodnocované len vtedy, keď rozhodca vedome vykoná
 aktivačné gesto, čím sa predchádza nechcenému pripočítaniu bodov.
 
 \paragraph{Aktivácia pre červeného -- RISE ARM}
@@ -123,7 +158,7 @@ Po rozpoznaní gesta \uv{Rise Arm} sa aplikácia prepne do režimu bodovania pre
 
 Na obrázku~\ref{fig:gesto-rise-arm} je znázornená poloha ruky rozhodcu pri geste \uv{Rise Arm}. Ľavá
 ruka s~hodinkami a~červenou manžetou je zdvihnutá nad hlavu a~zároveň dlaň smeruje dopredu. Táto
-poloha zodpovedá reálnemu signálu rozhodcu na žinenke, ktorým oznamuje začiatok bodovania pre
+poloha zodpovedá reálnemu gestu rozhodcu na žinenke, ktorým oznamuje začiatok bodovania pre
 červeného zápasníka ostatným členom rozhodcovského tímu.
 
 \begin{figure}[H]
@@ -136,7 +171,7 @@ poloha zodpovedá reálnemu signálu rozhodcu na žinenke, ktorým oznamuje zač
 Na obrázku~\ref{fig:subgesture-hand-up} je zobrazený priebeh akcelerometrických dát počas vykonania
 gesta \uv{Rise Arm} a označený bod, kedy dochádza k~detekcii tohto gesta.
 
-Hraničné hodnoty pre rozpoznanie gesta \uv{Rise Arm}, kde $a_x$, $a_y$ a~$a_z$ označujú hodnoty
+Interval hodnôt pre rozpoznanie gesta \uv{Rise Arm}, kde $a_x$, $a_y$ a~$a_z$ označujú hodnoty
 zrýchlenia na príslušných osiach akcelerometra:
 
 \begin{itemize}
@@ -172,7 +207,7 @@ dát počas vykonania gesta \uv{Hand Back} a~označený bod, kedy dochádza
 k~detekcii tohto gesta.
 
 \noindent
-\textbf{Hraničné hodnoty:}
+\textbf{Interval hodnôt:}
 
 \begin{itemize}
   \item \colorbox{xaxis!20}{$\handBackAxMin \leq a_x \leq \handBackAxMax \;\text{m/s}^2$}
@@ -182,7 +217,7 @@ k~detekcii tohto gesta.
 
 Ak sa hodnoty všetkých troch osí súčasne nachádzajú v~rámci uvedených rozsahov pre dané aktivačné
 gesto, aplikácia sa prepne do príslušného režimu bodovania, v~ktorom sú následne vyhodnocované
-flickovacie gestá.
+gestá \uv{Flick}.
 
 \subsubsection{Fáza 2 -- FLICK}
 \label{subsubsec:flick}
@@ -198,12 +233,12 @@ nastaveného v~prvej fáze:
 
 Dáta z~gyroskopu sú prenášané do telefónu, kde algoritmus vyhodnocuje uhlovú rýchlosť rotácie na osi
 $g_x$, kde $g_x$ označuje hodnotu uhlovej rýchlosti na príslušnej osi gyroskopického senzora
-v~jednotkách stupňov za sekundu (DPS). Na základe analýzy nameraných gyroskopických dát bola
+v~jednotkách stupňov za sekundu ($^\circ$/s). Na základe analýzy nameraných gyroskopických dát bola
 stanovená nasledovná prahová hodnota pre rozpoznanie flicku:
 
 \begin{itemize}
-  \item \colorbox{xaxis!20}{$g_x < \flckBlueThreshold \;\text{DPS}$} -- rotácia proti smeru
-        hodinových ručičiek prekročí prahovú hodnotu $\flckBlueThreshold\,\text{DPS}$.
+  \item \colorbox{xaxis!20}{$g_x < \flckBlueThreshold \;^\circ\text{/s}$} -- rotácia proti smeru
+        hodinových ručičiek prekročí prahovú hodnotu $\flckBlueThreshold\,^\circ\text{/s}$.
 \end{itemize}
 
 \begin{figure}[H]
@@ -228,12 +263,13 @@ modrou šípkou. Tento pohyb je zachytený gyroskopom na osi $g_x$ ako výrazný
 Na obrázku~\ref{fig:subgesture-flick-ccw} je zobrazený priebeh senzorových dát počas vykonania gesta
 \uv{Flick}. V~hornej časti grafu, ktorá zachytáva gyroskopické dáta, je viditeľný
 výrazný záporný špičkový výkyv na osi $g_x$ (modrá), ktorý dosahuje hodnotu približne
-$-1600\,\text{DPS}$, čo výrazne prekračuje stanovenú prahovú hodnotu $\flckBlueThreshold\,\text{DPS}$.
-Práve tento krátkodobý, ale intenzívny výkyv je kľúčovým signálom, na základe ktorého algoritmus
-rozpozná flick a~pridelí bod podľa aktívneho režimu. V~spodnej časti grafu sú zobrazené
-akcelerometrické dáta, na ktorých je viditeľný sprievodný otras spôsobený rýchlym pohybom zápästia.
+$-1600\,^\circ\text{/s}$, čo výrazne prekračuje stanovenú prahovú hodnotu
+$\flckBlueThreshold\,^\circ\text{/s}$. Práve tento krátkodobý, ale intenzívny výkyv je kľúčovým
+signálom, na základe ktorého algoritmus rozpozná flick a~pridelí bod podľa aktívneho režimu.
+V~spodnej časti grafu sú zobrazené akcelerometrické dáta, na ktorých je viditeľný sprievodný otras
+spôsobený rýchlym pohybom zápästia.
 
-Rozhodca môže v~rámci jednej aktivácie vykonať aj viacero po sebe nasledujúcich flickovacích gest,
+Rozhodca môže v~rámci jednej aktivácie vykonať aj viacero po sebe nasledujúcich gest \uv{Flick},
 pokiaľ neukončí fázu bodovania gestom \uv{Hand Down}. Tým je umožnené prideliť viacero bodov bez
 nutnosti opakovane vykonávať aktivačné gesto.
 
@@ -242,7 +278,7 @@ nutnosti opakovane vykonávať aktivačné gesto.
 
 Poslednou fázou je návrat ruky do neutrálnej polohy pri tele. Akcelerometer deteguje návrat
 zápästia do neutrálnej orientácie, čo signalizuje ukončenie procesu bodovania. Po rozpoznaní gesta
-\uv{Hand Down} sa aplikácia prepne späť do režimu čakania, v~ktorom sú flickovacie gestá ignorované.
+\uv{Hand Down} sa aplikácia prepne späť do režimu čakania, v~ktorom je gesto \uv{Flick} ignorované.
 Tým je zabezpečené, že bežné pohyby ruky rozhodcu počas zápasu nevedú k~neúmyselnému prideľovaniu bodov.
 
 \begin{figure}[H]
@@ -261,9 +297,9 @@ Tým je zabezpečené, že bežné pohyby ruky rozhodcu počas zápasu nevedú k
 
 Na obrázku~\ref{fig:subgesture-hand-down} je zobrazený priebeh akcelerometrických dát počas
 vykonania gesta \uv{Hand Down}. Z~grafu je zrejmé, že hodnoty jednotlivých osí sa po návrate ruky
-ustália v~rámci definovaných hraničných pásiem.
+ustália v~rámci definovaných intervalov hodnôt.
 
-Hraničné hodnoty pre rozpoznanie gesta \uv{Hand Down}:
+Interval hodnôt pre rozpoznanie gesta \uv{Hand Down}:
 
 \begin{itemize}
   \item \colorbox{xaxis!20}{$\handDownAxMin \leq a_x \leq \handDownAxMax \;\text{m/s}^2$}
@@ -357,11 +393,11 @@ Na obrázku~\ref{fig:subgesture-pasivita-cerveny}
 je zobrazený priebeh akcelerometrických dát počas
 vykonania aktivačného gesta \uv{PASIVITA -- červený}.
 Farebné pásma znázorňujú
-očakávané rozsahy hodnôt pre jednotlivé osi
+očakávaný interval hodnôt pre jednotlivé osi
 v~cieľovej polohe.
 
 \noindent
-\textbf{Hraničné hodnoty:}
+\textbf{Interval hodnôt:}
 
 \begin{itemize}
   \item \colorbox{xaxis!20}{$\passivityRedAxMin \leq a_x \leq \passivityRedAxMax \;\text{m/s}^2$}
@@ -378,8 +414,8 @@ k~stropu.
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.4\textwidth]{img/gesture-img/obrazok-gesto-pasivity-modry.png}
-  \caption{Poloha ruky pri geste
-    \uv{PASIVITA -- modrý}}
+  \caption{Poloha ruky s hodinkami pri geste
+    \uv{PASIVITA -- modrý} -- poloha ruky s modrou manžetou nezodpovedá skutočnej polohe ruky rozhodcu počas zápasu.}
   \label{fig:gesto-pasivita-modry}
 \end{figure}
 
@@ -393,11 +429,11 @@ k~stropu.
 Na obrázku~\ref{fig:subgesture-pasivita-modry}
 je zobrazený priebeh akcelerometrických dát počas
 vykonania gesta \uv{PASIVITA -- modrý}. Farebné pásma znázorňujú
-očakávané rozsahy hodnôt pre jednotlivé osi
+očakávaný interval hodnôt pre jednotlivé osi
 v~cieľovej polohe.
 
 \noindent
-\textbf{Hraničné hodnoty:}
+\textbf{Interval hodnôt:}
 
 \begin{itemize}
   \item \colorbox{xaxis!20}{$\passivityBlueAxMin \leq a_x \leq \passivityBlueAxMax \;\text{m/s}^2$}
@@ -412,9 +448,10 @@ priestupku zápasníka (podrobne popísané
 v~kapitole~\ref{chapter:zapasenie}). Po detekcii aplikácia automaticky prepne do režimu
 bodovania, kde sú všetky body pripočítavané výhradne
 súperovi napomenutého zápasníka. Rozhodca následne
-flickovaním určí počet udelených bodov. Po ukončení
-bodovania je potrebné vykonať gesto \uv{Hand Down},
-ktoré vráti aplikáciu späť do režimu čakania.
+počtom vykonaní gesta \uv{Flick} určí počet udelených
+bodov. Po ukončení bodovania je potrebné vykonať gesto
+\uv{Hand Down}, ktoré vráti aplikáciu späť do režimu
+čakania.
 
 \begin{figure}[H]
   \centering
@@ -451,11 +488,11 @@ gyroskopických a~akcelerometrických dát počas vykonania aktivačného gesta
 \uv{NAPOMENUTIE -- červený} a~následnej sekvencie bodovania. V~prvej fáze
 (\uv{Gesto napomenutie}) sa aplikácia
 prepne do režimu napomenutia červeného zápasníka. V~druhej fáze rozhodca
-vykonal tri po sebe nasledujúce flickovacie gestá, ktoré sú v~hornej časti grafu
+vykonal tri po sebe nasledujúce gestá \uv{Flick}, ktoré sú v~hornej časti grafu
 viditeľné ako výrazné záporné špičkové výkyvy na osi $g_x$ (modrá)
 prekračujúce prahovú hodnotu $\flckBlueThreshold\,\text{DPS}$. Každý
 z~týchto výkyvov pridelil jeden bod modrému zápasníkovi, keďže bodovanie
-je v~režime napomenutia zamknuté výhradne pre súpera napomenutého
+je v~režime napomenutia obmedzené len na súpera napomenutého
 zápasníka. V~tretej fáze (\uv{Hand Down}) sa hodnoty
 akcelerometra ustália v~rozsahoch zodpovedajúcich polohe gesta \uv{Hand Down},
 čo signalizuje ukončenie procesu napomenutia červeného zápasníka.
@@ -463,12 +500,12 @@ akcelerometra ustália v~rozsahoch zodpovedajúcich polohe gesta \uv{Hand Down},
 Pre os $a_y$ (oranžová) sme zvolili väčší rozsah, pretože ruka rozhodcu
 nemusí smerovať presne dole -- pri reálnom použití môže dochádzať
 k~jemnému odklonu od ideálnej polohy. Farebné pásma na grafe akcelerometra
-znázorňujú očakávané rozsahy hodnôt pre jednotlivé osi v~cieľovej polohe
+znázorňujú očakávaný interval hodnôt pre jednotlivé osi v~cieľovej polohe
 aktivačného gesta \uv{NAPOMENUTIE -- červený} a~v~neutrálnej polohe gesta
 \uv{Hand Down}.
 
 \noindent
-\textbf{Hraničné hodnoty:}
+\textbf{Interval hodnôt:}
 
 \begin{itemize}
   \item \colorbox{xaxis!20}{$\warnRedAxMin \leq a_x \leq \warnRedAxMax \;\text{m/s}^2$}
@@ -502,7 +539,7 @@ Na obrázku~\ref{fig:subgesture-napomenutie-modry} je zobrazený priebeh
 gyroskopických a~akcelerometrických dát počas vykonania aktivačného gesta
 \uv{NAPOMENUTIE -- modrý} a~následnej sekvencie bodovania. V~prvej fáze (\uv{Gesto napomenutie}) sa aplikácia
 prepne do režimu napomenutia modrého zápasníka.
-V~druhej fáze rozhodca vykonal dve po sebe nasledujúce flickovacie gestá.
+V~druhej fáze rozhodca vykonal dve po sebe nasledujúce gestá \uv{Flick}.
 Každé z~nich pridelilo jeden bod červenému zápasníkovi.
 
 V~tretej fáze (\uv{Hand Down}) sa hodnoty
@@ -510,7 +547,7 @@ akcelerometra ustália v~rozsahoch zodpovedajúcich polohe gesta \uv{Hand Down},
 čo signalizuje ukončenie procesu napomenutia modrého zápasníka.
 
 \noindent
-\textbf{Hraničné hodnoty:}
+\textbf{Interval hodnôt:}
 
 \begin{itemize}
   \item \colorbox{xaxis!20}{$\warnBlueAxMin \leq a_x \leq \warnBlueAxMax \;\text{m/s}^2$}
@@ -561,10 +598,10 @@ poloha ruky pri tomto geste.
 
 Na obrázku~\ref{fig:subgesture-touche} je zobrazený priebeh akcelerometrických
 dát počas vykonania gesta \uv{TOUCHE}. Hodnoty osí sa po preložení ruky
-cez hruď ustália v~rámci definovaných hraničných pásiem.
+cez hruď ustália v~rámci definovaných intervalov hodnôt.
 
 \noindent
-\textbf{Hraničné hodnoty:}
+\textbf{Interval hodnôt:}
 
 \begin{itemize}
   \item \colorbox{xaxis!20}{$\toucheAxMin \leq a_x \leq \toucheAxMax \;\text{m/s}^2$}

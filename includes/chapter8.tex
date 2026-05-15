@@ -4,8 +4,8 @@
 V~tejto kapitole popisujeme proces testovania
 implementovanej aplikácie a~uvádzame výsledky
 overenia spoľahlivosti rozpoznávania jednotlivých
-gest. Cieľom testovania bolo overiť, či hraničné
-hodnoty stanovené v~kapitole~\ref{chapter:gesta}
+gest. Cieľom testovania bolo overiť, či hraničné intervaly
+hodnôt definované v~kapitole~\ref{chapter:gesta}
 zabezpečujú spoľahlivú detekciu gest pri ich
 opakovanom vykonávaní.
 
@@ -289,11 +289,11 @@ predstavovalo gesto \uv{NAPOMENUTIE} a~následné gesto
 musel rozhodca vykonať postupne. V~našej implementácii
 gesto \uv{NAPOMENUTIE} automaticky prepne aplikáciu do
 režimu napomenutia (\texttt{WARNING\_RED} alebo
-\texttt{WARNING\_BLUE}), v~ktorom flickovacie gestá
+\texttt{WARNING\_BLUE}), v~ktorom gestá \uv{Flick}
 priraďujú body výhradne súperovi napomenutého zápasníka
 (viď podsekciu~\ref{subsubsec:rezimy-aplikacie}). Rozhodca
 tak môže body prideliť bezprostredne po napomenutí
-samotným flickom, bez nutnosti vykonať aktivačné gesto
+samotným gestom \uv{Flick}, bez nutnosti vykonať aktivačné gesto
 \uv{Rise Arm} alebo \uv{Hand Back}, ktoré v~režime
 napomenutia považujeme za nadbytočné.
 
@@ -413,7 +413,7 @@ falošnou detekciou počas autorovho testovania.
 \label{subsec:user-testing}
 
 V~predchádzajúcich fázach prebiehalo testovanie výhradne
-autorom práce, ktorý je zároveň autorom hraničných hodnôt
+autorom práce, ktorý je zároveň autorom hraničných intervalov hodnôt gest
 definovaných v~kapitole~\ref{chapter:gesta}. Pre objektívne
 posúdenie použiteľnosti aplikácie sme preto vykonali
 rozšírené používateľské testovanie s~ďalšími dvomi
@@ -432,9 +432,9 @@ gest.
 
 Každý tester vykonal kompozitný testovací scenár (definovaný
 v~tabuľke~\ref{tab:test-scenario}) päťkrát po sebe. Žiadne
-hraničné hodnoty sa pre nich neupravovali -- aplikácia bežala
+hraničné intervaly hodnôt sa pre nich neupravovali -- aplikácia bežala
 s~rovnakou konfiguráciou ako pri testovaní autorom. Cieľom
-bolo zistiť, do akej miery sú navrhnuté hraničné hodnoty
+bolo zistiť, do akej miery sú navrhnuté hraničné intervaly hodnôt
 prenositeľné na používateľov, ktorí ich nekalibrovali, a~ako
 sa systém správa pri rozdielnom štýle vykonania jednotlivých
 gest.
@@ -513,7 +513,7 @@ v~prípade testera~A a~na 90,8\,\% v~prípade testera~B.
 Tento pokles je očakávaný -- testeri vykonávali jednotlivé
 gestá často odlišne od pôvodných pokynov, čo viedlo
 k~nesprávnemu rozpoznaniu zo strany aplikácie. Hraničné
-hodnoty boli kalibrované na základe pohybov autora
+intervaly hodnôt boli kalibrované na základe pohybov autora
 a~iný používateľ vykonáva tie isté gestá s~odlišnou
 amplitúdou, rýchlosťou alebo sklonom ruky.
 
@@ -543,7 +543,7 @@ medzi kalibračným používateľom a~koncovým používateľom.
 Pre praktické nasadenie aplikácie počas zápasov by bolo
 vhodné implementovať jednoduchú kalibračnú fázu, v~ktorej
 si rozhodca pred zápasom vykoná každé gesto niekoľkokrát
-a~hraničné hodnoty sa automaticky prispôsobia jeho
+a~hraničné intervaly hodnôt sa automaticky prispôsobia jeho
 osobitnému štýlu. Táto úprava však presahuje rámec
 diplomovej práce a~ponechávame ju ako možný smer
 ďalšieho výskumu.
@@ -553,7 +553,7 @@ Pri testovaní testerky~A sme pozorovali sťažené vykonávanie
 gesta \uv{TOUCHE}, ktoré vyžaduje pritlačenie ruky cez hrudník
 k~opačnému ramenu. Telesné proporcie testerky neumožňovali
 priliehavé vykonanie tohto gesta voči trupu, čím sa poloha
-zápästia s~hodinkami líšila od hraničných hodnôt
+zápästia s~hodinkami líšila od hraničných intervalov hodnôt
 definovaných na základe pohybov autora. Toto pozorovanie
 poukazuje na potrebu zohľadniť anatomické rozdiely medzi
 používateľmi pri návrhu gest -- gestá by mali byť vykonateľné
@@ -566,7 +566,7 @@ takýchto gest v~tomto smere.
 Minuloročná práca~\cite{dp-balla} vykonala podobné používateľské
 testovanie s~piatimi účastníkmi vo veku 20--50 rokov pomocou
 zariadenia Samsung Galaxy Watch~7 a~rovnakého prahového prístupu
-k~detekcii gest na základe hraničných hodnôt akcelerometra.
+k~detekcii gest na základe hraničných intervalov hodnôt akcelerometra.
 Zaznamenala pri tom pokles úspešnosti správnej detekcie medzi
 funkcionálnym testovaním (autor) a~používateľským testovaním
 zo 75,0\,\% na 66,4\,\%, teda o~približne 9~percentuálnych bodov.
@@ -581,8 +581,8 @@ používateľa, nezávislým od konkrétnej hardvérovej platformy.
 Pri rýchlom udeľovaní viacerých bodov za sebou
 (napríklad 4-bodové udelenie v~kroku~13~scenára)
 sme zaznamenali občasné vynechanie niektorého
-z~flickov -- aplikácia v~niektorých prípadoch
-detegovala iba 3 z~4~vykonaných flickov. Príčinou
+gesta \uv{Flick} -- aplikácia v~niektorých prípadoch
+detegovala iba 3 z~4~vykonaných gest \uv{Flick}. Príčinou
 je, že hodinky pri rýchlom za sebou nasledujúcom
 pohybe niektoré pohyby vôbec nezaznamenajú do
 údajov gyroskopu, čo je vlastnosť hardvérovej
@@ -618,4 +618,4 @@ práce~\cite{dp-balla}, čo potvrdzuje, že ide o~systémový
 jav prahového algoritmu, nezávislý od hardvérovej platformy.
 Možným smerom budúceho vývoja je doplnenie kalibračnej
 fázy pred prvým použitím aplikácie, ktorá by hraničné
-hodnoty automaticky prispôsobila každému používateľovi.
+intervaly hodnôt automaticky prispôsobila každému používateľovi.

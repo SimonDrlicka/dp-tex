@@ -37,7 +37,7 @@ požiadavky:
         napomenutí a~prípadné lopatkové víťazstvo.
 
   \item \textbf{Spätná väzba pre rozhodcu} -- aplikácia
-        musí poskytovať rozhodcovi okamžité potvrdenie
+        môže poskytovať rozhodcovi okamžité potvrdenie
         o~detekcii gesta priamo na hodinkách
         (napríklad vibračnou odozvou) bez nutnosti
         pozerania na obrazovku.
@@ -87,11 +87,10 @@ vlastnosti ako rýchlosť, spoľahlivosť či použiteľnosť:
 \label{subsec:hw-poziadavky}
 
 Keďže základom aplikácie je vyhodnocovanie pohybových
-gest rozhodcu priamo zo zápästia, nie každé smart
-nositeľné zariadenie je pre tento účel vhodné.
-Z~funkcionálnych a~nefunkcionálnych požiadaviek
-vyplynuli nasledujúce požiadavky na inteligentné
-hodinky:
+gest rozhodcu priamo zo zápästia, nie všetky inteligentné
+hodinky sú pre tento účel vhodné. Z~funkcionálnych
+a~nefunkcionálnych požiadaviek vyplynuli nasledujúce
+požiadavky na inteligentné hodinky:
 
 \begin{itemize}
   \item \textbf{Prístup k~akcelerometru a~gyroskopu
@@ -137,6 +136,9 @@ ponúkajú parametre, ktoré sú pre našu aplikáciu
 dostatočné a~zároveň umožňujú stabilný vývoj
 v~prostredí Zepp OS 4.
 
+Hodinky Amazfit T-Rex 3 \cite{trex3_specs}
+poskytujú nasledovné parametre:
+
 \begin{itemize}
   \item \textbf{Procesor:} ZPS3044
   \item \textbf{Operačná pamäť:} 64 MB \Gls{ram}
@@ -145,8 +147,21 @@ v~prostredí Zepp OS 4.
   \item \textbf{Senzory:} 6-osový \Gls{imu} (3-osový
         akcelerometer + 3-osový gyroskop), barometer,
         kompas, optický senzor srdcovej frekvencie
+  \item \textbf{Vibračný motor:}
+        programovateľný cez Zepp~OS\Gls{api}, umožňuje
+        nastavovanie režimov a~dĺžky vibrácií pre poskytovanie
+        spätnej väzby používateľovi~\cite{zepp_sensor_vibrator}
   \item \textbf{Konektivita:} Bluetooth 5.3 \Gls{ble}
   \item \textbf{Operačný systém:} Zepp OS 4
   \item \textbf{Výdrž batérie:} až 27 dní pri bežnom
         používaní
-\end{itemize} \cite{trex3_specs}
+\end{itemize}
+
+Konkrétny model akcelerometra~\cite{zepp_sensor_acc}, jeho dynamický rozsah ani
+frekvenciu vzorkovania Zepp~OS \Gls{api}
+nezverejňuje a~výrobca tieto údaje v~oficiálnej dokumentácii
+hodiniek Amazfit T-Rex~3 neuvádza. \Gls{api} poskytuje len
+voľbu z~niekoľkých prednastavených režimov vzorkovania
+prostredníctvom metódy \texttt{setFreqMode()}, no nie samotnú
+frekvenciu ani rozsah merania. Pre potreby rozpoznávania
+gest v~našej práci boli zabudované parametre senzora dostatočné.

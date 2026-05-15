@@ -18,7 +18,7 @@ uvádzame v~kapitole~\ref{chapter:implementacia}.
 
 \subsubsection{JavaScript a~Zepp OS Mini Program}
 
-Aplikácie pre Zepp OS sa vyvíjajú výhradne
+Aplikácie pre Zepp OS \cite{zepp_architecture} sa vyvíjajú výhradne
 v~JavaScripte vo forme tzv. Mini Programov --
 odľahčených aplikácií navrhnutých pre obmedzené
 prostriedky inteligentných hodiniek. Mini Program
@@ -28,7 +28,7 @@ bežiacej na mobilnom telefóne ako prepojovacia služba,
 a~\textbf{Settings App} s~používateľským rozhraním
 pre konfiguráciu. Voľba JavaScriptu nie je voliteľná;
 ide o~jediný oficiálne podporovaný spôsob vývoja
-pre túto platformu \cite{zepp_architecture}.
+pre túto platformu.
 
 \subsubsection{Zepp OS Sensor API}
 
@@ -57,9 +57,9 @@ accelerometer.start()
 
 \subsubsection{Node.js a~Zeus CLI}
 
-Node.js je prostredie na beh JavaScriptu mimo
+Node.js~\cite{nodejs-definition} je prostredie na beh JavaScriptu mimo
 webového prehliadača, postavené na engine~V8
-od spoločnosti Google~\cite{Node.js-definition}.
+od spoločnosti Google.
 V~našom projekte slúži ako prerekvizita pre
 vývojový nástroj Zeus~\Gls{cli}, distribuovaný
 ako npm balík \texttt{@zeppos/zeus-cli} a~vyžadujúci
@@ -77,13 +77,12 @@ samotného balíka slúži štandardný správca balíčkov
 \subsubsection{Komunikácia cez Bluetooth Low Energy}
 
 Hodinky a~telefón medzi sebou komunikujú bezdrôtovo
-prostredníctvom \Gls{ble}.
+prostredníctvom \Gls{ble} \cite{zepp_bluetooth}.
 Keďže natívne \Gls{ble} \Gls{api} v~Zepp OS je
 pomerne nízkoúrovňové, platforma poskytuje pomocnú
 knižnicu \texttt{MessageBuilder}, ktorá abstrahuje
 odosielanie a~príjem správ medzi Device App a~Side
-Service do jednoduchého rozhrania
-\cite{zepp_bluetooth}.
+Service do jednoduchého rozhrania.
 
 \subsection{Vývoj časti pre mobilný telefón}
 \label{subsec:android-tech}
@@ -91,21 +90,19 @@ Service do jednoduchého rozhrania
 \subsubsection{Kotlin}
 
 Pre vývoj Android aplikácie sme zvolili jazyk
-Kotlin, ktorý je od roku 2019 preferovaným jazykom
-Googlu pre vývoj Android aplikácií
-\cite{kotlin_android}. Oproti Jave prináša Kotlin
+Kotlin \cite{kotlin_android}, ktorý je od roku 2019 preferovaným jazykom
+Googlu pre vývoj Android aplikácií. Oproti Jave prináša Kotlin
 výrazne stručnejšiu syntax, zabudovanú ochranu
-pred null pointer výnimkami a~podporu pre
+pred \textit{null pointer} výnimkami a~podporu pre
 korutiny (\textit{coroutines}), ktoré zjednodušujú
 prácu s~asynchrónnym kódom \cite{kotlin_overview}.
 
 \subsubsection{Android Studio}
 
-Android Studio je oficiálne \Gls{ide} pre vývoj 
+Android Studio~\cite{android_studio_intro} je oficiálne \Gls{ide} pre vývoj 
 Android aplikácií. Je postavené na platforme IntelliJ IDEA od
 spoločnosti JetBrains a~bolo predstavené na
-konferencii Google~I/O v~roku 2013
-\cite{android_studio_intro}. Vďaka vstavanému
+konferencii Google~I/O v~roku 2013. Vďaka vstavanému
 emulátoru, profilovaciemu nástroju a~build systému
 Gradle pokrýva celý vývojový cyklus Android
 aplikácie.
@@ -115,14 +112,13 @@ aplikácie.
 
 \subsubsection{Python}
 
-Python je interpretovaný, vysokoúrovňový programovací
+Python~\cite{python-definition} je interpretovaný, vysokoúrovňový programovací
 jazyk s~dynamickým typovaním, ktorý kladie dôraz
-na čitateľnosť a~jednoduchosť syntaxe
-\cite{python-definition}. Vďaka rozsiahlemu
+na čitateľnosť a~jednoduchosť syntaxe. Vďaka rozsiahlemu
 ekosystému knižníc pre prácu s~dátami sa stal
 štandardom pre analýzu nameraných údajov vo
 vedeckom prostredí. V~našom projekte slúži na
-pomocné skripty pre kalibráciu hraničných
-hodnôt jednotlivých gest -- detaily o~konkrétnom
+pomocné skripty pre kalibráciu intervalov hodnôt
+jednotlivých gest -- detaily o~konkrétnom
 použití uvádzame v~podsekcii
 \ref{sec:python-skript}.

@@ -12,8 +12,8 @@ Vývoj sme začali analýzou údajov z~akcelerometra,
 ktorý nám umožnil rozpoznávať základné polohy ruky --
 napríklad zdvihnutie ruky nad hlavu alebo presunutie
 za chrbát. Pre detekciu rýchlych rotačných pohybov
-zápästia, ktoré sú charakteristické pre flickovacie
-gestá, sme následne pridali aj spracovanie údajov
+zápästia, ktoré sú charakteristické pre gesto \uv{Flick},
+sme následne pridali aj spracovanie údajov
 z~gyroskopu. Pri vývoji časti bežiacej na hodinkách
 sme použili knižnicu \texttt{@zos/sensor} a~Zepp OS
 \Gls{api} vo verzii 4.2.
@@ -56,9 +56,8 @@ rozhranie, ktoré v~reálnom čase zobrazuje
 grafy hodnôt akcelerometra a~gyroskopu. Po ukončení
 meracej relácie sa všetky nazbierané dáta automaticky
 exportujú do \Gls{csv} súboru. Tento súbor následne
-slúži na vizualizáciu grafov a~definovanie hraničných
-hodnôt pre jednotlivé gestá popísané
-v~kapitole~\ref{chapter:gesta}.
+slúži na vizualizáciu grafov a~definovanie intervalov
+pre jednotlivé gestá popísané v~kapitole~\ref{chapter:gesta}.
 
 Na obrázku~\ref{fig:zber-data-app} je zobrazené
 rozhranie aplikácie na zber dát. V~hornej časti sa
@@ -66,7 +65,7 @@ nachádza graf gyroskopických dát (osi $g_x$, $g_y$,
 $g_z$) a~pod ním graf akcelerometrických dát (osi
 $a_x$, $a_y$, $a_z$) za posledných 20 sekúnd.
 V~grafe akcelerometra sú farebnými pásmami vyznačené
-hraničné hodnoty pre aktuálne zvolené gesto. Výber
+hraničné intervaly hodnôt pre aktuálne zvolené gesto. Výber
 gesta je možné zmeniť prostredníctvom rozbaľovacieho
 menu nad grafom -- na ľavom snímku je zvolené gesto
 \uv{Rise arm}, na pravom \uv{Hand down}.
@@ -95,31 +94,36 @@ a~spracovanie v~Python skripte.
 
 \subsubsection{Zber dát}
 \label{sec:zber-dát}
-Dáta na definovanie hraničných hodnôt sme zbierali
+Dáta na definovanie intervalov hodnôt jednotlivých gest sme zbierali
 pomocou aplikácie popísanej vyššie. Meranie prebiehalo
 v~stoji -- pre každé gesto sme ruku uviedli do
 požadovanej polohy a~následne s~ňou pohybovali
 v~rámci tejto polohy. Cieľom bolo zachytiť
 prirodzenú variabilitu, keďže rozhodca nikdy
 nedá ruku do presne rovnakej pozície. Hraničné
-hodnoty preto musia obsahovať dostatočnú
-toleranciu, ktorá zohľadňuje nielen odchýlky
+hodnoty preto musia obsahovať dostatočne široký
+interval, ktorý zohľadňuje nielen odchýlky
 v~polohe ruky, ale aj skutočnosť, že sa rozhodca
-počas zápasu môže nachádzať v~pohybe.
+počas zápasu môže nachádzať v~pohybe. Priemerná
+šírka definovaných hraničných intervalov naprieč všetkými
+osami a~gestami dosahuje hodnotu približne
+$4{,}1~\text{m/s}^2$, čo zodpovedá tolerancii
+$\pm\,2{,}0~\text{m/s}^2$ od strednej hodnoty
+intervalu.
 
 Pre každé gesto sme vykonali 10 meraní. Exportované
 \Gls{csv} súbory sme následne spracovali v~Python
 nástroji popísanom v~sekcii~\ref{sec:python-skript},
 kde sme vizuálne posúdili priebehy senzorových dát
-a~na ich základe určili hraničné hodnoty pre
+a~na ich základe určili hraničné intervaly hodnôt pre
 jednotlivé gestá.
 
 \subsection{Python skript na spracovanie a~vizualizáciu dát}
 \label{sec:python-skript}
-Na definovanie hraničných hodnôt pre jednotlivé gestá
+Na definovanie hraničných intervalov hodnôt pre jednotlivé gestá
 sme vytvorili pomocný nástroj v~jazyku Python, ktorý
 slúži ako lokálny webový editor gest. Nástroj je
-implementovaný ako \Gls{http} server s užívateľským rozhraním,
+implementovaný ako \Gls{http} server s používateľským rozhraním,
 ktoré umožňuje načítanie dát z~CSV súboru a~ich vizualizáciu v~grafoch.
 
 Nástroj načíta \Gls{csv} súbory s~nameranými dátami
@@ -133,7 +137,7 @@ orezanie \Gls{csv} súborov tak, že používateľ vyberie
 relevantný časový úsek a~následne vie uložiť tento segment
 do samostatného súboru.
 
-Po uložení hraničných hodnôt nástroj automaticky
+Po uložení hraničných intervalov hodnôt nástroj automaticky
 vygeneruje Kotlin kód v~tvare \texttt{GestureDefinition},
 pripravený na priame vloženie do konfigurácie
 Android aplikácie. Príklad vygenerovaného kódu je
@@ -150,12 +154,12 @@ GestureDefinition(
     name = "Rise arm",
     message = "Gesture detected: rise arm",
     bands = AccelBands(
-        axMin = 1.0,
-        axMax = 2.0,
-        ayMin = 3.0,
-        ayMax = 4.0,
-        azMin = 5.0,
-        azMax = 6.0
+        axMin = 7.69,
+        axMax = 10.5,
+        ayMin = -3.17,
+        ayMax = 2.81,
+        azMin = 0.67,
+        azMax = 6.51
     )
 ),
 \end{lstlisting}
@@ -164,7 +168,7 @@ Na obrázku~\ref{fig:gesture-editor} je zobrazené webové rozhranie nástroja n
 časti sa nachádza panel s~výberom \Gls{csv} súboru
 a~gesta prostredníctvom rozbaľovacích menu, uloženie
 a~orezanie \Gls{csv} súboru, a~vstupné polia pre
-manuálnu úpravu hraničných hodnôt jednotlivých osí
+manuálnu úpravu hraničných intervalov hodnôt jednotlivých osí
 akcelerometra. V~pravej časti sú zobrazené 2 interaktívne
 grafy, konkrétne horný pre gyroskop a~spodný pre akcelerometer.
 V~grafe akcelerometra sú farebnými pásmami
@@ -212,20 +216,20 @@ definované enumeráciou \texttt{GestureMode}:
 \begin{itemize}
   \item \textbf{WAITING} -- východiskový režim,
         v~ktorom aplikácia čaká na detekciu gesta.
-        Flickovacie gestá (viď podsekciu~\ref{subsubsec:flick})
+        Gestá \uv{Flick} (viď podsekciu~\ref{subsubsec:flick})
         sú v~tomto režime ignorované.
   \item \textbf{GESTURE\_RED} -- režim bodovania
         červeného zápasníka. Aplikácia sa do neho
         prepne po detekcii gesta \uv{Rise Arm}
         (viď podsekciu~\ref{subsubsec:rise-arm}).
-        Všetky flickovacie gestá zaznamenané počas
+        Všetky gestá \uv{Flick} zaznamenané počas
         tohto režimu pripočítavajú body červenému
         zápasníkovi.
   \item \textbf{GESTURE\_BLUE} -- režim bodovania
         modrého zápasníka. Aplikácia sa do neho
         prepne po detekcii gesta \uv{Hand Back}
         (viď podsekciu~\ref{subsubsec:hand-back}).
-        Všetky flickovacie gestá zaznamenané počas
+        Všetky gestá \uv{Flick} zaznamenané počas
         tohto režimu pripočítavajú body modrému
         zápasníkovi.
   \item \textbf{WARNING\_RED} -- režim napomenutia
@@ -242,7 +246,7 @@ definované enumeráciou \texttt{GestureMode}:
 Režimy \texttt{GESTURE\_RED}, \texttt{GESTURE\_BLUE},
 \texttt{WARNING\_RED} a~\texttt{WARNING\_BLUE} zdieľajú
 spoločnú vlastnosť -- vo všetkých štyroch sa vyhodnocujú
-flickovacie gestá. O~tom, ktorému zápasníkovi sa
+gestá \uv{Flick}. O~tom, ktorému zápasníkovi sa
 zaznamenaný flick pripočíta, rozhoduje výhradne aktuálny
 režim aplikácie, nie smer ani charakter samotného flicku.
 Návrat do režimu \texttt{WAITING} sa vo všetkých
@@ -277,17 +281,17 @@ a~informáciu o~poslednom rozpoznanom geste
 \uv{Rise Arm}. Pod tým je zobrazené priebežné
 skóre -- Blue: 0, Red: 2. Na grafe gyroskopu sú
 viditeľné výrazné špičkové výkyvy na osi $g_x$,
-ktoré zodpovedajú jednotlivým flickovacím gestám.
+ktoré zodpovedajú jednotlivým gestám \uv{Flick}.
 Každý výkyv prekračujúci nastavený prah pridelil
 jeden bod červenému zápasníkovi podľa aktívneho
 režimu bodovania v~čase jeho detekcie. V~grafe
 akcelerometra sú viditeľné prechody hodnôt
 zodpovedajúce aktivačnému gestu \uv{Rise Arm}
 (vstup do režimu \texttt{GESTURE\_RED}), po ktorom
-nasledovali flickovacie gestá. Farebné pásma
+nasledovali gestá \uv{Flick}. Farebné pásma
 v~pozadí grafu akcelerometra znázorňujú nastavené
-prahové intervaly pre rozpoznanie polohy ruky
-\uv{Hand up}.
+hraničné intervaly pre rozpoznanie polohy ruky
+\uv{Rise Arm}.
 
 \begin{figure}[H]
   \centering
@@ -319,9 +323,14 @@ Pre prípad chybnej detekcie alebo nesprávneho
 zaznamenania udalosti je každý záznam v~logu
 opatrený tlačidlom v~tvare krížika, ktoré umožňuje
 rozhodcovi alebo jeho asistentovi manuálne odstrániť
-zápis. Pri zmazaní udalosti sa zároveň automaticky
-prepočíta priebežné skóre, aby zodpovedalo aktuálnemu
-stavu zápasu.
+zápis. Na mazanie záznamov sme zvolili prístup
+\textit{soft delete} -- záznam nie je z~logu fyzicky
+odstránený, ale je iba označený ako neplatný a~vizuálne
+prečiarknutý. Vďaka tomu zostáva celá história
+zaznamenaných udalostí dohľadateľná aj po prípadnom
+zmazaní. Pri označení udalosti ako neplatnej sa
+zároveň automaticky prepočíta priebežné skóre, aby
+zodpovedalo aktuálnemu stavu zápasu.
 
 Na obrázku~\ref{fig:prod-mode} je zobrazený príklad
 produkčného rozhrania po sérii udalostí simulujúcich
@@ -400,26 +409,21 @@ schému, ktorá sa líši počtom impulzov a~ich trvaním.
 Rozhodca tak aj bez pohľadu na displej vie, aká
 udalosť bola zaznamenaná.
 
-V~rámci aplikácie sme definovali tri typy vibračných
+V~rámci aplikácie sme definovali dva typy vibračných
 impulzov, ktoré slúžia ako základné stavebné jednotky
 pre zložené vibračné schémy:
 
 \begin{itemize}
-  \item \textbf{Krátky impulz} (\textit{short})
+  \item \textbf{Krátky impulz}
         \label{vib:short} -- vibračný impulz s~trvaním
         250\,ms.
 
-  \item \textbf{Dlhý impulz} (\textit{long})
+  \item \textbf{Dlhý impulz}
         \label{vib:long} -- vibračný impulz s~trvaním
         500\,ms. Pri testovaní sa ukázalo, že 500\,ms
         je maximálna dosiahnuteľná dĺžka spojitej
         vibrácie -- firmvér hodiniek motor po tomto
         intervale automaticky zastaví.
-
-  \item \textbf{Silný krátky impulz}
-        (\textit{short\_strong}) \label{vib:short-strong}
-        -- jednorazový impulz s~trvaním 20\,ms a~vyššou
-        intenzitou.
 \end{itemize}
 
 \noindent V~aplikácii rozlišujeme šesť typov udalostí, pri ktorých sa
@@ -480,7 +484,7 @@ je uvedené v~tabuľke~\ref{tab:vibracna-odozva}.
     \midrule
     Prechod do režimu napomenutia & 2\,$\times$\,krátky       & --                           & oba              \\
     \midrule
-    Aktivácia režimu bodovania    & 1\,$\times$\,silný krátky & --                           & len \emph{debug} \\
+    Aktivácia režimu bodovania    & 1\,$\times$\,krátky      & --                           & len \emph{debug} \\
     \midrule
     Pasivita                      & 2\,$\times$\,krátky       & --                           & oba              \\
     \midrule
